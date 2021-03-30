@@ -9,7 +9,19 @@
   },
   "dependencies": {
     "next": "10.0.9",
+    "next-images": "^1.7.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-google-recaptcha": "^2.1.0",
+    "react-icons": "^4.2.0",
+    "react-loaders": "^3.0.1",
+    "react-redux": "^7.2.3",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
+    "shopify-buy": "^2.11.0"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^5.5.0"
   }
 }
