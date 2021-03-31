@@ -5,6 +5,7 @@ import "../styles/bootstrap/css/bootstrap-theme.min.css";
 import "../styles/bootstrap/css/bootstrap.min.css";
 import Head from "next/head";
 import store from "../redux/store";
+import Footer from "../components/common/footer";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -56,6 +57,7 @@ function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <Header message={"message"} />
         <Component {...pageProps} />
+        <Footer />
       </Provider>
     </>
   );

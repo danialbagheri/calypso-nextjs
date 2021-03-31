@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 // import logo from "./logo.svg";
 // import SiteMap from "../components/general/SiteMap";
-
+import Head from "next/head";
 import Contact from "../components/contact-form";
 class ContactUs extends Component {
   render() {
     return (
       <div className="container">
+        <Head>
+          <title>Calypso Sun - Contact Us</title>
+        </Head>
         <div className="row">
           <h1 className="text-centre">Contact Us</h1>
           <div className="col-md-6 col-12">

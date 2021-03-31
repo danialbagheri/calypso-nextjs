@@ -5,9 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "build-static": "next build && next export"
   },
   "dependencies": {
+    "@yazanaabed/react-tabs": "^2.3.6",
+    "loaders.css": "^0.1.2",
     "next": "10.0.9",
     "next-images": "^1.7.0",
     "react": "17.0.2",
@@ -16,12 +19,19 @@
     "react-icons": "^4.2.0",
     "react-loaders": "^3.0.1",
     "react-redux": "^7.2.3",
+    "react-responsive": "^8.2.0",
+    "react-slick": "^0.28.1",
+    "react-star-rating-component": "^1.4.1",
+    "react-tabs": "^3.2.1",
+    "react-youtube": "^7.13.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "shopify-buy": "^2.11.0"
+    "shopify-buy": "^2.11.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@svgr/webpack": "^5.5.0"
+    "@svgr/webpack": "^5.5.0",
+    "css-loader": "^5.2.0"
   }
 }

@@ -1,60 +1,51 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import HomeSlider from "../components/home/home-slider";
+import Trending from "../components/home/trending";
+import StaySafe from "../components/home/stay-safe";
+import AsSeen from "../components/home/as-seen";
+import BlogSlider from "../components/blogs/blog-slider";
+import Instagram from "../components/common/instagram";
 
-export default function Home() {
+function Home({ slides, isLoaded }) {
   return (
     <div>
       <Head>
         <title>Calypso Sun</title>
       </Head>
 
-      <main className={styles.main}>
+      <main>
         <section className="top-0">
-          <HomeSlider />
-          <Suspense
-            fallback={
-              <Loader
-                type="ball-pulse"
-                active={true}
-                color="orange"
-                size="Large"
-                className="p-2 general-loader"
-              />
-            }
-          >
-            <div className="container-fluid">
-              <Trending />
-            </div>
-          </Suspense>
-          <Suspense
-            fallback={
-              <Loader
-                type="ball-pulse"
-                active={true}
-                color="orange"
-                size="Large"
-                className="p-2 general-loader"
-              />
-            }
-          >
-            <StaySafe />
-            <AsSeen />
-            <BlogSlider />
-            <Instagram />
-          </Suspense>
+          <HomeSlider slides={slides} isLoaded={isLoaded} />
+          <div className="container-fluid">
+            <Trending />
+          </div>
+          <StaySafe />
+          <AsSeen />
+          <BlogSlider />
+          <Instagram />
         </section>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   );
 }
+
+export async function getStaticProps(context) {
+  const baseUrl = process.env.API_URL;
+  const endpoint = `web/slider/?slug=homepage`;
+  const finalUrl = baseUrl + endpoint;
+  const res = await fetch(finalUrl);
+  const slides = await res.json();
+
+  if (!slides) {
+    return {
+      notFound: true,
+      isLoaded: false,
+    };
+  }
+
+  return {
+    props: { slides: slides.results, isLoaded: true }, // will be passed to the page component as props
+  };
+}
+
+export default Home;
