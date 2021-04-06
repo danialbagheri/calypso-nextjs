@@ -78,10 +78,6 @@ function Article({ blog }) {
 }
 
 export async function getStaticProps(context) {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  //   const router = useRouter();
-  //   const { slug } = router.query;
   const slug = context.params.slug;
   const baseUrl = data.apiUrl;
   const url = baseUrl + "blogs/all/" + slug + "/?resize_h=510";
@@ -95,30 +91,38 @@ export async function getStaticProps(context) {
     revalidate: 1,
   };
 }
+
+async function getAllPages(pageCount, url) {
+  let pageNumber = 1;
+  let blogsResult = [];
+  for (pageNumber; pageNumber <= pageCount; pageNumber++) {
+    let paginatedUrl = url + `?page=${pageNumber}`;
+    const res = await fetch(paginatedUrl);
+    const blogs = await res.json();
+    blogsResult.push(blogs.results);
+  }
+  return blogsResult;
+}
+
 export async function getStaticPaths() {
-  const baseUrl = data.apiUrl;
-  const url = baseUrl + "blogs/all/";
+  // const baseUrl = data.apiUrl;
+  const baseUrl = "https://service.calypsosun.com/api/";
+  const url = baseUrl + `blogs/all/`;
   const res = await fetch(url);
   const blogs = await res.json();
-  let pageNumber = 1;
-  let slugPaths = blogs.results.map((item) => {
-    return {
-      params: {
-        slug: item.slug,
-      },
-    };
-  });
-
-  //   do {
-  //     fetch(blogs.next)
-  //       .then((res) => res.json())
-  //       .then((res) =>
-  //         res.results.map((item) =>
-  //           slugPaths.concat({ params: { slug: item.slug } })
-  //         )
-  //       );
-  //   } while (blogs.next);
-  console.log(slugPaths);
+  const pageCount = Math.ceil(blogs.count / 10);
+  let blogsResult = await getAllPages(pageCount, url);
+  let slugPaths = [];
+  for (let i = 0; i < blogsResult.length; i++) {
+    let slugs = blogsResult[i].map((item) => {
+      return {
+        params: {
+          slug: item.slug,
+        },
+      };
+    });
+    Array.prototype.push.apply(slugPaths, slugs);
+  }
   return {
     paths: slugPaths,
     fallback: false,
