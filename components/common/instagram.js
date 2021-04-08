@@ -45,6 +45,7 @@ export default function Instagram() {
             width={thumbnailWidth + "px"}
             height={thumbnailWidth + "px"}
             alt={insta.caption}
+            loading="lazy"
           />
         </picture>
         <div className="insta-caption">{insta.caption}</div>

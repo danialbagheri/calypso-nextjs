@@ -1,11 +1,11 @@
 import "../styles/globals.css";
-import { Provider } from "react-redux";
 import Header from "../components/header";
 import "../styles/bootstrap/css/bootstrap-theme.min.css";
 import "../styles/bootstrap/css/bootstrap.min.css";
 import Head from "next/head";
 import store from "../redux/store";
 import Footer from "../components/common/footer";
+import { Provider } from "react-redux";
 
 function MyApp({ Component, pageProps }) {
   return (

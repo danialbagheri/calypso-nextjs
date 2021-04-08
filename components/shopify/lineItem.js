@@ -68,7 +68,7 @@ export default function LineItem(props) {
                     </button>
                   </div>
                   <span className="Line-item__price">
-                    $ {(lineItem.quantity * lineItem.variant.price).toFixed(2)}
+                    £ {(lineItem.quantity * lineItem.variant.price).toFixed(2)}
                   </span>
                   <button
                     className="Line-item__remove"

@@ -207,17 +207,6 @@ p > a {
 .d-sm-none {
   display: block;
 }
-/* ESSENTIAL RESPONSIVE BOOTSTRAP UTILITIES */
-@media (min-width: 768px) {
-  .d-md-none {
-    display: none !important;
-  }
-}
-@media (min-width: 576px) {
-  .d-sm-none {
-    display: none !important;
-  }
-}
 
 /* ESSENTIAL RESPONSIVE BOOTSTRAP UTILITIES */
 .nav-link {
@@ -452,7 +441,6 @@ input.search-field:focus {
     /* padding: 35px; */
   }
 }
-
 /* BANNER */
 
 .banner a {

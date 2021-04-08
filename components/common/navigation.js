@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useShopify } from "../hooks";
 import logo from "../../public/logo.svg";
 import SearchBar from "../general/searchbar";
+import ActiveLink from "./active-link";
 
 function Navigation() {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -33,48 +34,59 @@ function Navigation() {
         itemScope
         itemType="https://schema.org/SiteNavigationElement"
       >
-        <Link className="navbar-brand" href="/">
-          <img src={logo} alt="Calypso" width="140" height="67" />
-        </Link>
-
+        <ActiveLink href="/">
+          <a className="navbar-brand">
+            <img src={logo} alt="Calypso" width="140" height="67" />
+          </a>
+        </ActiveLink>
         <ul
           className={
             mobileMenu ? "navbar-nav responsive fade-in" : "navbar-nav"
           }
         >
           <li>
-            <Link itemProp="url" exact className="nav-link" href="/">
-              Home
-            </Link>
+            <ActiveLink exact href="/">
+              <a itemProp="url" className="nav-link">
+                Home
+              </a>
+            </ActiveLink>
           </li>
           <li>
-            <Link itemProp="url" className="nav-link" href="/products/">
-              Products
-            </Link>
+            <ActiveLink href="/products">
+              <a itemProp="url" className="nav-link">
+                Products
+              </a>
+            </ActiveLink>
           </li>
           {/* <li>
-            <Link
+            <ActiveLink
               itemProp="url"
               className="nav-link"
               href="/products/"
             >
               Mix & Match
-            </Link>
+            </ActiveLink>
           </li> */}
           <li>
-            <Link itemProp="url" className="nav-link" href="/be-sun-ready/">
-              Be Sun Ready
-            </Link>
+            <ActiveLink href="/be-sun-ready">
+              <a itemProp="url" className="nav-link">
+                Be Sun Ready
+              </a>
+            </ActiveLink>
           </li>
           <li>
-            <Link itemProp="url" className="nav-link" href="/advice/">
-              Advice
-            </Link>
+            <ActiveLink href="/advice">
+              <a itemProp="url" className="nav-link">
+                Advice
+              </a>
+            </ActiveLink>
           </li>
           <li>
-            <Link itemProp="url" className="nav-link" href="/about/">
-              About Us
-            </Link>
+            <ActiveLink href="/about">
+              <a itemProp="url" className="nav-link">
+                About Us
+              </a>
+            </ActiveLink>
           </li>
         </ul>
         <div className="icon-holder">
