@@ -7,6 +7,9 @@ module.exports = withImages({
   webpack(config, options) {
     return config;
   },
+  images: {
+    domains: ["service.calypsosun.com"],
+  },
 });
 // module.exports = withCSS({
 //   webpack: function (config) {

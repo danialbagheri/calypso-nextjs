@@ -1951,6 +1951,7 @@ a img {
   overflow: hidden;
   text-align: center;
   color: white;
+  width: 100%;
 }
 .introduction {
   line-height: 3rem;
@@ -1980,11 +1981,11 @@ a img {
   margin: 0 auto;
 }
 .our-value-icon {
-  width: 100%;
+  width: 70px;
   margin: 0 auto;
 }
-.our-value-icon img {
-  display: block;
+.our-value-icon-innovation {
+  width: 97px;
   margin: 0 auto;
 }
 .our-values-container {

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { useShopify } from "../hooks";
 import logo from "../../public/logo.svg";
 import SearchBar from "../general/searchbar";

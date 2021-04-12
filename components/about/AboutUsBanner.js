@@ -1,17 +1,16 @@
 import React from "react";
+import Image from "next/image";
 
 export default function AboutUsBanner() {
-  // Declare a new state variable, which we'll call "count"
-  const aboutUsBanner = require("../../public/about-us/about-us-banner.jpg");
   return (
     <div className="about-us-page-top-banner ">
-      <picture>
-        <img
-          src={aboutUsBanner}
-          alt="Frequently Asked Questions"
-          width="100%"
-        />
-      </picture>
+      <Image
+        src="/about-us/about-us-banner.jpg"
+        alt="Frequently Asked Questions"
+        layout="responsive"
+        width={1366}
+        height={866}
+      />
     </div>
   );
 }

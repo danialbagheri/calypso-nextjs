@@ -1,11 +1,10 @@
 import React from "react";
+import Image from "next/image";
 
 export default function OurValues() {
   // Declare a new state variable, which we'll call "count"
   const ourValues = require("../../public/about-us/our-values.png");
-  const qualityIcon = require("../../public/about-us/quality-icon.png");
-  const ethicsIcon = require("../../public/about-us/ethical-award-icon.png");
-  const innovationIcon = require("../../public/about-us/innovation-icon.png");
+
   return (
     <section
       style={{ backgroundImage: `url(${ourValues})` }}
@@ -16,7 +15,12 @@ export default function OurValues() {
         <div className="row">
           <div className="col-12 col-md-4 col-xs-12">
             <div className="our-value-icon">
-              <img src={qualityIcon} alt="Quality icon" width="70px" />
+              <Image
+                src="/about-us/quality-icon.png"
+                alt="Quality icon"
+                width="70px"
+                height="97px"
+              />
             </div>
             <h5 className="text-centre calypso-orange-text">QUALITY</h5>
             <p className="text-centre">
@@ -27,7 +31,12 @@ export default function OurValues() {
           </div>
           <div className="col-12 col-md-4 col-xs-12">
             <div className="our-value-icon">
-              <img src={ethicsIcon} alt="Quality icon" width="70px" />
+              <Image
+                src="/about-us/ethical-award-icon.png"
+                alt="Quality icon"
+                width="70px"
+                height="97px"
+              />
             </div>
             <h5 className="text-centre calypso-orange-text">ETHICS</h5>
             <p className="text-centre">
@@ -37,8 +46,13 @@ export default function OurValues() {
             </p>
           </div>
           <div className="col-12 col-md-4 col-xs-12">
-            <div className="our-value-icon">
-              <img src={innovationIcon} alt="Quality icon" width="97px" />
+            <div className="our-value-icon-innovation">
+              <Image
+                src="/about-us/innovation-icon.png"
+                alt="Quality icon"
+                width="97px"
+                height="97px"
+              />
             </div>
             <h5 className="text-centre calypso-orange-text">INNOVATION</h5>
             <p className="text-centre">

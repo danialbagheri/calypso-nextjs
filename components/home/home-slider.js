@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import data from "../../data.json";
-
+import Image from "next/image";
+import Link from "next/link";
 export default function HomeSlider({ slides, isLoaded }) {
   const settings = {
     arrows: true,
@@ -25,7 +25,7 @@ export default function HomeSlider({ slides, isLoaded }) {
         } else {
           return (
             <div className="banner" index={slide.id}>
-              <a href={slide.slide.link}>
+              <Link href={slide.slide.link ? slide.slide.link : "/about"}>
                 <picture>
                   <source
                     media="(min-width: 641px)"
@@ -53,7 +53,7 @@ export default function HomeSlider({ slides, isLoaded }) {
                     className="hero-image"
                   />
                 </picture>
-              </a>
+              </Link>
             </div>
           );
         }

@@ -6,6 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 import BreadCrumb from "../../components/common/breadcrumb";
 import ProductTabs from "../../components/products/product-tabs";
 import ProductDescription from "../../components/products/product-description";
+import Head from "next/head";
+import Image from "next/image";
 
 function Product({ productData }) {
   const [product, setProduct] = useState(productData);
@@ -80,12 +82,14 @@ function Product({ productData }) {
 
   let images = imageList.map((image, index) => {
     return (
-      <div className="thumbnail-holder">
-        <img
-          className="SingleProductPageImage"
-          src={image.resized}
+      <div className="thumbnail-holder" key={index}>
+        <Image
+          // className="SingleProductPageImage"
+          src={image.image}
           alt={image.alternate_text}
-          key={index}
+          layout="responsive"
+          width={image.width}
+          height={image.height}
         />
       </div>
     );
@@ -130,6 +134,12 @@ function Product({ productData }) {
   );
   return (
     <div>
+      <Head>
+        <title>
+          Calypso - {product.name} - {product.sub_title}
+        </title>
+        <meta name="description" content={product.description} />
+      </Head>
       <div className="container-fluid">
         <div className="row productContainer">
           <div className="col-md-6 col-sm-6 col-xs-12">

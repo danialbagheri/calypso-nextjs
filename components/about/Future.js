@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from "next/image";
 export default function Future() {
   // Declare a new state variable, which we'll call "count"
   const futureOne = require("../../public/about-us/future-1.png");
@@ -26,17 +26,22 @@ export default function Future() {
         </div>
         <div className="col-6 col-md-6 col-sm-12 col-xs-12 pt-3 mt-2 future-images">
           <div className="col-6 col-md-6 col-sm-6 col-xs-6">
-            <img
-              src={futureOne}
+            <Image
+              src="/about-us/future-1.png"
               alt="Calypso 1999 to 2019 products"
-              width="100%"
+              layout="responsive"
+              width={388}
+              height={440}
+              // objectFit="contain"
             />
           </div>
           <div className="col-6 col-md-6 col-sm-6 col-xs-6">
-            <img
-              src={futureTwo}
+            <Image
+              src="/about-us/future-2.png"
               alt="Calypso 1999 to 2019 products"
-              width="100%"
+              layout="responsive"
+              width={388}
+              height={440}
             />
           </div>
         </div>

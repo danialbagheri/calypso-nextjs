@@ -1,16 +1,18 @@
 import React from "react";
+import Image from "next/image";
 
 export default function Past() {
   // Declare a new state variable, which we'll call "count"
-  const calypsoHistoryImage = require("../../public/about-us/calypso-history.jpg");
   return (
     <section className="container-fluid bg-our-history our-history-row">
       <div className="row">
         <div className="col-8 col-md-8 col-sm-12 pt-1">
-          <img
-            src={calypsoHistoryImage}
+          <Image
+            src="/about-us/calypso-history.jpg"
             alt="Calypso 1999 to 2019 products"
-            width="100%"
+            width={1400}
+            height={713}
+            layout="responsive"
           />
         </div>
         <div className="col-4 col-md-4 text-centre col-sm-12 our-history-row-text">

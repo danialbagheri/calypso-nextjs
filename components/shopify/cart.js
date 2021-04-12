@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import LineItem from "./LineItem";
+import LineItem from "./lineitem";
 import { useShopify } from "../hooks";
 import { MdShoppingCart, MdRemoveShoppingCart } from "react-icons/md";
 
