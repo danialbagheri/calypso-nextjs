@@ -3,6 +3,12 @@ import { useShopify } from "../hooks";
 import logo from "../../public/logo.svg";
 import SearchBar from "../general/searchbar";
 import ActiveLink from "./active-link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faShoppingCart,
+  faSearch,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Navigation() {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -89,15 +95,31 @@ function Navigation() {
           </li>
         </ul>
         <div className="icon-holder">
-          <button className="search-icon" onClick={() => showSearch(!search)}>
-            <i className="fas fa-search" />
+          <button
+            className="search-icon"
+            onClick={() => showSearch(!search)}
+            aria-label="Search"
+          >
+            <FontAwesomeIcon icon={faSearch} className="calypso-orange-text" />
           </button>
-          <button className="basket-icon" onClick={openCart}>
-            <i className="fas fa-shopping-cart" />
+          <button
+            className="basket-icon"
+            onClick={openCart}
+            aria-label="open Cart"
+          >
+            <FontAwesomeIcon
+              icon={faShoppingCart}
+              className="calypso-orange-text"
+            />
           </button>
 
-          <button className="burgerMenu" onClick={openResponsiveMenu}>
-            <i className="fa fa-bars" />
+          <button
+            className="burgerMenu"
+            onClick={openResponsiveMenu}
+            aria-label="Menu"
+          >
+            {/* <i className="fa fa-bars" /> */}
+            <FontAwesomeIcon icon={faBars} className="calypso-orange-text" />
           </button>
         </div>
       </nav>

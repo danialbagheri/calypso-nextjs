@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import BreadCrumb from "../../components/common/breadcrumb";
-import { useRouter } from "next/router";
+import Head from "next/head";
+import Image from "next/Image";
 
 export default function Advice({ posts, count, baseUrl }) {
   const [blogs, setBlogs] = useState(posts);
@@ -47,10 +48,12 @@ export default function Advice({ posts, count, baseUrl }) {
           <a href={`/advice/${blog.slug}`} className="disableLink">
             <div className="blog-card bg-white">
               <div className="blog-image">
-                <img
-                  className="img-responsive"
-                  src={blog.resized}
+                <Image
+                  src={blog.resized || "/advice/placeholder.png"}
                   alt={blog.image_alt_text}
+                  layout="responsive"
+                  height={blog.image_height}
+                  width={blog.image_width}
                 />
               </div>
               <div className="card-body">
@@ -72,6 +75,13 @@ export default function Advice({ posts, count, baseUrl }) {
         </div>
       </div>
       <div className="container">
+        <Head>
+          <title>Calypso Advice</title>
+          <meta
+            name="description"
+            content="Advice about Sun Care, Skin Care, Holiday and every in between."
+          />
+        </Head>
         <div className="row">{thumbnail}</div>
         <div className="text-centre">
           {moreToLoad ? (

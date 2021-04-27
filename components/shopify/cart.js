@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import LineItem from "./lineitem";
+import LineItem from "./lineItem";
 import { useShopify } from "../hooks";
-import { MdShoppingCart, MdRemoveShoppingCart } from "react-icons/md";
 
 export default function Cart(props) {
   const {

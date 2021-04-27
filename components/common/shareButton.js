@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faTwitter,
+  faTumblr,
+  faPinterest,
+} from "@fortawesome/free-brands-svg-icons";
+import { faShareAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 export default function ShareButton({ text, media }) {
   const [displayIcon, setDisplayIcon] = useState(false);
 
@@ -37,12 +44,12 @@ export default function ShareButton({ text, media }) {
     displayIcon === false ? (
       <button className="share-button" onClick={showSharingIcons}>
         <div className="icon-wrapper">
+          <FontAwesomeIcon icon={faShareAlt} />
           <p>Share</p>
-          <i className="fas fa-share-alt" />
         </div>
       </button>
     ) : (
-      <ul id="social_sharing">
+      <ul id="social_sharing-icon">
         <li>
           <a
             href={twitterUrl}
@@ -50,7 +57,7 @@ export default function ShareButton({ text, media }) {
             rel="noopener noreferrer"
             title="Tweet"
           >
-            <i className="fab fa-twitter" />
+            <FontAwesomeIcon icon={faTwitter} />
           </a>
         </li>
         <li>
@@ -60,7 +67,7 @@ export default function ShareButton({ text, media }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i className="fab fa-facebook-f" />
+            <FontAwesomeIcon icon={faFacebook} />
           </a>
         </li>
         <li>
@@ -70,7 +77,7 @@ export default function ShareButton({ text, media }) {
             rel="noopener noreferrer"
             title="Post to Tumblr"
           >
-            <i className="fab fa-tumblr" />
+            <FontAwesomeIcon icon={faTumblr} />
           </a>
         </li>
         <li>
@@ -80,7 +87,7 @@ export default function ShareButton({ text, media }) {
             rel="noopener noreferrer"
             title="Pin it"
           >
-            <i className="fab fa-pinterest" />
+            <FontAwesomeIcon icon={faPinterest} />
           </a>
         </li>
         <li>
@@ -95,7 +102,7 @@ export default function ShareButton({ text, media }) {
         </li>
         <li>
           <button className="close-social-icons" onClick={showSharingIcons}>
-            <i className="fa fa-times" />
+            <FontAwesomeIcon icon={faTimes} />
           </button>
         </li>
       </ul>

@@ -42,17 +42,17 @@ function MyApp({ Component, pageProps }) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <meta name="theme-color" content="#000000" />
-        <link rel="stylesheet" href="https://use.typekit.net/kls3ash.css" />
+        {/* <link rel="stylesheet" href="https://use.typekit.net/kls3ash.css" /> */}
         {/* <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         /> */}
-        <link
+        {/* <link
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
           crossorigin="anonymous"
-        />
+        /> */}
       </Head>
       <Provider store={store}>
         <Header message={"message"} />
@@ -64,17 +64,16 @@ function MyApp({ Component, pageProps }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch("https://api.github.com/repos/vercel/next.js");
-  const json = await res.json();
-
-  // if (!data) {
-  //   return {
-  //     notFound: true,
-  //   };
-  // }
-  return {
-    props: { message: "test22" }, // will be passed to the page component as props
-  };
+  // const res = await fetch("https://api.github.com/repos/vercel/next.js");
+  // const json = await res.json();
+  // // if (!data) {
+  // //   return {
+  // //     notFound: true,
+  // //   };
+  // // }
+  // return {
+  //   props: { message: "test22" }, // will be passed to the page component as props
+  // };
 }
 
 export default MyApp;

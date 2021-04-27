@@ -3,7 +3,7 @@ import React from "react";
 export default class AsSeen extends React.Component {
   render() {
     return (
-      <div className="row top50">
+      <div className="row top50 mb-4">
         <h1 className="textCenter">As seen in</h1>
         <div className="container top30">
           <div className="col-lg-3 col-md-3 col-xs-6 top15">

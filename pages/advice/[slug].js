@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import BlogSlider from "../../components/blogs/blog-slider";
 import ShareButton from "../../components/common/shareButton";
-// import RelatedProducts from "./RelatedProducts";
+import Image from "next/image";
 import data from "../../data.json";
+import Head from "next/head";
 
 function Article({ blog }) {
   let blogColor = blog.backround_color_hex
@@ -22,6 +23,10 @@ function Article({ blog }) {
       <meta property="og:title" content={blog.title} />
       <meta property="og:url" content="https://calypsosun.com/blog/" />
       <meta property="og:image" content={blog.resized} />
+      <Head>
+        <title>{blog.title} by Calypso Sun</title>
+        <meta name="description" content={blog.excerpt} />
+      </Head>
       <div className="container">
         <div className="row">
           <div className="col-md-2 col-12" />
@@ -38,11 +43,14 @@ function Article({ blog }) {
                 <ShareButton text={blog.title} />
               </div>
               <picture>
-                <img
+                <Image
                   itemProp="url contentUrl"
-                  src={blog.resized}
+                  src={blog.image || "/advice/placeholder.png"}
                   className="blog-post-image"
                   alt={blog.alt_text}
+                  layout="responsive"
+                  height={blog.image_height}
+                  width={blog.image_width}
                 />
               </picture>
               <meta itemProp="width" content="640" />

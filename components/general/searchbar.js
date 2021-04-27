@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import data from "../../data.json";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function SearchBar({ visible, visibilitySetter }) {
   const [searchVal, setSearchValue] = useState("");
@@ -50,7 +52,7 @@ export default function SearchBar({ visible, visibilitySetter }) {
             </div>
             <div className="col-md-12 col-xd-9">
               <h2 className="text-centre m-0">{p.name}</h2>
-              <h4 className="text-centre">{p.sub_title}</h4>
+              <p className="text-centre">{p.sub_title}</p>
             </div>
           </a>
         </div>
@@ -69,29 +71,41 @@ export default function SearchBar({ visible, visibilitySetter }) {
       <div className="search-container">
         <div className="search-box" id="search-form">
           <button
-            className="search-button search-icon"
+            className="search-menu-button search-icon"
             onClick={() => {
               visibilitySetter(false);
             }}
             type="button"
           >
-            <i className="fas fa-arrow-left" />
+            <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <input
             className="search-field"
             name="searchVal"
             value={searchVal}
-            placeholder="Start typing. Ask us anything ;)"
+            placeholder="Search our catalogue 🧴 🌞 🏖️"
+            list="searchOptions"
             onChange={(e) => handleChange(e)}
             onKeyDown={(e) => searchOnEnter(e)}
           />
+          <datalist id="searchOptions">
+            <option value="Once a day" />
+            <option value="Carrot Oil" />
+            <option value="After Sun" />
+            <option value="Deep tan" />
+            <option value="Monoi Tahiti" />
+            <option value="Anti Bacterial" />
+            <option value="UVA Protection" />
+            <option value="Water resistant" />
+            <option value="8 Hours Protection" />
+          </datalist>
 
           <button
             type="submit"
-            className="search-button search-icon"
+            className="search-menu-button search-icon"
             onClick={(e) => search(e)}
           >
-            <i className="fas fa-search" />
+            <FontAwesomeIcon icon={faSearch} />
           </button>
         </div>
       </div>

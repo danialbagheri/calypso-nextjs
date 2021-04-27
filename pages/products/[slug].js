@@ -8,6 +8,7 @@ import ProductTabs from "../../components/products/product-tabs";
 import ProductDescription from "../../components/products/product-description";
 import Head from "next/head";
 import Image from "next/image";
+import ProductReviews from "../../components/reviews/product-reviews";
 
 function Product({ productData }) {
   const [product, setProduct] = useState(productData);
@@ -167,11 +168,14 @@ function Product({ productData }) {
       </section>
 
       <div id="readReviews" />
-      {/* <Reviews
-          productCategory={this.state.productCategorySlug}
-          CategoryName={this.state.productCategoryName}
-          childProducts={this.state.childProducts}
-        /> */}
+      <ProductReviews
+        productSlug={product.slug}
+        ProductName={product.name}
+        childProducts={childProducts}
+        productReviews={product.reviews}
+        totalReviewCount={product.total_review_count}
+        reviewAverageScore={product.review_average_score}
+      />
       {/* <RelatedProducts products={childProducts} /> */}
     </div>
   );
@@ -180,7 +184,7 @@ function Product({ productData }) {
 export async function getStaticProps(context) {
   const slug = context.params.slug;
   const baseUrl = data.apiUrl;
-  const url = baseUrl + `products/product/${slug}/?resize_w=375`;
+  const url = baseUrl + `products/single/${slug}/?resize_w=375`;
   const res = await fetch(url);
   const productData = await res.json();
 

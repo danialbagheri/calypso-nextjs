@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 export default function HomeSlider({ slides, isLoaded }) {
   const settings = {
@@ -19,7 +18,10 @@ export default function HomeSlider({ slides, isLoaded }) {
         if (slide.slide.custom_slide) {
           return (
             <div className="banner" index={slide.slide.id}>
-              {slide.slide.custom_code}
+              <div
+                itemProp="articleBody"
+                dangerouslySetInnerHTML={{ __html: slide.slide.custom_code }}
+              />
             </div>
           );
         } else {
