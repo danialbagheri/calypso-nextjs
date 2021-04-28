@@ -40,7 +40,7 @@ export default function LineItem(props) {
               </div>
               <div className="Line-item__content">
                 <div className="Line-item__content-row">
-                  <div className="Line-item__variant-title">
+                  <div className="Line-item__variant-title calypso-orange-text">
                     {lineItem.variant.title}
                   </div>
                   <span className="Line-item__title">{lineItem.title}</span>

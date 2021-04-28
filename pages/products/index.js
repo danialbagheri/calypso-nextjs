@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Head from "next/head";
 
-function Products() {
+function Products(props) {
   const styles = {
     textAlign: "center",
     width: "auto",
@@ -63,27 +63,30 @@ function Products() {
             </TabList>
             <TabPanel id="tab1" title="Sun Protection" styles={tabStyles}>
               <div style={{ padding: 10 }}>
-                <ProductRange type="sun%20protection" />
+                <ProductRange
+                  type="sun%20protection"
+                  products={props.products}
+                />
               </div>
             </TabPanel>
             <TabPanel id="tab2" title="After Sun" styles={tabStyles}>
               <div style={{ padding: 10 }}>
-                <ProductRange type="after%20sun" />
+                <ProductRange type="after%20sun" products={null} />
               </div>
             </TabPanel>
             <TabPanel id="tab3" title="Kids" styles={tabStyles}>
               <div style={{ padding: 10 }}>
-                <ProductRange type="Kids" />
+                <ProductRange type="Kids" products={null} />
               </div>
             </TabPanel>
             <TabPanel id="tab4" title="Tanning" styles={tabStyles}>
               <div style={{ padding: 10 }}>
-                <ProductRange type="tanning" />
+                <ProductRange type="tanning" products={null} />
               </div>
             </TabPanel>
             <TabPanel id="tab5" title="Health Care" styles={tabStyles}>
               <div style={{ padding: 10 }}>
-                <ProductRange type="health%20care" />
+                <ProductRange type="health%20care" products={null} />
               </div>
             </TabPanel>
           </Tabs>
@@ -91,5 +94,25 @@ function Products() {
       </section>
     </div>
   );
+}
+export async function getStaticProps(context) {
+  const baseUrl = process.env.API_URL;
+  const endpoint = `products/product/?type=sun%20protection`;
+  const finalUrl = baseUrl + endpoint;
+  const res = await fetch(finalUrl);
+  const products = await res.json();
+
+  // Now we will get the staff picked articles
+
+  if (!products) {
+    return {
+      notFound: true,
+      isLoaded: false,
+    };
+  }
+
+  return {
+    props: { products: products.results, isLoaded: true }, // will be passed to the page component as props
+  };
 }
 export default Products;

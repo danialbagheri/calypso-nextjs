@@ -9,26 +9,30 @@ import ProductDescription from "../../components/products/product-description";
 import Head from "next/head";
 import Image from "next/image";
 import ProductReviews from "../../components/reviews/product-reviews";
+import QuestionAndAnswerRow from "../../components/question-and-answers/question-and-answers-row";
 
-function Product({ productData }) {
-  const [product, setProduct] = useState(productData);
-  const [childProducts, setChildProducts] = useState(productData.variants);
+function Product(props) {
+  const [product, setProduct] = useState(props.productData);
+  const [childProducts, setChildProducts] = useState(
+    props.productData.variants
+  );
   const [variantId, setShopifyVariantId] = useState(
-    productData.variants[0].shopify_storefront_variant_id
+    props.productData.variants[0].shopify_storefront_variant_id
   );
-  const [selectedPrice, setPrice] = useState(productData.variants[0].price);
+  const [selectedPrice, setPrice] = useState(
+    props.productData.variants[0].price
+  );
   const [selectedChildVariation, setselectedChildVariation] = useState(
-    productData.variants[0].name
+    props.productData.variants[0].name
   );
-  const [selectedChild, setChild] = useState(productData.variants[0].sku);
+  const [selectedChild, setChild] = useState(props.productData.variants[0].sku);
   const [stores, setWheretoBuyStores] = useState(
-    productData.variants[0].where_to_buy
+    props.productData.variants[0].where_to_buy
   );
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   let slider1 = [];
   let slider2 = [];
-  const productCategoryName = productData.name;
   useEffect(() => {
     setNav1(slider1);
     setNav2(slider2);
@@ -164,7 +168,10 @@ function Product({ productData }) {
         </div>
       </section>
       <section className="faq-container">
-        {/* <QuestionAndAnswerRow productSlug={productCategorySlug} /> */}
+        <QuestionAndAnswerRow
+          productSlug={product.slug}
+          faq={product.faq_list}
+        />
       </section>
 
       <div id="readReviews" />

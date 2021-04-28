@@ -8,6 +8,10 @@ export default function Instagram() {
 
   useEffect(() => {
     setWindowWidth(window.innerWidth);
+    fetchInstaImages();
+  }, []);
+
+  function fetchInstaImages() {
     const baseUrl = data.apiUrl;
     const endPoint = baseUrl + "web/instagram-feed/";
     fetch(endPoint)
@@ -15,7 +19,7 @@ export default function Instagram() {
       .then((result) => {
         setFeed(result);
       });
-  });
+  }
 
   let thumbnailWidth = 186;
   const quantityOfInstagramImages = Math.floor(windowWidth / thumbnailWidth);

@@ -1,0 +1,15 @@
+{
+  "short_name": "Calypso Sun",
+  "name": "Calypso Sun protection",
+  "icons": [
+    {
+      "src": "%PUBLIC_URL%/favicon2.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#fc6b21",
+  "background_color": "#ffffff"
+}

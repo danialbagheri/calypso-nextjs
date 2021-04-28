@@ -119,6 +119,51 @@ function checkout() {
   };
 }
 
+// test
+// function checkout() {
+//   let ShopifyConnect = localStorage.getItem("ShopifyConnect");
+//   let now = new Date();
+//   console.log(res);
+//   if (ShopifyConnect === null || ShopifyConnect === "") {
+//     return (dispatch) => {
+//       client.checkout.create().then((resp) => {
+//         let expirationInMin = 360;
+//         let expires = new Date(new Date().getTime() + 60000 * expirationInMin);
+//         let sessionObject = {
+//           expiresAt: expires,
+//           cartID: res.id,
+//         };
+//         localStorage.setItem("ShopifyConnect", JSON.stringify(sessionObject));
+//         dispatch({
+//           type: CHECKOUT_FOUND,
+//           payload: resp,
+//         });
+//       });
+//     };
+//   } else if (now > Date.parse(JSON.parse(ShopifyConnect).expiresAt)) {
+//     return (dispatch) => {
+//       localStorage.removeItem("ShopifyConnect");
+//       client.checkout.create().then((res) => {
+//         let expirationInMin = 360;
+//         let expires = new Date(new Date().getTime() + 60000 * expirationInMin);
+//         let sessionObject = {
+//           expiresAt: expires,
+//           cartID: res.id,
+//         };
+//         localStorage.setItem("ShopifyConnect", JSON.stringify(sessionObject));
+//         localStorage.setItem("checkoutId", res.id); // Store the ID in localStorage
+//         dispatch({ type: CHECKOUT_FOUND, payload: res });
+//       });
+//     };
+//   } else {
+//     return (dispatch) => {
+//       let cartID = JSON.parse(ShopifyConnect).cartID;
+//       client.checkout.fetch(cartID).then((res) => {
+//         dispatch({ type: "CHECKOUT_FOUND", payload: res });
+//       });
+//     };
+//   }
+// }
 // Gets Shopify store information
 function shopInfo() {
   return (dispatch) => {

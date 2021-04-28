@@ -4,12 +4,13 @@ export default class BreadCrumb extends React.Component {
   render() {
     const { breadcrumbs } = this.props;
 
-    const children = breadcrumbs.map((child) => {
+    const children = breadcrumbs.map((child, index) => {
       return (
         <li
           itemProp="itemListElement"
           itemScope
           itemType="http://schema.org/ListItem"
+          key={index}
         >
           <a itemProp="item" href={child.url}>
             <span itemProp="name">{child.name}</span>

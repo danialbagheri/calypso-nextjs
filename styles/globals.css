@@ -107,6 +107,12 @@ p > a {
 .m-0 {
   margin: 0 !important;
 }
+.m-1 {
+  margin: 1 !important;
+}
+.m-2 {
+  margin: 2 !important;
+}
 .mt-0 {
   margin-top: 0 !important;
 }
@@ -508,7 +514,7 @@ input.search-field:focus {
 }
 .dot {
   padding-top: 10px;
-  width: 100px;
+  width: 15rem;
   display: block;
   margin: 0 auto;
   cursor: pointer;
@@ -523,6 +529,7 @@ input.search-field:focus {
   display: inline-block;
   cursor: pointer;
 }
+
 @media only screen and (max-width: 700px) {
   .dot li {
     font-size: 15px;
@@ -560,6 +567,10 @@ input.search-field:focus {
   text-align: center;
   width: 100%;
   margin: 0 auto;
+}
+
+.video-thumbnail p {
+  font-size: 14px;
 }
 
 .stay-safe {
@@ -657,7 +668,7 @@ input.search-field:focus {
 /* LINE ITEMS
  * ============================== */
 .Line-item {
-  margin-bottom: 20px;
+  margin-bottom: 20px !important;
   overflow: hidden;
   backface-visibility: visible;
   min-height: 65px;
@@ -929,6 +940,23 @@ input.search-field:focus {
   background: #fbefee;
   color: #c23628;
 }
+.loading-spinner {
+  border: 10px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid #fc6b21; /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .loader-hidden {
   display: none;
 }
@@ -1062,9 +1090,21 @@ input.search-field:focus {
   /* width: 420px;
   height: 252px; 
 } */
-.slick-prev,
+.slick-prev {
+  margin-left: 12px !important;
+}
 .slick-next {
-  margin-right: 10px !important;
+  margin-right: 15px !important;
+}
+.slick-arrow.slick-prev:before {
+  font-size: 40px;
+}
+.slick-arrow.slick-next:before {
+  font-size: 40px;
+}
+.slick-arrow.slick-prev,
+.slick-arrow.slick-next {
+  z-index: 20;
 }
 
 .slick-prev:before,
@@ -1271,6 +1311,7 @@ a img {
   background-color: #fc6b21;
 }
 .CalypsoOrangeText,
+.calypso-orange,
 .calypso-orange-text {
   color: #fc6b21;
 }
@@ -2555,6 +2596,9 @@ ul.stores img {
 }
 .pl-2 {
   padding-left: 2rem !important;
+}
+.pr-1 {
+  padding-right: 1rem !important;
 }
 
 .bg-danger {

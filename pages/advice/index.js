@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import BreadCrumb from "../../components/common/breadcrumb";
 import Head from "next/head";
-import Image from "next/Image";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Advice({ posts, count, baseUrl }) {
   const [blogs, setBlogs] = useState(posts);
@@ -42,10 +43,10 @@ export default function Advice({ posts, count, baseUrl }) {
   if (!blogs) {
     thumbnail = <div> Loading...</div>;
   } else {
-    thumbnail = blogs.map((blog) => {
+    thumbnail = blogs.map((blog, index) => {
       return (
-        <div className="col-12 col-md-4 col-sm-6 mb-2 ">
-          <a href={`/advice/${blog.slug}`} className="disableLink">
+        <div className="col-12 col-md-4 col-sm-6 mb-2 " key={index}>
+          <Link href={`/advice/${blog.slug}`} className="disableLink">
             <div className="blog-card bg-white">
               <div className="blog-image">
                 <Image
@@ -61,7 +62,7 @@ export default function Advice({ posts, count, baseUrl }) {
                 <p>{blog.publish_date}</p>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       );
     });

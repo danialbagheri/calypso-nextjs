@@ -39,6 +39,7 @@ export async function getStaticProps(context) {
   const finalUrl = baseUrl + endpoint;
   const res = await fetch(finalUrl);
   const slides = await res.json();
+  // Now we will get the staff picked articles
 
   if (!slides) {
     return {

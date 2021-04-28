@@ -1,26 +1,28 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
 import data from "../../data.json";
+import Link from "next/link";
+export default function ProductRange(props) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [childProducts, setChildProducts] = useState([]);
+  const [variantId, setVariantId] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
 
-class ProductRange extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoaded: false,
-      products: [],
-      childProducts: [],
-      variantId: "",
-      selectedPrice: "",
-    };
-    this.addToBasket = this.addToBasket.bind(this);
-  }
-  componentDidMount() {
-    this.fetchProducts();
-  }
+  useEffect(() => {
+    if (props.products) {
+      const p = props.products;
+      setProducts(p);
+      setIsLoaded(true);
+      setChildProducts(p[0].variants);
+      setVariantId(p[0].variants[0].shopify_variant_id);
+    } else {
+      fetchProducts();
+    }
+  }, []);
 
-  fetchProducts() {
+  function fetchProducts() {
     const baseUrl = data.apiUrl;
-    const type = this.props.type;
+    const type = props.type;
     const finalUrl = baseUrl + `products/product/?type=${type}`;
     fetch(finalUrl)
       .then(function (response) {
@@ -29,39 +31,31 @@ class ProductRange extends React.Component {
       .then(
         (result) => {
           let jsonData = result.results;
-          this.setState({
-            isLoaded: true,
-            products: jsonData,
-            childProducts: jsonData[0].variants,
-            variantId: jsonData[0].variants[0].shopify_variant_id,
-            // selectedPrice: result.products[0].price
-            // images: result[0].products[0].images[0]
-          });
+          setIsLoaded(true);
+          setProducts(jsonData);
+          setChildProducts(jsonData[0].variants);
+          setVariantId(jsonData[0].variants[0].shopify_variant_id);
         },
         (error) => {
-          this.setState({
-            isLoaded: false,
-            error,
-          });
+          setIsLoaded(false);
         }
       );
   }
-  addToBasket(variantId, quantity) {
+  function addToBasket(variantId, quantity) {
     const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }];
-    const checkoutId = this.props.shopify.checkout.id;
-    this.props.addVariantToCart(checkoutId, lineItemsToAdd);
+    const checkoutId = props.shopify.checkout.id;
+    props.addVariantToCart(checkoutId, lineItemsToAdd);
   }
-  render() {
-    const { products } = this.state;
-    let product;
-    if (products.length >= 1) {
-      product = products.map((product) => {
-        return (
-          <div
-            key={product.id}
-            className="col-md-3 col-sm-6 col-xs-12 col-lg-3 col-6 productPageSingle"
-          >
-            <a href={`/products/${product.slug}`}>
+  let product;
+  if (products.length >= 1) {
+    product = products.map((product) => {
+      return (
+        <div
+          key={product.id}
+          className="col-md-3 col-sm-6 col-xs-12 col-lg-3 col-6 productPageSingle"
+        >
+          <Link href={`/products/${product.slug}`}>
+            <a>
               <div className="productPageImageHolder">
                 <img
                   className="ProductPageImage"
@@ -74,22 +68,12 @@ class ProductRange extends React.Component {
                 {product.second_title}
               </p>
             </a>
-          </div>
-        );
-      });
-    } else {
-      product = <p>there was a problem</p>;
-    }
-    return <div className="row">{product}</div>;
+          </Link>
+        </div>
+      );
+    });
+  } else {
+    product = <p>there was a problem</p>;
   }
+  return <div className="row">{product}</div>;
 }
-
-export default ProductRange;
-
-// <button
-//   onClick={() => {
-//     this.addToBasket(shopifyVariantId, 1);
-//   }}
-// >
-//   BUY NOW
-// </button>;

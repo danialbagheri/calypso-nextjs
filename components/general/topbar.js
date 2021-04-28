@@ -9,13 +9,12 @@ export default function TopBar() {
     // Update the document title using the browser API
     async function getTopBarStatus() {
       const endpoint = data.apiUrl + "web/configuration/top_bar/";
-      console.log(endpoint);
       const res = await fetch(endpoint);
       const json = await res.json();
       setMessage(json.value);
     }
     getTopBarStatus();
-  });
+  }, []);
   if (message) {
     return (
       <div className="bg-danger top-bar">
