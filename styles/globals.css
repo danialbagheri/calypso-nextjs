@@ -1,3 +1,6 @@
+@-ms-viewport {
+  width: device-width;
+}
 body {
   margin: 0;
   padding: 0;
@@ -2611,6 +2614,7 @@ ul.stores img {
 
 .top-bar {
   margin-top: -20px;
+  top: 0;
 }
 .top-bar p {
   font-weight: 600;

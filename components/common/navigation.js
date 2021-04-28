@@ -53,7 +53,11 @@ function Navigation() {
         >
           <li>
             <ActiveLink exact href="/">
-              <a itemProp="url" className="nav-link">
+              <a
+                itemProp="url"
+                className="nav-link"
+                onClick={(e) => CloseMobileMenu(e)}
+              >
                 Home
               </a>
             </ActiveLink>
@@ -80,21 +84,33 @@ function Navigation() {
           </li> */}
           <li>
             <ActiveLink href="/be-sun-ready/">
-              <a itemProp="url" className="nav-link">
+              <a
+                itemProp="url"
+                className="nav-link"
+                onClick={(e) => CloseMobileMenu(e)}
+              >
                 Be Sun Ready
               </a>
             </ActiveLink>
           </li>
           <li>
             <ActiveLink href="/advice/">
-              <a itemProp="url" className="nav-link">
+              <a
+                itemProp="url"
+                className="nav-link"
+                onClick={(e) => CloseMobileMenu(e)}
+              >
                 Advice
               </a>
             </ActiveLink>
           </li>
           <li>
             <ActiveLink href="/about/">
-              <a itemProp="url" className="nav-link">
+              <a
+                itemProp="url"
+                className="nav-link"
+                onClick={(e) => CloseMobileMenu(e)}
+              >
                 About Us
               </a>
             </ActiveLink>

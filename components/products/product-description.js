@@ -38,6 +38,7 @@ export default function ProductDescription(props) {
       <h3 className="productPrice">{props.secondTitle}</h3>
       <div className="review-count-product-description">
         <StarRatingComponent
+          name={props.productName}
           starColor={"#fc6b21"}
           editing={false}
           starCount={5}

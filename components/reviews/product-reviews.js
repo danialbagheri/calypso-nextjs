@@ -47,53 +47,65 @@ export default function ProductReviews({
     setModal(false);
   }
 
-  function likeReview(reviewId, e) {
+  function likeReview(e, reviewId) {
     const el = e.target;
     let likedReviews = [];
-    dislikeButton = document.getElementById(`dislike${reviewId}`);
+    const dislikeButton = document.getElementById(`dislike${reviewId}`);
     likedReviews.push({ reviewId });
     let likedReviewsInLocalStorage =
       JSON.parse(window.localStorage.getItem("likeReviews")) || [];
-    for (var i = 0; i < likedReviewsInLocalStorage.length; i++) {
-      console.log(likedReviewsInLocalStorage[i]["reviewId"]);
-      if (likedReviewsInLocalStorage[i]["reviewId"] === reviewId) {
-        console.log(likedReviewsInLocalStorage[i]["reviewId"]);
-        el.classList = "like-and-dislike-danger";
-        el.innerHTML = "You have already rated this review.";
-        dislikeButton.style.display = "none";
-      } else {
-        window.localStorage.setItem(
-          "likeReviews",
-          JSON.stringify(likedReviews)
-        );
-        el.classList = "like-and-dislike-feedback";
-        el.innerHTML = "Thank you for your feedback";
-        dislikeButton.style.display = "none";
+    if (likedReviewsInLocalStorage.length == 0) {
+      window.localStorage.setItem("likeReviews", JSON.stringify(likedReviews));
+      el.classList = "like-and-dislike-feedback";
+      el.innerHTML = "Thank you for your feedback";
+      dislikeButton.style.display = "none";
+    } else {
+      for (var i = 0; i < likedReviewsInLocalStorage.length; i++) {
+        if (likedReviewsInLocalStorage[i]["reviewId"] === reviewId) {
+          console.log(likedReviewsInLocalStorage[i]["reviewId"]);
+          el.classList = "like-and-dislike-danger";
+          el.innerHTML = "You have already rated this review.";
+          dislikeButton.style.display = "none";
+        } else {
+          window.localStorage.setItem(
+            "likeReviews",
+            JSON.stringify(likedReviews)
+          );
+          el.classList = "like-and-dislike-feedback";
+          el.innerHTML = "Thank you for your feedback";
+          dislikeButton.style.display = "none";
+        }
       }
     }
   }
   function dislikeReview(e, reviewId) {
     const el = e.target;
     let likedReviews = [];
-    dislikeButton = document.getElementById(`dislike${reviewId}`);
+    const likeButton = document.getElementById(`like${reviewId}`);
     likedReviews.push({ reviewId });
-    let likedReviewsInLocalStorage =
-      JSON.parse(window.localStorage.getItem("likeReviews")) || [];
-    for (var i = 0; i < likedReviewsInLocalStorage.length; i++) {
-      console.log(likedReviewsInLocalStorage[i]["reviewId"]);
-      if (likedReviewsInLocalStorage[i]["reviewId"] === reviewId) {
-        console.log(likedReviewsInLocalStorage[i]["reviewId"]);
-        el.classList = "like-and-dislike-danger";
-        el.innerHTML = "You have already rated this review.";
-        dislikeButton.style.display = "none";
-      } else {
-        window.localStorage.setItem(
-          "likeReviews",
-          JSON.stringify(likedReviews)
-        );
-        el.classList = "like-and-dislike-feedback";
-        el.innerHTML = "Thank you for your feedback";
-        dislikeButton.style.display = "none";
+    let dislikedReviewsInLocalStorage =
+      JSON.parse(window.localStorage.getItem("dislikeReviews")) || [];
+    if (dislikedReviewsInLocalStorage.length == 0) {
+      window.localStorage.setItem("likeReviews", JSON.stringify(likedReviews));
+      el.classList = "like-and-dislike-feedback";
+      el.innerHTML = "Thank you for your feedback";
+      likeButton.style.display = "none";
+    } else {
+      for (var i = 0; i < dislikedReviewsInLocalStorage.length; i++) {
+        if (dislikedReviewsInLocalStorage[i]["reviewId"] === reviewId) {
+          console.log(dislikedReviewsInLocalStorage[i]["reviewId"]);
+          el.classList = "like-and-dislike-danger";
+          el.innerHTML = "You have already rated this review.";
+          likeButton.style.display = "none";
+        } else {
+          window.localStorage.setItem(
+            "likeReviews",
+            JSON.stringify(likedReviews)
+          );
+          el.classList = "like-and-dislike-feedback";
+          el.innerHTML = "Thank you for your feedback";
+          likeButton.style.display = "none";
+        }
       }
     }
   }
@@ -187,7 +199,8 @@ export default function ProductReviews({
           Was this review helpful to you?
           <button
             className="pl-1 btn-clear review-like-button like-and-dislike-buttons"
-            onClick={(e) => likeReview(review.id, e)}
+            onClick={(e) => likeReview(e, review.id)}
+            id={`like${review.id}`}
           >
             <FontAwesomeIcon
               icon={faThumbsUp}

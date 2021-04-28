@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../public/logoWhite.svg";
 import externalLink from "../../public/icons/external-link.svg";
+import Link from "next/link";
 export default class Footer extends React.Component {
   constructor(props) {
     super(props);
@@ -52,19 +53,29 @@ export default class Footer extends React.Component {
               <div className="col-md-2 col-xs-6">
                 <ul className="list-unstyled">
                   <li>
-                    <a href="/">Home</a>
+                    <Link href="/">
+                      <a>Home</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/be-sun-ready">Be Sun Ready</a>
+                    <Link href="/be-sun-ready/">
+                      <a>Be Sun Ready</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/about">About Us</a>
+                    <Link href="/about">
+                      <a>About Us</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/products">Products</a>
+                    <Link href="/products">
+                      <a>Products</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/advice">Advice</a>
+                    <Link href="/advice">
+                      <a>Advice</a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -72,19 +83,29 @@ export default class Footer extends React.Component {
               <div className="col-md-2 col-xs-6">
                 <ul className="list-unstyled">
                   <li>
-                    <a href="/faq">HELP & FAQ</a>
+                    <Link href="/faq">
+                      <a>HELP & FAQ</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/contact-us">Contact Us</a>
+                    <Link href="/contact-us">
+                      <a>Contact Us</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/delivery-&-return-policy">Delivery & Return</a>
+                    <Link href="/delivery-and-return-policy">
+                      <a>Delivery & Return</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/privacy-policy">Privacy policy</a>
+                    <Link href="/privacy-policy">
+                      <a>Privacy policy</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/site-map/">Site Map</a>
+                    <Link href="/site-map/">
+                      <a>Site Map</a>
+                    </Link>
                   </li>
                 </ul>
               </div>

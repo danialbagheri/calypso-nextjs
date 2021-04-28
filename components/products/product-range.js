@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import data from "../../data.json";
 import Link from "next/link";
+
 export default function ProductRange(props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
