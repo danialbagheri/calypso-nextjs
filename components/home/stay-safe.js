@@ -16,23 +16,21 @@ export default function StaySafe() {
       image: "/video-thumbnails/holly.png",
       title: "Once a day for Kids",
       link:
-        "https://www.youtube.com/watch?v=6kgF4jr6kbE&list=PLQitqtgpPbJTuQKDE899W_3A8LHCKTWBl&index=5",
+        "https://www.youtube.com/watch?v=6kgF4jr6kbE&list=PLQitqtgpPbJTuQKDE899W_3A8LHCKTWBl&index=6",
       width: "1586px",
       height: "849px",
     },
     {
       image: "/video-thumbnails/kelly.png",
       title: "Sun Safety tips for Families",
-      link:
-        "https://www.youtube.com/watch?v=6kgF4jr6kbE&list=PLQitqtgpPbJTuQKDE899W_3A8LHCKTWBl&index=5",
+      link: "https://www.youtube.com/watch?v=KW2GYWJLWQs",
       width: "1586px",
       height: "849px",
     },
     {
       image: "/video-thumbnails/rte.png",
       title: "How much sunscreen should you apply?",
-      link:
-        "https://www.youtube.com/watch?v=6kgF4jr6kbE&list=PLQitqtgpPbJTuQKDE899W_3A8LHCKTWBl&index=5",
+      link: "https://www.youtube.com/watch?v=dCmwR67ZeEw&t=368s",
       width: "1586px",
       height: "849px",
     },
@@ -129,18 +127,7 @@ export default function StaySafe() {
           <h1 className="text-centre">Sun Safety Tips for Families</h1>
           <p className="text-centre">
             Unsure of how best to keep your family protected from the sun this
-            summer? Watch our video to get some valuable sun care advice from
-            NHS Nurse Manager and travel influencer Karen Edwards, better known
-            as <span />
-            <a
-              href="https://travelmadmum.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Travel Mad Mum
-            </a>
-            , who was recently interviewed by Katy Booth on BBC Radio
-            Lancashire.
+            summer? Watch our video to get some valuable sun care advice.
           </p>
         </div>
         <div className="col-2 col-md-2" />

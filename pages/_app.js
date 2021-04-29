@@ -33,10 +33,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#da532c" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=1"
-        />
+
         <meta name="theme-color" content="#000000" />
         {/* <link rel="stylesheet" href="https://use.typekit.net/kls3ash.css" /> */}
         {/* <link

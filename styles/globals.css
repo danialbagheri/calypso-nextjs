@@ -485,7 +485,7 @@ input.search-field:focus {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  position: relative;
+  /* position: relative; */
 }
 
 .hero-text {
@@ -1097,7 +1097,7 @@ input.search-field:focus {
   margin-left: 12px !important;
 }
 .slick-next {
-  margin-right: 15px !important;
+  margin-right: 18px !important;
 }
 .slick-arrow.slick-prev:before {
   font-size: 40px;
