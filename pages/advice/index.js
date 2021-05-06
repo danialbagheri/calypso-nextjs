@@ -59,7 +59,9 @@ export default function Advice({ posts, count, baseUrl }) {
               </div>
               <div className="card-body">
                 <p className="card-title">{blog.title}</p>
-                <p>{blog.publish_date}</p>
+                <p>
+                  <small>{blog.publish_date}</small>
+                </p>
               </div>
             </div>
           </Link>

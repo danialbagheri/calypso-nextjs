@@ -1,0 +1,45 @@
+.sunReadyIcons {
+  width: 178px;
+  margin: 0 auto;
+  margin-top: -80px;
+}
+
+.sunReadyTitle {
+  color: #fc6b21;
+  text-align: center;
+  font-weight: 600;
+  font-size: 3.5rem !important;
+}
+.SkinColorHolder {
+  max-height: 720px;
+  min-height: 720px;
+}
+.bulletList {
+  color: #717171;
+  font-size: 2rem;
+  margin-block-start: 0;
+  padding-inline-start: 20px;
+}
+.RecommendedSpf {
+  color: #fc6b21;
+  position: absolute;
+  font-weight: 600;
+  bottom: 0;
+}
+.SkinColorTitle {
+  color: #717171;
+  font-weight: 600;
+}
+.productHolder {
+  background-color: white;
+  margin-right: 20px;
+  padding: 20px;
+}
+.productHolder:hover {
+  border: 1px solid #fc6b21;
+}
+
+.productImageHolder {
+  max-width: 170px;
+  margin: 0 auto;
+}

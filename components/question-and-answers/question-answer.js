@@ -36,9 +36,9 @@ export default class QuestionAnswer extends React.Component {
           itemType="http://schema.org/Answer"
           className={this.state.isOpen ? "show-answer" : "hide-answer"}
         >
-          <p itemProp="text" className="answer">
-            {answer}
-          </p>
+          <div itemProp="text" className="answer">
+            <div dangerouslySetInnerHTML={{ __html: answer }}></div>
+          </div>
         </div>
       </div>
     );
