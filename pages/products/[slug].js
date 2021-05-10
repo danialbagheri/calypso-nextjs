@@ -87,16 +87,17 @@ function Product(props) {
 
   let images = imageList.map((image, index) => {
     return (
-      <div className="thumbnail-holder" key={index}>
-        <Image
-          // className="SingleProductPageImage"
-          src={image.image}
-          alt={image.alternate_text}
-          layout="responsive"
-          width={image.width}
-          height={image.height}
-        />
-      </div>
+      // <div className="thumbnail-holder" key={index}>
+      <Image
+        className="thumbnail-holder"
+        src={image.image}
+        alt={image.alternate_text}
+        layout="responsive"
+        width={image.width}
+        height={image.height}
+        key={index}
+      />
+      // </div>
     );
   });
 

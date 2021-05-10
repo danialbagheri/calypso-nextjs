@@ -9,6 +9,7 @@ export default function HomeSlider({ slides, isLoaded }) {
     dots: true,
     infinite: true,
     speed: 500,
+    lazyLoad: "progressive",
     // slidesToShow: 1,
     slidesToScroll: 1,
     dotsClass: "dot",

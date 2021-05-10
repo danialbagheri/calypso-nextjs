@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Styles from "../../styles/sunready.module.css";
+import Animation from "../../styles/animation.module.css";
+
 export default function CoverUp() {
   return (
     <div className="mt-4 mb-4">
       <div style={{ height: "153px", backgroundColor: "#FC954D" }}></div>
       <div className={Styles.sunReadyIcons}>
         <Image
-          src="/be-sun-ready/coverup.png"
+          src="/be-sun-ready/svgs/coverup.svg"
           height="178px"
           width="178px"
           layout="responsive"
@@ -28,6 +30,7 @@ export default function CoverUp() {
                 height="928px"
                 width="695px"
                 layout="responsive"
+                className={Animation.slideFromLeft}
               />
             </div>
             <div className="col-md-6">

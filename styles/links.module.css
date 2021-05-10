@@ -1,0 +1,45 @@
+.parent {
+  text-decoration: none;
+  list-style: none;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.parent .link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.linkButton {
+  border: 1px solid #fc6b21;
+  padding: 2rem 2rem;
+  font-size: 2rem;
+  border-radius: 7px;
+  margin-bottom: 2rem;
+  width: 90vw;
+  animation: slideIn;
+  animation-duration: 2s;
+}
+.linkButton:hover {
+  background-color: #fc6b21;
+  color: #fff;
+}
+@keyframes slideIn {
+  from {
+    margin-left: -300px;
+    opacity: 0;
+  }
+  to {
+    margin-left: 0;
+    opacity: 1;
+  }
+}
+.icons {
+  display: flex;
+  -ms-flex-align: start;
+  /* height: 25px; */
+}
+.icons svg {
+  width: 25px;
+  margin-right: 1.3rem;
+}

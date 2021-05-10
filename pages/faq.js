@@ -12,6 +12,7 @@ export default class Faq extends React.Component {
               alt="Frequently Asked Questions"
               width="3984px"
               height="2413px"
+              layout="responsive"
             />
           </picture>
           <h3 itemProp="name" className="mt-4 faq-page-title">

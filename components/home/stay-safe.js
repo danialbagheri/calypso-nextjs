@@ -1,6 +1,6 @@
 import React from "react";
-import YouTube from "react-youtube";
-import MediaQuery from "react-responsive";
+// import YouTube from "react-youtube";
+// import MediaQuery from "react-responsive";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -43,6 +43,7 @@ export default function StaySafe() {
     slidesToShow: 3,
     slidesToScroll: 1,
     dotsClass: "dot",
+    lazyLoad: "progressive",
     responsive: [
       {
         breakpoint: 1024,
@@ -87,20 +88,20 @@ export default function StaySafe() {
   };
   let videoThumbnails = videos.map((video, index) => {
     return (
-      <div className="pr-1">
+      <div className="pr-1 slick-slide">
         <Link href={video.link} key={index}>
           <a
             target="_blank"
             rel="noopener noreferrer"
             className="video-thumbnail disableLink"
           >
-            <div className="bg-calypso text-white m-0">
+            <div className="bg-calypso text-white m-0 slick-slide-title">
               <p className="m-0 text-centre">{video.title}</p>
             </div>
             <Image
               itemProp="url contentUrl"
               src={video.image || "/advice/placeholder.png"}
-              // className="blog-post-image"
+              className="slick-slide-image"
               alt={video.title}
               layout="responsive"
               height={video.height}

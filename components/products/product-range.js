@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import data from "../../data.json";
 import Link from "next/link";
+import StarRatingComponent from "react-star-rating-component";
 
 export default function ProductRange(props) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -64,10 +65,28 @@ export default function ProductRange(props) {
                   alt={product.name}
                 />
               </div>
-              <p className="textCenter productPageTitle">{product.name}</p>
-              <p className="textCenter" style={{ marginTop: 3 }}>
-                {product.second_title}
-              </p>
+              <div className="text-left-align">
+                <p className="productPageTitle">{product.name}</p>
+                <p className="mt-0 mb-0">
+                  <small>{product.sub_title}</small>
+                </p>
+                <hr className="m-1" />
+                <div className="mt-0 d-flex mb-2">
+                  <div>
+                    <small>From £{product.lowest_variant_price}</small>
+                  </div>
+                  <div className="product-range-star-rating-fix-width">
+                    <StarRatingComponent
+                      starColor={"#fc6b21"}
+                      editing={false}
+                      starCount={5}
+                      name={"Score"}
+                      value={product.review_average_score}
+                      className="trending-box-star "
+                    />
+                  </div>
+                </div>
+              </div>
             </a>
           </Link>
         </div>

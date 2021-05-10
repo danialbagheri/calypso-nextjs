@@ -10,7 +10,18 @@ module.exports = withImages({
   images: {
     domains: ["service.calypsosun.com"],
   },
+  async redirects() {
+    return [
+      {
+        // this will match `/english(default)/something` being requested
+        source: "/carrot-oil",
+        destination: "/products/carrot-oil",
+        permanent: false,
+      },
+    ];
+  },
 });
+
 // module.exports = withCSS({
 //   webpack: function (config) {
 //     config.module.rules.push({

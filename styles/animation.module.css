@@ -1,0 +1,14 @@
+.slideFromLeft {
+  animation: slideFromLeft;
+  animation-duration: 2s;
+}
+@keyframes slideFromLeft {
+  from {
+    margin-left: -300px;
+    opacity: 0;
+  }
+  to {
+    margin-left: 0;
+    opacity: 1;
+  }
+}

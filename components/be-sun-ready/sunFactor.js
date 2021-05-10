@@ -3,11 +3,11 @@ import Styles from "../../styles/sunready.module.css";
 import SpfTable from "../../public/be-sun-ready/spfTable.svg";
 export default function SunFactor() {
   return (
-    <div>
+    <div id="sun-factor">
       <div style={{ height: "153px", backgroundColor: "#FC954D" }}></div>
       <div className={Styles.sunReadyIcons}>
         <Image
-          src="/be-sun-ready/spf.png"
+          src="/be-sun-ready/svgs/SPF-CALYPSO.svg"
           height="178px"
           width="178px"
           layout="responsive"

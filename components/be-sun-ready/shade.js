@@ -6,7 +6,7 @@ export default function Shade() {
       <div style={{ height: "153px", backgroundColor: "#FC954D" }}></div>
       <div className={Styles.sunReadyIcons}>
         <Image
-          src="/be-sun-ready/shade.png"
+          src="/be-sun-ready/svgs/shade.svg"
           alt="shade and water icon"
           height="178px"
           width="178px"

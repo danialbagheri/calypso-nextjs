@@ -4,9 +4,10 @@ import QuestionAnswer from "./question-answer";
 export default function QuestionAndAnswerRow({ faq }) {
   const [isLoaded, setLoaded] = useState(faq.length > 0 ? true : false);
   const [questions, setQuestions] = useState(faq);
+  const [shownQuestions, setShownQuestions] = useState(faq.slice(0, 4));
 
   let faqItem = <li className="title-placeHolder" />;
-  const questionsList = questions.slice(0, 5).map((q) => {
+  const questionsList = shownQuestions.map((q) => {
     return (
       <QuestionAnswer key={q.id} question={q.question} answer={q.answer} />
     );
@@ -16,12 +17,22 @@ export default function QuestionAndAnswerRow({ faq }) {
   ) : (
     <p>There is no Question & Answer to show</p>
   );
+  function LoadMore(e) {
+    e.preventDefault();
+    setShownQuestions(questions);
+    e.target.nextElementSibling.style.display = "none";
+    e.target.style.display = "none";
+  }
   return (
     <div className="container">
       <h3 className="text-centre calypso-orange-text">Questions & Answers</h3>
       <div>{faqItem}</div>
       <div className="text-centre mb-3">
         <p>Have more questions?</p>
+        <a className="btn btn-outline-calypso" onClick={(e) => LoadMore(e)}>
+          See more
+        </a>
+        <span className="vertical-separator" id="verticalHide"></span>
         <a className="btn btn-outline-calypso" href="/faq">
           Check other Q&A
         </a>
