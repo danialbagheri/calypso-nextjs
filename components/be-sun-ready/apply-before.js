@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import Styles from "../../styles/sunready.module.css";
+import ApplyIcon from "../../public/be-sun-ready/svgs/apply.svg";
 
 export default function ApplyBefore({ blogs }) {
-  const blogRow = blogs.slice(0, 3).map((blog) => {
+  const blogRow = blogs.map((blog) => {
     return (
       <Link href={`/advice/${blog.slug}`} className="disableLink">
         <div className="blog-card bg-white">
           <div className="blog-image">
             <Image
-              src={blog.resized || "/advice/placeholder.png"}
+              src={blog.image || "/advice/placeholder.png"}
               alt={blog.image_alt_text}
               layout="responsive"
               height={blog.image_height}
@@ -31,8 +32,8 @@ export default function ApplyBefore({ blogs }) {
     <div className="mt-4 mb-4">
       <div style={{ height: "153px", backgroundColor: "#FC954D" }}></div>
       <div className={Styles.sunReadyIcons}>
-        <Image
-          src="/be-sun-ready/svgs/apply.svg"
+        <img
+          src={ApplyIcon}
           alt="Apply sunscreen before going out icon"
           height="178px"
           width="178px"

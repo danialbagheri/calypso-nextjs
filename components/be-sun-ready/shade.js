@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Styles from "../../styles/sunready.module.css";
+import shadeIcon from "../../public/be-sun-ready/svgs/shade.svg";
+
 export default function Shade() {
   return (
     <div className="mt-4 mb-4">
       <div style={{ height: "153px", backgroundColor: "#FC954D" }}></div>
       <div className={Styles.sunReadyIcons}>
         <Image
-          src="/be-sun-ready/svgs/shade.svg"
+          src={shadeIcon}
           alt="shade and water icon"
           height="178px"
           width="178px"

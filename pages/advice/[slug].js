@@ -39,8 +39,11 @@ function Article({ blog }) {
               <h1 className="blog-title" itemProp="name headline">
                 {blog.title}
               </h1>
-              <div className="blog-title-share-icon">
-                <ShareButton text={blog.title} />
+              <div className="d-flex">
+                <div className="blog-title-share-icon">
+                  <ShareButton text={blog.title} />
+                </div>
+                <p className="flatRight">{blog.read_time}</p>
               </div>
               <picture>
                 <Image

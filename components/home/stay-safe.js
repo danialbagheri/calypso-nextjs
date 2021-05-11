@@ -15,8 +15,7 @@ export default function StaySafe() {
     {
       image: "/video-thumbnails/holly.png",
       title: "Once a day for Kids",
-      link:
-        "https://www.youtube.com/watch?v=6kgF4jr6kbE&list=PLQitqtgpPbJTuQKDE899W_3A8LHCKTWBl&index=6",
+      link: "https://www.youtube.com/watch?v=6kgF4jr6kbE&list=PLQitqtgpPbJTuQKDE899W_3A8LHCKTWBl&index=6",
       width: "1586px",
       height: "849px",
     },
@@ -100,7 +99,7 @@ export default function StaySafe() {
             </div>
             <Image
               itemProp="url contentUrl"
-              src={video.image || "/advice/placeholder.png"}
+              src={video.image}
               className="slick-slide-image"
               alt={video.title}
               layout="responsive"

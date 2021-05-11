@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Styles from "../../styles/sunready.module.css";
 import Animation from "../../styles/animation.module.css";
+import coverUpIcon from "../../public/be-sun-ready/svgs/coverup.svg";
 
 export default function CoverUp() {
   return (
     <div className="mt-4 mb-4">
       <div style={{ height: "153px", backgroundColor: "#FC954D" }}></div>
       <div className={Styles.sunReadyIcons}>
-        <Image
-          src="/be-sun-ready/svgs/coverup.svg"
+        <img
+          src={coverUpIcon}
           height="178px"
           width="178px"
           layout="responsive"

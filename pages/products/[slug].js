@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import data from "../../data.json";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import BreadCrumb from "../../components/common/breadcrumb";
-import ProductTabs from "../../components/products/product-tabs";
+import ProductPageImage from "../../components/products/product-page-image";
 import ProductDescription from "../../components/products/product-description";
+import ProductTabs from "../../components/products/product-tabs";
 import Head from "next/head";
-import Image from "next/image";
 import ProductReviews from "../../components/reviews/product-reviews";
 import QuestionAndAnswerRow from "../../components/question-and-answers/question-and-answers-row";
 
@@ -29,14 +27,6 @@ function Product(props) {
   const [stores, setWheretoBuyStores] = useState(
     props.productData.variants[0].where_to_buy
   );
-  const [nav1, setNav1] = useState(null);
-  const [nav2, setNav2] = useState(null);
-  let slider1 = [];
-  let slider2 = [];
-  useEffect(() => {
-    setNav1(slider1);
-    setNav2(slider2);
-  }, [slider1, slider2]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -85,22 +75,6 @@ function Product(props) {
     );
   }
 
-  let images = imageList.map((image, index) => {
-    return (
-      // <div className="thumbnail-holder" key={index}>
-      <Image
-        className="thumbnail-holder"
-        src={image.image}
-        alt={image.alternate_text}
-        layout="responsive"
-        width={image.width}
-        height={image.height}
-        key={index}
-      />
-      // </div>
-    );
-  });
-
   const productDescription = (
     <ProductDescription
       productName={product.name}
@@ -114,30 +88,7 @@ function Product(props) {
       reviewCount={product.total_review_count}
     />
   );
-  const productPictures = (
-    <div className="product-photo-holder">
-      <Slider
-        asNavFor={nav2}
-        ref={(slider) => (slider1 = slider)}
-        className="product-page-main-image top20"
-      >
-        {images}
-      </Slider>
 
-      <Slider
-        className="product-image-thumbnail"
-        asNavFor={nav1}
-        ref={(slider) => (slider2 = slider)}
-        slidesToShow={6}
-        infinite={false}
-        swipeToSlide={true}
-        focusOnSelect={true}
-        lazyLoad={true}
-      >
-        {images}
-      </Slider>
-    </div>
-  );
   return (
     <div>
       <Head>
@@ -150,7 +101,7 @@ function Product(props) {
         <div className="row productContainer">
           <div className="col-md-6 col-sm-6 col-xs-12">
             <BreadCrumb breadcrumbs={breadCrumbPath} />
-            {productPictures}
+            <ProductPageImage imageList={imageList} />
           </div>
           <div className="col-md-6 col-sm-6 col-xs-12">
             {productDescription}
