@@ -6,15 +6,13 @@ export default class Faq extends React.Component {
     return (
       <div itemScope itemType="http://schema.org/FAQPage">
         <div className="faq-row">
-          <picture>
-            <Image
-              src="/faq/faqs.jpg"
-              alt="Frequently Asked Questions"
-              width="3984px"
-              height="2413px"
-              layout="responsive"
-            />
-          </picture>
+          <Image
+            src="/faq/faqs.jpg"
+            alt="Frequently Asked Questions"
+            layout="fill"
+            objectFit="cover"
+            objectPosition="80% 100%"
+          />
           <h3 itemProp="name" className="mt-4 faq-page-title">
             Frequently Asked Questions
           </h3>

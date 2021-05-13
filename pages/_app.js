@@ -38,6 +38,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="theme-color" content="#000000" />
+        <meta name="twitter:site" content="@calypsosuncare"></meta>
         {/* <link rel="stylesheet" href="https://use.typekit.net/kls3ash.css" /> */}
         {/* <link
           rel="stylesheet"

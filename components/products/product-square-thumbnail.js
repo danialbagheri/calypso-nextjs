@@ -1,5 +1,6 @@
 import React from "react";
 import StarRatingComponent from "react-star-rating-component";
+
 export default class ProductSquareThumbnail extends React.Component {
   constructor(props) {
     super(props);
@@ -32,13 +33,17 @@ export default class ProductSquareThumbnail extends React.Component {
     // }
     variants.map((each) => {
       if (each["image_list"].find((el) => el.image_type === "LS")) {
-        lifeStyleImage = each["image_list"].find((el) => el.image_type === "LS")
-          .resized;
+        lifeStyleImage = each["image_list"].find(
+          (el) => el.image_type === "LS"
+        ).resized;
       }
     });
     if (!lifeStyleImage) {
-      lifeStyleImage =
-        variants[variants.length - 1]["image_list"][0]["resized"];
+      if (variants[variants.length - 1]["image_list"].length > 0) {
+        lifeStyleImage = variants[variants.length - 1]["image_list"][0].resized;
+      } else {
+        lifeStyleImage = null;
+      }
     }
     let hoveredImage;
     if (this.state.hover) {
@@ -59,8 +64,17 @@ export default class ProductSquareThumbnail extends React.Component {
           <picture className={this.state.hover ? "d-none" : "d-block"}>
             <source srcSet={webp} alt={name} type="image/webp" />
             <source srcSet={image} alt={name} type="image/png" />
-            <img src={image} alt={name} />
+            <img src={image || "/advice/placeholder.png"} alt={name} />
           </picture>
+          {/* <div style={{ width: "280px", height: "400px" }}>
+            <Image
+              src={image || "/advice/placeholder.png"}
+              alt={name}
+              className={this.state.hover ? "d-none" : "d-block"}
+              layout="fill"
+              objectFit="cover"
+            />
+          </div> */}
         </a>
         <div className="trending-box-text">
           <p>

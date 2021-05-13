@@ -1992,7 +1992,9 @@ a img {
   margin-right: 15px;
 }
 .product-page-banner-image {
-  width: 100%;
+  /* width: 100%; */
+  object-fit: contain;
+  height: 255px;
 }
 
 .SingleProductPageImage {
@@ -2220,9 +2222,10 @@ ol.breadcrumb li a:hover {
 
 ul.benefits {
   list-style: none;
+  display: flex;
+  flex-wrap: wrap;
 }
 ul.benefits li {
-  display: inline;
   padding-right: 20px;
 }
 .benefitsItem img {
@@ -2232,7 +2235,6 @@ ul.benefits li {
 }
 .benefitsItem {
   width: 120px;
-  float: left;
   padding-right: 20px;
 }
 /* wheretobuy */
@@ -2441,7 +2443,9 @@ ul.stores img {
 }
 .faq-row {
   position: relative;
-  max-height: 550px;
+  /* max-height: 550px; */
+  width: 100%;
+  min-height: 35vh;
   overflow: hidden;
   text-align: center;
   color: white;

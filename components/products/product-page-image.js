@@ -18,13 +18,13 @@ export default function ProductPageImage(props) {
     return (
       //   <div className="product-image-holder" key={index}>
       <Image
-        className="thumbnail-holder"
-        src={image.image}
+        src={image.resized}
         alt={image.alternate_text}
         layout="responsive"
         width={image.width}
         height={image.height}
         key={index}
+        className="thumbnail-holder"
       />
       //   </div>
     );

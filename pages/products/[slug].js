@@ -88,7 +88,6 @@ function Product(props) {
       reviewCount={product.total_review_count}
     />
   );
-
   return (
     <div>
       <Head>
@@ -96,6 +95,12 @@ function Product(props) {
           Calypso - {product.name} - {product.sub_title}
         </title>
         <meta name="description" content={product.description} />
+        <meta name="twitter:card" content="product" />
+        <meta name="twitter:description" content={product.description} />
+        <meta property="og:image" content={imageList[0].resized} />
+        <meta name="twitter:image" content={imageList[0].resized} />
+        <meta property="og:price:amount" content={selectedPrice} />
+        <meta property="og:price:currency" content="GBP" />
       </Head>
       <div className="container-fluid">
         <div className="row productContainer">

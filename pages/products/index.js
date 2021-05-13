@@ -2,7 +2,7 @@ import ProductRange from "../../components/products/product-range";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Head from "next/head";
-
+import Image from "next/image";
 function Products(props) {
   const styles = {
     textAlign: "center",
@@ -11,7 +11,6 @@ function Products(props) {
   const tabStyles = {
     color: "#fff !important",
   };
-  const topBannerImage = require("../../public/product-page/banner-productspage-768x265.jpg");
 
   return (
     <div>
@@ -28,11 +27,14 @@ function Products(props) {
       <section className="container-fluid top20">
         <div className="row">
           <div className="col-lg-7 col-md-9 col-xs-12">
-            <img
-              alt="Calypso Product Clear Protection"
-              src={topBannerImage}
-              class="product-page-banner-image"
-            />
+            <div className="product-page-banner-image">
+              <Image
+                alt="Calypso Product Clear Protection"
+                src="/product-page/banner-spain.jpg"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
           </div>
           <div className="col-lg-5 col-md-3 col-xs-12 m2">
             <h2 className="text-right CalypsoOrangeText">SUN</h2>

@@ -1,5 +1,4 @@
 import React from "react";
-
 export default class Benefits extends React.Component {
   render() {
     let benefits;

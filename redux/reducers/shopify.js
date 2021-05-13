@@ -8,17 +8,17 @@ import {
   REMOVE_LINE_ITEM_IN_CART,
   OPEN_CART,
   CLOSE_CART,
-  OPEN_CHECKOUT
+  OPEN_CHECKOUT,
 } from "../actions/types";
 // initial state
 const shopify = {
   isCartOpen: false,
   checkout: { lineItems: [] },
   shop: {},
-  checkoutPage: {}
+  checkoutPage: {},
 };
 
-export default (state = shopify, action) => {
+export default function shopifyDuck(state = shopify, action) {
   switch (action.type) {
     case CLIENT_CREATED:
       return { ...state, client: action.payload };
@@ -30,7 +30,7 @@ export default (state = shopify, action) => {
       return {
         ...state,
         isCartOpen: true,
-        checkout: action.payload
+        checkout: action.payload,
       };
     case UPDATE_QUANTITY_IN_CART:
       return { ...state, checkout: action.payload.checkout };
@@ -45,4 +45,4 @@ export default (state = shopify, action) => {
     default:
       return state;
   }
-};
+}

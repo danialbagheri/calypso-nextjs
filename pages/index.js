@@ -13,7 +13,26 @@ function Home({ slides, isLoaded }) {
         <title>Calypso Sun - Bring out the sunshine - Calypso</title>
         <meta
           name="description"
-          content="Calypso sun creams are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers."
+          content="Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers."
+        />
+        <meta
+          name="twitter:card"
+          value="Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers."
+        />
+
+        <meta
+          property="og:title"
+          content="Calypso Sun - Bring out the sunshine - Calypso"
+        />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.calypsosun.com/" />
+        <meta
+          property="og:image"
+          content="https://calypsosun.com/social-media.png"
+        />
+        <meta
+          property="og:description"
+          content="Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers."
         />
       </Head>
 

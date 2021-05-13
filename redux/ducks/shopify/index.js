@@ -123,7 +123,6 @@ function getProduct(id) {
 function checkout() {
   let ShopifyConnect = localStorage.getItem("ShopifyConnect");
   let now = new Date();
-  console.log(ShopifyConnect);
   if (ShopifyConnect === null || ShopifyConnect === "") {
     return (dispatch) => {
       client.checkout.create().then((resp) => {
