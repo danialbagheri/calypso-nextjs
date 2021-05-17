@@ -51,11 +51,7 @@ function Products(props) {
       <section className="container">
         <div className="top50" />
         <div style={styles} className="productPageTab">
-          <Tabs
-            activeTab={{
-              id: "tab1",
-            }}
-          >
+          <Tabs>
             <TabList>
               <Tab styles={tabStyles}>Sun Protection</Tab>
               <Tab styles={tabStyles}>After Sun</Tab>

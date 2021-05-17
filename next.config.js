@@ -3,14 +3,11 @@ const path = require("path");
 const withImages = require("next-images");
 
 module.exports = withImages({
-  exclude: path.resolve(__dirname, "src/assets/svg"),
-  webpack(config, options) {
-    return config;
-  },
+  // exclude: path.resolve(__dirname, "public/svg"),
   images: {
     domains: ["service.calypsosun.com"],
   },
-  async redirects() {
+  redirects: async () => {
     return [
       {
         // this will match `/english(default)/something` being requested
@@ -20,7 +17,23 @@ module.exports = withImages({
       },
     ];
   },
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+  webpack(config, options) {
+    return config;
+  },
 });
+
+// module.exports = withImages({
+//   exclude: path.resolve(__dirname, "src/assets/svg"),
+//   webpack(config, options) {
+//     return config;
+//   },
+//   sassOptions: {
+//     includePaths: [path.join(__dirname, "styles")],
+//   },
+// });
 
 // module.exports = withCSS({
 //   webpack: function (config) {
