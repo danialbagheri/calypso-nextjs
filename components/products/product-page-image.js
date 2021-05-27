@@ -18,7 +18,7 @@ export default function ProductPageImage(props) {
     return (
       //   <div className="product-image-holder" key={index}>
       <Image
-        src={image.resized}
+        src={image.image}
         alt={image.alternate_text}
         layout="responsive"
         width={image.width}

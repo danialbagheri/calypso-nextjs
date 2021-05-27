@@ -17,7 +17,6 @@ export default function ProductDescription(props) {
         quantity: parseInt(quantity, 10),
       },
     ];
-    console.log(checkoutState.id);
     addVariant(checkoutState.id, lineItemsToAdd);
     openCart();
   }

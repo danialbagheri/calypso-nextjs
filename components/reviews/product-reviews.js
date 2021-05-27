@@ -62,7 +62,6 @@ export default function ProductReviews({
     } else {
       for (var i = 0; i < likedReviewsInLocalStorage.length; i++) {
         if (likedReviewsInLocalStorage[i]["reviewId"] === reviewId) {
-          console.log(likedReviewsInLocalStorage[i]["reviewId"]);
           el.classList = "like-and-dislike-danger";
           el.innerHTML = "You have already rated this review.";
           dislikeButton.style.display = "none";
@@ -93,7 +92,6 @@ export default function ProductReviews({
     } else {
       for (var i = 0; i < dislikedReviewsInLocalStorage.length; i++) {
         if (dislikedReviewsInLocalStorage[i]["reviewId"] === reviewId) {
-          console.log(dislikedReviewsInLocalStorage[i]["reviewId"]);
           el.classList = "like-and-dislike-danger";
           el.innerHTML = "You have already rated this review.";
           likeButton.style.display = "none";
