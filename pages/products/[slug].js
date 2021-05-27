@@ -11,6 +11,7 @@ import QuestionAndAnswerRow from "../../components/question-and-answers/question
 
 function Product(props) {
   const [product, setProduct] = useState(props.productData);
+  console.log(product);
   const [childProducts, setChildProducts] = useState(
     props.productData.variants
   );

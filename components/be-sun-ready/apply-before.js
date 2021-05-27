@@ -42,7 +42,7 @@ export default function ApplyBefore({ blogs }) {
       </div>
       <div className="container">
         <h4 className={Styles.sunReadyTitle}>
-          Apply sunscreen before going out icon
+          Apply sunscreen before going out
         </h4>
         <p className="text-centre m-5">
           You should always apply sunscreen to clean, dry skin at least 20-30

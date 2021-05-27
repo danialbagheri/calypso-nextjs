@@ -18,7 +18,7 @@ export default function HomeSlider({ slides, isLoaded }) {
     ? slides[0].slider_slides.map((slide) => {
         if (slide.slide.custom_slide) {
           return (
-            <div className="banner" index={slide.slide.id}>
+            <div className="banner" index={slide.slide.id} key={slide.slide.id}>
               <div
                 itemProp="articleBody"
                 dangerouslySetInnerHTML={{ __html: slide.slide.custom_code }}
@@ -27,7 +27,7 @@ export default function HomeSlider({ slides, isLoaded }) {
           );
         } else {
           return (
-            <div className="banner" index={slide.id}>
+            <div className="banner" index={slide.id} key={slide.id}>
               <Link href={slide.slide.link ? slide.slide.link : "/about"}>
                 <picture>
                   <source
@@ -47,7 +47,7 @@ export default function HomeSlider({ slides, isLoaded }) {
                   />
                   <source
                     media="(max-width: 640px)"
-                    srcset={slide.mobile_webp}
+                    srcSet={slide.mobile_webp}
                     type="image/webp"
                   />
                   <img

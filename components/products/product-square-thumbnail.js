@@ -1,5 +1,6 @@
 import React from "react";
 import StarRatingComponent from "react-star-rating-component";
+import Link from "next/link";
 
 export default class ProductSquareThumbnail extends React.Component {
   constructor(props) {
@@ -55,18 +56,18 @@ export default class ProductSquareThumbnail extends React.Component {
     }
     return (
       <div className="trending-item-parent">
-        <a
-          href={`/products/${slug}`}
-          className="trending-box-image"
-          onMouseEnter={this.toggleHover}
-          style={hoveredImage}
-        >
-          <picture className={this.state.hover ? "d-none" : "d-block"}>
-            <source srcSet={webp} alt={name} type="image/webp" />
-            <source srcSet={image} alt={name} type="image/png" />
-            <img src={image || "/advice/placeholder.png"} alt={name} />
-          </picture>
-          {/* <div style={{ width: "280px", height: "400px" }}>
+        <Link href={`/products/${slug}`}>
+          <a
+            className="trending-box-image"
+            onMouseEnter={this.toggleHover}
+            style={hoveredImage}
+          >
+            <picture className={this.state.hover ? "d-none" : "d-block"}>
+              <source srcSet={webp} alt={name} type="image/webp" />
+              <source srcSet={image} alt={name} type="image/png" />
+              <img src={image || "/advice/placeholder.png"} alt={name} />
+            </picture>
+            {/* <div style={{ width: "280px", height: "400px" }}>
             <Image
               src={image || "/advice/placeholder.png"}
               alt={name}
@@ -75,7 +76,8 @@ export default class ProductSquareThumbnail extends React.Component {
               objectFit="cover"
             />
           </div> */}
-        </a>
+          </a>
+        </Link>
         <div className="trending-box-text">
           <p>
             <strong>{name}</strong>{" "}

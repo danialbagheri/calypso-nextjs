@@ -1,28 +1,80 @@
-import React from "react";
+import { useState } from "react";
 import FaqItems from "../components/faqs/faq-item";
 import Image from "next/image";
-export default class Faq extends React.Component {
-  render() {
-    return (
-      <div itemScope itemType="http://schema.org/FAQPage">
-        <div className="faq-row">
-          <Image
-            src="/faq/faqs.jpg"
-            alt="Frequently Asked Questions"
-            layout="fill"
-            objectFit="cover"
-            objectPosition="80% 100%"
-          />
-          <h3 itemProp="name" className="mt-4 faq-page-title">
-            Frequently Asked Questions
-          </h3>
-        </div>
-        <div className="container">
-          <div style={{ padding: 10 }}>
-            <FaqItems category="general" />
-          </div>
+
+export default function Faq({ faqs }) {
+  const [questions, setQuestions] = useState(faqs);
+
+  function searchQuestions(e) {
+    e.preventDefault();
+    // input = document.getElementById("myInput");
+    let filter = e.target.value.toUpperCase();
+    let result = [];
+    for (let i = 0; i < faqs.length; i++) {
+      if (faqs[i].question.toUpperCase().indexOf(filter) > -1) {
+        result.push(faqs[i]);
+      }
+    }
+    setQuestions(result);
+  }
+  return (
+    <div itemScope itemType="http://schema.org/FAQPage">
+      <div className="faq-row">
+        <Image
+          src="/faq/faqs.jpg"
+          alt="Frequently Asked Questions"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="80% 100%"
+        />
+        <h3 itemProp="name" className="mt-4 faq-page-title">
+          Frequently Asked Questions
+          <input
+            className="faqSearchInput"
+            onChange={(e) => searchQuestions(e)}
+            placeholder="Search"
+          ></input>
+        </h3>
+      </div>
+      <div className="container">
+        <div style={{ padding: 10 }}>
+          <FaqItems questions={questions} />
         </div>
       </div>
-    );
+    </div>
+  );
+}
+
+async function getAllPages(pageCount, url) {
+  let pageNumber = 1;
+  let faqResults = [];
+  for (pageNumber; pageNumber <= pageCount; pageNumber++) {
+    let paginatedUrl = url + `?page=${pageNumber}`;
+    const res = await fetch(paginatedUrl);
+    const blogs = await res.json();
+    faqResults.push(blogs.results);
   }
+  return faqResults;
+}
+
+export async function getStaticProps(context) {
+  const baseUrl = process.env.API_URL;
+  const endpoint = `faq/`;
+  const finalUrl = baseUrl + endpoint;
+  const res = await fetch(finalUrl);
+  const faqs = await res.json();
+  const pageCount = Math.ceil(faqs.count / 10);
+  let faqResults = await getAllPages(pageCount, finalUrl);
+  // Now we will get the staff picked articles
+
+  if (!faqResults) {
+    return {
+      notFound: true,
+      isLoaded: false,
+    };
+  }
+
+  return {
+    props: { faqs: faqResults.flat(), isLoaded: true }, // will be passed to the page component as props
+  };
 }

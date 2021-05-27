@@ -2459,7 +2459,11 @@ ul.stores img {
   font-size: 4rem !important;
   color: #ffff;
 }
-
+.faqSearchInput {
+  color: black !important;
+  border: none;
+  padding: 0 4px;
+}
 .answer {
   font-size: 19px;
   line-height: 31px;

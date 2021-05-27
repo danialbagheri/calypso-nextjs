@@ -253,7 +253,7 @@ export default function ProductReviews({
       <div className="star-review-strap">
         <div className="star-review-holder">
           <h1 className="reviewTotalScore" itemProp="ratingValue">
-            {totalScore}
+            {reviewScores}
           </h1>
           <div className="starRating">
             <StarRatingComponent
@@ -261,7 +261,7 @@ export default function ProductReviews({
               editing={false}
               name={"total reviews"}
               starCount={5}
-              value={totalScore}
+              value={reviewScores}
             />
             <p className="reviewCount">
               <span itemProp="reviewCount">({count}</span> Reviews)

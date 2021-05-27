@@ -52,8 +52,8 @@ export default function ProductDescription(props) {
             : "Be the first to review to this product"}
         </a>
       </div>
-      <p
-        className="text-lg"
+      <div
+        className="text-lg mb-2"
         itemProp="description"
         dangerouslySetInnerHTML={{
           __html: props.description,
@@ -62,7 +62,7 @@ export default function ProductDescription(props) {
       <button className="DirectionOfUse" onClick={(e) => openDropDown(e)}>
         Directions for Use
       </button>
-      <p
+      <div
         style={DirectionOfUseText}
         dangerouslySetInnerHTML={{
           __html: props.direction,
