@@ -6,6 +6,7 @@ import ProductPageImage from "../../components/products/product-page-image";
 import ProductDescription from "../../components/products/product-description";
 import ProductTabs from "../../components/products/product-tabs";
 import Head from "next/head";
+import RelatedProduct from "../../components/products/related-products";
 import ProductReviews from "../../components/reviews/product-reviews";
 import QuestionAndAnswerRow from "../../components/question-and-answers/question-and-answers-row";
 import { useShopify } from "../../components/hooks";
@@ -37,6 +38,7 @@ function Product(props) {
   const { fetchProductByQuery } = useShopify();
 
   useEffect(() => {
+    window.history.scrollRestoration = "manual";
     const query = {
       query: `variant:[slug:${selectedChild}]`,
     };
@@ -151,7 +153,7 @@ function Product(props) {
           faq={product.faq_list}
         />
       </section>
-
+      <RelatedProduct related={product.related_products} />
       <div id="readReviews" />
       <ProductReviews
         productSlug={product.slug}

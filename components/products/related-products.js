@@ -1,19 +1,18 @@
+import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import NextImage from "next/image";
 import Styles from "../../styles/sunready.module.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function RecommendedProducts({ products }) {
-  // const [productsData, setProductsData] = useState(products);
-  // products ? setProductsData(products) : setProductsData([]);
+export default function RelatedProducts({ related }) {
   const settings = {
     arrows: true,
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     dotsClass: "dot",
     responsive: [
@@ -44,29 +43,28 @@ export default function RecommendedProducts({ products }) {
     ],
   };
 
-  const recommendedProducts = products.map((product) => {
-    const firstImage = product.variants[0].image_list[0];
+  const relatedProducts = related.map((product, index) => {
     return (
       <div>
         <div className={Styles.productHolder}>
-          <Link href={`/products/${product.slug}`} key={product.id}>
+          <Link href={`/products/${product.slug}`} key={index}>
             <a className="disableLink">
-              <div className={Styles.productImageHolder}>
-                <Image
-                  src={firstImage.image}
-                  width={firstImage.width}
-                  height={firstImage.height}
+              <div>
+                <NextImage
+                  src={product.main_image}
+                  height={750}
+                  width={500}
+                  alt={product.name}
                   layout="responsive"
                 />
               </div>
               <div className="text-centre">
-                <h6>{product.name}</h6>
                 <p>
+                  <strong>{product.name}</strong> <br />
                   {product.sub_title}
-                  <br />
                 </p>
                 <p>
-                  <strong>from £{product.lowest_variant_price}</strong>
+                  <strong>from £{product.starting_price}</strong>
                 </p>
               </div>
             </a>
@@ -76,11 +74,9 @@ export default function RecommendedProducts({ products }) {
     );
   });
   return (
-    <div className="mt-4 mb-0">
-      <div className="bg-secondary p-3">
-        <h4 className={Styles.sunReadyTitle}>STAY SAFE WITH CALYPSO</h4>
-        <Slider {...settings}>{recommendedProducts}</Slider>
-      </div>
+    <div className="bg-secondary p-3">
+      <h1 className="textCenter">Related Products</h1>
+      <Slider {...settings}>{relatedProducts}</Slider>
     </div>
   );
 }

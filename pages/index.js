@@ -24,6 +24,7 @@ function Home({ slides, isLoaded }) {
           property="og:title"
           content="Calypso Sun - Bring out the sunshine - Calypso"
         />
+
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.calypsosun.com/" />
         <meta

@@ -35,11 +35,12 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#da532c" />
+        <link rel="stylesheet" href="https://use.typekit.net/kls3ash.css" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="theme-color" content="#000000" />
         <meta name="twitter:site" content="@calypsosuncare"></meta>
-        {/* <link rel="stylesheet" href="https://use.typekit.net/kls3ash.css" /> */}
+
         {/* <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
