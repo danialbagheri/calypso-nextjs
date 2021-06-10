@@ -93,16 +93,29 @@ function Products(props) {
     </div>
   );
 }
+async function getAllPages(pageCount, url) {
+  let pageNumber = 1;
+  let productResult = [];
+  for (pageNumber; pageNumber <= pageCount; pageNumber++) {
+    let paginatedUrl = url + `&page=${pageNumber}`;
+    const res = await fetch(paginatedUrl);
+    const product = await res.json();
+    productResult.push(product.results);
+  }
+  return productResult;
+}
 export async function getStaticProps(context) {
   const baseUrl = process.env.API_URL;
   const endpoint = `products/product/?type=sun%20protection`;
   const finalUrl = baseUrl + endpoint;
   const res = await fetch(finalUrl);
-  const products = await res.json();
+  let products = await res.json();
+  const pageCount = Math.ceil(products.count / 10);
+  let productResult = await getAllPages(pageCount, finalUrl);
 
   // Now we will get the staff picked articles
 
-  if (!products) {
+  if (!productResult) {
     return {
       notFound: true,
       isLoaded: false,
@@ -110,7 +123,7 @@ export async function getStaticProps(context) {
   }
 
   return {
-    props: { products: products.results, isLoaded: true }, // will be passed to the page component as props
+    props: { products: productResult.flat(), isLoaded: true }, // will be passed to the page component as props
   };
 }
 export default Products;

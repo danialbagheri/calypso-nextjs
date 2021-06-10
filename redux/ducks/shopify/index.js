@@ -91,6 +91,16 @@ function getProduct(id) {
     return resp;
   };
 }
+function getProductByQuery(query) {
+  return async (dispatch) => {
+    const resp = await client.product.fetchQuery(query);
+    dispatch({
+      type: PRODUCT_FOUND,
+      payload: resp,
+    });
+    return resp;
+  };
+}
 
 //
 // Gets a  collection based on that collection's id
@@ -258,6 +268,7 @@ export function useShopify() {
   const shopDetails = useSelector((appState) => appState.shopifyState.shop);
   const fetchProducts = () => dispatch(getProducts());
   const fetchProduct = (id) => dispatch(getProduct(id));
+  const fetchProductByQuery = (query) => dispatch(getProductByQuery(query));
   // const fetchCollection = () => dispatch(getCollection())
   const createCheckout = () => dispatch(checkout());
   const createShop = () => dispatch(shopInfo());
@@ -283,6 +294,7 @@ export function useShopify() {
     addVariant,
     fetchProducts,
     fetchProduct,
+    fetchProductByQuery,
     // fetchCollection,
     createCheckout,
     createShop,

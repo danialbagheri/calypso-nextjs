@@ -80,10 +80,11 @@ export default class ProductSquareThumbnail extends React.Component {
         </Link>
         <div className="trending-box-text">
           <p>
-            <strong>{name}</strong>{" "}
+            <strong>{name}</strong>
+            <br />
+            {secondTitle}
           </p>
           <p className="trending-box-price">From £{minPrice}</p>
-          <p>{secondTitle}</p>
           <StarRatingComponent
             starColor={"#fc6b21"}
             editing={false}

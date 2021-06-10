@@ -6,22 +6,33 @@ import StarRatingComponent from "react-star-rating-component";
 export default function ProductRange(props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
-  const [childProducts, setChildProducts] = useState([]);
-  const [variantId, setVariantId] = useState("");
-  const [selectedPrice, setSelectedPrice] = useState("");
+  const [pageCount, setPageCount] = useState([]);
+  // const [childProducts, setChildProducts] = useState([]);
+  // const [variantId, setVariantId] = useState("");
+  // const [selectedPrice, setSelectedPrice] = useState("");
 
   useEffect(() => {
     if (props.products) {
       const p = props.products;
       setProducts(p);
       setIsLoaded(true);
-      setChildProducts(p[0].variants);
-      setVariantId(p[0].variants[0].shopify_variant_id);
+      // setChildProducts(p[0].variants);
+      // setVariantId(p[0].variants[0].shopify_variant_id);
     } else {
       fetchProducts();
     }
   }, []);
-
+  function getAllPages(pageCount, url) {
+    let pageNumber = 1;
+    let productResult = [];
+    for (pageNumber; pageNumber <= pageCount; pageNumber++) {
+      let paginatedUrl = url + `&page=${pageNumber}`;
+      fetch(paginatedUrl)
+        .then((res) => res.json())
+        .then((product) => productResult.push(product.results));
+    }
+    return productResult;
+  }
   function fetchProducts() {
     const baseUrl = data.apiUrl;
     const type = props.type;
@@ -33,10 +44,16 @@ export default function ProductRange(props) {
       .then(
         (result) => {
           let jsonData = result.results;
+          setPageCount(Math.ceil(jsonData.count / 10));
           setIsLoaded(true);
           setProducts(jsonData);
-          setChildProducts(jsonData[0].variants);
-          setVariantId(jsonData[0].variants[0].shopify_variant_id);
+          // setChildProducts(jsonData[0].variants);
+          // setVariantId(jsonData[0].variants[0].shopify_variant_id);
+          if (result.next) {
+            console.log("has next page!");
+            let productResult = getAllPages(pageCount, finalUrl);
+            setProducts(productResult.flat());
+          }
         },
         (error) => {
           setIsLoaded(false);
@@ -81,7 +98,7 @@ export default function ProductRange(props) {
                       editing={false}
                       starCount={5}
                       name={"Score"}
-                      value={product.review_average_score}
+                      value={parseInt(product.review_average_score)}
                       className="trending-box-star "
                     />
                   </div>

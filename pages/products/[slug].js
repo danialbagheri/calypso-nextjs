@@ -8,6 +8,7 @@ import ProductTabs from "../../components/products/product-tabs";
 import Head from "next/head";
 import ProductReviews from "../../components/reviews/product-reviews";
 import QuestionAndAnswerRow from "../../components/question-and-answers/question-and-answers-row";
+import { useShopify } from "../../components/hooks";
 
 function Product(props) {
   const [product, setProduct] = useState(props.productData);
@@ -17,27 +18,43 @@ function Product(props) {
   const [variantId, setShopifyVariantId] = useState(
     props.productData.variants[0].shopify_storefront_variant_id
   );
+
   const [selectedPrice, setPrice] = useState(
     props.productData.variants[0].price
   );
-  const [selectedChildVariation, setselectedChildVariation] = useState(
+  const [selectedChildVariation, setSelectedChildVariation] = useState(
     props.productData.variants[0].name
+  );
+  const [selectedVariant, setSelectedVariant] = useState(
+    props.productData.variants[0]
   );
   const [selectedChild, setChild] = useState(props.productData.variants[0].sku);
   const [stores, setWheretoBuyStores] = useState(
     props.productData.variants[0].where_to_buy
   );
+  const [shopifyState, setShopifyState] = useState(null);
+
+  const { fetchProductByQuery } = useShopify();
+
+  useEffect(() => {
+    const query = {
+      query: `variant:[slug:${selectedChild}]`,
+    };
+    const f = fetchProductByQuery(query);
+    f.then((f) => setShopifyState(f[0]));
+  }, [selectedChild]);
 
   const handleChange = (e) => {
     e.preventDefault();
     const selectedProduct = childProducts.find(
       (product) => product.sku === e.target.value
     );
+    setSelectedVariant(selectedProduct);
     setShopifyVariantId(selectedProduct.shopify_storefront_variant_id);
     setPrice(selectedProduct.price);
     setWheretoBuyStores(selectedProduct.where_to_buy);
     setChild(selectedProduct.sku);
-    setselectedChildVariation(selectedProduct.name);
+    setSelectedChildVariation(selectedProduct.name);
   };
 
   const breadCrumbPath = [
@@ -84,6 +101,7 @@ function Product(props) {
       direction={product.direction_of_use}
       child={child}
       variantId={variantId}
+      shopifyState={shopifyState}
       averageReviewScore={product.review_average_score}
       reviewCount={product.total_review_count}
     />
@@ -106,7 +124,10 @@ function Product(props) {
         <div className="row productContainer">
           <div className="col-md-6 col-sm-6 col-xs-12">
             <BreadCrumb breadcrumbs={breadCrumbPath} />
-            <ProductPageImage imageList={imageList} />
+            <ProductPageImage
+              imageList={imageList}
+              selectedVariant={selectedVariant}
+            />
           </div>
           <div className="col-md-6 col-sm-6 col-xs-12">
             {productDescription}

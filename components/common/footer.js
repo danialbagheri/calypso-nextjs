@@ -2,6 +2,8 @@ import React from "react";
 import logo from "../../public/logoWhite.svg";
 import externalLink from "../../public/icons/external-link.svg";
 import Link from "next/link";
+import PaymentIcon from "./payment-icons";
+
 export default class Footer extends React.Component {
   constructor(props) {
     super(props);
@@ -172,8 +174,8 @@ export default class Footer extends React.Component {
             itemScope
             itemType="https://schema.org/Organization"
           >
-            <meta itemProp="name" content="Linco Care limited" />
             <div className="linco-branding">
+              <meta itemProp="name" content="Linco Care limited" />
               <img
                 className="linco-logo"
                 src={require("../../public/home-page/Droplets.png")}
@@ -185,20 +187,22 @@ export default class Footer extends React.Component {
               </p>
             </div>
             <div className="linco-care-com">
-              <a
-                className=""
-                href="https://lincocare.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                lincocare.com{" "}
-                <img
-                  src={externalLink}
-                  alt="externalurl"
-                  width="14"
-                  height="14"
-                />
-              </a>
+              <div>
+                <a
+                  href="https://lincocare.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  lincocare.com{" "}
+                  <img
+                    src={externalLink}
+                    alt="externalurl"
+                    width="14"
+                    height="14"
+                  />
+                </a>
+              </div>
+              <PaymentIcon />
             </div>
           </div>
         </div>

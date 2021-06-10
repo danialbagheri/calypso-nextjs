@@ -1435,44 +1435,46 @@ a img {
 .bottom-bar {
   padding: 1rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 
 .linco-branding {
-  flex-grow: 2;
+  display: flex;
 }
 .linco-care-com {
-  margin: auto;
-  width: 30%;
-  text-align: right;
-  font-size: 1.7rem;
-  cursor: pointer;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  height: 15px;
+}
+.linco-care-com * {
+  margin-right: 5px;
 }
 .linco-care-com a {
+  cursor: pointer;
+  font-size: 1.7rem;
   text-decoration: none;
 }
 .linco-logo {
   width: 3rem;
   margin: 7px 20px 7px 7px;
-  float: left;
+  /* float: left; */
 }
-@media only screen and (max-width: 700px) {
+.payment-icon {
+  width: 30px;
+}
+@media only screen and (max-width: 780px) {
   .bottom-bar {
-    display: block;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .linco-branding {
-    width: 100%;
-    margin: 0 auto;
     text-align: center;
+    justify-content: center;
   }
   .linco-care-com {
-    width: 100%;
     text-align: center;
-  }
-  .linco-logo {
-    float: none;
-    margin: 0;
+    justify-content: center;
   }
 }
 
@@ -2308,6 +2310,11 @@ ul.stores img {
   margin: 0 auto;
 }
 
+.productPageSingle {
+  min-height: 490px !important;
+  max-height: 510px !important;
+}
+
 .productPageSingle a {
   text-decoration: none !important;
   text-transform: none;
@@ -2376,6 +2383,10 @@ ul.stores img {
 }
 .trending-box-star {
   font-size: 2rem;
+}
+.trending-box-price {
+  font-size: 1.6rem;
+  color: #505050;
 }
 @media only screen and (max-width: 750px) {
   .trending-box-image {

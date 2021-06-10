@@ -14,7 +14,7 @@ export default function Timeline() {
   return (
     <div className={Styles.timeline}>
       <div className={`${Styles.timelineContainer} ${Styles.left}`}>
-        <div className={Styles.date}>1989</div>
+        <div className={Styles.date}>1988</div>
         <div className={Styles.content}>
           <h2>Founding the brand</h2>
           <p>

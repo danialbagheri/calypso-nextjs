@@ -4,12 +4,24 @@ import StarRatingComponent from "react-star-rating-component";
 import { useShopify } from "../hooks";
 
 export default function ProductDescription(props) {
-  const [dropdown, setDropDown] = useState(false);
   const { addVariant, checkoutState, openCart } = useShopify();
+  const [dropdown, setDropDown] = useState(false);
+  const [inStock, setStockStatus] = useState(true);
+  const [price, setPrice] = useState(props.price);
+  useEffect(() => {
+    if (props.shopifyState) {
+      setStockStatus(props.shopifyState.availableForSale);
+      if (props.shopifyState.availableForSale) {
+        setPrice(props.shopifyState.variants[0].price);
+      }
+    }
+  }, props.shopifyState);
+
   const openDropDown = (e) => {
     e.preventDefault();
     setDropDown(!dropdown);
   };
+
   function addToBasket(variantId, quantity) {
     const lineItemsToAdd = [
       {
@@ -69,23 +81,26 @@ export default function ProductDescription(props) {
       />
       <div className="borderBottom" />
       <div className="top20" />
+      {inStock ? <p>In stock</p> : <p className="text-danger">OUT OF STOCK</p>}
       <h2 className="productPrice">
         <span itemProp="priceCurrency" content="GBP">
           £
         </span>
-        <span itemProp="price" content={props.price}>
-          {props.price}
+        <span itemProp="price" content={price}>
+          {price}
         </span>
       </h2>
       <div className="addToCartContainer">{props.child}</div>
-      <button
-        className="addToCart"
-        onClick={() => {
-          addToBasket(props.variantId, 1);
-        }}
-      >
-        ADD TO CART
-      </button>
+      {inStock ? (
+        <button
+          className="addToCart"
+          onClick={() => {
+            addToBasket(props.variantId, 1);
+          }}
+        >
+          ADD TO CART
+        </button>
+      ) : null}
       <div className="ShareButtonOnProductPage">
         <ShareButton />
       </div>

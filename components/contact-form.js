@@ -1,5 +1,5 @@
 import React from "react";
-// import data from "../data.json";
+import data from "../data.json";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const recaptchaRef = React.createRef();
@@ -20,7 +20,7 @@ export default class Contact extends React.Component {
         name: "",
         email: "",
         message: "",
-        subject: "Calypsosun.com - Product Question",
+        reason: "Calypsosun.com - Product Question",
         recaptcha: "",
       },
       errors: {
@@ -69,15 +69,16 @@ export default class Contact extends React.Component {
   }
 
   openTicket(fields) {
-    const baseUrl = process.env.API_URL;
+    const baseUrl = data.apiUrl;
     const finalUrl = baseUrl + `web/contact-us/`;
     const myBody = fields;
+    console.log(JSON.stringify(myBody));
     fetch(finalUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // "Content-Type": "application/x-www-form-urlencoded",
       },
+
       body: JSON.stringify(myBody),
     })
       .then((r) => {
@@ -97,7 +98,11 @@ export default class Contact extends React.Component {
           }
         },
         (error) => {
+          console.log(error.code);
           console.error(error);
+          this.setState({
+            response: error,
+          });
         }
       );
   }
@@ -184,7 +189,7 @@ export default class Contact extends React.Component {
           <select
             className="form-control"
             name="reason"
-            defaultValue={this.state.fields.subject}
+            defaultValue={this.state.fields.reason}
             onChange={this.handleChange}
           >
             <option value="Product Question">Product Question</option>
