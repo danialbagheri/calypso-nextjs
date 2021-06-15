@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import data from "../../data.json";
-
 import BreadCrumb from "../../components/common/breadcrumb";
 import ProductPageImage from "../../components/products/product-page-image";
 import ProductDescription from "../../components/products/product-description";
@@ -38,7 +37,6 @@ function Product(props) {
   const { fetchProductByQuery } = useShopify();
 
   useEffect(() => {
-    window.history.scrollRestoration = "manual";
     const query = {
       query: `variant:[slug:${selectedChild}]`,
     };

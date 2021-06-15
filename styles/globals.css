@@ -1901,13 +1901,18 @@ a img {
   margin-top: 10px;
 }
 .review-count-product-description .star-rating {
-  min-width: 120px;
-  max-height: 40px;
-  padding: 5px 8px;
+  max-height: 30px;
+  padding: 3px 12px;
   background-color: #eeeded;
   font-size: 18px;
-  border-radius: 20px;
+  border-radius: 15px;
   margin-right: 14px;
+}
+
+.half-star-holder {
+  width: 21px !important;
+  font-size: 18px !important;
+  margin-top: 3px !important;
 }
 .review-count-product-description a {
   font-size: 18px;
@@ -2047,6 +2052,7 @@ a img {
   border: none;
   font-size: 18px;
   margin-bottom: 20px;
+  margin-right: 30px !important;
 }
 
 .ProductOptionSelector {
@@ -2062,7 +2068,6 @@ a img {
 }
 .ShareButtonOnProductPage {
   display: inline-block;
-  margin-left: 20px;
   width: 220px;
 }
 .productContainer {
@@ -2311,7 +2316,7 @@ ul.stores img {
 }
 
 .productPageSingle {
-  min-height: 490px !important;
+  min-height: 510px !important;
   max-height: 510px !important;
 }
 

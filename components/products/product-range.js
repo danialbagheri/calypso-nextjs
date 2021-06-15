@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import data from "../../data.json";
 import Link from "next/link";
-import StarRatingComponent from "react-star-rating-component";
+import StarRatingCustom from "../common/star-rating-custom";
 
 export default function ProductRange(props) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -93,13 +93,10 @@ export default function ProductRange(props) {
                     <small>From £{product.lowest_variant_price}</small>
                   </div>
                   <div className="product-range-star-rating-fix-width">
-                    <StarRatingComponent
-                      starColor={"#fc6b21"}
-                      editing={false}
-                      starCount={5}
-                      name={"Score"}
-                      value={parseInt(product.review_average_score)}
-                      className="trending-box-star "
+                    <StarRatingCustom
+                      value={product.review_average_score}
+                      name={product.name}
+                      className="trending-box-star"
                     />
                   </div>
                 </div>
@@ -110,7 +107,7 @@ export default function ProductRange(props) {
       );
     });
   } else {
-    product = <p>there was a problem</p>;
+    product = <p>Loading...</p>;
   }
   return <div className="row">{product}</div>;
 }

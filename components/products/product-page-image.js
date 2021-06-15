@@ -12,6 +12,9 @@ export default function ProductPageImage(props) {
   let imageList = props.imageList;
 
   function sortByImageType(a, b) {
+    if (a.main) {
+      return -2;
+    }
     if (a.image_type === "PI") {
       return -1;
     }
@@ -50,6 +53,7 @@ export default function ProductPageImage(props) {
         height={image.height}
         key={index}
         className="thumbnail-holder"
+        priority
       />
       //   </div>
     );

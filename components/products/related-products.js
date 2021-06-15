@@ -1,6 +1,4 @@
-import { useState } from "react";
-import Link from "next/link";
-import NextImage from "next/image";
+import Image from "next/image";
 import Styles from "../../styles/sunready.module.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -12,7 +10,7 @@ export default function RelatedProducts({ related }) {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     dotsClass: "dot",
     responsive: [
@@ -45,31 +43,32 @@ export default function RelatedProducts({ related }) {
 
   const relatedProducts = related.map((product, index) => {
     return (
-      <div>
-        <div className={Styles.productHolder}>
-          <Link href={`/products/${product.slug}`} key={index}>
-            <a className="disableLink">
-              <div>
-                <NextImage
-                  src={product.main_image}
-                  height={750}
-                  width={500}
-                  alt={product.name}
-                  layout="responsive"
-                />
-              </div>
-              <div className="text-centre">
-                <p>
-                  <strong>{product.name}</strong> <br />
-                  {product.sub_title}
-                </p>
-                <p>
-                  <strong>from £{product.starting_price}</strong>
-                </p>
-              </div>
-            </a>
-          </Link>
-        </div>
+      <div key={index}>
+        <a
+          href={`/products/${encodeURIComponent(product.slug)}`}
+          className="disableLink"
+        >
+          <div className={Styles.productHolder}>
+            <div>
+              <Image
+                src={product.main_image}
+                height={product.img_height}
+                width={product.img_width}
+                alt={product.name}
+                layout="responsive"
+              />
+            </div>
+            <div className="text-centre">
+              <p>
+                <strong>{product.name}</strong> <br />
+                {product.sub_title}
+              </p>
+              <p>
+                <strong>from £{product.starting_price}</strong>
+              </p>
+            </div>
+          </div>
+        </a>
       </div>
     );
   });

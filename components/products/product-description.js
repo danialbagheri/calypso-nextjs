@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ShareButton from "../common/shareButton";
 import StarRatingComponent from "react-star-rating-component";
 import { useShopify } from "../hooks";
-
+import StarRatingCustom from "../common/star-rating-custom";
 export default function ProductDescription(props) {
   const { addVariant, checkoutState, openCart } = useShopify();
   const [dropdown, setDropDown] = useState(false);
@@ -48,12 +48,8 @@ export default function ProductDescription(props) {
       </h1>
       <h3 className="productPrice">{props.secondTitle}</h3>
       <div className="review-count-product-description">
-        <StarRatingComponent
+        <StarRatingCustom
           name={props.productName}
-          starColor={"#fc6b21"}
-          editing={false}
-          starCount={5}
-          emptyStarColor={"#d2d2d2"}
           className="star-rating"
           value={props.averageReviewScore}
         />
