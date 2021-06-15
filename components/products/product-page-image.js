@@ -10,7 +10,30 @@ export default function ProductPageImage(props) {
   let slider1 = [];
   let slider2 = [];
   let imageList = props.imageList;
-
+  const settings = {
+    responsive: [
+      // {
+      //   breakpoint: 1024,
+      //   settings: {
+      //     slidesToShow: 6,
+      //   },
+      // },
+      // {
+      //   breakpoint: 600,
+      //   settings: {
+      //     slidesToShow: 2,
+      //     slidesToScroll: 2,
+      //     initialSlide: 2,
+      //   },
+      // },
+      {
+        breakpoint: 480,
+        settings: {
+          className: "d-none",
+        },
+      },
+    ],
+  };
   function sortByImageType(a, b) {
     if (a.main) {
       return -2;
@@ -40,7 +63,6 @@ export default function ProductPageImage(props) {
   useEffect(() => {
     let slideNumber = searchForVariant(props.selectedVariant.id, imageList);
     slider1.slickGoTo(slideNumber);
-    slider2.slickGoTo(slideNumber);
   }, [props.selectedVariant]);
 
   let images = imageList.map((image, index) => {
@@ -77,6 +99,7 @@ export default function ProductPageImage(props) {
         swipeToSlide={true}
         focusOnSelect={true}
         lazyLoad={true}
+        {...settings}
       >
         {images}
       </Slider>

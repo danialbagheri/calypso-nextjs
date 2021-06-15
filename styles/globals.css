@@ -381,12 +381,9 @@ nav ul {
 }
 
 .search-page {
-  z-index: 400;
   background-color: #fff;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  position: fixed;
-  overflow: auto;
+  width: 100vw; /* Full width */
+  height: 60vh; /* Full height */
   top: 0;
 }
 
@@ -454,7 +451,7 @@ input.search-field:focus {
   }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 850px) {
   .icon-holder {
     order: 2;
   }
@@ -1457,6 +1454,7 @@ a img {
 }
 .linco-logo {
   width: 3rem;
+  height: 5rem;
   margin: 7px 20px 7px 7px;
   /* float: left; */
 }
@@ -1469,10 +1467,18 @@ a img {
     flex-wrap: wrap;
   }
   .linco-branding {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .linco-logo {
     justify-content: center;
   }
   .linco-care-com {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     justify-content: center;
   }

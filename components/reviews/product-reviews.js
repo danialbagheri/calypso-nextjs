@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import ReviewForm from "./review-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+import StarRatingCustom from "../common/star-rating-custom";
 const customStyles = {
   content: {
     top: "50%",
@@ -172,13 +173,7 @@ export default function ProductReviews({
           itemType="http://schema.org/Rating"
           className="customerRaview flex-left"
         >
-          <StarRatingComponent
-            starColor={"#fc6b21"}
-            editing={false}
-            name={review.title}
-            starCount={5}
-            value={review.score}
-          />
+          <StarRatingCustom name={review.title} value={review.score} />
           <span itemProp="ratingValue" className="hide">
             {review.score}
           </span>
@@ -261,6 +256,7 @@ export default function ProductReviews({
               starCount={5}
               value={reviewScores}
             />
+            {/* <StarRatingCustom name={"total reviews"} value={reviewScores} /> */}
             <p className="reviewCount">
               <span itemProp="reviewCount">({count}</span> Reviews)
             </p>

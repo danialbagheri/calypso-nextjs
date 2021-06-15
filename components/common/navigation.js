@@ -117,13 +117,18 @@ function Navigation() {
           </li>
         </ul>
         <div className="icon-holder">
-          <button
-            className="search-icon"
-            onClick={() => showSearch(!search)}
-            aria-label="Search"
-          >
-            <FontAwesomeIcon icon={faSearch} className="calypso-orange-text" />
-          </button>
+          <ActiveLink href="/search/">
+            <button
+              className="search-icon"
+              // onClick={() => showSearch(!search)}
+              aria-label="Search"
+            >
+              <FontAwesomeIcon
+                icon={faSearch}
+                className="calypso-orange-text"
+              />
+            </button>
+          </ActiveLink>
           <button
             className="basket-icon"
             onClick={openCart}
