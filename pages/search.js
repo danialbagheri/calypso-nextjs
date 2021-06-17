@@ -1,14 +1,11 @@
 import { useState } from "react";
 import data from "../data.json";
-import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faSearch,
-  faSpinner,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 import SearchResultElements from "../components/general/searchResult";
+import * as ga from "../components/common/googleAnalytics";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function SearchPage() {
   const router = useRouter();
@@ -19,7 +16,6 @@ export default function SearchPage() {
 
   function handleChange(e) {
     setSearchValue(e.target.value);
-
     if (e.target.value === "") {
       setSearchValue("");
       setSearchResult("");
@@ -35,11 +31,17 @@ export default function SearchPage() {
     fetch(endPoint)
       .then((response) => response.json())
       .then((result) => {
-        setSearchValue(null);
+        setSearchValue("");
         setLoading(false);
         setSearchResult(result.results);
         setSearchResultCount(result.count);
       });
+    ga.event({
+      action: "search",
+      params: {
+        search_term: searchVal,
+      },
+    });
   };
   function searchOnEnter(e) {
     if (e.key === "Enter") {
@@ -55,19 +57,20 @@ export default function SearchPage() {
       </div>
     );
   } else if (searchResultCount >= 1) {
-    results = searchResult.map((p) => <SearchResultElements product={p} />);
+    results = searchResult.map((p) => (
+      <SearchResultElements product={p} key={p.id} />
+    ));
   } else if (searchResultCount == 0) {
     results = <span>Nothing found</span>;
   } else {
     results = <span></span>;
   }
-  console.log(router);
-  function takeMeBack() {
-    router.back();
-  }
 
   return (
     <div className="search-page">
+      <Head>
+        <title>Calypso - Search</title>
+      </Head>
       <div className="search-container">
         <div className="search-box" id="search-form">
           <button
@@ -108,7 +111,9 @@ export default function SearchPage() {
           </button>
         </div>
       </div>
-      <div className="container mt-6">{results}</div>
+      <div className="container mt-6">
+        <div className="row">{results}</div>
+      </div>
     </div>
   );
 }

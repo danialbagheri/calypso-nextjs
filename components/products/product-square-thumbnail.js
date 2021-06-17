@@ -1,6 +1,7 @@
 import React from "react";
 import StarRatingComponent from "react-star-rating-component";
 import Link from "next/link";
+import StarRatingCustom from "../common/star-rating-custom";
 
 export default class ProductSquareThumbnail extends React.Component {
   constructor(props) {
@@ -85,14 +86,15 @@ export default class ProductSquareThumbnail extends React.Component {
             {secondTitle}
           </p>
           <p className="trending-box-price">From £{minPrice}</p>
-          <StarRatingComponent
-            starColor={"#fc6b21"}
-            editing={false}
-            starCount={5}
-            name={"Score"}
-            value={AverageReviewScore}
-            className="trending-box-star"
-          />
+
+          <div className="trending-star-review-container">
+            <StarRatingCustom
+              ame={name}
+              value={AverageReviewScore}
+              className="trending-box-star"
+            />
+            <text>{AverageReviewScore}</text>
+          </div>
         </div>
       </div>
     );

@@ -95,8 +95,8 @@ export default class Footer extends React.Component {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/delivery-and-return-policy">
-                      <a>Delivery & Return</a>
+                    <Link href="/terms-conditions">
+                      <a>Terms & Conditions</a>
                     </Link>
                   </li>
                   <li>
@@ -105,8 +105,8 @@ export default class Footer extends React.Component {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/site-map/">
-                      <a>Site Map</a>
+                    <Link href="/returns-policy/">
+                      <a>Return Policy</a>
                     </Link>
                   </li>
                 </ul>

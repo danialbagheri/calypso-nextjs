@@ -42,7 +42,7 @@ export default function HomeSlider({ slides, isLoaded }) {
                   />
                   <source
                     media="(max-width: 640px)"
-                    srcset={slide.slide.mobile_image}
+                    srcSet={slide.slide.mobile_image}
                     type="image/png"
                   />
                   <source

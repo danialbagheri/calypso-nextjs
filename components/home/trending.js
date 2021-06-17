@@ -35,7 +35,7 @@ class Trending extends React.Component {
     }
     const baseUrl = data.apiUrl;
     const finalUrl =
-      baseUrl + `products/product/?top=yes&count=10&resize_w=${thumbnailWidth}`;
+      baseUrl + `products/collections/trending?resize_w=${thumbnailWidth}`;
     fetch(finalUrl)
       .then(function (response) {
         return response.json();
@@ -44,7 +44,7 @@ class Trending extends React.Component {
         (result) => {
           this.setState({
             isLoaded: true,
-            topSeller: result.results,
+            topSeller: result.items,
           });
         },
         (error) => {
@@ -63,9 +63,6 @@ class Trending extends React.Component {
       dots: false,
       slidesToScroll: 1,
       infinite: false,
-      //   infinite: true,
-      //   speed: 300,
-      //   slidesToScroll: 2,
       responsive: [
         {
           breakpoint: 1025,
@@ -96,14 +93,14 @@ class Trending extends React.Component {
         return (
           <div className="mr-3" key={index}>
             <ProductSquareThumbnail
-              name={each.name}
-              secondTitle={each.sub_title}
-              slug={each.slug}
-              image={each.main_image_resized}
-              webp={each.main_image_webp}
-              minPrice={each.lowest_variant_price}
-              AverageReviewScore={each.review_average_score}
-              variants={each.variants}
+              name={each.item.name}
+              secondTitle={each.item.sub_title}
+              slug={each.item.slug}
+              image={each.item.main_image_resized}
+              webp={each.item.main_image_webp}
+              minPrice={each.item.lowest_variant_price}
+              AverageReviewScore={each.item.review_average_score}
+              variants={each.item.variants}
             />
           </div>
         );

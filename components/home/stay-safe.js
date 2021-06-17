@@ -87,8 +87,8 @@ export default function StaySafe() {
   };
   let videoThumbnails = videos.map((video, index) => {
     return (
-      <div className="pr-1 slick-slide">
-        <Link href={video.link} key={index}>
+      <div className="pr-1 slick-slide" key={index}>
+        <Link href={video.link}>
           <a
             target="_blank"
             rel="noopener noreferrer"

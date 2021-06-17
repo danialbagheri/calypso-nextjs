@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ShareButton from "../common/shareButton";
-import StarRatingComponent from "react-star-rating-component";
 import { useShopify } from "../hooks";
 import StarRatingCustom from "../common/star-rating-custom";
+import * as ga from "../common/googleAnalytics";
+
 export default function ProductDescription(props) {
   const { addVariant, checkoutState, openCart } = useShopify();
   const [dropdown, setDropDown] = useState(false);
@@ -31,6 +32,12 @@ export default function ProductDescription(props) {
     ];
     addVariant(checkoutState.id, lineItemsToAdd);
     openCart();
+    ga.event({
+      action: "add_to_cart",
+      params: {
+        product: props.productName,
+      },
+    });
   }
 
   const DirectionOfUseText = {

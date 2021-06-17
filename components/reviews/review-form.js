@@ -1,6 +1,7 @@
 import React from "react";
 import StarRatingComponent from "react-star-rating-component";
 import data from "../../data.json";
+
 export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props);

@@ -12,20 +12,6 @@ export default function ProductPageImage(props) {
   let imageList = props.imageList;
   const settings = {
     responsive: [
-      // {
-      //   breakpoint: 1024,
-      //   settings: {
-      //     slidesToShow: 6,
-      //   },
-      // },
-      // {
-      //   breakpoint: 600,
-      //   settings: {
-      //     slidesToShow: 2,
-      //     slidesToScroll: 2,
-      //     initialSlide: 2,
-      //   },
-      // },
       {
         breakpoint: 480,
         settings: {

@@ -6,6 +6,7 @@ import Head from "next/head";
 import store from "../redux/store";
 import Footer from "../components/common/footer";
 import { Provider } from "react-redux";
+import CookieConsent from "react-cookie-consent";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -40,21 +41,36 @@ function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="#ffffff" />
         <meta name="theme-color" content="#000000" />
         <meta name="twitter:site" content="@calypsosuncare"></meta>
-
-        {/* <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-        /> */}
-        {/* <link
-          rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-          crossorigin="anonymous"
-        /> */}
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
       </Head>
       <Provider store={store}>
-        <Header message={"message"} />
+        <Header />
         <Component {...pageProps} />
+        <CookieConsent
+        // onAccept={() => {
+        //   alert("Accept was triggered by clicking the Accept button");
+        // }}
+        >
+          We use cookies to ensure that we give you the best experience on our
+          website.
+        </CookieConsent>
+
         <Footer />
       </Provider>
     </>

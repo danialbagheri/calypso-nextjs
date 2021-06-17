@@ -1,4 +1,5 @@
 import BreadCrumb from "../components/common/breadcrumb";
+
 function TermsConditions({ page, isLoaded }) {
   const breadCrumbPath = [
     { name: "Home", url: "/" },
@@ -24,7 +25,7 @@ function TermsConditions({ page, isLoaded }) {
 
 export async function getStaticProps(context) {
   const baseUrl = process.env.API_URL;
-  const endpoint = `page/privacy-policy/`;
+  const endpoint = `page/returns-policy/`;
   const finalUrl = baseUrl + endpoint;
   const res = await fetch(finalUrl);
   const page = await res.json();
