@@ -37,13 +37,9 @@ function Products(props) {
             </div>
           </div>
           <div className="col-lg-5 col-md-3 col-xs-12 m2">
-            <h2 className="text-right CalypsoOrangeText">SUN</h2>
+            <h2 className="text-right CalypsoOrangeText">Products</h2>
             <p className="text-right">
-              From scalp protection to insect repellent, we have everything you
-              need to <span className="CalypsoOrangeText">stay protected</span>{" "}
-              in the sun both at home and abroad. Our products are available to
-              buy from some of the biggest UK grocery chains as well as some
-              independent pharmacies, and online on Amazon.
+              Discover Calypso Sun and Skin care products.
             </p>
           </div>
         </div>

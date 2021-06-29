@@ -6,24 +6,26 @@ import ApplyIcon from "../../public/be-sun-ready/svgs/apply.svg";
 export default function ApplyBefore({ blogs }) {
   const blogRow = blogs.map((blog) => {
     return (
-      <Link href={`/advice/${blog.slug}`} className="disableLink">
-        <div className="blog-card bg-white">
-          <div className="blog-image">
-            <Image
-              src={blog.image || "/advice/placeholder.png"}
-              alt={blog.image_alt_text}
-              layout="responsive"
-              height={blog.image_height}
-              width={blog.image_width}
-            />
+      <Link href={`/advice/${blog.item.slug}`}>
+        <a className="disableLink text-centre">
+          <div className="blog-card bg-white">
+            <div className="blog-image">
+              <Image
+                src={blog.item.resized || "/advice/placeholder.png"}
+                alt={blog.item.image_alt_text}
+                layout="responsive"
+                height={blog.item.image_height}
+                width={blog.item.image_width}
+              />
+            </div>
+            <div className="card-body">
+              <p className="card-title">{blog.item.title}</p>
+              <p className="read-more">
+                <small>Read Now</small>
+              </p>
+            </div>
           </div>
-          <div className="card-body">
-            <p className="card-title">{blog.title}</p>
-            <p>
-              <small>{blog.publish_date}</small>
-            </p>
-          </div>
-        </div>
+        </a>
       </Link>
     );
   });

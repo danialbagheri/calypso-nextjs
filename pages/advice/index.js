@@ -58,12 +58,13 @@ export default function Advice({ posts, count, baseUrl }) {
                 />
               </div>
               <div className="card-body">
-                <p className="card-title">{blog.title}</p>
                 <p>
                   <small>
-                    {blog.publish_date} • {blog.read_time}
+                    {blog.read_time} • {blog.publish_date}
                   </small>
                 </p>
+                <p className="card-title">{blog.title}</p>
+                <div className="read-more">Read More</div>
               </div>
             </div>
           </Link>

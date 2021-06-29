@@ -21,7 +21,7 @@ export default class BlogSlider extends React.Component {
 
   fetchBlogs() {
     const baseUrl = data.apiUrl;
-    const url = baseUrl + "blogs/all/?resize_w=450";
+    const url = baseUrl + "blogs/collections/staff-picked/?resize_w=450";
     fetch(url)
       .then(function (response) {
         return response.json();
@@ -30,7 +30,7 @@ export default class BlogSlider extends React.Component {
         (result) => {
           this.setState({
             isLoaded: true,
-            blogs: result.results,
+            blogs: result.items,
           });
         },
         (error) => {
@@ -68,13 +68,13 @@ export default class BlogSlider extends React.Component {
       thumbnail = blogs.map((blog) => {
         flipState = !flipState;
         return (
-          <Link href={`/advice/${blog.slug}/`} key={blog.id}>
+          <Link href={`/advice/${blog.item.slug}/`} key={blog.id}>
             <a className="textCenter disableLink">
               <BlogThumbnail
-                blogImage={blog.image}
-                altText={blog.image_alt_text}
+                blogImage={blog.item.image}
+                altText={blog.item.image_alt_text}
                 flipImage={flipState}
-                title={blog.title}
+                title={blog.item.title}
                 button="Read More"
               />
             </a>

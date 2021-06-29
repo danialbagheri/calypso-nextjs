@@ -40,13 +40,14 @@ export async function getStaticProps(context) {
   const res = await fetch(url);
   const productData = await res.json();
 
-  const blogEndPoint = baseUrl + `blogs/all/?count=3`;
+  const blogEndPoint = baseUrl + `blogs/collections/be-sun-ready/?resize_w=450`;
   const result = await fetch(blogEndPoint);
   const blogs = await result.json();
+  console.log(blogs);
   return {
     props: {
       productData: productData.results,
-      blogs: blogs.results,
+      blogs: blogs.items,
     },
     revalidate: 1,
   };
