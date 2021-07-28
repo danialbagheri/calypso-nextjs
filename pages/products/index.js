@@ -1,9 +1,12 @@
+import { useState, useEffect } from "react";
 import ProductRange from "../../components/products/product-range";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Head from "next/head";
 import Image from "next/image";
 function Products(props) {
+  const [products, setProducts] = useState(props.products);
+  const [limit, setLimit] = useState(10);
+  const [maxLimit, setMaxLimit] = useState(false);
   const styles = {
     textAlign: "center",
     width: "auto",
@@ -12,6 +15,56 @@ function Products(props) {
     color: "#fff !important",
   };
 
+  function filterProductsByCategory(productType) {
+    const filteredProducts = props.products.filter((product) => {
+      return product.types[0].name.includes(productType);
+    });
+    setProducts(filteredProducts);
+    if (limit <= filteredProducts.length) {
+      if (filteredProducts.length > 10) {
+        setLimit(10);
+        setMaxLimit(false);
+      } else {
+        setLimit(filteredProducts.length);
+        setMaxLimit(true);
+      }
+    } else {
+      setLimit(filteredProducts.length);
+      setMaxLimit(true);
+    }
+  }
+  function filterByProperties(value) {
+    const filteredProducts = props.products.filter((product) => {
+      let productsVariants = product.variants.filter((variant) => {
+        return variant.name.includes(value);
+      });
+      return productsVariants.length >= 1;
+    });
+
+    setProducts(filteredProducts);
+    if (limit <= filteredProducts.length) {
+      if (filteredProducts.length > 10) {
+        setLimit(10);
+        setMaxLimit(false);
+      } else {
+        setLimit(filteredProducts.length);
+        setMaxLimit(true);
+      }
+    } else {
+      setLimit(filteredProducts.length);
+      setMaxLimit(true);
+    }
+  }
+
+  function LoadMore() {
+    const newLimit = limit + 10;
+    if (newLimit >= products.length) {
+      setLimit(products.length);
+      setMaxLimit(true);
+    } else {
+      setLimit(newLimit);
+    }
+  }
   return (
     <div>
       <Head>
@@ -44,46 +97,77 @@ function Products(props) {
           </div>
         </div>
       </section>
-      <section className="container">
+      <section className="container m-4">
         <div className="top50" />
         <div style={styles} className="productPageTab">
-          <Tabs>
-            <TabList>
-              <Tab styles={tabStyles}>Sun Protection</Tab>
-              <Tab styles={tabStyles}>After Sun</Tab>
-              <Tab styles={tabStyles}>Kids</Tab>
-              <Tab styles={tabStyles}>Tanning</Tab>
-              <Tab styles={tabStyles}>Health Care</Tab>
-            </TabList>
-            <TabPanel id="tab1" title="Sun Protection" styles={tabStyles}>
-              <div style={{ padding: 10 }}>
-                <ProductRange
-                  type="sun%20protection"
-                  products={props.products}
-                />
-              </div>
-            </TabPanel>
-            <TabPanel id="tab2" title="After Sun" styles={tabStyles}>
-              <div style={{ padding: 10 }}>
-                <ProductRange type="after%20sun" products={null} />
-              </div>
-            </TabPanel>
-            <TabPanel id="tab3" title="Kids" styles={tabStyles}>
-              <div style={{ padding: 10 }}>
-                <ProductRange type="Kids" products={null} />
-              </div>
-            </TabPanel>
-            <TabPanel id="tab4" title="Tanning" styles={tabStyles}>
-              <div style={{ padding: 10 }}>
-                <ProductRange type="tanning" products={null} />
-              </div>
-            </TabPanel>
-            <TabPanel id="tab5" title="Health Care" styles={tabStyles}>
-              <div style={{ padding: 10 }}>
-                <ProductRange type="health%20care" products={null} />
-              </div>
-            </TabPanel>
-          </Tabs>
+          <div className="product-page-filter row">
+            <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1">
+              <span className="ml-2">
+                Showing {limit} of {products.length} results.
+              </span>
+            </div>
+            <div className="col-md-4 col-12 col-xs-12 mt-1 mb-1">
+              <label>Categories</label>
+              <select
+                className="form-select"
+                onChange={(e) => filterProductsByCategory(e.target.value)}
+              >
+                <option value="">All</option>
+                <option value="Sun protection">Sun Protection</option>
+                <option value="After Sun">After Sun</option>
+                <option value="Kids">Kids</option>
+                <option value="Tanning">Tanning</option>
+                <option value="Health Care">Health Care</option>
+              </select>
+            </div>
+            <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1">
+              <label className="ml-2">Filter By</label>
+              <select
+                className="form-select"
+                aria-label="Filter by"
+                onChange={(e) => filterByProperties(e.target.value)}
+              >
+                <optgroup label="SPF">
+                  <option value="SPF 10">10</option>
+                  <option value="SPF 15">15</option>
+                  <option value="SPF 30">30</option>
+                  <option value="SPF 40">40</option>
+                  <option value="SPF 50">50+</option>
+                </optgroup>
+                {/* <optgroup label="Sizes">
+                  <option value="Size 100">100ml</option>
+                  <option value="Size 150">150ml</option>
+                  <option value="Once A Day">Once A Day</option>
+                  <option value="40">Silicon Free</option>
+                  <option value="50">Monoi Tahiti</option>
+                </optgroup> */}
+              </select>
+            </div>
+            <div className="col-md-2 col-12 col-xs-12 mt-1 mb-1">
+              <label className="ml-2">Show</label>
+              <select
+                className="form-select"
+                aria-label="Select Product Shown per page"
+                onChange={(e) => setLimit(parseInt(e.target.value))}
+              >
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </div>
+          </div>
+          <div style={{ padding: 10 }}>
+            <ProductRange
+              type="sun%20protection"
+              products={products}
+              limit={limit}
+            />
+            {maxLimit ? null : (
+              <button onClick={LoadMore} className="btn btn-calypso">
+                Load More
+              </button>
+            )}
+          </div>
         </div>
       </section>
     </div>
@@ -93,7 +177,7 @@ async function getAllPages(pageCount, url) {
   let pageNumber = 1;
   let productResult = [];
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    let paginatedUrl = url + `&page=${pageNumber}`;
+    let paginatedUrl = url + `?page=${pageNumber}`;
     const res = await fetch(paginatedUrl);
     const product = await res.json();
     productResult.push(product.results);
@@ -102,13 +186,12 @@ async function getAllPages(pageCount, url) {
 }
 export async function getStaticProps(context) {
   const baseUrl = process.env.API_URL;
-  const endpoint = `products/product/?type=sun%20protection`;
+  const endpoint = `products/product/`;
   const finalUrl = baseUrl + endpoint;
   const res = await fetch(finalUrl);
   let products = await res.json();
   const pageCount = Math.ceil(products.count / 10);
   let productResult = await getAllPages(pageCount, finalUrl);
-
   // Now we will get the staff picked articles
 
   if (!productResult) {
