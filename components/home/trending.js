@@ -65,7 +65,7 @@ class Trending extends React.Component {
       infinite: false,
       responsive: [
         {
-          breakpoint: 1025,
+          breakpoint: 1236,
           settings: {
             slidesToShow: 3,
             slidesToScroll: 1,

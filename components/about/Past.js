@@ -21,7 +21,7 @@ export default function Past() {
           <p className="text-centre mb-4">
             Calypso was created in Manchester in 1988 with a small range of
             seven products. Over the decades, Calypso has expanded and it now
-            has over 50 products, which have received numerous awards, including
+            has over 60 products, which have received numerous awards, including
             the Which? Best Buy Award.
           </p>
           <a

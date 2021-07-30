@@ -40,8 +40,8 @@ export default function OurValues() {
             </div>
             <h5 className="text-centre calypso-orange-text">ETHICS</h5>
             <p className="text-centre">
-              We received the Ethical Award from the Ethical Company
-              Organisation in 2018 and 2019, recognising our strong ethical
+              We have received the Ethical Award from the Ethical Company
+              Organisation every year since 2018, recognising our strong ethical
               values.
             </p>
           </div>

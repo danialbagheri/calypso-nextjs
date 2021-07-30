@@ -8,12 +8,13 @@ export default function ProductDescription(props) {
   const { addVariant, checkoutState, openCart } = useShopify();
   const [dropdown, setDropDown] = useState(false);
   const [inStock, setStockStatus] = useState(true);
-  const [price, setPrice] = useState(props.price);
+  // const [price, setPrice] = useState(props.price);
   useEffect(() => {
     if (props.shopifyState) {
       setStockStatus(props.shopifyState.availableForSale);
       if (props.shopifyState.availableForSale) {
-        setPrice(props.shopifyState.variants[0].price);
+        // if this line of code is needed in needs to be moved to the above hiarachy as the price will not change
+        // setPrice(props.shopifyState.variants[0].price);
       }
     }
   }, props.shopifyState);
@@ -44,6 +45,7 @@ export default function ProductDescription(props) {
     display: dropdown ? "block" : "none",
     padding: 0,
   };
+  console.log(props.price, "color:red;");
   return (
     <div
       className="productDescription"
@@ -89,8 +91,8 @@ export default function ProductDescription(props) {
         <span itemProp="priceCurrency" content="GBP">
           £
         </span>
-        <span itemProp="price" content={price}>
-          {price}
+        <span itemProp="price" content={props.price}>
+          {props.price}
         </span>
       </h2>
       <div className="addToCartContainer">{props.child}</div>

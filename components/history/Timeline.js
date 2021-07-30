@@ -72,13 +72,13 @@ export default function Timeline() {
         </div>
       </div>
       <div className={`${Styles.timelineContainer} ${Styles.right}`}>
-        <div className={Styles.date}>2010</div>
+        <div className={Styles.date}>2007</div>
         <div className={Styles.content}>
           <div className="row">
             <h2>Launch of Once a Day range </h2>
             <div className="col-12 col-xs-12 col-md-6">
               <p>
-                In 2010 Calypso Once A Day was added to the range of sun
+                In 2007 Calypso Once A Day was added to the range of sun
                 protection products, offering all-day protection after one
                 application. <br />
                 <br />
@@ -214,8 +214,8 @@ export default function Timeline() {
         <div className={Styles.content}>
           <h2>Received the Ethical Award </h2>
           <p>
-            Calypso was awarded Ethical Accreditation from the Ethical Company
-            Organisation in 2018 and 2019. <br />
+            Calypso has been awarded Ethical Accreditation from the Ethical
+            Company Organisation every year since 2018. <br />
             <br />
             Not only did the products pass the strict ethical audit, but they
             also received an impressive Ethical Company Index (ECI) score of 92

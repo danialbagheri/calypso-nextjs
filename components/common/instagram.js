@@ -29,32 +29,40 @@ export default function Instagram() {
   // Instagram feed component
   const instagramPost = feed
     .slice(0, quantityOfInstagramImages)
-    .map((insta, index) => (
-      <a
-        className="instaPost"
-        href={insta.permalink}
-        target="_blank"
-        rel="noopener noreferrer"
-        key={index}
-      >
-        <picture>
-          <source srcSet={insta.webp} alt={insta.caption} type="image/webp" />
-          <source
-            srcSet={insta.thumbnail}
-            alt={insta.caption}
-            type="image/png"
-          />
-          <img
-            src={insta.thumbnail}
-            width={thumbnailWidth + "px"}
-            height={thumbnailWidth + "px"}
-            alt={insta.caption}
-            loading="lazy"
-          />
-        </picture>
-        <div className="insta-caption">{insta.caption}</div>
-      </a>
-    ));
+    .map((insta, index) => {
+      if (insta.thumbnail) {
+        return (
+          <a
+            className="instaPost"
+            href={insta.permalink}
+            target="_blank"
+            rel="noopener noreferrer"
+            key={index}
+          >
+            <picture>
+              <source
+                srcSet={insta.webp}
+                alt={insta.caption}
+                type="image/webp"
+              />
+              <source
+                srcSet={insta.thumbnail}
+                alt={insta.caption}
+                type="image/png"
+              />
+              <img
+                src={insta.thumbnail}
+                width={thumbnailWidth + "px"}
+                height={thumbnailWidth + "px"}
+                alt={insta.caption}
+                loading="lazy"
+              />
+            </picture>
+            <div className="insta-caption">{insta.caption}</div>
+          </a>
+        );
+      }
+    });
   const instagramFeed = <div className="instagramFeed">{instagramPost}</div>;
   return (
     <div className="top50 insta">

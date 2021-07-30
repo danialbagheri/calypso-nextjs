@@ -13,50 +13,73 @@ export default function Links() {
   return (
     <div className={Styles.parent}>
       <Link className={Styles.link} href="/products/">
-        <div className={Styles.linkButton}>🧴 Discover our products</div>
+        <a className={Styles.link}>
+          <div className={Styles.linkButton}>🧴 Discover our products</div>
+        </a>
       </Link>
       <Link className={Styles.link} href="/advice/">
-        <div className={Styles.linkButton}>⭐ Advice</div>
+        <a className={Styles.link}>
+          <div className={Styles.linkButton}>⭐ Advice</div>
+        </a>
       </Link>
-      <Link className={Styles.link} href="">
-        <div className={Styles.linkButton}>
-          <div className={Styles.icons}>
-            <FontAwesomeIcon icon={faInstagram} />
-            <span>Instagram</span>
+      <Link
+        className={Styles.link}
+        href="https://www.instagram.com/calypsosuncare/"
+      >
+        <a className={Styles.link}>
+          <div className={Styles.linkButton}>
+            <div className={Styles.icons}>
+              <FontAwesomeIcon icon={faInstagram} />
+              <span>Instagram</span>
+            </div>
           </div>
-        </div>
+        </a>
       </Link>
-      <Link className={Styles.link} href="">
-        <div className={Styles.linkButton}>
-          <div className={Styles.icons}>
-            <FontAwesomeIcon icon={faFacebook} />
-            <span>Facebook</span>
+      <Link
+        className={Styles.link}
+        href="https://www.facebook.com/calypsosuncare/"
+      >
+        <a className={Styles.link}>
+          <div className={Styles.linkButton}>
+            <div className={Styles.icons}>
+              <FontAwesomeIcon icon={faFacebook} />
+              <span>Facebook</span>
+            </div>
           </div>
-        </div>
+        </a>
       </Link>
-      <Link className={Styles.link} href="">
-        <div className={Styles.linkButton}>
-          <div className={Styles.icons}>
-            <FontAwesomeIcon icon={faTwitter} />
-            <span>Twitter</span>
+      <Link className={Styles.link} href="https://twitter.com/calypsosuncare">
+        <a className={Styles.link}>
+          <div className={Styles.linkButton}>
+            <div className={Styles.icons}>
+              <FontAwesomeIcon icon={faTwitter} />
+              <span>Twitter</span>
+            </div>
           </div>
-        </div>
+        </a>
       </Link>
-      <Link className={Styles.link} href="">
-        <div className={Styles.linkButton}>
-          <div className={Styles.icons}>
-            <FontAwesomeIcon icon={faYoutube} />
-            <span>YouTube</span>
+      <Link
+        className={Styles.link}
+        href="https://www.youtube.com/channel/UCrZ14JcmZRDobPIVo8ptmrw"
+      >
+        <a className={Styles.link}>
+          <div className={Styles.linkButton}>
+            <div className={Styles.icons}>
+              <FontAwesomeIcon icon={faYoutube} />
+              <span>YouTube</span>
+            </div>
           </div>
-        </div>
+        </a>
       </Link>
       <Link className={Styles.link} href="/contact-us/">
-        <div className={Styles.linkButton}>
-          <div className={Styles.icons}>
-            <FontAwesomeIcon icon={faEnvelope} />
-            <span>Contact Us</span>
+        <a className={Styles.link}>
+          <div className={Styles.linkButton}>
+            <div className={Styles.icons}>
+              <FontAwesomeIcon icon={faEnvelope} />
+              <span>Contact Us</span>
+            </div>
           </div>
-        </div>
+        </a>
       </Link>
     </div>
   );

@@ -113,6 +113,9 @@ a:hover {
   color: red;
 }
 
+.float-left {
+  float: left;
+}
 p > a {
   color: #fc6b21;
 }
@@ -404,6 +407,7 @@ nav ul {
 }
 
 .search-container {
+  margin-top: 1rem;
   border-bottom: 1px solid lightgray;
   height: 0px;
   width: 100%;
@@ -1936,6 +1940,11 @@ a img {
   margin: 0;
 }
 
+.review-title {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
 .review-count-product-description {
   display: flex;
   flex-direction: flex-start;
@@ -2349,6 +2358,9 @@ ul.stores img {
   border-top: 1px solid #d2d2d2;
   border-bottom: 1px solid #d2d2d2;
   margin: 1rem;
+}
+.product-page-filter-item {
+  text-align: center;
 }
 .border-right {
   border-right: 1px solid #d2d2d2;

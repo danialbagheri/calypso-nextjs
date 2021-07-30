@@ -5,7 +5,8 @@
   display: flex;
   flex-direction: column;
 }
-.parent .link {
+.parent .link,
+.link {
   text-decoration: none;
   cursor: pointer;
 }

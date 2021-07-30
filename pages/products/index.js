@@ -7,19 +7,8 @@ function Products(props) {
   const [products, setProducts] = useState(props.products);
   const [limit, setLimit] = useState(10);
   const [maxLimit, setMaxLimit] = useState(false);
-  const styles = {
-    textAlign: "center",
-    width: "auto",
-  };
-  const tabStyles = {
-    color: "#fff !important",
-  };
 
-  function filterProductsByCategory(productType) {
-    const filteredProducts = props.products.filter((product) => {
-      return product.types[0].name.includes(productType);
-    });
-    setProducts(filteredProducts);
+  function sortLimit(filteredProducts) {
     if (limit <= filteredProducts.length) {
       if (filteredProducts.length > 10) {
         setLimit(10);
@@ -33,6 +22,14 @@ function Products(props) {
       setMaxLimit(true);
     }
   }
+
+  function filterProductsByCategory(productType) {
+    const filteredProducts = props.products.filter((product) => {
+      return product.types[0].name.includes(productType);
+    });
+    setProducts(filteredProducts);
+    sortLimit(filteredProducts);
+  }
   function filterByProperties(value) {
     const filteredProducts = props.products.filter((product) => {
       let productsVariants = product.variants.filter((variant) => {
@@ -42,18 +39,7 @@ function Products(props) {
     });
 
     setProducts(filteredProducts);
-    if (limit <= filteredProducts.length) {
-      if (filteredProducts.length > 10) {
-        setLimit(10);
-        setMaxLimit(false);
-      } else {
-        setLimit(filteredProducts.length);
-        setMaxLimit(true);
-      }
-    } else {
-      setLimit(filteredProducts.length);
-      setMaxLimit(true);
-    }
+    sortLimit(filteredProducts);
   }
 
   function LoadMore() {
@@ -97,77 +83,76 @@ function Products(props) {
           </div>
         </div>
       </section>
-      <section className="container m-4">
+      <section className="container">
         <div className="top50" />
-        <div style={styles} className="productPageTab">
-          <div className="product-page-filter row">
-            <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1">
-              <span className="ml-2">
-                Showing {limit} of {products.length} results.
-              </span>
-            </div>
-            <div className="col-md-4 col-12 col-xs-12 mt-1 mb-1">
-              <label>Categories</label>
-              <select
-                className="form-select"
-                onChange={(e) => filterProductsByCategory(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="Sun protection">Sun Protection</option>
-                <option value="After Sun">After Sun</option>
-                <option value="Kids">Kids</option>
-                <option value="Tanning">Tanning</option>
-                <option value="Health Care">Health Care</option>
-              </select>
-            </div>
-            <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1">
-              <label className="ml-2">Filter By</label>
-              <select
-                className="form-select"
-                aria-label="Filter by"
-                onChange={(e) => filterByProperties(e.target.value)}
-              >
-                <optgroup label="SPF">
-                  <option value="SPF 10">10</option>
-                  <option value="SPF 15">15</option>
-                  <option value="SPF 30">30</option>
-                  <option value="SPF 40">40</option>
-                  <option value="SPF 50">50+</option>
-                </optgroup>
-                {/* <optgroup label="Sizes">
+
+        <div className="product-page-filter row">
+          <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1 product-page-filter-item">
+            <span className="ml-2">
+              Showing {limit} of {products.length} results.
+            </span>
+          </div>
+          <div className="col-md-4 col-12 col-xs-12 mt-1 mb-1 product-page-filter-item">
+            <label>Categories</label>
+            <select
+              className="form-select"
+              onChange={(e) => filterProductsByCategory(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="Sun protection">Sun Protection</option>
+              <option value="After Sun">After Sun</option>
+              <option value="Kids">Kids</option>
+              <option value="Tanning">Tanning</option>
+              <option value="Health Care">Health Care</option>
+            </select>
+          </div>
+          <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1 product-page-filter-item">
+            <label className="ml-2">Filter By</label>
+            <select
+              className="form-select"
+              aria-label="Filter by"
+              onChange={(e) => filterByProperties(e.target.value)}
+            >
+              <optgroup label="SPF">
+                <option value="SPF 10">10</option>
+                <option value="SPF 15">15</option>
+                <option value="SPF 30">30</option>
+                <option value="SPF 40">40</option>
+                <option value="SPF 50">50+</option>
+              </optgroup>
+              {/* <optgroup label="Sizes">
                   <option value="Size 100">100ml</option>
                   <option value="Size 150">150ml</option>
                   <option value="Once A Day">Once A Day</option>
                   <option value="40">Silicon Free</option>
                   <option value="50">Monoi Tahiti</option>
                 </optgroup> */}
-              </select>
-            </div>
-            <div className="col-md-2 col-12 col-xs-12 mt-1 mb-1">
-              <label className="ml-2">Show</label>
-              <select
-                className="form-select"
-                aria-label="Select Product Shown per page"
-                onChange={(e) => setLimit(parseInt(e.target.value))}
-              >
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-              </select>
-            </div>
+            </select>
           </div>
-          <div style={{ padding: 10 }}>
-            <ProductRange
-              type="sun%20protection"
-              products={products}
-              limit={limit}
-            />
-            {maxLimit ? null : (
-              <button onClick={LoadMore} className="btn btn-calypso">
-                Load More
-              </button>
-            )}
+          <div className="col-md-2 col-12 col-xs-12 mt-1 mb-1 product-page-filter-item">
+            <label className="ml-2">Show</label>
+            <select
+              className="form-select"
+              aria-label="Select Product Shown per page"
+              onChange={(e) => setLimit(parseInt(e.target.value))}
+            >
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </select>
           </div>
+        </div>
+        <div style={{ padding: 10 }}>
+          <ProductRange
+            type="sun%20protection"
+            products={products}
+            limit={limit}
+          />
+          {maxLimit ? null : (
+            <button onClick={LoadMore} className="btn btn-calypso">
+              Load More
+            </button>
+          )}
         </div>
       </section>
     </div>

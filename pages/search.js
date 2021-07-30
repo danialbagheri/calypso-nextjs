@@ -90,7 +90,7 @@ export default function SearchPage() {
             onChange={(e) => handleChange(e)}
             onKeyDown={(e) => searchOnEnter(e)}
           />
-          <datalist id="searchOptions">
+          {/* <datalist id="searchOptions">
             <option value="Once a day" />
             <option value="Carrot Oil" />
             <option value="After Sun" />
@@ -100,7 +100,7 @@ export default function SearchPage() {
             <option value="UVA Protection" />
             <option value="Water resistant" />
             <option value="8 Hours Protection" />
-          </datalist>
+          </datalist> */}
 
           <button
             type="submit"

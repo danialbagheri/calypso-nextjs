@@ -22,18 +22,11 @@ const customStyles = {
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 //Modal.setAppElement("#root");
 
-export default function ProductReviews({
-  productReviews,
-  totalReviewCount,
-  reviewAverageScore,
-  productSlug,
-  productName,
-  childProducts,
-}) {
-  const [allReviews, setReviews] = useState(productReviews);
-  const totalScore = reviewAverageScore / totalReviewCount;
-  const [reviewScores, setReviewScores] = useState(reviewAverageScore);
-  const [count, setCount] = useState(totalReviewCount);
+export default function ProductReviews(props) {
+  const [allReviews, setReviews] = useState(props.productReviews);
+  // const totalScore = reviewAverageScore / totalReviewCount;
+  const [reviewScores, setReviewScores] = useState(props.reviewAverageScore);
+  const [count, setCount] = useState(props.totalReviewCount);
   const [modalIsOpen, setModal] = useState(false);
   function openModal() {
     setModal(true);
@@ -126,7 +119,8 @@ export default function ProductReviews({
 
   function fetchReviews() {
     const baseUrl = data.apiUrl;
-    const finalUrl = baseUrl + `reviews/product/?product_slug=${productSlug}`;
+    const finalUrl =
+      baseUrl + `reviews/product/?product_slug=${props.productSlug}`;
     fetch(finalUrl)
       .then(function (response) {
         return response.json();
@@ -161,11 +155,11 @@ export default function ProductReviews({
   const reviews = allReviews.map((review, index) => {
     return (
       <li key={index} className="review-item">
-        <p>
+        <div>
           <span itemProp="author">{review.name}</span>, {review.location}
           <br />
           <span className="dateAdded">{review.date_created}</span>
-        </p>
+        </div>
         <meta itemProp="datePublished" content={review.published_date} />
         <div
           itemProp="reviewRating"
@@ -173,20 +167,28 @@ export default function ProductReviews({
           itemType="http://schema.org/Rating"
           className="customerRaview flex-left"
         >
-          <StarRatingCustom name={review.title} value={review.score} />
           <span itemProp="ratingValue" className="hide">
             {review.score}
           </span>
           <meta itemProp="worstRating" content="1" />
           <meta itemProp="bestRating" content="5" />
         </div>
-        <br />
-        <strong>{review.title}</strong>
-        <p itemProp="description">{review.comment}</p>
-        <p className="text-sm">
-          {review.recommended
-            ? "Yes - I would recommend this to a friend"
-            : "No - I don't recommend this product."}
+
+        <p>
+          <div className="mb-1">
+            <StarRatingCustom
+              name={review.title}
+              value={review.score}
+              className="float-left mr-1"
+            />
+            <span className="review-title">{review.title}</span>
+          </div>
+          <div itemProp="description">{review.comment}</div>
+          <strong className="text-sm">
+            {review.recommended
+              ? "Yes - I would recommend this to a friend"
+              : "No - I don't recommend this product."}
+          </strong>
         </p>
         <p className="text-sm">
           Was this review helpful to you?
@@ -230,9 +232,9 @@ export default function ProductReviews({
       </button>
       <h2 ref={(subtitle) => (subtitle = subtitle)}>WRITE A REVIEW</h2>
       <ReviewForm
-        productCategorySlug={productSlug}
-        productCategoryName={productName}
-        childProducts={childProducts}
+        productCategorySlug={props.productSlug}
+        productCategoryName={props.productName}
+        childProducts={props.childProducts}
       />
     </Modal>
   );

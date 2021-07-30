@@ -19,7 +19,12 @@ export default function Future() {
               protection products that are affordable and suitable for the whole
               family.
             </p>
-            <a href="/" className="btn bt-round btn-round-calypso mt-4">
+            <a
+              href="https://lincocare.com"
+              className="btn bt-round btn-round-calypso mt-4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               OUR COMPANY
             </a>
           </div>
