@@ -21,7 +21,7 @@ export default function Shade() {
           Seek shade whenever possible - this will help to cool you down and
           also protect your skin on a hot day. This can also help to prevent
           other symptoms of overexposure to the sun such as nausea,
-          lightheadedness, and dehydration. When your body is hot you begin to
+          lightheadedness and dehydration. When your body is hot you begin to
           sweat, which evaporates allowing your body to cool off efficiently so
           that you don’t overheat. That’s why it is vital to drink lots of water
           to prevent dehydration or heat stroke.

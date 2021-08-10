@@ -5,6 +5,7 @@
 :root {
   --calypso-color: #fc6b21;
   --light-gray: #f9f9fc;
+  --dark-orange: #c04c30;
 }
 
 body {
@@ -96,7 +97,15 @@ button {
   font-size: 18px;
   outline: none;
 }
-
+.text-secondary {
+  color: var(--light-gray);
+}
+.text-calypso {
+  color: var(--calypso-color) !important;
+}
+.text-dark-orange {
+  color: var(--dark-orange);
+}
 .textCenter {
   text-align: center;
 }
@@ -2352,6 +2361,19 @@ ul.stores img {
   padding: 5px;
   border: none;
   background-color: transparent;
+  border-bottom: 1px solid var(--dark-orange);
+}
+
+.product-page-select {
+  border-bottom: 1px solid var(--dark-orange);
+}
+.product-page-search {
+  background: transparent;
+  border: none;
+  width: 1.7rem;
+  height: 100%;
+  color: #505050;
+  padding-top: 2px;
 }
 .product-page-filter {
   padding: 10px;

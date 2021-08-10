@@ -33,7 +33,7 @@ class ContactUs extends Component {
             <Contact />
           </div>
           <div className="col-md-6 col-12">
-            <h5>Before contacting us please check these information</h5>
+            <h5>Before contacting us please check this information</h5>
             <ul className="text-lg">
               <li>Privacy Policy</li>
               <li className="mt-1">Delivery & Return Policy</li>
@@ -46,11 +46,13 @@ class ContactUs extends Component {
               <br />
               Linco House
               <br />
-              Manchester road
+              Manchester Road
+              <br />
+              Manchester,
               <br />
               M31 4BX
               <br />
-              Manchester, United Kingdom
+              United Kingdom
               <br />
             </p>
             <p>
@@ -61,11 +63,13 @@ class ContactUs extends Component {
               <br />
               Linco House
               <br />
-              Manchester road
+              Manchester Road
+              <br />
+              Manchester,
               <br />
               M31 4BX
               <br />
-              Manchester, United Kingdom
+              United Kingdom
               <br />
             </p>
             {/* <SiteMap /> */}

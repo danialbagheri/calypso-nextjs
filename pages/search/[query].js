@@ -1,13 +1,13 @@
-import { useState } from "react";
-import data from "../data.json";
+import { useState, useEffect } from "react";
+import data from "../../data.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
-import SearchResultElements from "../components/general/searchResult";
-import * as ga from "../components/common/googleAnalytics";
+import SearchResultElements from "../../components/general/searchResult";
+import * as ga from "../../components/common/googleAnalytics";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-export default function SearchPage() {
+export default function Searched() {
   const router = useRouter();
   const [searchVal, setSearchValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,11 +23,19 @@ export default function SearchPage() {
     }
   }
 
-  const search = (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const search = (e = null) => {
     const baseUrl = data.apiUrl;
-    const endPoint = `${baseUrl}web/search/?q=${searchVal}`;
+    let endPoint;
+    if (e) {
+      e.preventDefault();
+      endPoint = `${baseUrl}web/search/?q=${searchVal}`;
+    } else {
+      const { query } = router.query;
+      // setSearchValue(query);
+      console.log(query);
+      endPoint = `${baseUrl}web/search/?q=${query}`;
+    }
+    setLoading(true);
     fetch(endPoint)
       .then((response) => response.json())
       .then((result) => {
@@ -48,6 +56,15 @@ export default function SearchPage() {
       search(e);
     }
   }
+  useEffect(() => {
+    // const { query } = router.query;
+    // console.log(query);
+    // setSearchValue(query);
+    // console.log(searchVal);
+    search();
+    // setTimeout(search(), 6000);
+  }, []);
+
   let results;
   if (loading) {
     results = (
@@ -90,17 +107,6 @@ export default function SearchPage() {
             onChange={(e) => handleChange(e)}
             onKeyDown={(e) => searchOnEnter(e)}
           />
-          {/* <datalist id="searchOptions">
-            <option value="Once a day" />
-            <option value="Carrot Oil" />
-            <option value="After Sun" />
-            <option value="Deep tan" />
-            <option value="Monoi Tahiti" />
-            <option value="Anti Bacterial" />
-            <option value="UVA Protection" />
-            <option value="Water resistant" />
-            <option value="8 Hours Protection" />
-          </datalist> */}
 
           <button
             type="submit"

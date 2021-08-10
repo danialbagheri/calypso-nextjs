@@ -55,6 +55,9 @@ export default class Footer extends React.Component {
               <div className="col-md-2 col-xs-6">
                 <ul className="list-unstyled">
                   <li>
+                    <span className="text-dark-orange">MENU</span>
+                  </li>
+                  <li>
                     <Link href="/">
                       <a>Home</a>
                     </Link>
@@ -85,8 +88,11 @@ export default class Footer extends React.Component {
               <div className="col-md-2 col-xs-6">
                 <ul className="list-unstyled">
                   <li>
+                    <span className="text-dark-orange">HELP</span>
+                  </li>
+                  <li>
                     <Link href="/faq">
-                      <a>HELP & FAQ</a>
+                      <a>FAQ</a>
                     </Link>
                   </li>
                   <li>

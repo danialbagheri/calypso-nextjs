@@ -10,7 +10,6 @@ export default function FaqItems({ questions }) {
   });
   return (
     <div className="container">
-      <h3 className="text-centre calypso-orange-text">Questions & Answers</h3>
       <div>{faqItem}</div>
       <div className="text-centre mb-3" />
     </div>

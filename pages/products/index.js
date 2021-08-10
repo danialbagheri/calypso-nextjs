@@ -3,6 +3,10 @@ import ProductRange from "../../components/products/product-range";
 import "react-tabs/style/react-tabs.css";
 import Head from "next/head";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+
 function Products(props) {
   const [products, setProducts] = useState(props.products);
   const [limit, setLimit] = useState(10);
@@ -87,15 +91,15 @@ function Products(props) {
         <div className="top50" />
 
         <div className="product-page-filter row">
-          <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1 product-page-filter-item">
+          <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1 col-sm-6 product-page-filter-item">
             <span className="ml-2">
               Showing {limit} of {products.length} results.
             </span>
           </div>
-          <div className="col-md-4 col-12 col-xs-12 mt-1 mb-1 product-page-filter-item">
+          <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1 col-sm-6 product-page-filter-item">
             <label>Categories</label>
             <select
-              className="form-select"
+              className="form-select product-page-select"
               onChange={(e) => filterProductsByCategory(e.target.value)}
             >
               <option value="">All</option>
@@ -106,7 +110,7 @@ function Products(props) {
               <option value="Health Care">Health Care</option>
             </select>
           </div>
-          <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1 product-page-filter-item">
+          <div className="col-md-3 col-12 col-xs-12 col-sm-5 mt-1 mb-1 product-page-filter-item">
             <label className="ml-2">Filter By</label>
             <select
               className="form-select"
@@ -129,10 +133,10 @@ function Products(props) {
                 </optgroup> */}
             </select>
           </div>
-          <div className="col-md-2 col-12 col-xs-12 mt-1 mb-1 product-page-filter-item">
+          <div className="col-md-2 col-12 col-xs-12 mt-1 col-sm-5 mb-1 product-page-filter-item">
             <label className="ml-2">Show</label>
             <select
-              className="form-select"
+              className="form-select mr-2"
               aria-label="Select Product Shown per page"
               onChange={(e) => setLimit(parseInt(e.target.value))}
             >
@@ -140,6 +144,16 @@ function Products(props) {
               <option value="15">15</option>
               <option value="20">20</option>
             </select>
+          </div>
+          <div className="col-md-1 col-12 col-xs-12 mt-1 mb-1 col-sm-2 product-page-filter-item">
+            <Link href="/search/">
+              <button className="product-page-search" aria-label="Search">
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  className="product-page-search"
+                />
+              </button>
+            </Link>
           </div>
         </div>
         <div style={{ padding: 10 }}>

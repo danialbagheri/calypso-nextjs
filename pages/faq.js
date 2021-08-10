@@ -27,7 +27,7 @@ export default function Faq({ faqs }) {
           objectFit="cover"
           objectPosition="80% 100%"
         />
-        <h3 itemProp="name" className="mt-4 faq-page-title">
+        <h3 itemProp="name" className="mt-4 faq-page-title text-calypso">
           Frequently Asked Questions
           <input
             className="faqSearchInput"
