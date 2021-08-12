@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import logo from "./logo.svg";
-// import SiteMap from "../components/general/SiteMap";
+import Link from "next/link";
 import Head from "next/head";
 import Contact from "../components/contact-form";
 class ContactUs extends Component {
@@ -35,8 +34,17 @@ class ContactUs extends Component {
           <div className="col-md-6 col-12">
             <h5>Before contacting us please check this information</h5>
             <ul className="text-lg">
-              <li>Privacy Policy</li>
-              <li className="mt-1">Delivery & Return Policy</li>
+              <li>
+                <Link href="/privacy-policy">
+                  <a className="disableLink">Privacy Policy</a>
+                </Link>
+              </li>
+
+              <li className="mt-1">
+                <Link href="/returns-policy">
+                  <a className="disableLink">Delivery & Return Policy</a>
+                </Link>
+              </li>
             </ul>
             <p>
               <strong>Postal Address</strong>

@@ -1,51 +1,8 @@
 import React, { useState, useEffect } from "react";
-import data from "../../data.json";
 import Link from "next/link";
 import StarRatingCustom from "../common/star-rating-custom";
 
 export default function ProductRange(props) {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const [pageCount, setPageCount] = useState([]);
-
-  // function getAllPages(pageCount, url) {
-  //   let pageNumber = 1;
-  //   let productResult = [];
-  //   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-  //     let paginatedUrl = url + `&page=${pageNumber}`;
-  //     fetch(paginatedUrl)
-  //       .then((res) => res.json())
-  //       .then((product) => productResult.push(product.results));
-  //   }
-  //   return productResult;
-  // }
-  // function fetchProducts() {
-  //   const baseUrl = data.apiUrl;
-  //   const type = props.type;
-  //   const finalUrl = baseUrl + `products/product/?type=${type}`;
-  //   fetch(finalUrl)
-  //     .then(function (response) {
-  //       return response.json();
-  //     })
-  //     .then(
-  //       (result) => {
-  //         let jsonData = result.results;
-  //         setPageCount(Math.ceil(jsonData.count / 10));
-  //         setIsLoaded(true);
-  //         setProducts(jsonData);
-  //         // setChildProducts(jsonData[0].variants);
-  //         // setVariantId(jsonData[0].variants[0].shopify_variant_id);
-  //         if (result.next) {
-  //           console.log("has next page!");
-  //           let productResult = getAllPages(pageCount, finalUrl);
-  //           setProducts(productResult.flat());
-  //         }
-  //       },
-  //       (error) => {
-  //         setIsLoaded(false);
-  //       }
-  //     );
-  // }
   function addToBasket(variantId, quantity) {
     const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }];
     const checkoutId = props.shopify.checkout.id;

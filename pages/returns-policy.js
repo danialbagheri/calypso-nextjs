@@ -14,7 +14,9 @@ function TermsConditions({ page, isLoaded }) {
             <BreadCrumb breadcrumbs={breadCrumbPath} />
             <hr />
           </div>
-          <div dangerouslySetInnerHTML={{ __html: page.html }} />
+          <div className="mt-3 mb-4">
+            <div dangerouslySetInnerHTML={{ __html: page.html }} />
+          </div>
         </div>
       ) : (
         <p>Nothing found</p>

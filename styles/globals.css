@@ -1370,11 +1370,14 @@ input.search-field:focus {
 }
 
 .disableLink {
-  text-decoration: none;
+  text-decoration: none !important;
   color: black;
   cursor: default;
   outline: none;
   border: 0;
+}
+.disableLink > a {
+  text-decoration: none !important;
 }
 .disableLink:hover {
   text-decoration: none;

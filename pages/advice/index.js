@@ -4,37 +4,21 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Advice({ posts, count, baseUrl }) {
+export default function Advice({ posts, count }) {
   const [blogs, setBlogs] = useState(posts);
-  const [page, setPage] = useState(2);
-  const [moreToLoad, setMoreToLoad] = useState(true);
-  function getMoreBlogs() {
-    const endpoint = `${baseUrl}blogs/all/?resize_w=500&page=${page}`;
-    fetch(endpoint)
-      .then((res) => res.json())
-      .then((res) => {
-        let result = res.results;
-        let postCopy = posts;
-        Array.prototype.push.apply(postCopy, result);
-        setBlogs(postCopy);
-      });
-  }
+  const [limit, setLimit] = useState(10);
+  const [maxLimit, setMaxLimit] = useState(false);
 
-  useEffect(() => {
-    getMoreBlogs();
-  }, [blogs]);
-  function loadMore(evt) {
-    evt.preventDefault();
-    console.log(page);
-    const maxPageCount = Math.ceil(count / 10);
-    if (page <= maxPageCount) {
-      let newPage = page + 1;
-      setPage(newPage);
-      getMoreBlogs();
+  function loadMore() {
+    const newLimit = limit + 10;
+    if (newLimit >= blogs.length) {
+      setLimit(blogs.length);
+      setMaxLimit(true);
     } else {
-      setMoreToLoad(false);
+      setLimit(newLimit);
     }
   }
+
   let thumbnail;
   const breadcrumbPath = [
     { name: "Home", url: "/" },
@@ -43,7 +27,7 @@ export default function Advice({ posts, count, baseUrl }) {
   if (!blogs) {
     thumbnail = <div> Loading...</div>;
   } else {
-    thumbnail = blogs.map((blog, index) => {
+    thumbnail = blogs.slice(0, limit).map((blog, index) => {
       return (
         <div className="col-12 col-md-4 col-sm-6 mb-2 " key={index}>
           <Link href={`/advice/${blog.slug}`} className="disableLink">
@@ -90,7 +74,7 @@ export default function Advice({ posts, count, baseUrl }) {
         </Head>
         <div className="row">{thumbnail}</div>
         <div className="text-centre">
-          {moreToLoad ? (
+          {maxLimit ? null : (
             <button
               className="text-centre btn btn-outline-calypso mb-3"
               onClick={(evt) => {
@@ -99,13 +83,22 @@ export default function Advice({ posts, count, baseUrl }) {
             >
               Load More
             </button>
-          ) : (
-            <span></span>
           )}
         </div>
       </div>
     </div>
   );
+}
+async function getAllPages(pageCount, url) {
+  let pageNumber = 1;
+  let blogResult = [];
+  for (pageNumber; pageNumber <= pageCount; pageNumber++) {
+    let paginatedUrl = url + `&page=${pageNumber}`;
+    const res = await fetch(paginatedUrl);
+    const product = await res.json();
+    blogResult.push(product.results);
+  }
+  return blogResult;
 }
 
 export async function getStaticProps() {
@@ -114,6 +107,8 @@ export async function getStaticProps() {
   const finalUrl = baseUrl + endpoint;
   const res = await fetch(finalUrl);
   const articles = await res.json();
+  const pageCount = Math.ceil(articles.count / 10);
+  let blogResult = await getAllPages(pageCount, finalUrl);
 
   if (!articles) {
     return {
@@ -124,10 +119,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      baseUrl: baseUrl,
-      posts: articles.results,
+      posts: blogResult.flat(),
       isLoaded: true,
-      count: articles.count,
     }, // will be passed to the page component as props
   };
 }

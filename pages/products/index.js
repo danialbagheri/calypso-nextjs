@@ -163,9 +163,11 @@ function Products(props) {
             limit={limit}
           />
           {maxLimit ? null : (
-            <button onClick={LoadMore} className="btn btn-calypso">
-              Load More
-            </button>
+            <div className="text-centre m-3">
+              <button onClick={LoadMore} className="btn btn-calypso">
+                Load More
+              </button>
+            </div>
           )}
         </div>
       </section>
