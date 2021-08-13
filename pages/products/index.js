@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import _ from "lodash/core";
 
 function Products(props) {
   const [products, setProducts] = useState(props.products);
@@ -29,17 +30,26 @@ function Products(props) {
 
   function filterProductsByCategory(productType) {
     const filteredProducts = props.products.filter((product) => {
-      return product.types[0].name.includes(productType);
+      if (productType != "") {
+        return _.find(product.types, function (o) {
+          return o.name == productType;
+        });
+      } else {
+        return product;
+      }
     });
     setProducts(filteredProducts);
     sortLimit(filteredProducts);
   }
   function filterByProperties(value) {
     const filteredProducts = props.products.filter((product) => {
-      let productsVariants = product.variants.filter((variant) => {
-        return variant.name.includes(value);
+      let variants = _.find(product.variants, function (o) {
+        if (o.name == value) {
+          product.main_image = o.image_list[0].image; // replaces the main image with variant image
+          return o;
+        }
       });
-      return productsVariants.length >= 1;
+      return variants;
     });
 
     setProducts(filteredProducts);
