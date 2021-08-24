@@ -29,8 +29,6 @@ export default class Contact extends React.Component {
         message: "",
       },
       response: [],
-      success: null,
-      ticketError: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.openTicket = this.openTicket.bind(this);
@@ -69,7 +67,8 @@ export default class Contact extends React.Component {
   }
 
   openTicket(fields) {
-    const baseUrl = data.apiUrl;
+    // const baseUrl = data.apiUrl;
+    const baseUrl = "http://localhost:8000/api/";
     const finalUrl = baseUrl + `web/contact-us/`;
     const myBody = fields;
     console.log(JSON.stringify(myBody));
@@ -93,7 +92,6 @@ export default class Contact extends React.Component {
           if (result.message) {
             this.setState({
               response: result.message,
-              ticketError: true,
             });
           }
         },
@@ -117,27 +115,7 @@ export default class Contact extends React.Component {
   };
 
   render() {
-    const { response, ticketError, errors } = this.state;
-    let formHasError;
-    let formSuccessful;
-    formSuccessful = <h2 style={{ color: "green" }}>{response.message}</h2>;
-    if (response.length >= 1) {
-      if (ticketError) {
-        let responseList = response.map((e) => {
-          return (
-            <p>
-              {e.code} {e.field} : {e.message}
-            </p>
-          );
-        });
-        formHasError = (
-          <h2 style={{ color: "red" }}>
-            Failed to Submit your message, errors are displayed below
-            {responseList}
-          </h2>
-        );
-      }
-    }
+    const { response, errors } = this.state;
 
     return (
       <form>
@@ -229,8 +207,9 @@ export default class Contact extends React.Component {
           sitekey="6LfjPaEUAAAAAPGfkx7Nxp3glAdPGbLZE3lwY5c9"
           onChange={this.recaptchaChange}
         />
-        {formSuccessful}
-        {formHasError}
+        <p>
+          {response.success} {response.message}
+        </p>
         <button
           className="btn btn-wide "
           type="submit"

@@ -45,7 +45,6 @@ export default function ProductDescription(props) {
     display: dropdown ? "block" : "none",
     padding: 0,
   };
-  console.log(props.price, "color:red;");
   return (
     <div
       className="productDescription"

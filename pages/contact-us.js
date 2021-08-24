@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Contact from "../components/contact-form";
+import ContactUsForm from "../components/contact-form2";
 class ContactUs extends Component {
   render() {
     return (
@@ -29,7 +30,8 @@ class ContactUs extends Component {
               <i className="fas fa-phone mr-1" />
               <a href="tell:+441617779229">+44 (0) 161 777 9229</a>
             </p>
-            <Contact />
+            {/* <Contact /> */}
+            <ContactUsForm />
           </div>
           <div className="col-md-6 col-12">
             <h5>Before contacting us please check this information</h5>

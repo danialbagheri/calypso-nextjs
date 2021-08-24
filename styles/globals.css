@@ -1186,10 +1186,12 @@ input.search-field:focus {
   /* width: 420px;
   height: 252px; 
 } */
-.slick-prev {
+.product-photo-holder .slick-prev {
+  left: 0 !important;
   margin-left: 12px !important;
 }
 .slick-next {
+  right: -8px !important;
   margin-right: 18px !important;
 }
 .slick-arrow.slick-prev:before {
