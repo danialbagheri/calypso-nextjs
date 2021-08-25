@@ -67,8 +67,7 @@ export default class Contact extends React.Component {
   }
 
   openTicket(fields) {
-    // const baseUrl = data.apiUrl;
-    const baseUrl = "http://localhost:8000/api/";
+    const baseUrl = data.apiUrl;
     const finalUrl = baseUrl + `web/contact-us/`;
     const myBody = fields;
     console.log(JSON.stringify(myBody));

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import ReCAPTCHA from "react-google-recaptcha";
-
+import data from "../data.json";
 const recaptchaRef = React.createRef();
 
 const MyTextInput = ({ label, ...props }) => {
@@ -120,7 +120,7 @@ const ContactUsForm = () => {
           //   setSubmitting(false);
           // }, 400);
           setSubmitting(true);
-          const baseUrl = "http://localhost:8000/api/";
+          const baseUrl = data.apiUrl;
           const finalUrl = baseUrl + `web/contact-us/`;
           fetch(finalUrl, {
             method: "POST",

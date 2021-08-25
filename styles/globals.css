@@ -6,6 +6,7 @@
   --calypso-color: #fc6b21;
   --light-gray: #f9f9fc;
   --dark-orange: #c04c30;
+  --darker-orange: #6c2d1d;
 }
 
 body {
@@ -104,7 +105,7 @@ button {
   color: var(--calypso-color) !important;
 }
 .text-dark-orange {
-  color: var(--dark-orange);
+  color: var(--darker-orange);
 }
 .textCenter {
   text-align: center;
