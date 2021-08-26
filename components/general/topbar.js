@@ -1,6 +1,7 @@
 // import React from "react";
 import React, { useState, useEffect } from "react";
 import data from "../../data.json";
+
 export default function TopBar() {
   const [message, setMessage] = useState(null);
 
@@ -11,14 +12,15 @@ export default function TopBar() {
       const endpoint = data.apiUrl + "web/configuration/top_bar/";
       const res = await fetch(endpoint);
       const json = await res.json();
-      setMessage(json.value);
+      setMessage(json);
     }
     getTopBarStatus();
   }, []);
-  if (message) {
+
+  if (message && message.active) {
     return (
       <div className="bg-danger top-bar">
-        <p className="text-white text-centre">{message}</p>
+        <p className="text-white text-centre">{message.value}</p>
       </div>
     );
   } else {

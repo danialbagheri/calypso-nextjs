@@ -15,6 +15,21 @@ module.exports = withImages({
         destination: "/products/carrot-oil",
         permanent: false,
       },
+      {
+        source: "/kids-disappearing-blue-lotion",
+        destination: "/products/kids-disappearing-blue-lotion",
+        permanent: false,
+      },
+      {
+        source: "/products/once-a-day-suitable-for-kids",
+        destination: "/products/once-a-day-lotion",
+        permanent: false,
+      },
+      {
+        source: "/products/carrot-oil-2",
+        destination: "/products/carrot-oil",
+        permanent: false,
+      },
     ];
   },
   sassOptions: {

@@ -8,11 +8,7 @@ export default class ProductTabs extends React.Component {
   render() {
     return (
       <div className="tabs">
-        <Tabs
-          activeTab={{
-            id: "tab1",
-          }}
-        >
+        <Tabs>
           <TabList>
             <Tab>Benefits</Tab>
             <Tab>Where to buy</Tab>
