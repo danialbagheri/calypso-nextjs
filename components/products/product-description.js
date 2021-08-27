@@ -46,11 +46,7 @@ export default function ProductDescription(props) {
     padding: 0,
   };
   return (
-    <div
-      className="productDescription"
-      itemScope
-      itemType="http://schema.org/Product"
-    >
+    <div className="productDescription">
       <h1 className="productTitle" itemProp="name">
         {props.productName}
       </h1>
@@ -62,14 +58,18 @@ export default function ProductDescription(props) {
           value={props.averageReviewScore}
         />
         <a href="#readReviews" className="read-reviews">
-          {props.reviewCount >= 1
-            ? `Read ${props.reviewCount} reviews`
-            : "Be the first to review to this product"}
+          {props.reviewCount >= 1 ? (
+            <span>
+              Read {props.reviewCount}
+              reviews
+            </span>
+          ) : (
+            <span>Be the first to review to this product</span>
+          )}
         </a>
       </div>
       <div
         className="text-lg mb-2"
-        itemProp="description"
         dangerouslySetInnerHTML={{
           __html: props.description,
         }}
@@ -90,9 +90,7 @@ export default function ProductDescription(props) {
         <span itemProp="priceCurrency" content="GBP">
           £
         </span>
-        <span itemProp="price" content={props.price}>
-          {props.price}
-        </span>
+        <span>{props.price}</span>
       </h2>
       <div className="addToCartContainer">{props.child}</div>
       {inStock ? (

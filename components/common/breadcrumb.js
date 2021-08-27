@@ -6,15 +6,10 @@ export default class BreadCrumb extends React.Component {
 
     const children = breadcrumbs.map((child, index) => {
       return (
-        <li
-          itemProp="itemListElement"
-          itemScope
-          itemType="http://schema.org/ListItem"
-          key={index}
-        >
-          <a itemProp="item" href={child.url}>
-            <span itemProp="name">{child.name}</span>
-            <meta itemProp="position" content="1" />
+        <li property="itemListElement" typeof="ListItem" key={index}>
+          <a property="item" typeof="WebPage" href={child.url}>
+            <span property="name">{child.name}</span>
+            <meta property="position" content={index} />
           </a>
         </li>
       );
@@ -22,8 +17,8 @@ export default class BreadCrumb extends React.Component {
     return (
       <ol
         className="breadcrumb"
-        itemScope
-        itemType="http://schema.org/BreadcrumbList"
+        vocab="https://schema.org/"
+        typeof="BreadcrumbList"
       >
         {children}
       </ol>

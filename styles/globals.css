@@ -1959,10 +1959,13 @@ a img {
   font-size: 1.3em;
   font-weight: 600;
 }
-
+.read-reviews {
+  margin-top: 10px;
+}
 .review-count-product-description {
   display: flex;
   flex-direction: flex-start;
+  justify-content: flex-start;
   margin-top: 10px;
 }
 .review-count-product-description .star-rating {
@@ -1981,7 +1984,7 @@ a img {
 }
 .review-count-product-description a {
   font-size: 18px;
-  padding-top: 5px;
+  /* padding-top: 5px; */
 }
 
 .like-and-dislike-buttons {

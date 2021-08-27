@@ -156,22 +156,12 @@ export default function ProductReviews(props) {
     return (
       <li key={index} className="review-item">
         <div>
-          <span itemProp="author">{review.name}</span>, {review.location}
+          <span>{review.name}</span>, {review.location}
           <br />
           <span className="dateAdded">{review.date_created}</span>
         </div>
-        <meta itemProp="datePublished" content={review.published_date} />
-        <div
-          itemProp="reviewRating"
-          itemScope
-          itemType="http://schema.org/Rating"
-          className="customerRaview flex-left"
-        >
-          <span itemProp="ratingValue" className="hide">
-            {review.score}
-          </span>
-          <meta itemProp="worstRating" content="1" />
-          <meta itemProp="bestRating" content="5" />
+        <div className="customerRaview flex-left">
+          <span className="hide">{review.score}</span>
         </div>
 
         <p>
@@ -183,7 +173,7 @@ export default function ProductReviews(props) {
             />
             <span className="review-title">{review.title}</span>
           </div>
-          <div itemProp="description">{review.comment}</div>
+          <div>{review.comment}</div>
           <strong className="text-sm">
             {review.recommended
               ? "Yes - I would recommend this to a friend"
@@ -239,29 +229,20 @@ export default function ProductReviews(props) {
     </Modal>
   );
   const topReviewBanner = (
-    <div
-      className="topReviewBanner"
-      itemProp="aggregateRating"
-      itemScope
-      itemType="http://schema.org/AggregateRating"
-    >
+    <div className="topReviewBanner">
       <div className="star-review-strap">
         <div className="star-review-holder">
-          <h1 className="reviewTotalScore" itemProp="ratingValue">
-            {reviewScores}
-          </h1>
+          <h1 className="reviewTotalScore">{reviewScores}</h1>
           <div className="starRating">
             <StarRatingComponent
               starColor={"#fc6b21"}
               editing={false}
               name={"total reviews"}
               starCount={5}
-              value={reviewScores}
+              value={parseFloat(reviewScores)}
             />
             {/* <StarRatingCustom name={"total reviews"} value={reviewScores} /> */}
-            <p className="reviewCount">
-              <span itemProp="reviewCount">({count}</span> Reviews)
-            </p>
+            <p className="reviewCount">({count} Reviews)</p>
           </div>
         </div>
         <div>
@@ -289,14 +270,7 @@ export default function ProductReviews(props) {
       ) : (
         <div>
           {topReviewBanner}
-          <ul
-            itemProp="review"
-            itemScope
-            itemType="http://schema.org/Review"
-            className="reviews"
-          >
-            {reviews}
-          </ul>
+          <ul className="reviews">{reviews}</ul>
         </div>
       )}
     </section>

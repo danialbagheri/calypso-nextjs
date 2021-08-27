@@ -1,10 +1,14 @@
 import { useState } from "react";
 import FaqItems from "../components/faqs/faq-item";
 import Image from "next/image";
+import BreadCrumb from "../components/common/breadcrumb";
 
 export default function Faq({ faqs }) {
   const [questions, setQuestions] = useState(faqs);
-
+  const breadCrumbPath = [
+    { name: "Home", url: "/" },
+    { name: "FAQ", url: "/faq/" },
+  ];
   function searchQuestions(e) {
     e.preventDefault();
     // input = document.getElementById("myInput");
@@ -18,7 +22,7 @@ export default function Faq({ faqs }) {
     setQuestions(result);
   }
   return (
-    <div itemScope itemType="http://schema.org/FAQPage">
+    <div itemProp="mainEntity" itemScope itemType="http://schema.org/FAQPage">
       <div className="faq-row">
         <Image
           src="/faq/faqs.jpg"
@@ -38,6 +42,7 @@ export default function Faq({ faqs }) {
       </div>
       <div className="container">
         <div style={{ padding: 10 }}>
+          <BreadCrumb breadcrumbs={breadCrumbPath} />
           <FaqItems questions={questions} />
         </div>
       </div>
