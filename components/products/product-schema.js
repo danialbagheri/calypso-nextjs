@@ -10,6 +10,9 @@ export default function ProductSchema(props) {
           </div>
         </div>
         <div rel="schema:author">
+          <span property="author" typeof="Person">
+            <span property="name">{review.customer_name}</span>
+          </span>
           <div typeof="schema:Person">
             <div property="schema:name" content={review.customer_name}></div>
             <meta property="datePublished" content={review.date_created}></meta>

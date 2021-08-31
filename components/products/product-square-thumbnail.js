@@ -1,6 +1,7 @@
 import React from "react";
-import StarRatingComponent from "react-star-rating-component";
+// import StarRatingComponent from "react-star-rating-component";
 import Link from "next/link";
+import Image from "next/image";
 import StarRatingCustom from "../common/star-rating-custom";
 
 export default class ProductSquareThumbnail extends React.Component {
@@ -63,12 +64,11 @@ export default class ProductSquareThumbnail extends React.Component {
             onMouseEnter={this.toggleHover}
             style={hoveredImage}
           >
-            <picture className={this.state.hover ? "d-none" : "d-block"}>
+            {/* <picture className={this.state.hover ? "d-none" : "d-block"}>
               <source srcSet={webp} alt={name} type="image/webp" />
               <source srcSet={image} alt={name} type="image/png" />
               <img src={image || "/advice/placeholder.png"} alt={name} />
-            </picture>
-            {/* <div style={{ width: "280px", height: "400px" }}>
+            </picture> */}
             <Image
               src={image || "/advice/placeholder.png"}
               alt={name}
@@ -76,6 +76,8 @@ export default class ProductSquareThumbnail extends React.Component {
               layout="fill"
               objectFit="cover"
             />
+            {/* <div style={{ width: "280px", height: "400px" }}>
+
           </div> */}
           </a>
         </Link>

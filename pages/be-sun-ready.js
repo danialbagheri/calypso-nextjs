@@ -43,7 +43,6 @@ export async function getStaticProps(context) {
   const blogEndPoint = baseUrl + `blogs/collections/be-sun-ready/?resize_w=450`;
   const result = await fetch(blogEndPoint);
   const blogs = await result.json();
-  console.log(blogs);
   return {
     props: {
       productData: productData.results,

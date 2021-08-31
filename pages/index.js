@@ -6,7 +6,7 @@ import AsSeen from "../components/home/as-seen";
 import BlogSlider from "../components/blogs/blog-slider";
 import Instagram from "../components/common/instagram";
 
-function Home({ slides, isLoaded }) {
+function Home({ slides, isLoaded, trending }) {
   return (
     <div>
       <Head>
@@ -41,7 +41,7 @@ function Home({ slides, isLoaded }) {
         <section className="top-0">
           <HomeSlider slides={slides} isLoaded={isLoaded} />
           <div className="container-fluid">
-            <Trending />
+            <Trending trending={trending} />
           </div>
           <StaySafe />
           <AsSeen />
@@ -60,6 +60,10 @@ export async function getStaticProps(context) {
   const res = await fetch(finalUrl);
   const slides = await res.json();
   // Now we will get the staff picked articles
+  // api call for trending products
+  const trendingUrl = baseUrl + `products/collections/trending`;
+  const trendingResults = await fetch(trendingUrl);
+  const trending = await trendingResults.json();
 
   if (!slides) {
     return {
@@ -69,7 +73,8 @@ export async function getStaticProps(context) {
   }
 
   return {
-    props: { slides: slides.results, isLoaded: true }, // will be passed to the page component as props
+    props: { slides: slides.results, isLoaded: true, trending: trending.items },
+    revalidate: 120, // will be passed to the page component as props
   };
 }
 

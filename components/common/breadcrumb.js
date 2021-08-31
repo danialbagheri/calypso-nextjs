@@ -9,8 +9,8 @@ export default class BreadCrumb extends React.Component {
         <li property="itemListElement" typeof="ListItem" key={index}>
           <a property="item" typeof="WebPage" href={child.url}>
             <span property="name">{child.name}</span>
-            <meta property="position" content={index} />
           </a>
+          <meta property="position" content={index} />
         </li>
       );
     });

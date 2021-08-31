@@ -99,7 +99,7 @@ export async function getStaticProps(context) {
     props: {
       blog,
     },
-    revalidate: 1,
+    revalidate: 120,
   };
 }
 

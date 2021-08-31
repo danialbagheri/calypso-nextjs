@@ -59,10 +59,7 @@ export default function ProductDescription(props) {
         />
         <a href="#readReviews" className="read-reviews">
           {props.reviewCount >= 1 ? (
-            <span>
-              Read {props.reviewCount}
-              reviews
-            </span>
+            <span>Read {props.reviewCount} reviews</span>
           ) : (
             <span>Be the first to review to this product</span>
           )}

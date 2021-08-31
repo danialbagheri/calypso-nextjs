@@ -12,10 +12,8 @@ import { useShopify } from "../../components/hooks";
 import ProductSchema from "../../components/products/product-schema";
 
 function Product(props) {
-  const [product, setProduct] = useState(props.productData);
-  const [childProducts, setChildProducts] = useState(
-    props.productData.variants
-  );
+  const product = props.productData;
+  const childProducts = props.productData.variants;
   const [variantId, setShopifyVariantId] = useState(
     props.productData.variants[0].shopify_storefront_variant_id
   );
