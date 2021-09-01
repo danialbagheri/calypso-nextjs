@@ -48,22 +48,10 @@ export default class ProductSquareThumbnail extends React.Component {
         lifeStyleImage = null;
       }
     }
-    let hoveredImage;
-    if (this.state.hover) {
-      hoveredImage = {
-        backgroundSize: "cover",
-        backgroundImage: `url(${lifeStyleImage})`,
-        backgroundPosition: "center center",
-      };
-    }
     return (
       <div className="trending-item-parent">
         <Link href={`/products/${slug}`}>
-          <a
-            className="trending-box-image"
-            onMouseEnter={this.toggleHover}
-            style={hoveredImage}
-          >
+          <a className="trending-box-image" onMouseEnter={this.toggleHover}>
             {/* <picture className={this.state.hover ? "d-none" : "d-block"}>
               <source srcSet={webp} alt={name} type="image/webp" />
               <source srcSet={image} alt={name} type="image/png" />
@@ -73,6 +61,13 @@ export default class ProductSquareThumbnail extends React.Component {
               src={image || "/advice/placeholder.png"}
               alt={name}
               className={this.state.hover ? "d-none" : "d-block"}
+              layout="fill"
+              objectFit="cover"
+            />
+            <Image
+              src={lifeStyleImage || "/advice/placeholder.png"}
+              alt={name}
+              className={this.state.hover ? "d-block" : "d-none"}
               layout="fill"
               objectFit="cover"
             />

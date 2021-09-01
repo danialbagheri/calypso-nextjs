@@ -9,7 +9,7 @@ import RelatedProduct from "../../components/products/related-products";
 import ProductReviews from "../../components/reviews/product-reviews";
 import QuestionAndAnswerRow from "../../components/question-and-answers/question-and-answers-row";
 import { useShopify } from "../../components/hooks";
-import ProductSchema from "../../components/products/product-schema";
+import ProductSchema from "../../components/seo/product-schema";
 
 function Product(props) {
   const product = props.productData;

@@ -61,7 +61,7 @@ export async function getStaticProps(context) {
   const slides = await res.json();
   // Now we will get the staff picked articles
   // api call for trending products
-  const trendingUrl = baseUrl + `products/collections/trending`;
+  const trendingUrl = baseUrl + `products/collections/trending/?resize_w=580`;
   const trendingResults = await fetch(trendingUrl);
   const trending = await trendingResults.json();
 
