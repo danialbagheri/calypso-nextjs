@@ -10,16 +10,16 @@ export default function ProductPageImage(props) {
   let slider1 = [];
   let slider2 = [];
   let imageList = props.imageList;
-  const settings = {
-    responsive: [
-      {
-        breakpoint: 480,
-        settings: {
-          className: "d-none",
-        },
-      },
-    ],
-  };
+  // const settings = {
+  //   responsive: [
+  //     {
+  //       breakpoint: 480,
+  //       settings: {
+  //         // className: "d-none",
+  //       },
+  //     },
+  //   ],
+  // };
   function sortByImageType(a, b) {
     if (a.main) {
       return -2;
@@ -53,17 +53,17 @@ export default function ProductPageImage(props) {
 
   let images = imageList.map((image, index) => {
     return (
-      <Image
-        src={image.image}
-        alt={image.alternate_text}
-        layout="responsive"
-        width={image.width}
-        height={image.height}
-        key={index}
-        className="thumbnail-holder"
-        priority
-      />
-      //   </div>
+      <div key={index}>
+        <Image
+          src={image.image}
+          alt={image.alternate_text}
+          layout="responsive"
+          width={image.width}
+          height={image.height}
+          className="thumbnail-holder"
+          priority
+        />
+      </div>
     );
   });
   return (
@@ -75,7 +75,6 @@ export default function ProductPageImage(props) {
       >
         {images}
       </Slider>
-
       <Slider
         className="product-image-thumbnail"
         asNavFor={nav1}
@@ -85,7 +84,7 @@ export default function ProductPageImage(props) {
         swipeToSlide={true}
         focusOnSelect={true}
         lazyLoad={true}
-        {...settings}
+        // {...settings}
       >
         {images}
       </Slider>

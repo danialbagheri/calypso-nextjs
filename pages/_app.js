@@ -63,10 +63,15 @@ function MyApp({ Component, pageProps }) {
         <Header />
         <Component {...pageProps} />
         <CookieConsent
-        // onAccept={() => {
-        //   alert("Accept was triggered by clicking the Accept button");
-        // }}
+          containerClasses="cookie-css"
+          contentClasses="cookie-text disableBlur"
+          // buttonWrapperClasses="disableBlur"
+          // buttonClasses="disableBlur bg-calypso"
+          // onAccept={() => {
+          //   alert("Accept was triggered by clicking the Accept button");
+          // }}
         >
+          <div className="cookie-background"></div>
           We use cookies to ensure that we give you the best experience on our
           website.
         </CookieConsent>
@@ -75,19 +80,6 @@ function MyApp({ Component, pageProps }) {
       </Provider>
     </>
   );
-}
-
-export async function getServerSideProps(context) {
-  // const res = await fetch("https://api.github.com/repos/vercel/next.js");
-  // const json = await res.json();
-  // // if (!data) {
-  // //   return {
-  // //     notFound: true,
-  // //   };
-  // // }
-  // return {
-  //   props: { message: "test22" }, // will be passed to the page component as props
-  // };
 }
 
 export default MyApp;

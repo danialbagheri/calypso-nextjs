@@ -270,6 +270,19 @@ p > a {
   padding: 0;
 }
 
+.cookie-css {
+  background-color: #ffff !important;
+  opacity: 80%;
+}
+
+.cookie-text {
+  color: black !important;
+  -webkit-filter: blur(0) !important; /* Safari 6.0 - 9.0 */
+  filter: blur(0) !important;
+}
+.disableBlur {
+  filter: blur(0) !important;
+}
 /* ESSENTIAL RESPONSIVE BOOTSTRAP UTILITIES */
 .nav-link {
   text-decoration: none;
@@ -2091,6 +2104,7 @@ a img {
     align-content: flex-end;
     flex-wrap: nowrap;
     flex-direction: column;
+    max-height: 565px;
   }
   .product-page-main-image {
     width: 100%;

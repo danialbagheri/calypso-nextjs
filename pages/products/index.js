@@ -6,10 +6,16 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import _ from "lodash/core";
+import _ from "lodash";
 
 function Products(props) {
-  const [products, setProducts] = useState(props.products);
+  const ordered_products = _.orderBy(
+    props.products,
+    [(item) => item.types[0].id, (item) => item.top_seller.toString()],
+    ["asc", "desc"]
+  );
+
+  const [products, setProducts] = useState(ordered_products);
   const [limit, setLimit] = useState(10);
   const [maxLimit, setMaxLimit] = useState(false);
 
@@ -65,6 +71,27 @@ function Products(props) {
       setLimit(newLimit);
     }
   }
+
+  // useEffect(() => {
+  //   window.onscroll = () => {
+  //     let loading = document.getElementById("loading");
+  //     let scrollTop = document.documentElement.scrollTop;
+  //     let loadMoreOffsetTop = loading.offsetTop;
+  //     const windowHeight = window.innerHeight;
+  //     console.log(scrollTop);
+  //     console.log(loadMoreOffsetTop - windowHeight);
+  //     console.log(loadMoreOffsetTop);
+  //     handleScroll(scrollTop, loadMoreOffsetTop, windowHeight);
+  //   };
+  // }, []);
+
+  // function handleScroll(scrollTop, loadMoreOffsetTop, windowHeight) {
+  //   if (scrollTop > loadMoreOffsetTop - windowHeight) {
+  //     LoadMore();
+  //     console.log("yes");
+  //   }
+  // }
+
   return (
     <div>
       <Head>
@@ -172,9 +199,15 @@ function Products(props) {
             products={products}
             limit={limit}
           />
-          {maxLimit ? null : (
+          {maxLimit ? (
+            <span id="loading"></span>
+          ) : (
             <div className="text-centre m-3">
-              <button onClick={LoadMore} className="btn btn-calypso">
+              <button
+                onClick={LoadMore}
+                className="btn btn-calypso"
+                id="loading"
+              >
                 Load More
               </button>
             </div>
