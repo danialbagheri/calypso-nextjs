@@ -61,14 +61,19 @@ export default function ProductPageImage(props) {
           width={image.width}
           height={image.height}
           className="thumbnail-holder"
-          priority
+          // priority
         />
       </div>
     );
   });
   return (
     <div className="product-photo-holder">
-      <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)} className="">
+      <Slider
+        slidesToShow={1}
+        asNavFor={nav2}
+        ref={(slider) => (slider1 = slider)}
+        className=""
+      >
         {images}
       </Slider>
       <Slider

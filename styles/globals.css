@@ -2060,18 +2060,17 @@ a img {
 .img-thumbnail-product img {
   cursor: pointer;
 }
-
-.img-thumbnail-product {
+.img-thumbnail-product .slick-current {
+  background-color: #ff6b00 !important;
+  border: 1px solid black;
+}
+.img-thumbnail-product .slick-slide {
   background-color: #eeecec;
 }
 /* .img-thumbnail-product > .slick-current :focus {
   background-color: #ff6b00;
   border: 1px solid black;
 } */
-.img-thumbnail-product .slick-current {
-  background-color: #ff6b00;
-  border: 1px solid black;
-}
 
 .product-image-thumbnail .slick-slide div {
   margin-right: 15px;
