@@ -68,15 +68,11 @@ export default function ProductPageImage(props) {
   });
   return (
     <div className="product-photo-holder">
-      <Slider
-        asNavFor={nav2}
-        ref={(slider) => (slider1 = slider)}
-        className="product-page-main-image top20"
-      >
+      <Slider asNavFor={nav2} ref={(slider) => (slider1 = slider)} className="">
         {images}
       </Slider>
       <Slider
-        className="product-image-thumbnail"
+        className="img-thumbnail-product"
         asNavFor={nav1}
         ref={(slider) => (slider2 = slider)}
         slidesToShow={6}
@@ -84,6 +80,7 @@ export default function ProductPageImage(props) {
         swipeToSlide={true}
         focusOnSelect={true}
         lazyLoad={true}
+        centerPadding={"10px"}
         // {...settings}
       >
         {images}

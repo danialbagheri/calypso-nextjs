@@ -1200,6 +1200,10 @@ input.search-field:focus {
   /* width: 420px;
   height: 252px; 
 } */
+.product-photo-holder {
+  width: 65%;
+  float: right;
+}
 .product-photo-holder .slick-prev {
   left: 0 !important;
   margin-left: 12px !important;
@@ -1509,7 +1513,7 @@ a img {
   margin-top: 2rem;
   display: flex;
   justify-content: flex-end;
-  height: 15px;
+  /* height: 15px; */
 }
 .linco-care-com * {
   margin-right: 5px;
@@ -1520,10 +1524,8 @@ a img {
   text-decoration: none;
 }
 .linco-logo {
-  width: 3rem;
-  height: 5rem;
-  margin: 7px 20px 7px 7px;
-  /* float: left; */
+  width: 35px;
+  margin-right: 10px;
 }
 .payment-icon {
   width: 30px;
@@ -2039,12 +2041,12 @@ a img {
   /* height: 450px; */
   width: 400px;
 }
-.product-photo-holder {
+/* .product-photo-holder {
   display: flex;
   align-content: flex-end;
   flex-wrap: wrap;
   flex-direction: column;
-}
+} */
 
 .product-page-main-image {
   width: 500px;
@@ -2054,25 +2056,19 @@ a img {
   margin: 0 auto;
   /* width: 370px; */
 }
-.product-image-thumbnail {
-  width: 500px;
-  margin-top: 10px;
-  /* height: 80px; */
-}
-.product-image-thumbnail img {
-  width: 40px;
+
+.img-thumbnail-product img {
   cursor: pointer;
-  margin: 0 auto;
 }
 
-.product-image-thumbnail .thumbnail-holder {
+.img-thumbnail-product {
   background-color: #eeecec;
 }
-.product-image-thumbnail .thumbnail-holder:focus {
+/* .img-thumbnail-product > .slick-current :focus {
   background-color: #ff6b00;
   border: 1px solid black;
-}
-.product-image-thumbnail .thumbnail-holder:active {
+} */
+.img-thumbnail-product .slick-current {
   background-color: #ff6b00;
   border: 1px solid black;
 }
@@ -2093,35 +2089,17 @@ a img {
 .addToCartContainer {
   width: 60%;
 }
-.product-page-main-image:focus {
-  border-color: red;
-  background-color: red;
+
+@media only screen and (max-width: 880px) {
+  .product-photo-holder {
+    width: 100%;
+  }
 }
 
 @media only screen and (max-width: 480px) {
   .product-photo-holder {
-    display: flex;
-    align-content: flex-end;
-    flex-wrap: nowrap;
-    flex-direction: column;
-    max-height: 565px;
-  }
-  .product-page-main-image {
     width: 100%;
-    margin: 0 auto;
   }
-  .product-page-main-image img {
-    width: 70vw;
-    margin: 0 auto;
-  }
-
-  .product-image-thumbnail * {
-    display: none;
-    /* height: 80px; */
-  }
-
-  /* .product-image-thumbnail * {
-  } */
 
   .addToCartContainer {
     width: 100%;

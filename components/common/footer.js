@@ -3,6 +3,7 @@ import logo from "../../public/logoWhite.svg";
 import externalLink from "../../public/icons/external-link.svg";
 import Link from "next/link";
 import PaymentIcon from "./payment-icons";
+import Image from "next/image";
 
 export default class Footer extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export default class Footer extends React.Component {
     return null;
   }
   render() {
+    const lincoDropLet = require("../../public/home-page/Droplets.png");
     var date = new Date();
     return (
       <footer className="page-footer font-small ">
@@ -23,7 +25,7 @@ export default class Footer extends React.Component {
           <div className="container top30">
             <div className="row height250">
               <div className="col-md-5">
-                <img
+                <Image
                   src={logo}
                   className="footerLogo"
                   alt="Calypso"
@@ -182,11 +184,14 @@ export default class Footer extends React.Component {
           >
             <div className="linco-branding">
               <meta itemProp="name" content="Linco Care limited" />
-              <img
-                className="linco-logo"
-                src={require("../../public/home-page/Droplets.png")}
-                alt="Linco Care logo Icon"
-              />
+              <div className="linco-logo">
+                <Image
+                  width={246}
+                  height={352}
+                  src={lincoDropLet}
+                  alt="Linco Care logo Icon"
+                />
+              </div>
               <p>
                 Copyright&#169; Linco Care Ltd {date.getFullYear()} | United
                 Kingdom
@@ -200,7 +205,7 @@ export default class Footer extends React.Component {
                   rel="noopener noreferrer"
                 >
                   lincocare.com{" "}
-                  <img
+                  <Image
                     src={externalLink}
                     alt="externalurl"
                     width="14"

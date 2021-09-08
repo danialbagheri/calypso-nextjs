@@ -3,6 +3,7 @@ import Styles from "../../styles/sunready.module.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
 
 export default function RelatedProducts({ related }) {
   const settings = {
@@ -44,31 +45,30 @@ export default function RelatedProducts({ related }) {
   const relatedProducts = related.map((product, index) => {
     return (
       <div key={index}>
-        <a
-          href={`/products/${encodeURIComponent(product.slug)}`}
-          className="disableLink"
-        >
-          <div className={Styles.productHolder}>
-            <div>
-              <Image
-                src={product.main_image}
-                height={product.img_height}
-                width={product.img_width}
-                alt={product.name}
-                layout="responsive"
-              />
+        <Link href={`/products/${encodeURIComponent(product.slug)}`}>
+          <a className="disableLink">
+            <div className={Styles.productHolder}>
+              <div>
+                <Image
+                  src={product.main_image}
+                  height={product.img_height}
+                  width={product.img_width}
+                  alt={product.name}
+                  layout="responsive"
+                />
+              </div>
+              <div className="text-centre">
+                <p>
+                  <strong>{product.name}</strong> <br />
+                  {product.sub_title}
+                </p>
+                <p>
+                  <strong>from £{product.starting_price}</strong>
+                </p>
+              </div>
             </div>
-            <div className="text-centre">
-              <p>
-                <strong>{product.name}</strong> <br />
-                {product.sub_title}
-              </p>
-              <p>
-                <strong>from £{product.starting_price}</strong>
-              </p>
-            </div>
-          </div>
-        </a>
+          </a>
+        </Link>
       </div>
     );
   });
