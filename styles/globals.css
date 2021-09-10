@@ -2088,16 +2088,19 @@ a img {
 .addToCartContainer {
   width: 60%;
 }
+.product-photo-holder img {
+  width: auto !important;
+}
 
 @media only screen and (max-width: 880px) {
   .product-photo-holder {
-    width: 100%;
+    width: 100vw;
   }
 }
 
 @media only screen and (max-width: 480px) {
   .product-photo-holder {
-    width: 100%;
+    width: 100vw;
   }
 
   .addToCartContainer {
