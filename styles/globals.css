@@ -1201,8 +1201,11 @@ input.search-field:focus {
   height: 252px; 
 } */
 .product-photo-holder {
-  width: 65%;
+  width: 75%;
   float: right;
+}
+.product-photo-holder div {
+  /* max-height: 650px; */
 }
 .product-photo-holder .slick-prev {
   left: 0 !important;
@@ -2089,7 +2092,9 @@ a img {
   width: 60%;
 }
 .product-photo-holder img {
-  width: auto !important;
+  width: 70%;
+  margin: 0 auto;
+  height: auto;
 }
 
 @media only screen and (max-width: 880px) {

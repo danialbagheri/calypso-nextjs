@@ -54,10 +54,10 @@ export default function ProductPageImage(props) {
   let images = imageList.map((image, index) => {
     return (
       <div key={index}>
-        <Image
+        <img
           src={image.image}
           alt={image.alternate_text}
-          layout="responsive"
+          // layout="intrinsic"
           width={image.width}
           height={image.height}
           className="thumbnail-holder"
