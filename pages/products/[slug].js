@@ -21,6 +21,9 @@ function Product(props) {
   const [selectedPrice, setPrice] = useState(
     props.productData.variants[0].price
   );
+  const [pricePer100ml, setPricePer100ml] = useState(
+    props.productData.variants[0].price_per_100ml
+  );
   const [selectedChildVariation, setSelectedChildVariation] = useState(
     props.productData.variants[0].name
   );
@@ -51,6 +54,7 @@ function Product(props) {
     setSelectedVariant(selectedProduct);
     setShopifyVariantId(selectedProduct.shopify_storefront_variant_id);
     setPrice(selectedProduct.price);
+    setPricePer100ml(selectedProduct.price_per_100ml);
     setWheretoBuyStores(selectedProduct.where_to_buy);
     setChild(selectedProduct.sku);
     setSelectedChildVariation(selectedProduct.name);
@@ -96,6 +100,7 @@ function Product(props) {
       productName={product.name}
       secondTitle={product.sub_title}
       price={selectedPrice}
+      pricePer100ml={pricePer100ml}
       description={product.description}
       direction={product.direction_of_use}
       child={child}

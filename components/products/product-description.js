@@ -89,6 +89,10 @@ export default function ProductDescription(props) {
         </span>
         <span>{props.price}</span>
       </h2>
+      {props.pricePer100ml ? (
+        <small>£{props.pricePer100ml} per 100ml</small>
+      ) : null}
+
       <div className="addToCartContainer">{props.child}</div>
       {inStock ? (
         <button

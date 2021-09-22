@@ -19,9 +19,6 @@ const customStyles = {
   },
 };
 
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
-//Modal.setAppElement("#root");
-
 export default function ProductReviews(props) {
   const [allReviews, setReviews] = useState(props.productReviews);
   // const totalScore = reviewAverageScore / totalReviewCount;
@@ -41,116 +38,81 @@ export default function ProductReviews(props) {
     setModal(false);
   }
 
-  function likeReview(e, reviewId) {
-    const el = e.target;
-    let likedReviews = [];
-    const dislikeButton = document.getElementById(`dislike${reviewId}`);
-    likedReviews.push({ reviewId });
-    let likedReviewsInLocalStorage =
-      JSON.parse(window.localStorage.getItem("likeReviews")) || [];
-    if (likedReviewsInLocalStorage.length == 0) {
-      window.localStorage.setItem("likeReviews", JSON.stringify(likedReviews));
-      el.classList = "like-and-dislike-feedback";
-      el.innerHTML = "Thank you for your feedback";
+  function RateReview(reviewId, reteType) {
+    const baseUrl = data.apiUrl;
+    const endpoint = baseUrl + `reviews/rate/${reviewId}/`;
+
+    let formdata = new FormData();
+    formdata.append("rate_type", reteType);
+
+    let requestOptions = {
+      method: "PATCH",
+      body: formdata,
+    };
+
+    fetch(endpoint, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  }
+
+  function toggleButton(el, reviewId, liked) {
+    el.classList = "like-and-dislike-feedback";
+    el.innerHTML = "Thank you for your feedback";
+    if (liked) {
+      const dislikeButton = document.getElementById(`dislike${reviewId}`);
       dislikeButton.style.display = "none";
     } else {
-      for (var i = 0; i < likedReviewsInLocalStorage.length; i++) {
-        if (likedReviewsInLocalStorage[i]["reviewId"] === reviewId) {
-          el.classList = "like-and-dislike-danger";
-          el.innerHTML = "You have already rated this review.";
-          dislikeButton.style.display = "none";
-        } else {
-          window.localStorage.setItem(
-            "likeReviews",
-            JSON.stringify(likedReviews)
-          );
-          el.classList = "like-and-dislike-feedback";
-          el.innerHTML = "Thank you for your feedback";
-          dislikeButton.style.display = "none";
-        }
-      }
+      const likeButton = document.getElementById(`like${reviewId}`);
+      likeButton.style.display = "none";
     }
+  }
+
+  function likeReview(e, reviewId) {
+    const el = e.target;
+    toggleButton(el, reviewId, true);
+    RateReview(reviewId, "like");
   }
   function dislikeReview(e, reviewId) {
     const el = e.target;
-    let likedReviews = [];
-    const likeButton = document.getElementById(`like${reviewId}`);
-    likedReviews.push({ reviewId });
-    let dislikedReviewsInLocalStorage =
-      JSON.parse(window.localStorage.getItem("dislikeReviews")) || [];
-    if (dislikedReviewsInLocalStorage.length == 0) {
-      window.localStorage.setItem("likeReviews", JSON.stringify(likedReviews));
-      el.classList = "like-and-dislike-feedback";
-      el.innerHTML = "Thank you for your feedback";
-      likeButton.style.display = "none";
-    } else {
-      for (var i = 0; i < dislikedReviewsInLocalStorage.length; i++) {
-        if (dislikedReviewsInLocalStorage[i]["reviewId"] === reviewId) {
-          el.classList = "like-and-dislike-danger";
-          el.innerHTML = "You have already rated this review.";
-          likeButton.style.display = "none";
-        } else {
-          window.localStorage.setItem(
-            "likeReviews",
-            JSON.stringify(likedReviews)
-          );
-          el.classList = "like-and-dislike-feedback";
-          el.innerHTML = "Thank you for your feedback";
-          likeButton.style.display = "none";
-        }
-      }
-    }
-  }
-  function dislikeReviewOnServer() {
-    const el = e.target;
-    const baseUrl = data.apiUrl;
-    const endpoint = baseUrl + `reviews/rate/${reviewId}/`;
-    fetch(endpoint, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        like: 0,
-        dislike: 1,
-      }),
-    }).catch((e) => console.log(e));
+    toggleButton(el, reviewId, false);
+    RateReview(reviewId, "dislike");
   }
 
-  function fetchReviews() {
-    const baseUrl = data.apiUrl;
-    const finalUrl =
-      baseUrl + `reviews/product/?product_slug=${props.productSlug}`;
-    fetch(finalUrl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(
-        (result) => {
-          // calculate the total score of the reviews
-          let scores = [];
-          result.results.map((each) => scores.push(each.score));
-          let averageScore = 0;
-          scores.forEach((each) => {
-            averageScore += each;
-          });
-          // calculation ends here
-          this.setState({
-            isLoaded: true,
-            count: result.count,
-            allReviews: result.results,
-            review_scores: scores,
-            totalScore: averageScore / result.count,
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
-        }
-      );
-  }
+  // function fetchReviews() {
+  //   const baseUrl = data.apiUrl;
+  //   const finalUrl =
+  //     baseUrl + `reviews/product/?product_slug=${props.productSlug}`;
+  //   fetch(finalUrl)
+  //     .then(function (response) {
+  //       return response.json();
+  //     })
+  //     .then(
+  //       (result) => {
+  //         // calculate the total score of the reviews
+  //         let scores = [];
+  //         result.results.map((each) => scores.push(each.score));
+  //         let averageScore = 0;
+  //         scores.forEach((each) => {
+  //           averageScore += each;
+  //         });
+  //         // calculation ends here
+  //         this.setState({
+  //           isLoaded: true,
+  //           count: result.count,
+  //           allReviews: result.results,
+  //           review_scores: scores,
+  //           totalScore: averageScore / result.count,
+  //         });
+  //       },
+  //       (error) => {
+  //         this.setState({
+  //           isLoaded: true,
+  //           error,
+  //         });
+  //       }
+  //     );
+  // }
 
   const reviews = allReviews.map((review, index) => {
     return (
