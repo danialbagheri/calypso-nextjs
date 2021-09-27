@@ -54,15 +54,17 @@ export default function ProductPageImage(props) {
   let images = imageList.map((image, index) => {
     return (
       <div key={index}>
-        <img
-          src={image.image}
-          alt={image.alternate_text}
-          // layout="intrinsic"
-          width={image.width}
-          height={image.height}
-          className="thumbnail-holder"
-          // priority
-        />
+        <picture>
+          <source srcset={image.webp} type="image/webp" />
+          <source srcset={image.resized} media="(max-width: 600px)" />
+          <img
+            src={image.image}
+            alt={image.alternate_text}
+            width={image.width}
+            height={image.height}
+            className="thumbnail-holder"
+          />
+        </picture>
       </div>
     );
   });

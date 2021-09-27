@@ -1094,29 +1094,35 @@ input.search-field:focus {
   cursor: pointer;
   transform: scale(1);
   overflow: hidden;
-  max-height: 398px;
-  min-height: 398px;
+  max-height: 358px;
+  min-height: 358px;
+  position: relative;
 }
 .blog-card:hover {
   transform: scale(1.02);
   transition: transform 200ms linear;
 }
 .blog-card .card-body {
+  position: absolute;
+  top: 50%;
   padding-left: 1rem;
   /* padding-bottom: 1rem; */
   padding-right: 1rem;
+}
+.card-footer {
+  position: absolute;
+  bottom: 1rem;
+  padding-left: 1rem;
 }
 .blog-card .card-title {
   font-weight: 600;
   font-size: medium;
 }
-.blog-card .blog-image {
-  height: 250px;
-  overflow: hidden;
+
+.blog-image,
+.blog-image * {
   width: 100%;
-}
-.blog-card img {
-  width: 100%;
+  max-height: 50% !important;
 }
 
 .blogSlider {
@@ -2780,6 +2786,10 @@ ul.stores img {
 .flex-left {
   display: flex;
   justify-content: left;
+}
+.flex-right {
+  display: flex;
+  justify-content: right;
 }
 .p-1 {
   padding: 1rem !important;

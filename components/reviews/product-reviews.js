@@ -79,41 +79,6 @@ export default function ProductReviews(props) {
     RateReview(reviewId, "dislike");
   }
 
-  // function fetchReviews() {
-  //   const baseUrl = data.apiUrl;
-  //   const finalUrl =
-  //     baseUrl + `reviews/product/?product_slug=${props.productSlug}`;
-  //   fetch(finalUrl)
-  //     .then(function (response) {
-  //       return response.json();
-  //     })
-  //     .then(
-  //       (result) => {
-  //         // calculate the total score of the reviews
-  //         let scores = [];
-  //         result.results.map((each) => scores.push(each.score));
-  //         let averageScore = 0;
-  //         scores.forEach((each) => {
-  //           averageScore += each;
-  //         });
-  //         // calculation ends here
-  //         this.setState({
-  //           isLoaded: true,
-  //           count: result.count,
-  //           allReviews: result.results,
-  //           review_scores: scores,
-  //           totalScore: averageScore / result.count,
-  //         });
-  //       },
-  //       (error) => {
-  //         this.setState({
-  //           isLoaded: true,
-  //           error,
-  //         });
-  //       }
-  //     );
-  // }
-
   const reviews = allReviews.map((review, index) => {
     return (
       <li key={index} className="review-item">

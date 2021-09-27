@@ -36,9 +36,10 @@ export default function Advice({ posts, count }) {
                 <Image
                   src={blog.resized || "/advice/placeholder.png"}
                   alt={blog.image_alt_text}
-                  layout="responsive"
-                  height={blog.image_height}
-                  width={blog.image_width}
+                  layout="fill"
+                  objectFit="cover"
+                  // height={blog.image_height}
+                  // width={blog.image_width}
                 />
               </div>
               <div className="card-body">
@@ -48,6 +49,8 @@ export default function Advice({ posts, count }) {
                   </small>
                 </p>
                 <p className="card-title">{blog.title}</p>
+              </div>
+              <div className="card-footer">
                 <div className="read-more">Read More</div>
               </div>
             </div>

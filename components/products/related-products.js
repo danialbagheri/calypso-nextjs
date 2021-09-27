@@ -1,9 +1,9 @@
-import Image from "next/image";
-import Styles from "../../styles/sunready.module.css";
+import Styles from "../../styles/relatedProducts.module.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
+import StarRatingCustom from "../common/star-rating-custom";
 
 export default function RelatedProducts({ related }) {
   const settings = {
@@ -48,23 +48,30 @@ export default function RelatedProducts({ related }) {
         <Link href={`/products/${encodeURIComponent(product.slug)}`}>
           <a className="disableLink">
             <div className={Styles.productHolder}>
-              <div>
-                <Image
-                  src={product.main_image}
-                  height={product.img_height}
-                  width={product.img_width}
-                  alt={product.name}
-                  layout="responsive"
-                />
+              <div className={Styles.ProductImage}>
+                <picture>
+                  <source srcset={product.webp} type="image/webp" />
+                  <source srcset={product.resized} media="(max-width: 600px)" />
+                  <img
+                    src={product.main_image}
+                    height={product.img_height}
+                    width={product.img_width}
+                    alt={product.name}
+                  />
+                </picture>
               </div>
-              <div className="text-centre">
+
+              <div className={Styles.bottomText}>
+                <StarRatingCustom
+                  value={product.review_average_score}
+                  name={product.name}
+                  className={Styles.starReview}
+                />
                 <p>
                   <strong>{product.name}</strong> <br />
                   {product.sub_title}
                 </p>
-                <p>
-                  <strong>from £{product.starting_price}</strong>
-                </p>
+                <p>from £{product.starting_price}</p>
               </div>
             </div>
           </a>
@@ -74,7 +81,7 @@ export default function RelatedProducts({ related }) {
   });
   return (
     <div className="bg-secondary p-3">
-      <h1 className="textCenter">Related Products</h1>
+      <h4 className="textCenter">You may also like</h4>
       <Slider {...settings}>{relatedProducts}</Slider>
     </div>
   );
