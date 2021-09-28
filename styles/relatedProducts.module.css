@@ -30,8 +30,23 @@
 
 @media only screen and (min-width: 1400px) {
   .productHolder {
-    min-height: 470px;
-    max-height: 470px;
+    height: 300px;
+    overflow: hidden;
+  }
+  .ProductImage img {
+    width: auto;
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .ProductImage {
+    height: 200px;
+    overflow: hidden;
+  }
+  .ProductImage img {
+    width: auto;
+    height: 100%;
   }
 }
 

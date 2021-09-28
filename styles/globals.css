@@ -2417,6 +2417,20 @@ ul.stores img {
   background-color: rgba(255, 107, 0, 0.5);
   transform: scale(1.1);
 }
+.productBadge {
+  border-radius: 3px;
+  opacity: 0.8;
+  font-size: 11px;
+  font-weight: 700;
+  z-index: 100;
+  position: absolute;
+  top: 1rem;
+  right: 3rem;
+  color: black;
+  background-color: var(--calypso-color);
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+}
 .ProductPageImage {
   height: 300px;
   width: auto;
@@ -2529,8 +2543,8 @@ ul.stores img {
 }
 @media only screen and (max-width: 460px) {
   .trending-box-image {
-    height: 430px;
-    width: 270px;
+    height: 230px;
+    width: 150px;
   }
 }
 /* top products tabs */

@@ -33,7 +33,7 @@ export default function Trending(props) {
       {
         breakpoint: 460,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },

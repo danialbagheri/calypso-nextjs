@@ -20,6 +20,12 @@ export default function ProductRange(props) {
           <Link href={`/products/${product.slug}`}>
             <a>
               <div className="productPageImageHolder">
+                {product.collection_names.length > 0 ? (
+                  <div className="productBadge">
+                    {product.collection_names[0]}
+                  </div>
+                ) : null}
+
                 <img
                   className="ProductPageImage"
                   src={product.main_image}
