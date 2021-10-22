@@ -52,11 +52,14 @@ export default function ProductDescription(props) {
       </h1>
       <h3 className="productPrice">{props.secondTitle}</h3>
       <div className="review-count-product-description">
-        <StarRatingCustom
-          name={props.productName}
-          className="star-rating"
-          value={props.averageReviewScore}
-        />
+        <div className="star-rating">
+          <StarRatingCustom
+            name={props.productName}
+            // className="star-rating"
+            value={props.averageReviewScore}
+            halfStarSize={"2rem"}
+          />
+        </div>
         <a href="#readReviews" className="read-reviews">
           {props.reviewCount >= 1 ? (
             <span>Read {props.reviewCount} reviews</span>

@@ -3,12 +3,12 @@ import ProductRange from "../../components/products/product-range";
 import "react-tabs/style/react-tabs.css";
 import Head from "next/head";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import FilterProducts from "../../components/products/filter-products";
 import _ from "lodash";
 
 function Products(props) {
+  const router = useRouter();
   const ordered_products = _.orderBy(
     props.products,
     [(item) => item.types[0].id, (item) => item.top_seller.toString()],
@@ -17,50 +17,19 @@ function Products(props) {
 
   const [products, setProducts] = useState(ordered_products);
   const [limit, setLimit] = useState(10);
+
   const [maxLimit, setMaxLimit] = useState(false);
 
-  function sortLimit(filteredProducts) {
-    if (limit <= filteredProducts.length) {
-      if (filteredProducts.length > 10) {
-        setLimit(10);
-        setMaxLimit(false);
-      } else {
-        setLimit(filteredProducts.length);
-        setMaxLimit(true);
-      }
-    } else {
-      setLimit(filteredProducts.length);
-      setMaxLimit(true);
-    }
-  }
+  // useEffect(() => {
+  //   router.query.limit ? setLimit(router.query.limit) : setLimit(10);
+  // }, [router.isReady]);
 
-  function filterProductsByCategory(productType) {
-    const filteredProducts = props.products.filter((product) => {
-      if (productType != "") {
-        return _.find(product.types, function (o) {
-          return o.name == productType;
-        });
-      } else {
-        return product;
-      }
-    });
-    setProducts(filteredProducts);
-    sortLimit(filteredProducts);
-  }
-  function filterByProperties(value) {
-    const filteredProducts = props.products.filter((product) => {
-      let variants = _.find(product.variants, function (o) {
-        if (o.name == value) {
-          product.main_image = o.image_list[0].image; // replaces the main image with variant image
-          return o;
-        }
-      });
-      return variants;
-    });
-
-    setProducts(filteredProducts);
-    sortLimit(filteredProducts);
-  }
+  // useEffect(() => {
+  //   // The counter changed!
+  //   router.push(`?limit=${limit}`, `/products?limit=${limit}`, {
+  //     shallow: true,
+  //   });
+  // }, [limit]);
 
   function LoadMore() {
     const newLimit = limit + 10;
@@ -71,26 +40,6 @@ function Products(props) {
       setLimit(newLimit);
     }
   }
-
-  // useEffect(() => {
-  //   window.onscroll = () => {
-  //     let loading = document.getElementById("loading");
-  //     let scrollTop = document.documentElement.scrollTop;
-  //     let loadMoreOffsetTop = loading.offsetTop;
-  //     const windowHeight = window.innerHeight;
-  //     console.log(scrollTop);
-  //     console.log(loadMoreOffsetTop - windowHeight);
-  //     console.log(loadMoreOffsetTop);
-  //     handleScroll(scrollTop, loadMoreOffsetTop, windowHeight);
-  //   };
-  // }, []);
-
-  // function handleScroll(scrollTop, loadMoreOffsetTop, windowHeight) {
-  //   if (scrollTop > loadMoreOffsetTop - windowHeight) {
-  //     LoadMore();
-  //     console.log("yes");
-  //   }
-  // }
 
   return (
     <div>
@@ -117,7 +66,7 @@ function Products(props) {
             </div>
           </div>
           <div className="col-lg-5 col-md-3 col-xs-12 m2">
-            <h2 className="text-right CalypsoOrangeText">Products</h2>
+            <h2 className="text-right CalypsoOrangeText mt-4">Products</h2>
             <p className="text-right">
               Discover Calypso Sun and Skin care products.
             </p>
@@ -125,75 +74,16 @@ function Products(props) {
         </div>
       </section>
       <section className="container">
-        <div className="top50" />
-
         <div className="product-page-filter row">
-          <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1 col-sm-6 product-page-filter-item">
-            <span className="ml-2">
-              Showing {limit} of {products.length} results.
-            </span>
-          </div>
-          <div className="col-md-3 col-12 col-xs-12 mt-1 mb-1 col-sm-6 product-page-filter-item">
-            <label>Categories</label>
-            <select
-              className="form-select product-page-select"
-              onChange={(e) => filterProductsByCategory(e.target.value)}
-            >
-              <option value="">All</option>
-              <option value="Sun protection">Sun Protection</option>
-              <option value="After Sun">After Sun</option>
-              <option value="Kids">Kids</option>
-              <option value="Tanning">Tanning</option>
-              <option value="Health Care">Health Care</option>
-            </select>
-          </div>
-          <div className="col-md-3 col-12 col-xs-12 col-sm-5 mt-1 mb-1 product-page-filter-item">
-            <label className="ml-2">Filter By</label>
-            <select
-              className="form-select"
-              aria-label="Filter by"
-              onChange={(e) => filterByProperties(e.target.value)}
-            >
-              <optgroup label="SPF">
-                <option value="SPF 10">10</option>
-                <option value="SPF 15">15</option>
-                <option value="SPF 30">30</option>
-                <option value="SPF 40">40</option>
-                <option value="SPF 50">50+</option>
-              </optgroup>
-              {/* <optgroup label="Sizes">
-                  <option value="Size 100">100ml</option>
-                  <option value="Size 150">150ml</option>
-                  <option value="Once A Day">Once A Day</option>
-                  <option value="40">Silicon Free</option>
-                  <option value="50">Monoi Tahiti</option>
-                </optgroup> */}
-            </select>
-          </div>
-          <div className="col-md-2 col-12 col-xs-12 mt-1 col-sm-5 mb-1 product-page-filter-item">
-            <label className="ml-2">Show</label>
-            <select
-              className="form-select mr-2"
-              aria-label="Select Product Shown per page"
-              onChange={(e) => setLimit(parseInt(e.target.value))}
-            >
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-            </select>
-          </div>
-          <div className="col-md-1 col-12 col-xs-12 mt-1 mb-1 col-sm-2 product-page-filter-item">
-            <Link href="/search/">
-              <button className="product-page-search" aria-label="Search">
-                <FontAwesomeIcon
-                  icon={faSearch}
-                  className="product-page-search"
-                />
-              </button>
-            </Link>
-          </div>
+          <FilterProducts
+            limit={limit}
+            products={ordered_products}
+            setProducts={setProducts}
+            setLimit={setLimit}
+            setMaxLimit={setMaxLimit}
+          />
         </div>
-        <div style={{ padding: 10 }}>
+        <div>
           <ProductRange
             type="sun%20protection"
             products={products}
@@ -249,4 +139,5 @@ export async function getStaticProps(context) {
     props: { products: productResult.flat(), isLoaded: true }, // will be passed to the page component as props
   };
 }
+
 export default Products;

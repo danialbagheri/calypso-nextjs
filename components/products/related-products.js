@@ -66,6 +66,7 @@ export default function RelatedProducts({ related }) {
                   value={product.review_average_score}
                   name={product.name}
                   className={Styles.starReview}
+                  halfStarSize={"1.2rem"}
                 />
                 <p>
                   <strong>{product.name}</strong> <br />

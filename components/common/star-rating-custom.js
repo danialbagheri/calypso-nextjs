@@ -1,4 +1,5 @@
 import StarRatingComponent from "react-star-rating-component";
+import { StarHalf } from "@mui/icons-material";
 
 export default function StarRatingCustom(props) {
   return (
@@ -11,13 +12,13 @@ export default function StarRatingCustom(props) {
       className={props.className || ""}
       value={parseFloat(props.value)}
       renderStarIconHalf={() => (
-        <div className="half-star-holder">
-          <img
-            src="/icons/half-star.svg"
-            alt="half star"
-            width="55"
-            height="55"
-          />
+        <div className={props.className || ""}>
+          <i
+            className="material-icons half-star"
+            style={{ fontSize: props.halfStarSize || "22px" }}
+          >
+            star_half
+          </i>
         </div>
       )}
     />

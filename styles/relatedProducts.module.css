@@ -7,14 +7,15 @@
   position: relative;
 }
 .ProductImage {
-  height: 60%;
-  max-height: 60%;
+  height: 220px;
+  max-height: 220px;
   width: 100%;
 }
 .ProductImage img {
   width: 90%;
   margin: 0 auto;
-  height: auto;
+  height: 210px;
+  object-fit: contain;
 }
 
 .productHolder:hover {
@@ -23,6 +24,7 @@
 .bottomText {
   position: absolute;
   bottom: 10px;
+  top: 235px;
 }
 .bottomText p {
   font-size: 1.4rem;
@@ -41,15 +43,18 @@
 
 @media only screen and (max-width: 475px) {
   .ProductImage {
-    height: 200px;
+    height: 150px;
     overflow: hidden;
   }
   .ProductImage img {
     width: auto;
-    height: 100%;
+    height: 150px;
   }
 }
 
 .starReview {
   font-size: 1.2rem;
+}
+.starReview .half-star-holder img {
+  height: 10px !important;
 }

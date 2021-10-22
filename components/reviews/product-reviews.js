@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import data from "../../data.json";
-import StarRatingComponent from "react-star-rating-component";
 import Modal from "react-modal";
 import ReviewForm from "./review-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -159,14 +158,14 @@ export default function ProductReviews(props) {
     <div className="topReviewBanner">
       <div className="star-review-strap">
         <div className="star-review-holder">
-          <h1 className="reviewTotalScore">{reviewScores}</h1>
+          <div className="reviewTotalScore">{reviewScores}</div>
           <div className="starRating">
-            <StarRatingComponent
-              starColor={"#fc6b21"}
-              editing={false}
-              name={"total reviews"}
-              starCount={5}
+            <StarRatingCustom
               value={parseFloat(reviewScores)}
+              name={"total reviews"}
+              editing={false}
+              halfStarSize={32}
+              className="star-rating-product-page"
             />
             {/* <StarRatingCustom name={"total reviews"} value={reviewScores} /> */}
             <p className="reviewCount">({count} Reviews)</p>

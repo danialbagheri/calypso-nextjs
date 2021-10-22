@@ -19,8 +19,8 @@ export default function ApplyBefore({ blogs }) {
                   width={blog.item.image_width}
                 />
               </div>
-              <div className="card-body">
-                <p className="card-title">{blog.item.title}</p>
+              <div className="card-body mt-2">
+                <p className="card-title text-centre">{blog.item.title}</p>
                 <p className="read-more">
                   <small>Read Now</small>
                 </p>

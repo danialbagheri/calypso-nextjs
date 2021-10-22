@@ -81,7 +81,7 @@ const ContactUsForm = () => {
           address: "",
           email: "",
           // mailChimp: false,
-          reason: "",
+          reason: "Product Question",
           message: "",
           recaptcha: "",
         }}
@@ -143,7 +143,7 @@ const ContactUsForm = () => {
             })
             .catch((error) => {
               setStatus(
-                "There is a network connection problem, please try again later."
+                "There is a network connection problem, please try again later or send us an email to info@calypsosun.com"
               );
               console.error(error);
             });
@@ -207,12 +207,12 @@ const ContactUsForm = () => {
             {/* <MyCheckbox name="mailChimp" className="form-check-input">
                 I would like to sign up to Calypso (Linco Care) newsletter.
               </MyCheckbox> */}
-
             <ReCAPTCHA
               ref={recaptchaRef}
               sitekey="6LfjPaEUAAAAAPGfkx7Nxp3glAdPGbLZE3lwY5c9"
               onChange={(value) => {
-                setFieldValue("recaptcha", value);
+                // setFieldValue("recaptcha", value);
+                setFieldValue("recaptcha", recaptchaRef.current.getValue());
               }}
             />
             <div className="form-group mt-2">

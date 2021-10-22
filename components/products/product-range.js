@@ -46,6 +46,7 @@ export default function ProductRange(props) {
                     <StarRatingCustom
                       value={product.review_average_score}
                       name={product.name}
+                      halfStarSize={"2.2rem"}
                       className="trending-box-star"
                     />
                   </div>

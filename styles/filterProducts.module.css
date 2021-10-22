@@ -1,0 +1,179 @@
+.Centralize {
+  text-align: center;
+  margin: 0 auto;
+}
+.ProductCategories {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  margin-bottom: 1rem;
+}
+.ProductCategories button {
+  border: none;
+  background-color: #eee;
+  padding: 1em 2em;
+  font-size: small;
+  margin-right: 9px;
+  height: minmax(70px, 80px);
+}
+.FilterButton {
+  border: 1px solid #ddd;
+  background-color: #eee;
+  padding: 0.3em 1em;
+  font-size: large;
+  color: gray;
+}
+.ProductCategories button:hover,
+.FilterButton:hover {
+  background-color: #ddd;
+}
+.SlideMenuBackground {
+  background: white;
+  position: fixed;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.8;
+  top: 70px;
+  left: 0px;
+}
+.slideMenu {
+  border-right: 1px solid #e5e5e5;
+  background: #fcfcfc;
+  opacity: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 300px;
+  top: 0px;
+  left: -100px;
+  padding: 2rem;
+  z-index: 10;
+  padding-top: 70px;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 2s;
+  animation: slide 0.5s forwards;
+}
+
+@-webkit-keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+.FilterWrapper {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.SelectedFilterWrapper {
+  display: flex;
+  gap: 9px;
+}
+.SelectedFilter {
+  background-color: #fc6b21;
+  color: #fff;
+  padding: 2px 12px;
+}
+.ClearButton {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(5, 124, 198);
+  color: rgb(5, 124, 198);
+}
+.CloseSlider {
+  background-color: transparent;
+  border: none;
+  font-size: 3rem;
+  float: right;
+  font-weight: 100;
+  margin-bottom: 3rem;
+}
+.CloseSlider:hover {
+  color: #fc6b21;
+}
+.OptionsTitle {
+  background-color: transparent;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: 400;
+  width: 100%;
+  text-align: left;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-bottom: 2rem;
+}
+.OptionsTitle:hover {
+  color: #fc6b21;
+}
+.Options {
+  display: flex;
+  flex-direction: column;
+}
+.Options button {
+  background-color: transparent;
+  border: none;
+  padding: 12px 12px 12px 0;
+  text-align: left;
+  font-size: 1.7rem;
+  font-weight: 200;
+}
+.Options button:hover {
+  color: #fc6b21;
+}
+.SPFOptions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.SPFOptions button {
+  background-color: #fc6b21;
+  color: #fff;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 65px;
+  font-size: 1.7rem;
+  margin-right: 8px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+.SPFOptions button:last-child {
+  padding: 10px 7px;
+}
+.SPFOptions button:hover {
+  background-color: #c2541d;
+}
+.SearchIcon {
+  background: transparent;
+  border: none;
+  float: right;
+  font-weight: 300;
+  height: 22px;
+  color: #505050;
+  padding-top: 2px;
+  font-size: 1rem;
+}
+.ApplyFilter {
+  background-color: transparent;
+  border: 1px solid #c2541d;
+  color: #c2541d;
+  font-size: 3rem;
+  font-weight: 100;
+  margin-bottom: 3rem;
+}
+@media only screen and (max-width: 680px) {
+  .ProductCategories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: stretch;
+    grid-gap: 1rem;
+  }
+}

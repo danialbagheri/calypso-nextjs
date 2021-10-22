@@ -19,7 +19,7 @@ export default function TopBar() {
 
   if (message && message.active) {
     return (
-      <div className="bg-danger top-bar">
+      <div className="top-bar">
         <p className="text-white text-centre">{message.value}</p>
       </div>
     );

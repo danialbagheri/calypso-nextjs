@@ -63,6 +63,10 @@ function Product(props) {
   const breadCrumbPath = [
     { name: "Home", url: "/" },
     { name: "Products", url: "/products/" },
+    {
+      name: product.types[0],
+      url: `/products/?category=${encodeURIComponent(product.types[0])}`,
+    },
     { name: product.slug, url: `/products/${product.slug}` },
   ];
   let imageList = [];

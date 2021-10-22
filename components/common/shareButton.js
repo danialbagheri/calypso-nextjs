@@ -18,7 +18,7 @@ export default function ShareButton({ text, media }) {
   const twitterBaseUrl = "https://twitter.com/intent/tweet?source=";
   const facebookBaseUrl = "https://www.facebook.com/sharer/sharer.php?u=";
   const pinterestBaseUrl = "http://pinterest.com/pin/create/button/?url=";
-  const tumblrBasrUrl = "http://www.tumblr.com/share?v=3&u=";
+  const tumblrBaseUrl = "http://www.tumblr.com/share?v=3&u=";
   const router = useRouter();
   let locationUrl = "https://calypsosun.com" + router.asPath;
   let uriMedia;
@@ -38,7 +38,7 @@ export default function ShareButton({ text, media }) {
     "&description=" +
     text;
   const mailTo = "mailto:?subject=" + text + "&body=" + locationUrl;
-  const tumblrUrl = tumblrBasrUrl + locationUrl + +"&quote=" + text + "&s=";
+  const tumblrUrl = tumblrBaseUrl + locationUrl + +"&quote=" + text + "&s=";
 
   const icons =
     displayIcon === false ? (

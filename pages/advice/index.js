@@ -3,6 +3,7 @@ import BreadCrumb from "../../components/common/breadcrumb";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+// import BlogFilters from "../../components/blogs/blog-filters";
 
 export default function Advice({ posts, count }) {
   const [blogs, setBlogs] = useState(posts);
@@ -66,6 +67,7 @@ export default function Advice({ posts, count }) {
         <div className="blogBreadCrumbs">
           <BreadCrumb breadcrumbs={breadcrumbPath} />
         </div>
+        {/* <BlogFilters /> */}
       </div>
       <div className="container">
         <Head>
