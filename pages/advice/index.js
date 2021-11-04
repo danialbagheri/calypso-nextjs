@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import BreadCrumb from "../../components/common/breadcrumb";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import Styles from "../../styles/adviceIndex.module.css";
 // import BlogFilters from "../../components/blogs/blog-filters";
 
 export default function Advice({ posts, count }) {
@@ -43,13 +44,11 @@ export default function Advice({ posts, count }) {
                   // width={blog.image_width}
                 />
               </div>
-              <div className="card-body">
-                <p>
-                  <small>
-                    {blog.read_time} • {blog.publish_date}
-                  </small>
-                </p>
+              <div className={Styles.CardBody}>
                 <p className="card-title">{blog.title}</p>
+                <small>
+                  {blog.read_time} • {blog.publish_date}
+                </small>
               </div>
               <div className="card-footer">
                 <div className="read-more">Read More</div>

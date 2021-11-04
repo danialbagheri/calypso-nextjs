@@ -12,7 +12,7 @@ export default class ReviewForm extends React.Component {
         score: 0,
         customer_email: "",
         location: "",
-        product: this.props.childProducts[0].product_code,
+        // variant: this.props.childProducts[0].product_code,
         recommended: true,
         comment: "",
         skinType: "",

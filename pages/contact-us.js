@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import Contact from "../components/contact-form";
 import ContactUsForm from "../components/contact-form2";
 class ContactUs extends Component {
   render() {

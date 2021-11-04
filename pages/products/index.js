@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ProductRange from "../../components/products/product-range";
 import "react-tabs/style/react-tabs.css";
 import Head from "next/head";

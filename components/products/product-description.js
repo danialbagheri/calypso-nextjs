@@ -12,10 +12,10 @@ export default function ProductDescription(props) {
   useEffect(() => {
     if (props.shopifyState) {
       setStockStatus(props.shopifyState.availableForSale);
-      if (props.shopifyState.availableForSale) {
-        // if this line of code is needed in needs to be moved to the above hiarachy as the price will not change
-        // setPrice(props.shopifyState.variants[0].price);
-      }
+      // if (props.shopifyState.availableForSale) {
+      //   // if this line of code is needed in needs to be moved to the above hiarachy as the price will not change
+      //   // setPrice(props.shopifyState.variants[0].price);
+      // }
     }
   }, props.shopifyState);
 

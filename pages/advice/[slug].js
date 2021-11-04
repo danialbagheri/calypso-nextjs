@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import BlogSlider from "../../components/blogs/blog-slider";
 import ShareButton from "../../components/common/shareButton";
 import Image from "next/image";

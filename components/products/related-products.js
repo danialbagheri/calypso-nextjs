@@ -45,7 +45,10 @@ export default function RelatedProducts({ related }) {
   const relatedProducts = related.map((product, index) => {
     return (
       <div key={index}>
-        <Link href={`/products/${encodeURIComponent(product.slug)}`}>
+        <Link
+          href={`/products/${encodeURIComponent(product.slug)}`}
+          prefetch={true}
+        >
           <a className="disableLink">
             <div className={Styles.productHolder}>
               <div className={Styles.ProductImage}>
