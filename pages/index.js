@@ -5,8 +5,8 @@ import StaySafe from "../components/home/stay-safe";
 import AsSeen from "../components/home/as-seen";
 import BlogSlider from "../components/blogs/blog-slider";
 import Instagram from "../components/common/instagram";
-
-function Home({ slides, isLoaded, trending }) {
+import BestSeller from "../components/home/best-seller";
+function Home({ slides, isLoaded, trending, bestseller }) {
   return (
     <div>
       <Head>
@@ -44,6 +44,7 @@ function Home({ slides, isLoaded, trending }) {
             <Trending trending={trending} />
           </div>
           <StaySafe />
+          <BestSeller bestseller={bestseller} />
           <AsSeen />
           <BlogSlider />
           <Instagram />
@@ -64,7 +65,10 @@ export async function getStaticProps(context) {
   const trendingUrl = baseUrl + `products/collections/trending/?resize_w=580`;
   const trendingResults = await fetch(trendingUrl);
   const trending = await trendingResults.json();
-
+  // Best product collections
+  const bestSellerEndPoint = baseUrl + `products/collections/best_seller/`;
+  const bestSellerResults = await fetch(bestSellerEndPoint);
+  const bestSeller = await bestSellerResults.json();
   if (!slides) {
     return {
       notFound: true,
@@ -73,7 +77,12 @@ export async function getStaticProps(context) {
   }
 
   return {
-    props: { slides: slides.results, isLoaded: true, trending: trending.items },
+    props: {
+      slides: slides.results,
+      isLoaded: true,
+      trending: trending.items,
+      bestseller: bestSeller,
+    },
     revalidate: 120, // will be passed to the page component as props
   };
 }
