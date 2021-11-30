@@ -10,12 +10,19 @@ export default function Trending(props) {
   const topSeller = props.trending;
 
   const settings = {
-    slidesToShow: 4,
+    slidesToShow: 5,
     arrows: true,
     dots: false,
     slidesToScroll: 1,
     infinite: false,
     responsive: [
+      {
+        breakpoint: 1600,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
       {
         breakpoint: 1236,
         settings: {

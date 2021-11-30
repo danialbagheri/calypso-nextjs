@@ -2507,6 +2507,10 @@ ul.stores img {
   }
 }
 /* trending */
+.trending-slider {
+  max-width: 1800px;
+  margin: 0 auto;
+}
 /* .trending-slider {
   max-height: 800px;
   margin-top: 50px auto 0 auto;
@@ -2647,9 +2651,13 @@ ul.stores img {
   color: #ffff;
 }
 .faqSearchInput {
-  color: black !important;
+  color: gray !important;
   border: none;
   padding: 0 4px;
+}
+.faqSearchInput:focus {
+  border: 3px solid var(--calypso-color);
+  outline: none;
 }
 .answer {
   font-size: 19px;

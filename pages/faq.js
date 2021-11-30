@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import FaqItems from "../components/faqs/faq-item";
 import Image from "next/image";
 import BreadCrumb from "../components/common/breadcrumb";
@@ -9,6 +9,13 @@ export default function Faq({ faqs }) {
     { name: "Home", url: "/" },
     { name: "FAQ", url: "/faq/" },
   ];
+  const inputElement = useRef(null);
+
+  useEffect(() => {
+    if (inputElement.current) {
+      inputElement.current.focus();
+    }
+  }, []);
   function searchQuestions(e) {
     e.preventDefault();
     // input = document.getElementById("myInput");
@@ -33,11 +40,14 @@ export default function Faq({ faqs }) {
         />
         <h3 itemProp="name" className="mt-4 faq-page-title text-calypso">
           Frequently Asked Questions
+          <br />
           <input
             className="faqSearchInput"
             onChange={(e) => searchQuestions(e)}
             placeholder="Search"
-          ></input>
+            type="text"
+            ref={inputElement}
+          />
         </h3>
       </div>
       <div className="container">

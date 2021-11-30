@@ -1,4 +1,3 @@
-import React from "react";
 import QuestionAnswer from "../question-and-answers/question-answer";
 
 export default function FaqItems({ questions }) {

@@ -62,14 +62,14 @@ export default class ProductSquareThumbnail extends React.Component {
               alt={name}
               className={this.state.hover ? "d-none" : "d-block"}
               layout="fill"
-              objectFit="cover"
+              objectFit="contain"
             />
             <Image
               src={lifeStyleImage || "/advice/placeholder.png"}
               alt={name}
               className={this.state.hover ? "d-block" : "d-none"}
               layout="fill"
-              objectFit="cover"
+              objectFit="contain"
             />
             {/* <div style={{ width: "280px", height: "400px" }}>
 
