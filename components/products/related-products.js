@@ -45,41 +45,36 @@ export default function RelatedProducts({ related }) {
   const relatedProducts = related.map((product, index) => {
     return (
       <div key={index}>
-        <Link
-          href={`/products/${encodeURIComponent(product.slug)}`}
-          prefetch={true}
-        >
-          <a className="disableLink">
-            <div className={Styles.productHolder}>
-              <div className={Styles.ProductImage}>
-                <picture>
-                  <source srcset={product.webp} type="image/webp" />
-                  <source srcset={product.resized} media="(max-width: 600px)" />
-                  <img
-                    src={product.main_image}
-                    height={product.img_height}
-                    width={product.img_width}
-                    alt={product.name}
-                  />
-                </picture>
-              </div>
-
-              <div className={Styles.bottomText}>
-                <StarRatingCustom
-                  value={product.review_average_score}
-                  name={product.name}
-                  className={Styles.starReview}
-                  halfStarSize={"1.2rem"}
+        <a href={`/products/${encodeURIComponent(product.slug)}`}>
+          <div className={Styles.productHolder}>
+            <div className={Styles.ProductImage}>
+              <picture>
+                <source srcset={product.webp} type="image/webp" />
+                <source srcset={product.resized} media="(max-width: 600px)" />
+                <img
+                  src={product.main_image}
+                  height={product.img_height}
+                  width={product.img_width}
+                  alt={product.name}
                 />
-                <p>
-                  <strong>{product.name}</strong> <br />
-                  {product.sub_title}
-                </p>
-                <p>from £{product.starting_price}</p>
-              </div>
+              </picture>
             </div>
-          </a>
-        </Link>
+
+            <div className={Styles.bottomText}>
+              <StarRatingCustom
+                value={product.review_average_score}
+                name={product.name}
+                className={Styles.starReview}
+                halfStarSize={"1.2rem"}
+              />
+              <p>
+                <strong>{product.name}</strong> <br />
+                {product.sub_title}
+              </p>
+              <p>from £{product.starting_price}</p>
+            </div>
+          </div>
+        </a>
       </div>
     );
   });

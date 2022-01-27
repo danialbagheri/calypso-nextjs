@@ -1,15 +1,11 @@
 import React, { useEffect } from "react";
 import LineItem from "./lineItem";
 import { useShopify } from "../hooks";
+import DealOffer from "./deals-offer";
 
 export default function Cart(props) {
-  const {
-    cartStatus,
-    closeCart,
-    openCart,
-    checkoutState,
-    setCount,
-  } = useShopify();
+  const { cartStatus, closeCart, openCart, checkoutState, setCount } =
+    useShopify();
 
   function handleOpen(e) {
     e.preventDefault();
@@ -70,12 +66,13 @@ export default function Cart(props) {
           <LineItem />
         </ul>
         <footer className="Cart__footer">
-          <div className="Cart-info clearfix">
+          <DealOffer totalPrice={checkoutState.totalPrice} />
+          {/* <div className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Subtotal</div>
             <div className="Cart-info__pricing">
               <span className="pricing">£ {checkoutState.subtotalPrice}</span>
             </div>
-          </div>
+          </div> */}
           <div className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Taxes</div>
             <div className="Cart-info__pricing">

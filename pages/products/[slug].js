@@ -17,7 +17,6 @@ function Product(props) {
   const [variantId, setShopifyVariantId] = useState(
     props.productData.variants[0].shopify_storefront_variant_id
   );
-  console.log(props.productData.variants[0].shopify_storefront_variant_id);
   const [selectedPrice, setPrice] = useState(
     props.productData.variants[0].price
   );
@@ -180,9 +179,10 @@ export async function getStaticProps(context) {
   const url = baseUrl + `products/single/${slug}/?resize_w=375`;
   const res = await fetch(url);
   const productData = await res.json();
-
+  // key is needed here
   return {
     props: {
+      // key: productData.id,
       productData,
     },
     revalidate: 120,
