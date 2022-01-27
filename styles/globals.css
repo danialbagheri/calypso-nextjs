@@ -338,6 +338,7 @@ nav ul {
 .navbar {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   background-color: #fff;
   height: 70px;
   width: 95%;
@@ -346,7 +347,7 @@ nav ul {
 .navbar-fixed-top {
   /* position: fixed;  */
   position: relative;
-  margin-top: 0;
+  margin: 0 auto;
   width: 100%;
   z-index: 100;
 }
@@ -568,6 +569,11 @@ input.search-field:focus {
     /* padding: 35px; */
   }
 }
+@media only screen and (max-width: 320px) {
+  .navbar-brand img {
+    width: 110px;
+  }
+}
 /* BANNER */
 
 .banner a {
@@ -722,12 +728,15 @@ input.search-field:focus {
   border-bottom: 1px solid #e5e5e5;
   flex: 0 0 auto;
   display: inline-block;
+  max-height: 9vh;
 }
 
 .Cart__line-items {
   flex: 1 0 auto;
   margin: 0;
   padding: 20px;
+  overflow: scroll;
+  max-height: 63vh;
 }
 
 .Cart__footer {
@@ -740,8 +749,9 @@ input.search-field:focus {
   margin-top: 20px;
   display: block;
   width: 100%;
-  background-color: #fc601e;
+  background-color: var(--calypso-color);
   border: none;
+  font-weight: 600;
   color: #fff;
   padding: 10px;
 }
@@ -804,14 +814,14 @@ input.search-field:focus {
 .Line-item__content-row {
   display: inline-block;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 9px;
   position: relative;
 }
 
 .Line-item__variant-title {
-  float: right;
+  /* float: right; */
   font-weight: bold;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 17px;
   color: #767676;
 }
@@ -1290,10 +1300,6 @@ input.search-field:focus {
   top: 30vh;
   margin: 12rem 20%;
   width: 50vw;
-
-  /* -ms-transform: translate(20%, -150%);
-  transform: translate(20%, -150%); */
-  /* padding: 0 20px 0 350px; */
 }
 /* .blog-title-text > p {
   line-height: 21px;
@@ -2002,6 +2008,45 @@ a img {
   top: 0;
   bottom: 0;
   margin: 0;
+}
+
+.addToCartContainer {
+  gap: 2rem;
+}
+
+.quantity-text {
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 1rem;
+  text-align: left !important;
+}
+.productQuantityContainer,
+.addToCartContainer {
+  display: flex;
+  align-items: flex-start;
+  align-content: center;
+  text-align: center;
+}
+
+.productQuantity {
+  padding: 10px;
+  font-size: medium;
+}
+
+.productQuantityButton {
+  width: 43px;
+  height: 43px;
+  font-size: 3rem;
+  line-height: 0px;
+}
+
+.deliveryInfo {
+  background-color: rgba(255, 94, 43, 0.1);
+  color: var(--calypso-color);
+  text-align: center;
+  padding: 5px 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .review-title {

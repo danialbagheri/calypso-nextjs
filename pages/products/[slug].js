@@ -17,7 +17,7 @@ function Product(props) {
   const [variantId, setShopifyVariantId] = useState(
     props.productData.variants[0].shopify_storefront_variant_id
   );
-
+  console.log(props.productData.variants[0].shopify_storefront_variant_id);
   const [selectedPrice, setPrice] = useState(
     props.productData.variants[0].price
   );
@@ -170,7 +170,6 @@ function Product(props) {
         totalReviewCount={product.total_review_count}
         reviewAverageScore={product.review_average_score}
       />
-      {/* <RelatedProducts products={childProducts} /> */}
     </div>
   );
 }

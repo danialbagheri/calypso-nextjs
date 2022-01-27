@@ -3,21 +3,19 @@ import ShareButton from "../common/shareButton";
 import { useShopify } from "../hooks";
 import StarRatingCustom from "../common/star-rating-custom";
 import * as ga from "../common/googleAnalytics";
+import ProductQuantity from "./detail/product-quantity";
 
 export default function ProductDescription(props) {
   const { addVariant, checkoutState, openCart } = useShopify();
   const [dropdown, setDropDown] = useState(false);
   const [inStock, setStockStatus] = useState(true);
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
   // const [price, setPrice] = useState(props.price);
   useEffect(() => {
     if (props.shopifyState) {
       setStockStatus(props.shopifyState.availableForSale);
-      // if (props.shopifyState.availableForSale) {
-      //   // if this line of code is needed in needs to be moved to the above hiarachy as the price will not change
-      //   // setPrice(props.shopifyState.variants[0].price);
-      // }
     }
-  }, props.shopifyState);
+  }, [props.shopifyState]);
 
   const openDropDown = (e) => {
     e.preventDefault();
@@ -39,6 +37,7 @@ export default function ProductDescription(props) {
         product: props.productName,
       },
     });
+    setSelectedQuantity(1);
   }
 
   const DirectionOfUseText = {
@@ -85,7 +84,11 @@ export default function ProductDescription(props) {
       />
       <div className="borderBottom" />
       <div className="top20" />
-      {inStock ? <p>In stock</p> : <p className="text-danger">OUT OF STOCK</p>}
+      {inStock ? (
+        <p className="text-sm">In stock - Usually dispatched within 24 hours</p>
+      ) : (
+        <p className="text-danger">OUT OF STOCK</p>
+      )}
       <h2 className="productPrice">
         <span itemProp="priceCurrency" content="GBP">
           £
@@ -96,16 +99,25 @@ export default function ProductDescription(props) {
         <small>£{props.pricePer100ml} per 100ml</small>
       ) : null}
 
+      <div className="deliveryInfo">
+        Standard UK delivery £2 Free UK delivery when you buy 2 or more products
+      </div>
       <div className="addToCartContainer">{props.child}</div>
       {inStock ? (
-        <button
-          className="addToCart"
-          onClick={() => {
-            addToBasket(props.variantId, 1);
-          }}
-        >
-          ADD TO CART
-        </button>
+        <div className="addToCartContainer">
+          <ProductQuantity
+            selectedQuantity={selectedQuantity}
+            setQuantity={setSelectedQuantity}
+          />
+          <button
+            className="addToCart"
+            onClick={() => {
+              addToBasket(props.variantId, selectedQuantity);
+            }}
+          >
+            ADD TO CART
+          </button>
+        </div>
       ) : null}
       <div className="ShareButtonOnProductPage">
         <ShareButton />

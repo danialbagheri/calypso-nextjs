@@ -139,4 +139,15 @@
   .starRating {
     display: none;
   }
+  .itemBody {
+    height: 160px;
+  }
+  .Hide {
+    display: block;
+    padding: 5px 10px;
+    background: transparent;
+    width: 100%;
+    border: 1px solid darkgray;
+    opacity: 0;
+  }
 }

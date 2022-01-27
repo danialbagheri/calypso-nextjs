@@ -22,7 +22,7 @@
     "google-recaptcha": "^1.1.0",
     "loaders.css": "^0.1.2",
     "lodash": "^4.17.21",
-    "next": "10.0.9",
+    "next": "^10.0.9",
     "next-images": "^1.7.0",
     "react": "17.0.2",
     "react-cookie-consent": "^6.2.4",
@@ -40,7 +40,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "sass": "^1.32.13",
+    "sass": "^1.49.0",
     "shopify-buy": "^2.11.0",
     "slick-carousel": "^1.8.1",
     "yup": "^0.32.9"

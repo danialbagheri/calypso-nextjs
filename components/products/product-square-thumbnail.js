@@ -52,11 +52,6 @@ export default class ProductSquareThumbnail extends React.Component {
       <div className="trending-item-parent">
         <Link href={`/products/${slug}`}>
           <a className="trending-box-image" onMouseEnter={this.toggleHover}>
-            {/* <picture className={this.state.hover ? "d-none" : "d-block"}>
-              <source srcSet={webp} alt={name} type="image/webp" />
-              <source srcSet={image} alt={name} type="image/png" />
-              <img src={image || "/advice/placeholder.png"} alt={name} />
-            </picture> */}
             <Image
               src={image || "/advice/placeholder.png"}
               alt={name}
@@ -86,7 +81,7 @@ export default class ProductSquareThumbnail extends React.Component {
 
           <div className="trending-star-review-container">
             <StarRatingCustom
-              ame={name}
+              name={name}
               value={AverageReviewScore}
               className="trending-box-star"
             />

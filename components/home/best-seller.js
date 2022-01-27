@@ -25,11 +25,7 @@ export default function BestSeller(props) {
   const collectionItems = collection.items.slice(0, 6).map((item) => {
     const i = item.item;
     return (
-      <div
-        index={i.id}
-        onMouseEnter={showBox}
-        className={Styles.collectionItem}
-      >
+      <div key={i.id} onMouseEnter={showBox} className={Styles.collectionItem}>
         <Link href={`/products/${i.slug}`}>
           <a>
             <div className={Styles.starRating}>
@@ -78,8 +74,8 @@ export default function BestSeller(props) {
       {collection ? (
         <div className={Styles.Container}>
           <div>
-            <source srcset={collection.webp} type="image/webp" />
-            <source srcset={collection.resized} media="(max-width: 600px)" />
+            <source srcSet={collection.webp} type="image/webp" />
+            <source srcSet={collection.resized} media="(max-width: 600px)" />
             <img src={collection.image} alt="Calypso Best Seller products" />
           </div>
           <div className={Styles.productContainer}>{collectionItems}</div>

@@ -63,7 +63,7 @@ function Navigation() {
             </ActiveLink>
           </li>
           <li>
-            <ActiveLink href="/products/">
+            <ActiveLink href="/products">
               <a
                 itemProp="url"
                 className="nav-link"
@@ -83,7 +83,7 @@ function Navigation() {
             </ActiveLink>
           </li> */}
           <li>
-            <ActiveLink href="/be-sun-ready/">
+            <ActiveLink href="/be-sun-ready">
               <a
                 itemProp="url"
                 className="nav-link"
@@ -94,7 +94,7 @@ function Navigation() {
             </ActiveLink>
           </li>
           <li>
-            <ActiveLink href="/advice/">
+            <ActiveLink href="/advice">
               <a
                 itemProp="url"
                 className="nav-link"
@@ -105,7 +105,7 @@ function Navigation() {
             </ActiveLink>
           </li>
           <li>
-            <ActiveLink href="/about/">
+            <ActiveLink href="/about">
               <a
                 itemProp="url"
                 className="nav-link"

@@ -7,13 +7,10 @@ const ActiveLink = ({ children, ...props }) => {
   const child = Children.only(children);
   const childClassName = child.props.className || "";
 
-  // pages/index.js will be matched via props.href
-  // pages/about.js will be matched via props.href
-  // pages/[slug].js will be matched via props.as
-  //   console.log(asPath === props.href);
-  //   console.log(`${asPath} ${props.href}`);
   const className =
-    asPath === props.href || asPath === props.as
+    asPath === props.href ||
+    asPath === props.as ||
+    (props.href != "/" && asPath.includes(props.href))
       ? `${childClassName} active`.trim()
       : childClassName;
 

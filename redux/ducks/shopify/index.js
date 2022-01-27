@@ -39,7 +39,7 @@ const initialState = {
   shop: {},
 };
 
-export default (state = initialState, action) => {
+export default function reducers(state = initialState, action) {
   switch (action.type) {
     case PRODUCTS_FOUND:
       return { ...state, products: action.payload };
@@ -66,7 +66,7 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
 
 // Gets all the products from Shopify
 function getProducts() {
