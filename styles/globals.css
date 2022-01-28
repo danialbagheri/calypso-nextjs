@@ -1603,6 +1603,12 @@ a img {
   justify-content: flex-end;
   /* height: 15px; */
 }
+.linco-care-com img {
+  width: 14px;
+}
+.linco-branding img {
+  width: 50px;
+}
 .linco-care-com * {
   margin-right: 5px;
 }
@@ -2664,10 +2670,16 @@ ul.stores img {
     height: 360px;
     width: 240px;
   }
+  .trending-box-image img {
+    width: 240px;
+  }
 }
 @media only screen and (max-width: 460px) {
   .trending-box-image {
     height: 230px;
+    width: 150px;
+  }
+  .trending-box-image img {
     width: 150px;
   }
 }
