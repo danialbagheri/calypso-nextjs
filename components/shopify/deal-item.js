@@ -4,7 +4,7 @@ import { useShopify } from "../hooks";
 export default function DealItem() {
   const [product, setProduct] = useState(null);
   const [isLoaded, setLoaded] = useState(false);
-  const { fetchProductByQuery } = useShopify();
+  const { fetchProductByQuery, addVariant, checkoutState } = useShopify();
 
   useEffect(() => {
     const query = {
@@ -13,19 +13,27 @@ export default function DealItem() {
 
     const f = fetchProductByQuery(query);
     f.then((f) => {
-      console.log(f);
-      console.log(f[0]);
       setProduct(f[0]);
       setLoaded(true);
     });
   }, []);
+
+  function addToBasket(variantId, quantity) {
+    const lineItemsToAdd = [
+      {
+        variantId: variantId,
+        quantity: parseInt(quantity, 10),
+      },
+    ];
+    addVariant(checkoutState.id, lineItemsToAdd);
+  }
   return (
     <div>
       <small>You are eligible for the followings deals</small>
       {isLoaded && (
         <div
           className="deal_item_container"
-          onClick={() => console.log("clicked", product.id)}
+          onClick={() => addToBasket(product.variants[0].id, 1)}
         >
           <div className="deal_item_image">
             {product.images[0] ? (
@@ -37,7 +45,10 @@ export default function DealItem() {
           </div>
           <div className="deal_item_content">
             <div className="deal_item_title">{product.title}</div>
-            <div className="deal_item_offer">only £1</div>
+            <div className="deal_item_offer">
+              only £{Math.trunc(product.variants[0].price)}
+            </div>
+            <div className="deal_item_click">+ ADD</div>
             {/* <div>{product.id}</div> */}
           </div>
         </div>

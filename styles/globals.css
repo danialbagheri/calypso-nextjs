@@ -812,6 +812,17 @@ input.search-field:focus {
   width: 50px;
   text-align: center;
   border-radius: 5px;
+  float: left;
+}
+.deal_item_click {
+  font-size: 1.3rem;
+  font-weight: 800;
+  background-color: var(--darker-orange);
+  color: #fff;
+  width: 60px;
+  float: right;
+  text-align: center;
+  border-radius: 5px;
 }
 .deal_item_image img {
   height: 60px;
