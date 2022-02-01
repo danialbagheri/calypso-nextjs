@@ -4,6 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Styles from "../../styles/adviceIndex.module.css";
+import _ from "lodash";
 // import BlogFilters from "../../components/blogs/blog-filters";
 
 export default function Advice({ posts, count }) {
@@ -126,5 +127,6 @@ export async function getStaticProps() {
       posts: blogResult.flat(),
       isLoaded: true,
     }, // will be passed to the page component as props
+    revalidate: 120,
   };
 }

@@ -4,6 +4,8 @@ import { useShopify } from "../hooks";
 import StarRatingCustom from "../common/star-rating-custom";
 import * as ga from "../common/googleAnalytics";
 import ProductQuantity from "./detail/product-quantity";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTruck } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductDescription(props) {
   const { addVariant, checkoutState, openCart } = useShopify();
@@ -100,7 +102,12 @@ export default function ProductDescription(props) {
       ) : null}
 
       <div className="deliveryInfo">
-        Standard UK delivery £2 Free UK delivery when you buy 2 or more products
+        <FontAwesomeIcon icon={faTruck} className="calypso-orange-text" />
+        <div style={{ textAlign: "left" }}>
+          Buy 2 or more products for <strong>Free UK Delivery</strong>
+          <br />
+          <span style={{ color: "grey" }}>Standard UK delivery £2</span>
+        </div>
       </div>
       <div className="addToCartContainer">{props.child}</div>
       {inStock ? (

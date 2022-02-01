@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && next build",
-    "start": "next start",
+    "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && next start",
     "build-static": "next build && next export"
   },
   "dependencies": {
@@ -20,6 +20,7 @@
     "@yazanaabed/react-tabs": "^2.3.6",
     "formik": "^2.2.9",
     "google-recaptcha": "^1.1.0",
+    "gsap": "^3.9.1",
     "loaders.css": "^0.1.2",
     "lodash": "^4.17.21",
     "next": "^10.0.9",

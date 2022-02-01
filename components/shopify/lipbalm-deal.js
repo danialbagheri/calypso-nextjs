@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useShopify } from "../hooks";
 
-export default function DealItem() {
+export default function LipBalmDeal() {
   const [product, setProduct] = useState(null);
   const [isLoaded, setLoaded] = useState(false);
   const { fetchProductByQuery, addVariant, checkoutState } = useShopify();
 
   useEffect(() => {
     const query = {
-      query: `product:[id:6783989088393]`,
+      query: `product:[id:533727871031]`,
     };
 
     const f = fetchProductByQuery(query);
@@ -26,6 +26,7 @@ export default function DealItem() {
       },
     ];
     addVariant(checkoutState.id, lineItemsToAdd);
+    setLoaded(false);
   }
   return (
     <div>
@@ -45,9 +46,8 @@ export default function DealItem() {
             </div>
             <div className="deal_item_content">
               <div className="deal_item_title">{product.title}</div>
-              <div className="deal_item_rrp">£5.40</div>
-              <div className="deal_item_offer">
-                £{Math.trunc(product.variants[0].price)}
+              <div className="deal_item_offer" style={{ color: "#D83030" }}>
+                FREE Valentine’s Gift (worth £4.99)
               </div>
               {/* <div>{product.id}</div> */}
             </div>

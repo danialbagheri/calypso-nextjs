@@ -705,6 +705,7 @@ input.search-field:focus {
   transform: translateX(100%);
   transition: transform 0.15s ease-in-out;
   z-index: 100;
+  overflow: scroll;
 }
 
 .Cart--open {
@@ -782,6 +783,15 @@ input.search-field:focus {
 .deal-container {
   background-color: rgba(255, 94, 43, 0.1);
 }
+.deal_item_parent_container {
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  background-color: #fff;
+  margin-top: 5px;
+  cursor: pointer;
+  /* align-items: center; */
+}
 .deal_item_container {
   display: flex;
   align-content: flex-start;
@@ -790,9 +800,8 @@ input.search-field:focus {
   background-color: #fff;
   padding: 5px 10px 0 10px;
   border: 2px;
-  margin-top: 2px;
 }
-.deal_item_container:hover {
+.deal_item_parent_container:hover {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   cursor: pointer;
 }
@@ -804,25 +813,34 @@ input.search-field:focus {
   font-size: 1.2rem;
   font-weight: 600;
 }
+.deal_item_rrp {
+  float: left;
+  text-decoration: line-through;
+  margin-right: 10px;
+}
 .deal_item_offer {
   font-size: 1.3rem;
   font-weight: 800;
-  background-color: var(--calypso-color);
-  color: #fff;
-  width: 50px;
-  text-align: center;
+  color: var(--calypso-color);
   border-radius: 5px;
   float: left;
 }
 .deal_item_click {
-  font-size: 1.3rem;
-  font-weight: 800;
-  background-color: var(--darker-orange);
+  /* padding: 50px 0; */
+  vertical-align: middle;
+  width: 48px;
+  background-color: var(--calypso-color);
   color: #fff;
   width: 60px;
-  float: right;
   text-align: center;
   border-radius: 5px;
+}
+.deal_item_click p {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 800;
+  vertical-align: middle;
+  padding-top: 10px;
 }
 .deal_item_image img {
   height: 60px;
@@ -2101,6 +2119,16 @@ a img {
   padding: 5px 10px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 384px;
+}
+
+.deliveryInfo > svg {
+  width: 30px;
+  height: 30px;
+  margin-right: 1rem;
 }
 
 .review-title {

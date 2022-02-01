@@ -66,19 +66,19 @@ export default function Cart(props) {
           <LineItem />
         </ul>
         <footer className="Cart__footer">
-          <DealOffer totalPrice={checkoutState.totalPrice} />
+          <DealOffer checkoutState={checkoutState} />
           {/* <div className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Subtotal</div>
             <div className="Cart-info__pricing">
               <span className="pricing">£ {checkoutState.subtotalPrice}</span>
             </div>
-          </div> */}
+          </div> 
           <div className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Taxes</div>
             <div className="Cart-info__pricing">
               <span className="pricing">£ {checkoutState.totalTax}</span>
             </div>
-          </div>
+          </div>*/}
           <div className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Total</div>
             <div className="Cart-info__pricing">

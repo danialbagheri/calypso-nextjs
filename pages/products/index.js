@@ -136,7 +136,8 @@ export async function getStaticProps(context) {
   }
 
   return {
-    props: { products: productResult.flat(), isLoaded: true }, // will be passed to the page component as props
+    props: { products: productResult.flat(), isLoaded: true },
+    revalidate: 120, // will be passed to the page component as props
   };
 }
 
