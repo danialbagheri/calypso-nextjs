@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && next build",
-    "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && next start",
+    "start": "next start",
     "build-static": "next build && next export"
   },
   "dependencies": {
