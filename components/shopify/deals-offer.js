@@ -5,6 +5,7 @@ import LipBalmDeal from "./lipbalm-deal";
 
 export default function DealOffer(props) {
   const [offerDeal, setOfferDeal] = useState(false);
+  const [remindFreeDelivery, setRemindFreeDelivery] = useState(false);
   const [offerLipBalm, setOfferLipBalm] = useState(false);
   const totalPrice = props.checkoutState.totalPrice;
   const checkoutState = props.checkoutState;
@@ -13,7 +14,6 @@ export default function DealOffer(props) {
     const lineItems = checkoutState.lineItems;
 
     function verifySku(n) {
-      console.log(n.variant.sku);
       return n.variant.sku.startsWith("CALB");
     }
     const result = _.map(lineItems, verifySku);
@@ -23,6 +23,20 @@ export default function DealOffer(props) {
       console.log("There is only sanitiser in the basket");
     } else {
       setOfferLipBalm(true);
+    }
+  };
+
+  const checkFreeDeliveryEligibility = () => {
+    const lineItems = checkoutState.lineItems;
+    function lineItemQuantity(n) {
+      return n.quantity;
+    }
+    const itemsInBasket = _.map(lineItems, lineItemQuantity);
+    const sum = itemsInBasket.reduce((partialSum, a) => partialSum + a, 0);
+    if (lineItems && sum == 1) {
+      setRemindFreeDelivery(true);
+    } else {
+      setRemindFreeDelivery(false);
     }
   };
 
@@ -38,22 +52,31 @@ export default function DealOffer(props) {
   useEffect(() => {
     checkSanitiserDeal();
     checkLipBalmDeal();
+    checkFreeDeliveryEligibility();
   }, [props.checkoutState]);
 
   return (
-    <div className="deal-container">
-      {offerDeal || offerLipBalm ? (
-        <div className="Cart-info clearfix">
-          <div>
-            <strong>DEALS</strong>
-            <div>
-              <small>You are eligible for the following deals</small>
-            </div>
-            {offerDeal && <DealItem />}
-            {offerLipBalm && <LipBalmDeal />}
-          </div>
+    <>
+      {remindFreeDelivery ? (
+        <div className="Cart-info clearfix calypso-orange">
+          Add one more item to your basket to be eligible for{" "}
+          <strong>FREE delivery</strong>
         </div>
       ) : null}
-    </div>
+      <div className="deal-container">
+        {offerDeal || offerLipBalm ? (
+          <div className="Cart-info clearfix">
+            <div>
+              <strong>DEALS</strong>
+              <div>
+                <small>You are eligible for the following deals</small>
+              </div>
+              {offerDeal && <DealItem />}
+              {offerLipBalm && <LipBalmDeal />}
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </>
   );
 }

@@ -2,8 +2,12 @@ import React, { useEffect } from "react";
 import LineItem from "./lineItem";
 import { useShopify } from "../hooks";
 import DealOffer from "./deals-offer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import * as ga from "../common/googleAnalytics";
 
 export default function Cart(props) {
+  const [discountItem, setDiscountItem] = React.useState({});
   const { cartStatus, closeCart, openCart, checkoutState, setCount } =
     useShopify();
 
@@ -20,8 +24,46 @@ export default function Cart(props) {
   function openCheckout(e) {
     e.preventDefault();
     // window.open(checkoutState.webUrl) // opens checkout in a new window
+    const itemsInBasket = checkoutState.lineItems.map((item) => {
+      return {
+        id: item.variant.sku,
+        name: item.title,
+        variant: item.variant.title,
+        quantity: item.quantity,
+        price: item.variant.price,
+      };
+    });
+    ga.event({
+      action: "begin_checkout",
+      params: [
+        {
+          items: itemsInBasket,
+        },
+      ],
+    });
     window.location.replace(checkoutState.webUrl); // opens checkout in same window
   }
+
+  function applyDiscountApplication(checkoutState) {
+    try {
+      if (checkoutState && checkoutState.discountApplications.length >= 1) {
+        checkoutState.discountApplications.map((item) => {
+          setDiscountItem({
+            title: item.title,
+            percentage: item.value.percentage,
+          });
+        });
+      } else {
+        setDiscountItem({});
+      }
+    } catch (error) {
+      setDiscountItem({});
+    }
+  }
+
+  useEffect(() => {
+    applyDiscountApplication(checkoutState);
+  }, [checkoutState]);
 
   useEffect(() => {
     const button = document.querySelector("button.App__view-cart");
@@ -79,6 +121,25 @@ export default function Cart(props) {
               <span className="pricing">£ {checkoutState.totalTax}</span>
             </div>
           </div>*/}
+          {discountItem.title ? (
+            <div className="Cart-info clearfix cart__discount__code">
+              <FontAwesomeIcon
+                icon={faCheckCircle}
+                className="discount__code__icon"
+              />
+              <div className=" Cart-info__small">
+                Automatic discount applied: <br />
+                <span
+                  style={{
+                    fontSize: "1.3rem",
+                  }}
+                >
+                  {discountItem.title}
+                </span>
+              </div>
+            </div>
+          ) : null}
+
           <div className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Total</div>
             <div className="Cart-info__pricing">

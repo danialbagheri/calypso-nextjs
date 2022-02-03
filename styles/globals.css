@@ -736,8 +736,8 @@ input.search-field:focus {
   flex: 1 0 auto;
   margin: 0;
   padding: 20px;
-  overflow: scroll;
-  max-height: 63vh;
+  /* overflow: scroll; */
+  /* max-height: 63vh; */
 }
 
 .Cart__footer {
@@ -844,6 +844,19 @@ input.search-field:focus {
 }
 .deal_item_image img {
   height: 60px;
+}
+
+.cart__discount__code {
+  display: flex;
+  color: #2b7126;
+  gap: 5px;
+  justify-content: center;
+}
+
+.discount__code__icon {
+  height: 17px;
+  float: left;
+  color: #39ac31;
 }
 /* LINE ITEMS
  * ============================== */

@@ -20,6 +20,9 @@ function Product(props) {
   const [selectedPrice, setPrice] = useState(
     props.productData.variants[0].price
   );
+  const [selectedProduct, setSelectedProduct] = useState({
+    sku: props.productData.variants[0].sku,
+  });
   const [pricePer100ml, setPricePer100ml] = useState(
     props.productData.variants[0].price_per_100ml
   );
@@ -57,6 +60,7 @@ function Product(props) {
     setWheretoBuyStores(selectedProduct.where_to_buy);
     setChild(selectedProduct.sku);
     setSelectedChildVariation(selectedProduct.name);
+    setSelectedProduct({ sku: selectedProduct.sku });
   };
 
   const breadCrumbPath = [
@@ -101,6 +105,7 @@ function Product(props) {
   const productDescription = (
     <ProductDescription
       productName={product.name}
+      sku={selectedProduct.sku}
       secondTitle={product.sub_title}
       price={selectedPrice}
       pricePer100ml={pricePer100ml}

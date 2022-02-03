@@ -35,9 +35,20 @@ export default function ProductDescription(props) {
     openCart();
     ga.event({
       action: "add_to_cart",
-      params: {
-        product: props.productName,
-      },
+      params: [
+        {
+          product: props.productName,
+          item: [
+            {
+              id: props.sku,
+              name: props.productName,
+              price: props.price,
+              brand: "Calypso",
+              variant: props.child,
+            },
+          ],
+        },
+      ],
     });
     setSelectedQuantity(1);
   }
@@ -95,7 +106,7 @@ export default function ProductDescription(props) {
         <span itemProp="priceCurrency" content="GBP">
           £
         </span>
-        <span>{props.price}</span>
+        <span>{props.price.toFixed(2)}</span>
       </h2>
       {props.pricePer100ml ? (
         <small>£{props.pricePer100ml} per 100ml</small>
