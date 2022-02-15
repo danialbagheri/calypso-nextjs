@@ -6,6 +6,7 @@ import * as ga from "../common/googleAnalytics";
 import ProductQuantity from "./detail/product-quantity";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
+import DispatchTime from "./detail/dispatch-time";
 
 export default function ProductDescription(props) {
   const { addVariant, checkoutState, openCart } = useShopify();
@@ -98,7 +99,9 @@ export default function ProductDescription(props) {
       <div className="borderBottom" />
       <div className="top20" />
       {inStock ? (
-        <p className="text-sm">In stock - Usually dispatched within 24 hours</p>
+        <p className="text-sm">
+          In stock - <DispatchTime />
+        </p>
       ) : (
         <p className="text-danger">OUT OF STOCK</p>
       )}

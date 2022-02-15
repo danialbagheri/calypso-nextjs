@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import _ from "lodash";
 import DealItem from "./deal-item";
-import LipBalmDeal from "./lipbalm-deal";
 
 export default function DealOffer(props) {
   const [offerDeal, setOfferDeal] = useState(false);
@@ -51,7 +50,6 @@ export default function DealOffer(props) {
 
   useEffect(() => {
     checkSanitiserDeal();
-    checkLipBalmDeal();
     checkFreeDeliveryEligibility();
   }, [props.checkoutState]);
 
