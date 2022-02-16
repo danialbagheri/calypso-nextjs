@@ -1,0 +1,21 @@
+.DirectionOfUse {
+  background-color: none;
+  background: none;
+  border: none;
+  width: 100%;
+  border-top: 2px solid #cdcdcd;
+  text-align: left;
+  color: #ff6b00;
+  padding: 20px 0;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+.DirectionOfUse:focus {
+  outline: none;
+}
+
+.Arrow {
+  color: #ff6b00;
+  font-size: 28px;
+}

@@ -23,16 +23,12 @@ export default function DispatchTime() {
   function calculateTheDispatchTime() {
     const today = new Date();
     if (isSaturday(today) || isSunday(today)) {
-      setDispatchTime(
-        "Usually dispatched on Monday morning for next day delivery"
-      );
+      setDispatchTime("Usually dispatched on Monday.");
     } else if (isFriday(today) && isEvening(today)) {
-      setDispatchTime(
-        "Usually dispatched on Monday morning for next day delivery"
-      );
+      setDispatchTime("Dispatched on Monday morning.");
     } else {
       if (isEvening(today)) {
-        setDispatchTime("Usually dispatched next day.");
+        setDispatchTime("Dispatched next day.");
       } else {
         setDispatchTime("Order before 3:00 pm for same day dispatch.");
       }

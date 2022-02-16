@@ -47,7 +47,7 @@ export default function DealItem() {
               <div className="deal_item_title">{product.title}</div>
               <div className="deal_item_rrp">£5.40</div>
               <div className="deal_item_offer">
-                £{Math.trunc(product.variants[0].price)}
+                £{product.variants[0].price}
               </div>
               {/* <div>{product.id}</div> */}
             </div>

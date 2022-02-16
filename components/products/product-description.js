@@ -7,10 +7,10 @@ import ProductQuantity from "./detail/product-quantity";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import DispatchTime from "./detail/dispatch-time";
+import DirectionOfUse from "./detail/DirectionOfUse";
 
 export default function ProductDescription(props) {
   const { addVariant, checkoutState, openCart } = useShopify();
-  const [dropdown, setDropDown] = useState(false);
   const [inStock, setStockStatus] = useState(true);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   // const [price, setPrice] = useState(props.price);
@@ -19,11 +19,6 @@ export default function ProductDescription(props) {
       setStockStatus(props.shopifyState.availableForSale);
     }
   }, [props.shopifyState]);
-
-  const openDropDown = (e) => {
-    e.preventDefault();
-    setDropDown(!dropdown);
-  };
 
   function addToBasket(variantId, quantity) {
     const lineItemsToAdd = [
@@ -54,10 +49,6 @@ export default function ProductDescription(props) {
     setSelectedQuantity(1);
   }
 
-  const DirectionOfUseText = {
-    display: dropdown ? "block" : "none",
-    padding: 0,
-  };
   return (
     <div className="productDescription">
       <h1 className="productTitle" itemProp="name">
@@ -87,16 +78,8 @@ export default function ProductDescription(props) {
           __html: props.description,
         }}
       />
-      <button className="DirectionOfUse" onClick={(e) => openDropDown(e)}>
-        Directions for Use
-      </button>
-      <div
-        style={DirectionOfUseText}
-        dangerouslySetInnerHTML={{
-          __html: props.direction,
-        }}
-      />
-      <div className="borderBottom" />
+      <DirectionOfUse direction={props.direction} />
+
       <div className="top20" />
       {inStock ? (
         <p className="text-sm">
