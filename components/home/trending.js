@@ -17,7 +17,7 @@ export default function Trending(props) {
     infinite: false,
     responsive: [
       {
-        breakpoint: 1600,
+        breakpoint: 1400,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
@@ -33,12 +33,12 @@ export default function Trending(props) {
       {
         breakpoint: 980,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 460,
+        breakpoint: 640,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,

@@ -70,6 +70,40 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
+function submitContactForm(
+  values,
+  { setSubmitting, setFieldError, setStatus }
+) {
+  setSubmitting(true);
+  const baseUrl = data.apiUrl;
+  const finalUrl = baseUrl + `web/contact-us/`;
+  fetch(finalUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(values),
+  })
+    .then((r) => {
+      if (r.status != 201) {
+        setStatus("There was a problem");
+        return r.json();
+      } else {
+        return r.json();
+      }
+    })
+    .then((result) => {
+      setFieldError(result);
+      setResponse(result);
+    })
+    .catch((error) => {
+      setStatus(
+        "There is a network connection problem, please try again later or send us an email to info@calypsosun.com"
+      );
+      console.error(error);
+    });
+}
+
 // And now we can use these
 const ContactUsForm = () => {
   const [response, setResponse] = useState("");
@@ -114,40 +148,9 @@ const ContactUsForm = () => {
             .required("Required"),
           recaptcha: Yup.string().required(),
         })}
-        onSubmit={(values, { setSubmitting, setFieldError, setStatus }) => {
-          // setTimeout(() => {
-          //   alert(JSON.stringify(values, null, 2));
-          //   setSubmitting(false);
-          // }, 400);
-          setSubmitting(true);
-          const baseUrl = data.apiUrl;
-          const finalUrl = baseUrl + `web/contact-us/`;
-          fetch(finalUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values),
-          })
-            .then((r) => {
-              if (r.status != 200) {
-                setStatus("There was a problem");
-                return r.json();
-              } else {
-                return r.json();
-              }
-            })
-            .then((result) => {
-              setFieldError(result);
-              setResponse(result);
-            })
-            .catch((error) => {
-              setStatus(
-                "There is a network connection problem, please try again later or send us an email to info@calypsosun.com"
-              );
-              console.error(error);
-            });
-        }}
+        onSubmit={(values, { setSubmitting, setFieldError, setStatus }) =>
+          submitContactForm(values, { setSubmitting, setFieldError, setStatus })
+        }
       >
         {({ isSubmitting, status, setFieldValue }) => (
           <Form>
