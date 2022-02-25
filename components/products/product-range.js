@@ -42,7 +42,7 @@ export default function ProductRange(props) {
                   <div>
                     <small>From £{product.lowest_variant_price}</small>
                   </div>
-                  <div className="product-range-star-rating-fix-width">
+                  <div>
                     <StarRatingCustom
                       value={product.review_average_score}
                       name={product.name}

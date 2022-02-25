@@ -1,0 +1,45 @@
+.VideoThumbnailContainer {
+  padding-right: 1.9rem;
+}
+.VideoThumbnail {
+  min-height: 300px;
+  text-decoration: none !important;
+  border: 0;
+}
+.VideoThumbnail:-webkit-any-link {
+  text-decoration: none !important;
+}
+.VideoThumbnailContainer a {
+  text-decoration: none !important;
+}
+
+.OverlayColor {
+  opacity: 1;
+  background: rgba(223, 100, 24, 0.52);
+  overflow: hidden;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 25px;
+  transition: opacity 1s;
+}
+.OverlayColor:hover {
+  opacity: 0;
+}
+
+.Title {
+  /* padding-top: 50px; */
+  font-size: 27px;
+  text-align: center;
+  text-decoration: none !important;
+  font-weight: 600;
+}
+
+.text {
+  text-align: center;
+  max-width: 700px;
+  margin: 10px auto 25px auto;
+}

@@ -679,10 +679,6 @@ input.search-field:focus {
   margin: 0 auto;
 }
 
-.video-thumbnail p {
-  font-size: 14px;
-}
-
 .stay-safe {
   display: block;
   padding: 20px;
@@ -2131,6 +2127,9 @@ a img {
   color: #fff;
   background-color: var(--calypso-color);
 }
+.productQuantityButton svg {
+  width: 18px;
+}
 .deliveryInfo {
   background-color: rgba(255, 94, 43, 0.1);
   color: var(--calypso-color);
@@ -2616,9 +2615,7 @@ ul.stores img {
 .productPageTitle {
   font-weight: 600;
 }
-.product-range-star-rating-fix-width {
-  width: 110px;
-}
+
 .productPageTab .react-tabs__tab-list {
   border: none;
   margin-bottom: 3rem;

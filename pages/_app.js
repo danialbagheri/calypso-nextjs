@@ -90,6 +90,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
         <Header />
         <Component {...pageProps} />
+
         <CookieConsent
           containerClasses="cookie-css"
           contentClasses="cookie-text disableBlur"

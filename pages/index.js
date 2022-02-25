@@ -5,7 +5,7 @@ import StaySafe from "../components/home/stay-safe";
 import AsSeen from "../components/home/as-seen";
 import BlogSlider from "../components/blogs/blog-slider";
 import Instagram from "../components/common/instagram";
-import BestSeller from "../components/home/best-seller";
+import BestSeller from "../components/home/bestsellers/best-seller";
 function Home({ slides, isLoaded, trending, bestseller }) {
   return (
     <div>

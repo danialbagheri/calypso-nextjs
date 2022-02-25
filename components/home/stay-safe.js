@@ -6,11 +6,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 import Link from "next/link";
+import Styles from "../../styles/homepage/staySafewithCalypso.module.css";
+
 export default function StaySafe() {
-  // _onReady(event) {
-  //   // access to player in all event handlers via event.target
-  //   event.target.pauseVideo();
-  // }
   const videos = [
     {
       image: "/video-thumbnails/holly.png",
@@ -70,42 +68,32 @@ export default function StaySafe() {
       },
     ],
   };
-  const youtubeDesktop = {
-    height: "390px",
-    width: "640px",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 0,
-    },
-  };
-  const youtubeMobile = {
-    height: "180px",
-    width: "350px",
-    playerVars: {
-      autoplay: 0,
-    },
-  };
+
   let videoThumbnails = videos.map((video, index) => {
     return (
-      <div className="pr-1 slick-slide" key={index}>
+      <div className={Styles.VideoThumbnailContainer} key={index}>
         <Link href={video.link}>
           <a
             target="_blank"
             rel="noopener noreferrer"
-            className="video-thumbnail disableLink"
+            className={Styles.videoThumbnails}
           >
-            <div className="bg-calypso text-white m-0 slick-slide-title">
-              <p className="m-0 text-centre">{video.title}</p>
+            <div
+              className="bg-calypso text-white m-0 slick-slide-title"
+              style={{
+                backgroundImage: `url(${video.image})`,
+                width: "100%",
+                height: "210px",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+                borderRadius: "25px",
+              }}
+            >
+              <div className={Styles.OverlayColor}>
+                <div className={Styles.Title}>{video.title}</div>
+              </div>
             </div>
-            <Image
-              itemProp="url contentUrl"
-              src={video.image}
-              className="slick-slide-image"
-              alt={video.title}
-              layout="responsive"
-              height={video.height}
-              width={video.width}
-            />
           </a>
         </Link>
       </div>
@@ -122,13 +110,12 @@ export default function StaySafe() {
             className="stay-safe top30"
             src={require("../../public/home-page/Stay-Safe-with-Calypso.png")}
           />
-          <Slider {...settings}>{videoThumbnails}</Slider>
-
-          <h1 className="text-centre">Sun Safety Tips for Families</h1>
-          <p className="text-centre">
+          <p className={Styles.text}>
             Unsure of how best to keep your family protected from the sun this
             summer? Watch our video to get some valuable sun care advice.
           </p>
+          <Slider {...settings}>{videoThumbnails}</Slider>
+          <div className="mt-4" />
         </div>
         <div className="col-2 col-md-2" />
       </div>
