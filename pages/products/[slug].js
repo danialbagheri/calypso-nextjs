@@ -120,14 +120,14 @@ function Product(props) {
   );
   return (
     <div>
-      <ProductSchema product={product} />
+      <ProductSchema product={product} selected={selectedProduct} />
       <Head>
         <title>
           Calypso - {product.name} - {product.sub_title}
         </title>
-        <meta name="description" content={product.description} />
+        <meta name="description" content={product.plain_description} />
         <meta name="twitter:card" content="product" />
-        <meta name="twitter:description" content={product.description} />
+        <meta name="twitter:description" content={product.plain_description} />
         <meta property="og:image" content={imageList[0].resized} />
         <meta name="twitter:image" content={imageList[0].resized} />
         <meta property="og:price:amount" content={selectedPrice} />

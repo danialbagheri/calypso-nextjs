@@ -39,6 +39,7 @@ export default function ProductSchema(props) {
       </div>
       <div property="schema:description" content={product.description} />
       <div property="schema:sku" content={product.variants[0].sku} />
+      <div property="schema:gtin14" content={props.selected.barcode}></div>
       {/* <div property="schema:mpn" content="925872" /> */}
       <img property="image" src={product.main_image} alt={product.name} />
       <span property="name">{product.name}</span>

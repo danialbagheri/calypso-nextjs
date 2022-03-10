@@ -7,6 +7,7 @@ import store from "../redux/store";
 import Footer from "../components/common/footer";
 import { Provider } from "react-redux";
 import CookieConsent from "react-cookie-consent";
+import MailChimpSignUp from "../components/general/MailChimpSignUp";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -89,8 +90,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         <Header />
+        <MailChimpSignUp />
         <Component {...pageProps} />
-
         <CookieConsent
           containerClasses="cookie-css"
           contentClasses="cookie-text disableBlur"

@@ -40,6 +40,7 @@ export default class Footer extends React.Component {
                   method="POST"
                   name="mc-embedded-subscribe-form"
                   className="validate subscribe-form"
+                  target="_blank"
                 >
                   <input
                     type="hidden"
