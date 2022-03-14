@@ -9,7 +9,6 @@ export default function MailChimpSignUp() {
   useEffect(() => {
     const mailChimpPopUp = localStorage.getItem("mailChimpPopUp");
     if (mailChimpPopUp) {
-      console.log(mailChimpPopUp);
       setShowPopUp(mailChimpPopUp);
     } else {
       localStorage.setItem("mailChimpPopUp", "NU");

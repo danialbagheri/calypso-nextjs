@@ -115,11 +115,13 @@
     max-height: 536px;
     max-width: 100vw;
     margin: 0 auto;
-    right: initial;
-    left: initial;
+    position: fixed;
+    left: 0;
+    top: 70px;
+    touch-action: pan-down;
   }
   .NewsLetterContainerClose {
-    transform: translateY(502px);
+    transform: translateY(calc(100vh - 95px));
   }
   .OfferContainer {
     transform: none;
@@ -135,6 +137,7 @@
     top: 0;
     width: 100%;
     text-align: center;
+    touch-action: pan-down;
   }
   .ToggleIcon {
     margin: 0 10px 0 auto;
