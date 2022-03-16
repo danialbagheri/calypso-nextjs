@@ -10,6 +10,8 @@ import DispatchTime from "./detail/dispatch-time";
 import DirectionOfUse from "./detail/DirectionOfUse";
 
 export default function ProductDescription(props) {
+  const product = props.product;
+  const selectedVariant = props.selectedVariant;
   const { addVariant, checkoutState, openCart } = useShopify();
   const [inStock, setStockStatus] = useState(true);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -36,11 +38,11 @@ export default function ProductDescription(props) {
           product: props.productName,
           item: [
             {
-              id: props.sku,
-              name: props.productName,
-              price: props.price,
+              id: selectedVariant.sku,
+              name: product.name,
+              price: selectedVariant.price,
               brand: "Calypso",
-              variant: props.child,
+              variant: selectedVariant.name,
             },
           ],
         },
@@ -48,25 +50,24 @@ export default function ProductDescription(props) {
     });
     setSelectedQuantity(1);
   }
-
   return (
     <div className="productDescription">
       <h1 className="productTitle" itemProp="name">
-        {props.productName}
+        {product.name}
       </h1>
-      <h3 className="productPrice">{props.secondTitle}</h3>
+      <h3 className="productPrice">{product.sub_title}</h3>
       <div className="review-count-product-description">
         <div className="star-rating">
           <StarRatingCustom
-            name={props.productName}
+            name={product.name}
             // className="star-rating"
-            value={props.averageReviewScore}
+            value={product.review_average_score}
             halfStarSize={"2rem"}
           />
         </div>
         <a href="#readReviews" className="read-reviews">
-          {props.reviewCount >= 1 ? (
-            <span>Read {props.reviewCount} reviews</span>
+          {product.total_review_count >= 1 ? (
+            <span>Read {product.total_review_count} reviews</span>
           ) : (
             <span>Be the first to review to this product</span>
           )}
@@ -75,12 +76,13 @@ export default function ProductDescription(props) {
       <div
         className="text-lg mb-2"
         dangerouslySetInnerHTML={{
-          __html: props.description,
+          __html: product.description,
         }}
       />
-      <DirectionOfUse direction={props.direction} />
+      <DirectionOfUse direction={product.direction_of_use} />
 
       <div className="top20" />
+
       {inStock ? (
         <p className="text-sm">
           In stock - <DispatchTime />
@@ -92,10 +94,14 @@ export default function ProductDescription(props) {
         <span itemProp="priceCurrency" content="GBP">
           £
         </span>
-        <span>{props.price.toFixed(2)}</span>
+        <span>{selectedVariant.price.toFixed(2)}</span>
       </h2>
-      {props.pricePer100ml ? (
-        <small>£{props.pricePer100ml} per 100ml</small>
+      {selectedVariant.size ? (
+        <small>Size: {selectedVariant.size} | </small>
+      ) : null}
+
+      {selectedVariant.price_per_100ml ? (
+        <small>£{selectedVariant.price_per_100ml} per 100ml</small>
       ) : null}
 
       <div className="deliveryInfo">
@@ -116,7 +122,10 @@ export default function ProductDescription(props) {
           <button
             className="addToCart"
             onClick={() => {
-              addToBasket(props.variantId, selectedQuantity);
+              addToBasket(
+                selectedVariant.shopify_storefront_variant_id,
+                selectedQuantity
+              );
             }}
           >
             ADD TO CART

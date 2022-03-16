@@ -41,39 +41,40 @@ function Navigation() {
         itemScope
         itemType="https://schema.org/SiteNavigationElement"
       >
-        <ActiveLink href="/">
-          <a className="navbar-brand">
-            <img src={logo} alt="Calypso" width="140" height="67" />
-          </a>
-        </ActiveLink>
-        <ul
-          className={
-            mobileMenu ? "navbar-nav responsive fade-in" : "navbar-nav"
-          }
-        >
-          <li>
-            <ActiveLink exact href="/">
-              <a
-                itemProp="url"
-                className="nav-link"
-                onClick={(e) => CloseMobileMenu(e)}
-              >
-                Home
-              </a>
-            </ActiveLink>
-          </li>
-          <li>
-            <ActiveLink href="/products">
-              <a
-                itemProp="url"
-                className="nav-link"
-                onClick={(e) => CloseMobileMenu(e)}
-              >
-                Products
-              </a>
-            </ActiveLink>
-          </li>
-          {/* <li>
+        <div className="navbar-content">
+          <ActiveLink href="/">
+            <a className="navbar-brand">
+              <img src={logo} alt="Calypso" width="140" height="67" />
+            </a>
+          </ActiveLink>
+          <ul
+            className={
+              mobileMenu ? "navbar-nav responsive fade-in" : "navbar-nav"
+            }
+          >
+            <li>
+              <ActiveLink exact href="/">
+                <a
+                  itemProp="url"
+                  className="nav-link"
+                  onClick={(e) => CloseMobileMenu(e)}
+                >
+                  Home
+                </a>
+              </ActiveLink>
+            </li>
+            <li>
+              <ActiveLink href="/products">
+                <a
+                  itemProp="url"
+                  className="nav-link"
+                  onClick={(e) => CloseMobileMenu(e)}
+                >
+                  Products
+                </a>
+              </ActiveLink>
+            </li>
+            {/* <li>
             <ActiveLink
               itemProp="url"
               className="nav-link"
@@ -82,72 +83,73 @@ function Navigation() {
               Mix & Match
             </ActiveLink>
           </li> */}
-          <li>
-            <ActiveLink href="/be-sun-ready">
-              <a
-                itemProp="url"
-                className="nav-link"
-                onClick={(e) => CloseMobileMenu(e)}
+            <li>
+              <ActiveLink href="/be-sun-ready">
+                <a
+                  itemProp="url"
+                  className="nav-link"
+                  onClick={(e) => CloseMobileMenu(e)}
+                >
+                  Be Sun Ready
+                </a>
+              </ActiveLink>
+            </li>
+            <li>
+              <ActiveLink href="/advice">
+                <a
+                  itemProp="url"
+                  className="nav-link"
+                  onClick={(e) => CloseMobileMenu(e)}
+                >
+                  Advice
+                </a>
+              </ActiveLink>
+            </li>
+            <li>
+              <ActiveLink href="/about">
+                <a
+                  itemProp="url"
+                  className="nav-link"
+                  onClick={(e) => CloseMobileMenu(e)}
+                >
+                  About Us
+                </a>
+              </ActiveLink>
+            </li>
+          </ul>
+          <div className="icon-holder">
+            <ActiveLink href="/search/">
+              <button
+                className="search-icon"
+                // onClick={() => showSearch(!search)}
+                aria-label="Search"
               >
-                Be Sun Ready
-              </a>
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  className="calypso-orange-text"
+                />
+              </button>
             </ActiveLink>
-          </li>
-          <li>
-            <ActiveLink href="/advice">
-              <a
-                itemProp="url"
-                className="nav-link"
-                onClick={(e) => CloseMobileMenu(e)}
-              >
-                Advice
-              </a>
-            </ActiveLink>
-          </li>
-          <li>
-            <ActiveLink href="/about">
-              <a
-                itemProp="url"
-                className="nav-link"
-                onClick={(e) => CloseMobileMenu(e)}
-              >
-                About Us
-              </a>
-            </ActiveLink>
-          </li>
-        </ul>
-        <div className="icon-holder">
-          <ActiveLink href="/search/">
             <button
-              className="search-icon"
-              // onClick={() => showSearch(!search)}
-              aria-label="Search"
+              className="basket-icon"
+              onClick={openCart}
+              aria-label="open Cart"
             >
               <FontAwesomeIcon
-                icon={faSearch}
+                icon={faShoppingCart}
                 className="calypso-orange-text"
               />
             </button>
-          </ActiveLink>
-          <button
-            className="basket-icon"
-            onClick={openCart}
-            aria-label="open Cart"
-          >
-            <FontAwesomeIcon
-              icon={faShoppingCart}
-              className="calypso-orange-text"
-            />
-          </button>
 
-          <button
-            className="burgerMenu"
-            onClick={openResponsiveMenu}
-            aria-label="Menu"
-          >
-            {/* <i className="fa fa-bars" /> */}
-            <FontAwesomeIcon icon={faBars} className="calypso-orange-text" />
-          </button>
+            <button
+              className="burgerMenu"
+              onClick={openResponsiveMenu}
+              aria-label="Menu"
+            >
+              {/* <i className="fa fa-bars" /> */}
+              <FontAwesomeIcon icon={faBars} className="calypso-orange-text" />
+            </button>
+          </div>
         </div>
       </nav>
     </>

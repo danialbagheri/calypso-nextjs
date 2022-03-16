@@ -3,12 +3,10 @@ import ProductRange from "../../components/products/product-range";
 import "react-tabs/style/react-tabs.css";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import FilterProducts from "../../components/products/filter-products";
 import _ from "lodash";
 
 function Products(props) {
-  const router = useRouter();
   const ordered_products = _.orderBy(
     props.products,
     [(item) => item.types[0].id, (item) => item.top_seller.toString()],
@@ -19,17 +17,6 @@ function Products(props) {
   const [limit, setLimit] = useState(10);
 
   const [maxLimit, setMaxLimit] = useState(false);
-
-  // useEffect(() => {
-  //   router.query.limit ? setLimit(router.query.limit) : setLimit(10);
-  // }, [router.isReady]);
-
-  // useEffect(() => {
-  //   // The counter changed!
-  //   router.push(`?limit=${limit}`, `/products?limit=${limit}`, {
-  //     shallow: true,
-  //   });
-  // }, [limit]);
 
   function LoadMore() {
     const newLimit = limit + 10;

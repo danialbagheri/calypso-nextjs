@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useShopify } from "../components/hooks";
-import TopBar from "./general/topbar";
 import Navigation from "./common/navigation";
 import Cart from "./shopify/cart";
 
@@ -16,7 +15,6 @@ export default function Header() {
   }, []);
   return (
     <header>
-      <TopBar />
       <Navigation />
       <Cart />
     </header>

@@ -191,6 +191,7 @@ export default class Footer extends React.Component {
                   height={352}
                   src={lincoDropLet}
                   alt="Linco Care logo Icon"
+                  layout="responsive"
                 />
               </div>
               <p>
@@ -209,8 +210,9 @@ export default class Footer extends React.Component {
                   <Image
                     src={externalLink}
                     alt="externalurl"
-                    width="14"
-                    height="14"
+                    width={14}
+                    height={14}
+                    layout="fixed"
                   />
                 </a>
               </div>

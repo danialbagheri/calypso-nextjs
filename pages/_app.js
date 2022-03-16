@@ -8,6 +8,7 @@ import Footer from "../components/common/footer";
 import { Provider } from "react-redux";
 import CookieConsent from "react-cookie-consent";
 import MailChimpSignUp from "../components/general/MailChimpSignUp";
+import InfoBar from "../components/general/InforBar";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -91,6 +92,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
         <Header />
         <MailChimpSignUp />
+        <InfoBar />
         <Component {...pageProps} />
         <CookieConsent
           containerClasses="cookie-css"

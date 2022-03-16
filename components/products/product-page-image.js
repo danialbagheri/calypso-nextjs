@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Image from "next/image";
 
 export default function ProductPageImage(props) {
   const [nav1, setNav1] = useState(null);
@@ -10,16 +9,7 @@ export default function ProductPageImage(props) {
   let slider1 = [];
   let slider2 = [];
   let imageList = props.imageList;
-  // const settings = {
-  //   responsive: [
-  //     {
-  //       breakpoint: 480,
-  //       settings: {
-  //         // className: "d-none",
-  //       },
-  //     },
-  //   ],
-  // };
+
   function sortByImageType(a, b) {
     if (a.main) {
       return -2;
