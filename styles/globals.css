@@ -350,6 +350,7 @@ nav ul {
   flex-direction: row;
   justify-content: center;
   background-color: #fff;
+  flex-wrap: wrap;
 }
 .navbar-fixed-top {
   /* position: fixed;  */

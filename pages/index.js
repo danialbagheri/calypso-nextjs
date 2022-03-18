@@ -6,7 +6,7 @@ import AsSeen from "../components/home/as-seen";
 import BlogSlider from "../components/blogs/blog-slider";
 import Instagram from "../components/common/instagram";
 import BestSeller from "../components/home/bestsellers/best-seller";
-function Home({ slides, isLoaded, trending, bestseller }) {
+function Home({ slides, isLoaded, trending, bestseller, secondarySlides }) {
   return (
     <div>
       <Head>
@@ -43,8 +43,11 @@ function Home({ slides, isLoaded, trending, bestseller }) {
           <div className="container-fluid">
             <Trending trending={trending} />
           </div>
-          <StaySafe />
+          <div className="mt-5"></div>
+          <HomeSlider slides={secondarySlides} isLoaded={isLoaded} />
+          <div className="mt-5"></div>
           <BestSeller bestseller={bestseller} />
+          <StaySafe />
           <AsSeen />
           <BlogSlider />
           <Instagram />
@@ -54,12 +57,20 @@ function Home({ slides, isLoaded, trending, bestseller }) {
   );
 }
 
-export async function getStaticProps(context) {
+const getBannerSlides = async (slug) => {
   const baseUrl = process.env.API_URL;
-  const endpoint = `web/slider/?slug=homepage`;
+  const endpoint = `web/slider/?slug=${slug}`;
   const finalUrl = baseUrl + endpoint;
   const res = await fetch(finalUrl);
   const slides = await res.json();
+  return slides;
+};
+
+export async function getStaticProps(context) {
+  const baseUrl = process.env.API_URL;
+
+  const slides = await getBannerSlides("homepage");
+  const secondarySlides = await getBannerSlides("secondary");
   // Now we will get the staff picked articles
   // api call for trending products
   const trendingUrl = baseUrl + `products/collections/trending/?resize_w=580`;
@@ -69,7 +80,7 @@ export async function getStaticProps(context) {
   const bestSellerEndPoint = baseUrl + `products/collections/best_seller/`;
   const bestSellerResults = await fetch(bestSellerEndPoint);
   const bestSeller = await bestSellerResults.json();
-  if (!slides) {
+  if (!slides || !secondarySlides) {
     return {
       notFound: true,
       isLoaded: false,
@@ -79,6 +90,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       slides: slides.results,
+      secondarySlides: secondarySlides.results,
       isLoaded: true,
       trending: trending.items,
       bestseller: bestSeller,
