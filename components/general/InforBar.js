@@ -55,7 +55,6 @@ export default function InfoBar() {
     getInfoBarStatus();
   }, []);
 
-  console.log(items);
   if (isLoaded) {
     const infoBarItems = items.map((item) => {
       return (

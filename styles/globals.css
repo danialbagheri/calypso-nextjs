@@ -1542,6 +1542,14 @@ a img {
 }
 /* Footer */
 
+.footer-header {
+  color: white;
+  font-weight: 600;
+  font-size: 14px !important;
+  margin-bottom: 15px !important;
+  text-transform: uppercase;
+}
+
 .footerLogo {
   fill: red;
 }

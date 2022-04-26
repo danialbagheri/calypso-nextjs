@@ -56,6 +56,7 @@ export default function RelatedProducts({ related }) {
                   height={product.img_height}
                   width={product.img_width}
                   alt={product.name}
+                  loading="lazy"
                 />
               </picture>
             </div>

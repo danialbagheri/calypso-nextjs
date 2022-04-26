@@ -57,9 +57,7 @@ export default class Footer extends React.Component {
 
               <div className="col-md-2 col-xs-6">
                 <ul className="list-unstyled">
-                  <li>
-                    <span className="text-dark-orange">MENU</span>
-                  </li>
+                  <li className="footer-header">MENU</li>
                   <li>
                     <Link href="/">
                       <a>Home</a>
@@ -90,9 +88,7 @@ export default class Footer extends React.Component {
 
               <div className="col-md-2 col-xs-6">
                 <ul className="list-unstyled">
-                  <li>
-                    <span className="text-dark-orange">HELP</span>
-                  </li>
+                  <li className="footer-header">HELP</li>
                   <li>
                     <Link href="/faq">
                       <a>FAQ</a>
@@ -121,55 +117,56 @@ export default class Footer extends React.Component {
                 </ul>
               </div>
               <div className="col-md-3 col-xs-12">
-                <p className=" white">Follow us</p>
-
-                <div className="floatLeft">
-                  <a
-                    href="https://www.facebook.com/calypsosuncare/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      alt="Facebook"
-                      src={require("../../public/socialMedia/fa.png")}
-                    />
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="https://twitter.com/calypsosuncare"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      alt="Twitter"
-                      src={require("../../public/socialMedia/tw.png")}
-                    />
-                  </a>
-                </div>
-                <div className="floatLeft">
-                  <a
-                    href="https://www.instagram.com/calypsosuncare/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      alt="Instagram"
-                      src={require("../../public/socialMedia/in.png")}
-                    />
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href="https://www.youtube.com/channel/UCrZ14JcmZRDobPIVo8ptmrw"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      alt="Youtube"
-                      src={require("../../public/socialMedia/yo.png")}
-                    />
-                  </a>
+                <div className="footer-header">Follow us</div>
+                <div style={{ marginTop: "20px" }}>
+                  <div className="floatLeft">
+                    <a
+                      href="https://www.facebook.com/calypsosuncare/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        alt="Facebook"
+                        src={require("../../public/socialMedia/fa.png")}
+                      />
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href="https://twitter.com/calypsosuncare"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        alt="Twitter"
+                        src={require("../../public/socialMedia/tw.png")}
+                      />
+                    </a>
+                  </div>
+                  <div className="floatLeft">
+                    <a
+                      href="https://www.instagram.com/calypsosuncare/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        alt="Instagram"
+                        src={require("../../public/socialMedia/in.png")}
+                      />
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href="https://www.youtube.com/channel/UCrZ14JcmZRDobPIVo8ptmrw"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        alt="Youtube"
+                        src={require("../../public/socialMedia/yo.png")}
+                      />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
