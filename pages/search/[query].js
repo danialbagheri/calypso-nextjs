@@ -57,12 +57,7 @@ export default function Searched() {
     }
   }
   useEffect(() => {
-    // const { query } = router.query;
-    // console.log(query);
-    // setSearchValue(query);
-    // console.log(searchVal);
     search();
-    // setTimeout(search(), 6000);
   }, []);
 
   let results;

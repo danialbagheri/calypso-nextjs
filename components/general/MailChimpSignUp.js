@@ -36,7 +36,7 @@ export default function MailChimpSignUp() {
   function shouldShow() {
     if (showPopUp === "YES") {
       return true;
-    } else if (showPopUp === "NU" && scrollTop >= 300) {
+    } else if (showPopUp === "NU" && scrollTop >= 400) {
       return true;
     } else {
       return false;
@@ -59,9 +59,12 @@ export default function MailChimpSignUp() {
         <div className={Styles.Offer}>GET 10% OFF</div>
       </div>
       <div className={Styles.Content}>
-        <div className={Styles.ImageContainer}>
+        <div
+          className={Styles.ImageContainer}
+          onClick={() => setShowPopUpSetting()}
+        >
           <Image
-            src={require("../../public/home-page/onceaday-spf20.png")}
+            src={require("../../public/home-page/calypso-newsletter-subscription.jpg")}
             layout="fill"
             objectFit="cover"
           />

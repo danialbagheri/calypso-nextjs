@@ -81,13 +81,11 @@ const LoginFormik = withFormik({
       .then((response) => {
         console.log(response);
         if (response.ok) {
-          console.log(response.data);
-          console.log(response.text());
           return response.json();
         } else {
           // HANDLE ERROR
           console.log(response.text());
-          throw new Error("Something went wrong");
+          return response.text();
         }
       })
       .then((data) => {

@@ -78,7 +78,7 @@ export default function BestSellerItems(props) {
       <div className={Styles.itemBody}>
         <h6 className={Styles.subTitle}>{i.name}</h6>
         <p className={Styles.subTitle}>
-          {i.sub_title} = {i.variants[0].name}
+          {i.sub_title} {i.variants[0].name}
         </p>
         <p className={Styles.subTitle}>
           <strong>£{i.variants[0].price}</strong>

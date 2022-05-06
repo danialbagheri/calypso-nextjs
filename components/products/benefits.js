@@ -7,7 +7,7 @@ export default class Benefits extends React.Component {
         return (
           <li key={index}>
             <div className="benefitsItem">
-              <img src={benefit.icon} alt={benefit.name} />
+              <img src={benefit.icon} alt={benefit.name} loading="lazy" />
               <p className="textCenter" style={{ fontSize: "14px" }}>
                 {benefit.name}
               </p>

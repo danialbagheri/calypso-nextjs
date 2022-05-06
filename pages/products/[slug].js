@@ -14,18 +14,14 @@ import ProductSchema from "../../components/seo/product-schema";
 function Product(props) {
   const product = props.productData;
   const childProducts = props.productData.variants;
-  const [variantId, setShopifyVariantId] = useState(
-    props.productData.variants[0].shopify_storefront_variant_id
-  );
+
   const [selectedPrice, setPrice] = useState(
     props.productData.variants[0].price
   );
   const [selectedProduct, setSelectedProduct] = useState({
     sku: props.productData.variants[0].sku,
   });
-  const [pricePer100ml, setPricePer100ml] = useState(
-    props.productData.variants[0].price_per_100ml
-  );
+
   const [selectedChildVariation, setSelectedChildVariation] = useState(
     props.productData.variants[0].name
   );
@@ -54,9 +50,7 @@ function Product(props) {
       (product) => product.sku === e.target.value
     );
     setSelectedVariant(selectedProduct);
-    setShopifyVariantId(selectedProduct.shopify_storefront_variant_id);
     setPrice(selectedProduct.price);
-    setPricePer100ml(selectedProduct.price_per_100ml);
     setWheretoBuyStores(selectedProduct.where_to_buy);
     setChild(selectedProduct.sku);
     setSelectedChildVariation(selectedProduct.name);
@@ -104,18 +98,11 @@ function Product(props) {
 
   const productDescription = (
     <ProductDescription
-      productName={product.name}
-      sku={selectedProduct.sku}
-      secondTitle={product.sub_title}
-      price={selectedPrice}
-      pricePer100ml={pricePer100ml}
-      description={product.description}
-      direction={product.direction_of_use}
-      child={child}
-      variantId={variantId}
+      // clean from here
       shopifyState={shopifyState}
-      averageReviewScore={product.review_average_score}
-      reviewCount={product.total_review_count}
+      child={child}
+      product={product}
+      selectedVariant={selectedVariant}
     />
   );
   return (

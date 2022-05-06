@@ -1,0 +1,21 @@
+.VariantContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.VariantSelectContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.VariantSelectContainer:hover {
+  border: 1px solid #ccc;
+  cursor: pointer;
+}

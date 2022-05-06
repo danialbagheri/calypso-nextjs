@@ -19,17 +19,6 @@ function Products(props) {
 
   const [maxLimit, setMaxLimit] = useState(false);
 
-  // useEffect(() => {
-  //   router.query.limit ? setLimit(router.query.limit) : setLimit(10);
-  // }, [router.isReady]);
-
-  // useEffect(() => {
-  //   // The counter changed!
-  //   router.push(`?limit=${limit}`, `/products?limit=${limit}`, {
-  //     shallow: true,
-  //   });
-  // }, [limit]);
-
   function LoadMore() {
     const newLimit = limit + 10;
     if (newLimit >= products.length) {

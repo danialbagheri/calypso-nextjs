@@ -90,7 +90,7 @@ export default function ProductReviews(props) {
           <span className="hide">{review.score}</span>
         </div>
 
-        <p>
+        <div>
           <div className="mb-1">
             <StarRatingCustom
               name={review.title}
@@ -105,7 +105,7 @@ export default function ProductReviews(props) {
               ? "Yes - I would recommend this to a friend"
               : "No - I don't recommend this product."}
           </strong>
-        </p>
+        </div>
         <p className="text-sm">
           Was this review helpful to you?
           <button
@@ -183,7 +183,7 @@ export default function ProductReviews(props) {
   );
   return (
     <section className="container">
-      <h1 className="textCenter">Reviews</h1>
+      <h4 className="textCenter text-large">Reviews</h4>
       {count === 0 ? (
         <div className="textCenter">
           <p>There are no reviews yet.</p>
