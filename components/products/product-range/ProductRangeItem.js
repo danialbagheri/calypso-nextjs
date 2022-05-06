@@ -22,7 +22,11 @@ export default function ProductRangeItem(props) {
 
             <img
               className="ProductPageImage"
-              src={activeVariant.image_list[0].image}
+              src={
+                activeVariant.image_list[0]
+                  ? activeVariant.image_list[0].image
+                  : product.main_image
+              }
               alt={product.name}
             />
           </div>
@@ -42,7 +46,7 @@ export default function ProductRangeItem(props) {
             <hr className="m-0" />
             <div className="mt-0 d-flex">
               <div>
-                <small>From £{product.lowest_variant_price}</small>
+                <small>£{activeVariant.price}</small>
               </div>
             </div>
           </div>

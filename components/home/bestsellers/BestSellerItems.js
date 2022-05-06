@@ -5,6 +5,7 @@ import StarRatingCustom from "../../common/star-rating-custom";
 import Link from "next/link";
 import Styles from "../../../styles/bestseller.module.css";
 import AddToBasketWithDropDown from "../../products/detail/add-to-basket-with-dropdown";
+
 export default function BestSellerItems(props) {
   const i = props.item.item;
   const [showButton, setShowButton] = useState(false);
@@ -81,7 +82,7 @@ export default function BestSellerItems(props) {
           {i.sub_title} {i.variants[0].name}
         </p>
         <p className={Styles.subTitle}>
-          <strong>£{i.variants[0].price}</strong>
+          <strong>£{activeVariant.price}</strong>
         </p>
         <div className={Styles.buttonContainer}>
           <AddToBasketWithDropDown
