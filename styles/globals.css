@@ -299,6 +299,18 @@ p > a {
   opacity: 80%;
 }
 
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: "▼";
+  font-size: 1rem;
+  top: 6px;
+  right: 10px;
+  position: absolute;
+}
+
 .cookie-text {
   color: black !important;
   -webkit-filter: blur(0) !important; /* Safari 6.0 - 9.0 */
@@ -2603,8 +2615,8 @@ ul.stores img {
 }
 
 .productPageSingle {
-  min-height: 510px !important;
-  max-height: 510px !important;
+  min-height: 590px !important;
+  max-height: 590px !important;
 }
 
 .productPageSingle a {
@@ -2614,6 +2626,7 @@ ul.stores img {
 
 .productPageTitle {
   font-weight: 600;
+  margin-bottom:0;
 }
 
 .productPageTab .react-tabs__tab-list {
@@ -2691,7 +2704,7 @@ ul.stores img {
   margin-top: 5px;
 }
 .trending-box-star {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 .trending-box-star img {
   margin-top: 3.2px;

@@ -48,7 +48,7 @@
   margin-top: 10px;
   padding-left: 12px;
   padding-right: 12px;
-  height: 130px;
+  height: 170px;
   position: relative;
 }
 .subTitle {
@@ -82,8 +82,17 @@
   border: none;
 }
 .buttonContainer {
+  /* position: absolute;
+  bottom: 12px; */
+}
+
+.addToBasketWithDropDown{
+  display: block;
+  margin-top: 0;
   position: absolute;
-  bottom: 12px;
+  bottom: 5px;
+  width: 90%;
+  margin-right: 2rem,
 }
 
 .Hide {
@@ -167,3 +176,5 @@
     opacity: 0;
   }
 }
+
+

@@ -4,11 +4,12 @@ import { useShopify } from "../../hooks";
 import StarRatingCustom from "../../common/star-rating-custom";
 import Link from "next/link";
 import Styles from "../../../styles/bestseller.module.css";
-
+import AddToBasketWithDropDown from "../../products/detail/add-to-basket-with-dropdown";
 export default function BestSellerItems(props) {
   const i = props.item.item;
   const [showButton, setShowButton] = useState(false);
   const [hasLifeStyle, setHasLifeStyle] = useState([]);
+  const [activeVariant, setActiveVariant] = useState(i.variants[0]);
   const { addVariant, checkoutState, openCart } = useShopify();
 
   function addToBasket(variantId, quantity) {
@@ -83,15 +84,12 @@ export default function BestSellerItems(props) {
           <strong>£{i.variants[0].price}</strong>
         </p>
         <div className={Styles.buttonContainer}>
-          <button
-            className={showButton ? Styles.addToBasket : Styles.Hide}
-            id={`button-${i.id}`}
-            onClick={() => {
-              addToBasket(i.variants[0].shopify_storefront_variant_id, 1);
-            }}
-          >
-            Add to Basket
-          </button>
+          <AddToBasketWithDropDown
+            product={i}
+            activeVariant={activeVariant}
+            setActiveVariant={setActiveVariant}
+            customContainerStyle={Styles.addToBasketWithDropDown}
+          />
         </div>
       </div>
     </div>

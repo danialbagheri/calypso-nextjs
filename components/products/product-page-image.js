@@ -55,8 +55,8 @@ export default function ProductPageImage(props) {
     return (
       <div key={index}>
         <picture>
-          <source srcset={image.webp} type="image/webp" />
-          <source srcset={image.resized} media="(max-width: 600px)" />
+          <source srcSet={image.webp} type="image/webp" />
+          <source srcSet={image.resized} media="(max-width: 600px)" />
           <img
             src={image.image}
             alt={image.alternate_text}

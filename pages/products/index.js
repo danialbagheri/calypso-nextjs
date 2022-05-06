@@ -1,17 +1,16 @@
 import { useState } from "react";
-import ProductRange from "../../components/products/product-range";
+import ProductRange from "../../components/products/product-range/product-range";
 import "react-tabs/style/react-tabs.css";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import FilterProducts from "../../components/products/filter-products";
 import _ from "lodash";
 
 function Products(props) {
-  const router = useRouter();
   const ordered_products = _.orderBy(
+    // checks if product is in multiple collections meaning it's more popular than others
     props.products,
-    [(item) => item.types[0].id, (item) => item.top_seller.toString()],
+    [(item) => item.types[0].id, (item) => item.collection_names.length],
     ["asc", "desc"]
   );
 

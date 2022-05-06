@@ -29,13 +29,11 @@ export default function MailChimpSignUp() {
     let state;
     showPopUp === "NU" || showPopUp === "No" ? (state = "YES") : (state = "No");
     localStorage.setItem("mailChimpPopUp", state);
-    console.log(state);
-    console.log(showPopUp);
+
     setShowPopUp(state);
   }
 
   function shouldShow() {
-    console.log(showPopUp);
     if (showPopUp === "YES") {
       return true;
     } else if (showPopUp === "NU" && scrollTop >= 300) {

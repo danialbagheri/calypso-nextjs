@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Styles from "../../styles/filterProducts.module.css";
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function FilterProducts(props) {
@@ -202,7 +201,9 @@ export default function FilterProducts(props) {
       <div className={Styles.Centralize}>
         <div className={Styles.ProductCategories}>
           {topProductFilters.slice(0, topProductFiltersLimit).map((item) => (
-            <button onClick={(e) => setCategory(item)}>{item}</button>
+            <button key={item.id} onClick={(e) => setCategory(item)}>
+              {item}
+            </button>
           ))}
           {topProductFiltersLimit < topProductFilters.length ? (
             <button
