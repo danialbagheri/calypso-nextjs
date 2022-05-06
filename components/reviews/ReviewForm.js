@@ -38,11 +38,10 @@ export default function ReviewForm(props) {
     variant: "",
   };
 
-  console.log(variants);
   const variantOptions = variants.map((variant) => (
     <div className={Styles.VariantSelectContainer}>
       <img
-        src={variant.image_list[0].resized}
+        src={variant.image_list[0] && variant.image_list[0].resize}
         alt={variant.name}
         height="100"
       />
