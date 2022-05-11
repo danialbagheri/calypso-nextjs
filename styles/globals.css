@@ -3062,7 +3062,8 @@ ul.stores img {
 }
 
 .info-bar-icon {
-  width: 2rem;
+  width: 22px;
+  height: 23px;
 }
 .info-bar-item {
   display: flex !important;

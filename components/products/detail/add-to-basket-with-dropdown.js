@@ -4,10 +4,20 @@ import { useShopify } from "../../hooks";
 import Classlist from "./add-to-basket.module.css";
 
 export default function AddToBasketWithDropDown(props) {
-  const { addVariant, checkoutState, openCart } = useShopify();
+  const { addVariant, checkoutState, openCart, fetchProductByQuery } =
+    useShopify();
   const { activeVariant, setActiveVariant, customContainerStyle } = props;
+  const [inStock, setStockStatus] = react.useState(true);
   const variants = props.product.variants;
   const [layoutType, setLayoutType] = react.useState("default");
+
+  react.useEffect(() => {
+    const query = {
+      query: `variant:[slug:${activeVariant.sku}]`,
+    };
+    const f = fetchProductByQuery(query);
+    f.then((f) => setStockStatus(f[0].availableForSale));
+  }, [activeVariant]);
 
   function handleChange(item) {
     setActiveVariant(item);
@@ -33,7 +43,7 @@ export default function AddToBasketWithDropDown(props) {
       value={variant.id}
       className={`${Classlist.spfCircle} ${
         variant.id === activeVariant.id && Classlist.spfSelected
-      } ${variant.id}-${activeVariant.id}`}
+      } ${variant.id}-${activeVariant.id} ${!inStock && Classlist.outOfStock}`}
       onClick={() => handleChange(variant)}
     >
       {variant.name.replace("SPF", "")}
@@ -93,13 +103,16 @@ export default function AddToBasketWithDropDown(props) {
       )}
 
       <button
-        className={Classlist.addToCartButton}
+        className={`${Classlist.addToCartButton} ${
+          !inStock && Classlist.buttonOutOfStock
+        }`}
         style={divStyle.button}
         onClick={() => {
           addToBasket(activeVariant.shopify_storefront_variant_id, 1);
         }}
+        disabled={!inStock}
       >
-        ADD TO CART
+        {inStock ? "ADD TO CART" : "OUT OF STOCK"}
       </button>
     </div>
   );

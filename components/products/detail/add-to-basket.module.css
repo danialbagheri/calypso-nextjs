@@ -43,3 +43,11 @@
 .addToCartButton:hover{
     border: 1px solid #ff6b00;
 }
+
+.outOfStock{
+    background-color: #d2d2d2 !important;
+}
+.buttonOutOfStock{
+    color: #d2d2d2 !important;
+    cursor: not-allowed !important;
+}

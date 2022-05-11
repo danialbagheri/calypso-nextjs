@@ -64,8 +64,8 @@ export default function InfoBar() {
               <Image
                 src={item.icon}
                 layout="responsive"
-                width={30}
-                height={30}
+                width={22}
+                height={23}
                 alt={item.text}
               />
             </div>

@@ -94,7 +94,7 @@ export default function ProductDescription(props) {
         <span itemProp="priceCurrency" content="GBP">
           £
         </span>
-        <span>{selectedVariant.price.toFixed(2)}</span>
+        <span>{parseFloat(selectedVariant.price).toFixed(2)}</span>
       </h2>
       {selectedVariant.size ? (
         <small>Size: {selectedVariant.size} | </small>

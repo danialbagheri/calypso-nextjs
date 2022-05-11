@@ -14,7 +14,7 @@ import ProductSchema from "../../components/seo/product-schema";
 function Product(props) {
   const product = props.productData;
   const childProducts = props.productData.variants;
-
+  const instagramPosts = product.variants.map((v) => v.instagram_posts);
   const [selectedPrice, setPrice] = useState(
     props.productData.variants[0].price
   );
