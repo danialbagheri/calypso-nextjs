@@ -321,20 +321,41 @@ p > a {
 }
 /* ESSENTIAL RESPONSIVE BOOTSTRAP UTILITIES */
 .nav-link {
+  position: relative;
   text-decoration: none;
   color: black;
   text-transform: uppercase;
 }
 .nav-link:hover {
-  border-bottom: 2px solid #fc6b21;
+  /* border-bottom: 2px solid #fc6b21; */
   color: black;
+  /* color: #fc6b21; */
+  padding-bottom: 8px;
   text-decoration: none;
 }
 .nav-link.active {
   color: #fc6b21;
-  padding-bottom: 3px;
+  padding-bottom: 8px;
   border-bottom: 2px solid #fc6b21;
   text-decoration: none;
+}
+.nav_border_under:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 8px;
+  border-bottom: solid 2px #fc6b21;
+  animation: border_anim 0.3s linear forwards;
+}
+@keyframes border_anim {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
 }
 
 label {

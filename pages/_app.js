@@ -1,3 +1,10 @@
+import { SessionProvider } from "next-auth/react";
+import { useState } from "react";
+import { Provider } from "react-redux";
+import CookieConsent from "react-cookie-consent";
+import MailChimpSignUp from "../components/general/MailChimpSignUp";
+
+import RefreshTokenHandler from "../components/services/refreshTokenHandler";
 import "../styles/globals.css";
 import Header from "../components/header";
 import "../styles/bootstrap/css/bootstrap-theme.min.css";
@@ -5,12 +12,10 @@ import "../styles/bootstrap/css/bootstrap.min.css";
 import Head from "next/head";
 import store from "../redux/store";
 import Footer from "../components/common/footer";
-import { Provider } from "react-redux";
-import CookieConsent from "react-cookie-consent";
-import MailChimpSignUp from "../components/general/MailChimpSignUp";
 import InfoBar from "../components/general/InforBar";
 
 function MyApp({ Component, pageProps }) {
+  const [interval, setInterval] = useState(0);
   return (
     <>
       <Head>
@@ -77,39 +82,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
       </Head>
-      <Provider store={store}>
-        {/* <!-- Google Tag Manager (noscript) --> */}
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `
+      <SessionProvider session={pageProps.session} refetchInterval={interval}>
+        <Provider store={store}>
+          {/* <!-- Google Tag Manager (noscript) --> */}
+          <noscript
+            dangerouslySetInnerHTML={{
+              __html: `
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-5WH5SJG"
             height="0"
             width="0"
             style="display:none;visibility:hidden"
           ></iframe>`,
-          }}
-        />
-        <Header />
-        <MailChimpSignUp />
-        <InfoBar />
-        <Component {...pageProps} />
-        <CookieConsent
-          containerClasses="cookie-css"
-          contentClasses="cookie-text disableBlur"
-          // buttonWrapperClasses="disableBlur"
-          // buttonClasses="disableBlur bg-calypso"
-          // onAccept={() => {
-          //   alert("Accept was triggered by clicking the Accept button");
-          // }}
-        >
-          <div className="cookie-background"></div>
-          We use cookies to ensure that we give you the best experience on our
-          website.
-        </CookieConsent>
+            }}
+          />
+          <Header />
+          <MailChimpSignUp />
+          <InfoBar />
+          <Component {...pageProps} />
+          <CookieConsent
+            containerClasses="cookie-css"
+            contentClasses="cookie-text disableBlur"
+            // buttonWrapperClasses="disableBlur"
+            // buttonClasses="disableBlur bg-calypso"
+            // onAccept={() => {
+            //   alert("Accept was triggered by clicking the Accept button");
+            // }}
+          >
+            <div className="cookie-background"></div>
+            We use cookies to ensure that we give you the best experience on our
+            website.
+          </CookieConsent>
 
-        <Footer />
-      </Provider>
+          <Footer />
+          <RefreshTokenHandler setInterval={setInterval} />
+        </Provider>
+      </SessionProvider>
     </>
   );
 }

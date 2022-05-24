@@ -6,7 +6,8 @@ const ActiveLink = ({ children, ...props }) => {
   const { asPath } = useRouter();
   const child = Children.only(children);
   const childClassName = child.props.className || "";
-
+  const [showBorderUnderMenu, setShowBorderUnderMenu] = React.useState(false);
+  console.log("showBorderUnderMenu", showBorderUnderMenu);
   const className =
     asPath === props.href ||
     asPath === props.as ||
@@ -17,7 +18,11 @@ const ActiveLink = ({ children, ...props }) => {
   return (
     <Link {...props}>
       {React.cloneElement(child, {
-        className: className || null,
+        className: `${className || null} ${
+          showBorderUnderMenu && "nav_border_under"
+        }`,
+        onMouseEnter: () => setShowBorderUnderMenu(true),
+        onMouseLeave: () => setShowBorderUnderMenu(false),
       })}
     </Link>
   );

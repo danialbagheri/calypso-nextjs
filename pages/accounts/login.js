@@ -1,4 +1,5 @@
 import React from "react";
+import { signIn, signOut } from "next-auth/react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 
@@ -68,35 +69,31 @@ const LoginFormik = withFormik({
     email: Yup.string().email("Email not valid").required("Email is required"),
     password: Yup.string().required("Password is required"),
   }),
-  handleSubmit: (values) => {
-    const REST_API_URL = "https://service.calypsosun.com/api/users/token/";
-    console.log(values);
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    fetch(REST_API_URL, {
-      method: "POST",
-      headers: myHeaders,
-      body: JSON.stringify(values),
-    })
-      .then((response) => {
-        console.log(response);
-        if (response.ok) {
-          return response.json();
-        } else {
-          // HANDLE ERROR
-          console.log(response.text());
-          return response.text();
-        }
-      })
-      .then((data) => {
-        // HANDLE RESPONSE DATA
-        console.log(data.body);
-      })
-      .catch((error) => {
-        // HANDLE ERROR
-        console.log(error);
-      });
-  },
+  handleSubmit: (values) => signIn("credentials", values),
+  // const REST_API_URL = "https://service.calypsosun.com/api/users/token/";
+  // var myHeaders = new Headers();
+  // myHeaders.append("Content-Type", "application/json");
+  // fetch(REST_API_URL, {
+  //   method: "POST",
+  //   headers: myHeaders,
+  //   body: JSON.stringify(values),
+  // })
+  //   .then((response) => {
+  //     if (response.ok) {
+  //       return response.json();
+  //     } else {
+  //       // HANDLE ERROR
+  //       console.log(response);
+  //     }
+  //   })
+  //   .then((data) => {
+  //     // HANDLE RESPONSE DATA
+  //     console.log(data);
+  //   })
+  //   .catch((error) => {
+  //     // HANDLE ERROR
+  //     console.log(error);
+  //   });
 })(LoginPage);
 
 export default LoginFormik;

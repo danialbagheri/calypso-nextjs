@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useShopify } from "../hooks";
 import logo from "../../public/logo.svg";
 import SearchBar from "../general/searchbar";
+import Link from "next/link";
 import ActiveLink from "./active-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,6 +14,7 @@ import {
 function Navigation() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [search, showSearch] = useState(false);
+
   const { openCart } = useShopify();
   useEffect(() => {
     const navbar = document.getElementsByClassName("navbar-fixed-top")[0];
@@ -42,11 +44,11 @@ function Navigation() {
         itemType="https://schema.org/SiteNavigationElement"
       >
         <div className="navbar-content">
-          <ActiveLink href="/">
+          <Link href="/">
             <a className="navbar-brand">
               <img src={logo} alt="Calypso" width="140" height="67" />
             </a>
-          </ActiveLink>
+          </Link>
           <ul
             className={
               mobileMenu ? "navbar-nav responsive fade-in" : "navbar-nav"
@@ -118,7 +120,7 @@ function Navigation() {
             </li>
           </ul>
           <div className="icon-holder">
-            <ActiveLink href="/search/">
+            <Link href="/search/">
               <button
                 className="search-icon"
                 // onClick={() => showSearch(!search)}
@@ -129,7 +131,7 @@ function Navigation() {
                   className="calypso-orange-text"
                 />
               </button>
-            </ActiveLink>
+            </Link>
             <button
               className="basket-icon"
               onClick={openCart}
