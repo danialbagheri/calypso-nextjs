@@ -25,6 +25,7 @@
     "jwt-decode": "^3.1.2",
     "loaders.css": "^0.1.2",
     "lodash": "^4.17.21",
+    "lottie-react": "^2.2.1",
     "next": "^10.0.9",
     "next-auth": "^4.3.4",
     "next-images": "^1.7.0",

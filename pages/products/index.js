@@ -41,26 +41,12 @@ function Products(props) {
           content="From scalp protection to insect repellent, we have everything you need to stay protected in the sun both at home and abroad. Our products are available to buy from some of the biggest UK grocery chains as well as some independent pharmacies, and online on Amazon."
         />
       </Head>
-      <section className="container-fluid top20">
-        <div className="row">
-          <div className="col-lg-7 col-md-9 col-xs-12">
-            <div className="product-page-banner-image">
-              <Image
-                alt="Calypso Product Clear Protection"
-                src="/product-page/banner-spain.jpg"
-                layout="fill"
-                objectFit="cover"
-              />
-            </div>
-          </div>
-          <div className="col-lg-5 col-md-3 col-xs-12 m2">
-            <h2 className="text-right CalypsoOrangeText mt-4">Products</h2>
-            <p className="text-right">
-              Discover Calypso Sun and Skin care products.
-            </p>
-          </div>
-        </div>
-      </section>
+      <div className="product-page-banner-image">
+        <h1>
+          Have you got your <br />
+          <span>summer essentials</span> ready?
+        </h1>
+      </div>
       <section className="container">
         <div className="product-page-filter row">
           <FilterProducts
