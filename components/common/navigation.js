@@ -39,7 +39,7 @@ function Navigation() {
     fetch(endPoint)
       .then((res) => res.json())
       .then((data) => {
-        setProductPageMegaMenu(data);
+        setProductPageMegaMenu(data.items);
       });
   }, []);
 
@@ -92,13 +92,7 @@ function Navigation() {
                   Products
                 </a>
               </ActiveLink>
-              {showMegaMenu && (
-                <MegaMenu
-                  products={productsPageMegaMenu}
-                  onMouseEnter={() => toggleMegaMenu(true)}
-                  onMouseLeave={() => toggleMegaMenu(false)}
-                />
-              )}
+              {showMegaMenu && <MegaMenu products={productsPageMegaMenu} />}
             </li>
             {/* <li>
             <ActiveLink
