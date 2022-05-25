@@ -8,8 +8,8 @@ export default function AboutUsBanner() {
         src="/about-us/about-us-banner.jpg"
         alt="Frequently Asked Questions"
         layout="responsive"
-        width={1366}
-        height={866}
+        width={1400}
+        height={530}
       />
     </div>
   );

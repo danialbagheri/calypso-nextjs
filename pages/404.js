@@ -1,6 +1,6 @@
 import { Component } from "react";
 import Lottie from "lottie-react";
-
+import AnimationStyle from "../styles/animation.module.css";
 import errorAnimation from "../public/assets/animations/errorAnimation.json";
 
 class Custom404 extends Component {
@@ -10,7 +10,8 @@ class Custom404 extends Component {
         <div syle={{ marginTop: "40px !important" }}>
           <Lottie
             animationData={errorAnimation}
-            style={{ margin: "20px auto", width: "100%" }}
+            style={{ margin: "20px auto", width: "500px" }}
+            className={AnimationStyle.ErrorAnimation}
           />
         </div>
         <div style={{ textAlign: "center" }}>

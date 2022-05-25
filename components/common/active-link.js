@@ -7,7 +7,6 @@ const ActiveLink = ({ children, ...props }) => {
   const child = Children.only(children);
   const childClassName = child.props.className || "";
   const [showBorderUnderMenu, setShowBorderUnderMenu] = React.useState(false);
-  console.log("showBorderUnderMenu", showBorderUnderMenu);
   const className =
     asPath === props.href ||
     asPath === props.as ||

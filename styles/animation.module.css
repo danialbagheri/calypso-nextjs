@@ -12,3 +12,16 @@
     opacity: 1;
   }
 }
+
+.ErrorAnimation{
+  width: 900px;
+  margin: 20px auto;
+  
+}
+
+@media only screen and (max-width:800px){
+  .ErrorAnimation {
+      width: 90% !important;
+      margin: 20px auto;
+  }
+}

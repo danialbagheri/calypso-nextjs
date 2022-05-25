@@ -11,10 +11,13 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
+import MegaMenu from "./megaMenu";
+
 function Navigation() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [search, showSearch] = useState(false);
-
+  const [showMegaMenu, toggleMegaMenu] = useState(false);
+  const [productsPageMegaMenu, setProductPageMegaMenu] = useState([]);
   const { openCart } = useShopify();
   useEffect(() => {
     const navbar = document.getElementsByClassName("navbar-fixed-top")[0];
@@ -29,6 +32,17 @@ function Navigation() {
       }
     };
   });
+
+  useEffect(() => {
+    const endPoint =
+      "https://service.calypsosun.com/api/products/collections/products-mega-menu/?resize_w=280";
+    fetch(endPoint)
+      .then((res) => res.json())
+      .then((data) => {
+        setProductPageMegaMenu(data);
+      });
+  }, []);
+
   const openResponsiveMenu = () => {
     setMobileMenu(!mobileMenu);
   };
@@ -65,7 +79,10 @@ function Navigation() {
                 </a>
               </ActiveLink>
             </li>
-            <li>
+            <li
+              onMouseEnter={() => toggleMegaMenu(true)}
+              onMouseLeave={() => toggleMegaMenu(false)}
+            >
               <ActiveLink href="/products">
                 <a
                   itemProp="url"
@@ -153,6 +170,7 @@ function Navigation() {
             </button>
           </div>
         </div>
+        {showMegaMenu && <MegaMenu products={productsPageMegaMenu} />}
       </nav>
     </>
   );

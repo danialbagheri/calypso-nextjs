@@ -1,0 +1,44 @@
+.MegaMenuContainer{
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    left: 0;
+    z-index: 1;
+    height: 330px;
+    border-top: 1px solid #F66B03;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.MegaMenuItems{
+    margin-top: 10px;
+    display: flex;
+    height: 240px;
+    gap: 5rem;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: center;
+    cursor: pointer;
+}
+.MegaMenuShopAll{
+    margin-top: 30px;
+    text-align: center !important;
+}
+.MegaMenuItem p{
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.MegaMenuItemimage img {
+    width: 100px;
+}
+.MegaMenuItem p :hover{
+    margin-top: -40px;
+}
+@media only screen and (max-width: 768px) {
+    .MegaMenuContainer{
+        display: none;
+    }
+}
