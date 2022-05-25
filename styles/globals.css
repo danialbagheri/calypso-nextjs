@@ -411,6 +411,7 @@ nav ul {
   float: left;
   margin-top: 3rem;
   margin-right: 5rem;
+  height: 48px;
   /* text-align: right; */
 }
 

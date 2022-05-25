@@ -92,6 +92,13 @@ function Navigation() {
                   Products
                 </a>
               </ActiveLink>
+              {showMegaMenu && (
+                <MegaMenu
+                  products={productsPageMegaMenu}
+                  onMouseEnter={() => toggleMegaMenu(true)}
+                  onMouseLeave={() => toggleMegaMenu(false)}
+                />
+              )}
             </li>
             {/* <li>
             <ActiveLink
@@ -170,7 +177,6 @@ function Navigation() {
             </button>
           </div>
         </div>
-        {showMegaMenu && <MegaMenu products={productsPageMegaMenu} />}
       </nav>
     </>
   );

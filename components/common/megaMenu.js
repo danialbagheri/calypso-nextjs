@@ -5,7 +5,13 @@ function MegaMenuItem(props) {
   const { items } = props;
   const megaMenuItem = items.map((item) => {
     return (
-      <a key={item.item.id} className={MegaMenuStyle.MegaMenuItem}>
+      <a
+        key={item.item.id}
+        className={MegaMenuStyle.MegaMenuItem}
+        href={`/products?limit=41&category=${encodeURIComponent(
+          item.item.types[0]
+        )}`}
+      >
         <div className={MegaMenuStyle.MegaMenuItemimage}>
           <img src={item.item.main_image} alt="" />
         </div>
