@@ -2373,6 +2373,17 @@ a img {
   margin-bottom: 20px;
   margin-right: 30px !important;
 }
+.addToCartDisabed {
+  background-color: #afafaf !important;
+  cursor: not-allowed;
+  color: #fff;
+  padding: 15px 18px;
+  border: none;
+  font-size: 18px;
+  margin-bottom: 20px;
+  margin-right: 30px !important;
+  text-transform: uppercase;
+}
 
 .ProductOptionSelector {
   width: 70%;

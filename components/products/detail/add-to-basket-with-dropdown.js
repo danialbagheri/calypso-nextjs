@@ -7,17 +7,23 @@ export default function AddToBasketWithDropDown(props) {
   const { addVariant, checkoutState, openCart, fetchProductByQuery } =
     useShopify();
   const { activeVariant, setActiveVariant, customContainerStyle } = props;
-  const [inStock, setStockStatus] = react.useState(true);
   const variants = props.product.variants;
   const [layoutType, setLayoutType] = react.useState("default");
-
-  react.useEffect(() => {
-    const query = {
-      query: `variant:[slug:${activeVariant.sku}]`,
-    };
-    const f = fetchProductByQuery(query);
-    f.then((f) => setStockStatus(f[0].availableForSale));
-  }, [activeVariant]);
+  const inStock = (variant = false) => {
+    if (!variant) {
+      if (activeVariant.inventory_quantity > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (variant.inventory_quantity > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
 
   function handleChange(item) {
     setActiveVariant(item);
@@ -43,7 +49,9 @@ export default function AddToBasketWithDropDown(props) {
       value={variant.id}
       className={`${Classlist.spfCircle} ${
         variant.id === activeVariant.id && Classlist.spfSelected
-      } ${variant.id}-${activeVariant.id} ${!inStock && Classlist.outOfStock}`}
+      } ${variant.id}-${activeVariant.id} ${
+        !inStock(variant) && Classlist.outOfStock
+      }`}
       onClick={() => handleChange(variant)}
     >
       {variant.name.replace("SPF", "")}
@@ -104,15 +112,15 @@ export default function AddToBasketWithDropDown(props) {
 
       <button
         className={`${Classlist.addToCartButton} ${
-          !inStock && Classlist.buttonOutOfStock
+          !inStock() && Classlist.buttonOutOfStock
         }`}
         style={divStyle.button}
         onClick={() => {
           addToBasket(activeVariant.shopify_storefront_variant_id, 1);
         }}
-        disabled={!inStock}
+        disabled={!inStock()}
       >
-        {inStock ? "ADD TO CART" : "OUT OF STOCK"}
+        {inStock() ? "ADD TO CART" : "OUT OF STOCK"}
       </button>
     </div>
   );

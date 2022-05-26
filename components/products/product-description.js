@@ -13,14 +13,8 @@ export default function ProductDescription(props) {
   const product = props.product;
   const selectedVariant = props.selectedVariant;
   const { addVariant, checkoutState, openCart } = useShopify();
-  const [inStock, setStockStatus] = useState(true);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   // const [price, setPrice] = useState(props.price);
-  useEffect(() => {
-    if (props.shopifyState) {
-      setStockStatus(props.shopifyState.availableForSale);
-    }
-  }, [props.shopifyState]);
 
   function addToBasket(variantId, quantity) {
     const lineItemsToAdd = [
@@ -83,13 +77,12 @@ export default function ProductDescription(props) {
 
       <div className="top20" />
 
-      {inStock ? (
+      {selectedVariant.inventory_quantity > 0 ? (
         <p className="text-sm">
-          In stock - <DispatchTime />
+          <span style={{ marginRight: "10px" }}>🟢</span> In stock -{" "}
+          <DispatchTime />
         </p>
-      ) : (
-        <p className="text-danger">OUT OF STOCK</p>
-      )}
+      ) : null}
       <h2 className="productPrice">
         <span itemProp="priceCurrency" content="GBP">
           £
@@ -113,25 +106,32 @@ export default function ProductDescription(props) {
         </div>
       </div>
       <div className="addToCartContainer">{props.child}</div>
-      {inStock ? (
-        <div className="addToCartContainer">
-          <ProductQuantity
-            selectedQuantity={selectedQuantity}
-            setQuantity={setSelectedQuantity}
-          />
-          <button
-            className="addToCart"
-            onClick={() => {
-              addToBasket(
-                selectedVariant.shopify_storefront_variant_id,
-                selectedQuantity
-              );
-            }}
-          >
-            ADD TO CART
-          </button>
-        </div>
-      ) : null}
+
+      <div className="addToCartContainer">
+        <ProductQuantity
+          selectedQuantity={selectedQuantity}
+          setQuantity={setSelectedQuantity}
+        />
+        <button
+          className={
+            selectedVariant.inventory_quantity > 0
+              ? "addToCart"
+              : "addToCartDisabed"
+          }
+          onClick={() => {
+            addToBasket(
+              selectedVariant.shopify_storefront_variant_id,
+              selectedQuantity
+            );
+          }}
+          disabled={selectedVariant.inventory_quantity > 0 ? false : true}
+        >
+          {selectedVariant.inventory_quantity > 0
+            ? "Add to Cart"
+            : "Out of Stock"}
+        </button>
+      </div>
+
       <div className="ShareButtonOnProductPage">
         <ShareButton />
       </div>
