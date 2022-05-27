@@ -2763,12 +2763,13 @@ ul.stores img {
 
 .trending-star-review-container {
   display: flex;
-  flex-direction: end;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .trending-star-review-container text {
   margin-left: 4px;
-  margin-top: 5px;
 }
 .trending-box-star {
   font-size: 1.5rem;
@@ -2776,9 +2777,7 @@ ul.stores img {
 .trending-box-star img {
   margin-top: 3.2px;
 }
-.trending-star-review-container > .trending-box-star img {
-  margin-top: 5px !important;
-}
+
 .trending-box-price {
   font-size: 1.6rem;
   color: #505050;

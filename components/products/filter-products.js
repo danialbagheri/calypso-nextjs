@@ -18,12 +18,14 @@ export default function FilterProducts(props) {
   ];
   const [topProductFiltersLimit, setTopProductFiltersLimit] = useState(6);
   const [selectedFilter, setSelectedFilter] = useState(null);
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState(router.query.category);
   const [filterToggle, SetFilterToggle] = useState(false);
   const [dropDownToggle, setDropDownToggle] = useState(true);
   const [spfDropDownToggle, setSpfDropDownToggle] = useState(false);
   const [productsToShowDropDownToggle, setProductsToShowDropDownToggle] =
     useState(false);
+
+  console.log(router.query.category);
 
   function sortLimit(filteredProducts) {
     if (props.limit <= filteredProducts.length) {
@@ -115,7 +117,7 @@ export default function FilterProducts(props) {
     typeof router.query.limit == "number" && router.query.limit != props.limit
       ? props.setLimit(router.query.limit)
       : null;
-  }, [router.isReady]);
+  }, [router.asPath]);
 
   const filtersDiv = (
     <div className={Styles.slideMenu}>
@@ -142,8 +144,10 @@ export default function FilterProducts(props) {
           style={dropDownToggle ? { display: "flex" } : { display: "none" }}
           className={Styles.Options}
         >
-          {topProductFilters.map((item) => (
-            <button onClick={(e) => setCategory(item)}>{item}</button>
+          {topProductFilters.map((item, index) => (
+            <button onClick={(e) => setCategory(item)} key={index}>
+              {item}
+            </button>
           ))}
         </div>
       </div>

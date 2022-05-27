@@ -51,13 +51,7 @@ export default function Trending(props) {
     return (
       <div className="mr-3" key={index}>
         <ProductSquareThumbnail
-          name={each.item.name}
-          secondTitle={each.item.sub_title}
-          slug={each.item.slug}
-          image={each.item.main_image_resized}
-          webp={each.item.main_image_webp}
-          minPrice={each.item.lowest_variant_price}
-          AverageReviewScore={each.item.review_average_score}
+          product={each.item}
           variants={each.item.variants}
         />
       </div>

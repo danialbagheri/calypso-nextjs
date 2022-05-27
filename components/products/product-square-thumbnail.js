@@ -19,73 +19,44 @@ export default class ProductSquareThumbnail extends React.Component {
   }
 
   render() {
-    const {
-      name,
-      secondTitle,
-      slug,
-      image,
-      minPrice,
-      AverageReviewScore,
-      variants,
-      webp,
-    } = this.props;
-    let lifeStyleImage = null;
-
-    // for (let i = 0; i < imageList.length; i++) {
-    //   console.log(imageList[i]);
-    // }
-    variants.map((each) => {
-      if (each["image_list"].find((el) => el.image_type === "LS")) {
-        lifeStyleImage = each["image_list"].find(
-          (el) => el.image_type === "LS"
-        ).resized;
-      }
-    });
-    if (!lifeStyleImage) {
-      if (variants[variants.length - 1]["image_list"].length > 0) {
-        lifeStyleImage = variants[variants.length - 1]["image_list"][0].resized;
-      } else {
-        lifeStyleImage = null;
-      }
-    }
+    const { variants, product } = this.props;
     return (
       <div className="trending-item-parent">
-        <Link href={`/products/${slug}`}>
+        <Link href={`/products/${product.slug}`}>
           <a className="trending-box-image" onMouseEnter={this.toggleHover}>
             <Image
-              src={image || "/advice/placeholder.png"}
-              alt={name}
+              src={product.main_image || "/advice/placeholder.png"}
+              alt={product.name}
               className={this.state.hover ? "d-none" : "d-block"}
               layout="fill"
               objectFit="contain"
             />
             <Image
-              src={lifeStyleImage || "/advice/placeholder.png"}
-              alt={name}
+              src={product.secondary_image || "/advice/placeholder.png"}
+              alt={product.name}
               className={this.state.hover ? "d-block" : "d-none"}
               layout="fill"
               objectFit="contain"
             />
-            {/* <div style={{ width: "280px", height: "400px" }}>
-
-          </div> */}
           </a>
         </Link>
         <div className="trending-box-text">
           <p>
-            <strong>{name}</strong>
+            <strong>{product.name}</strong>
             <br />
-            {secondTitle}
+            {product.sub_title}
           </p>
-          <p className="trending-box-price">From £{minPrice}</p>
+          <p className="trending-box-price">
+            From £{product.lowest_variant_price}
+          </p>
 
           <div className="trending-star-review-container">
             <StarRatingCustom
-              name={name}
-              value={AverageReviewScore}
+              name={product.name}
+              value={product.review_average_score}
               className="trending-box-star"
             />
-            <text>{AverageReviewScore}</text>
+            <text>{product.review_average_score}</text>
           </div>
         </div>
       </div>

@@ -58,8 +58,8 @@ export default function InfoBar() {
   if (isLoaded) {
     const infoBarItems = items.map((item) => {
       return (
-        <div>
-          <div className="info-bar-item" key={item.id}>
+        <div key={item.id}>
+          <div className="info-bar-item">
             <div className="info-bar-icon">
               <Image
                 src={item.icon}

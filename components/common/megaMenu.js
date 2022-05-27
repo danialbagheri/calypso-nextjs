@@ -13,7 +13,10 @@ function MegaMenuItem(props) {
       >
         <a key={item.item.id} className={MegaMenuStyle.MegaMenuItem}>
           <div className={MegaMenuStyle.MegaMenuItemimage}>
-            <img src={item.item.main_image} alt="" />
+            <picture>
+              <source srcSet={item.item.main_image_webp} type="image/webp" />
+              <img src={item.item.main_image_resized} alt={item.item.name} />
+            </picture>
           </div>
           <p>{item.item.types[0]}</p>
         </a>

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import _ from "lodash";
-import { useShopify } from "../../hooks";
 import StarRatingCustom from "../../common/star-rating-custom";
 import Link from "next/link";
 import Styles from "../../../styles/bestseller.module.css";
@@ -9,41 +8,8 @@ import AddToBasketWithDropDown from "../../products/detail/add-to-basket-with-dr
 export default function BestSellerItems(props) {
   const i = props.item.item;
   const [showButton, setShowButton] = useState(false);
-  const [hasLifeStyle, setHasLifeStyle] = useState([]);
   const [activeVariant, setActiveVariant] = useState(i.variants[0]);
-  const { addVariant, checkoutState, openCart } = useShopify();
-
-  function addToBasket(variantId, quantity) {
-    const lineItemsToAdd = [
-      {
-        variantId: variantId,
-        quantity: parseInt(quantity, 10),
-      },
-    ];
-    addVariant(checkoutState.id, lineItemsToAdd);
-    openCart();
-  }
   const showBox = () => setShowButton(!showButton);
-
-  const hasLifeStyleImage = () => {
-    const results = i.variants.map((variant) => {
-      return _.find(variant.image_list, (image) => {
-        return image.image_type === "LS";
-      });
-    });
-    const filtered = results.filter((image) => {
-      if (typeof image !== "undefined") {
-        return image;
-      }
-    });
-    if (filtered.length >= 1) {
-      setHasLifeStyle(filtered);
-    }
-  };
-
-  useEffect(() => {
-    hasLifeStyleImage();
-  }, []);
 
   return (
     <div
@@ -59,12 +25,13 @@ export default function BestSellerItems(props) {
               name={i.name}
               value={i.review_average_score}
               className="trending-box-star"
+              halfStarSize="17px"
             />
           </div>
-          {showButton && Boolean(hasLifeStyle.length) ? (
+          {showButton ? (
             <div className={Styles.lifeStylePicture}>
               <picture>
-                <img src={hasLifeStyle[0].image} alt={i.name} />
+                <img src={i.secondary_image_resized} alt={i.name} />
               </picture>
             </div>
           ) : (
