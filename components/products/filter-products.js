@@ -18,14 +18,12 @@ export default function FilterProducts(props) {
   ];
   const [topProductFiltersLimit, setTopProductFiltersLimit] = useState(6);
   const [selectedFilter, setSelectedFilter] = useState(null);
-  const [category, setCategory] = useState(router.query.category);
+  const [category, setCategory] = useState(router.query.category || "All");
   const [filterToggle, SetFilterToggle] = useState(false);
   const [dropDownToggle, setDropDownToggle] = useState(true);
   const [spfDropDownToggle, setSpfDropDownToggle] = useState(false);
   const [productsToShowDropDownToggle, setProductsToShowDropDownToggle] =
     useState(false);
-
-  console.log(router.query.category);
 
   function sortLimit(filteredProducts) {
     if (props.limit <= filteredProducts.length) {
