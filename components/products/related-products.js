@@ -49,8 +49,8 @@ export default function RelatedProducts({ related }) {
           <div className={Styles.productHolder}>
             <div className={Styles.ProductImage}>
               <picture>
-                <source srcset={product.webp} type="image/webp" />
-                <source srcset={product.resized} media="(max-width: 600px)" />
+                <source srcSet={product.webp} type="image/webp" />
+                <source srcSet={product.resized} media="(max-width: 600px)" />
                 <img
                   src={product.main_image}
                   height={product.img_height}

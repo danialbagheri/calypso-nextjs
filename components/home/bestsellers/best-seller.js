@@ -5,8 +5,8 @@ import BestSellerItems from "./BestSellerItems";
 export default function BestSeller(props) {
   const collection = props.bestseller;
 
-  const collectionItems = collection.items.slice(0, 6).map((item) => {
-    return <BestSellerItems item={item} key={item.id} />;
+  const collectionItems = collection.items.slice(0, 6).map((item, index) => {
+    return <BestSellerItems item={item} key={index} />;
   });
 
   const collectionHTML = (

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import HomeSlider from "../components/home/home-slider";
-import Trending from "../components/home/trending";
+import Trending from "../components/home/trending/trending";
 import StaySafe from "../components/home/stay-safe";
 import AsSeen from "../components/home/as-seen";
 import BlogSlider from "../components/blogs/blog-slider";

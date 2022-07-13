@@ -8,8 +8,23 @@ import * as ga from "../common/googleAnalytics";
 
 export default function Cart(props) {
   const [discountItem, setDiscountItem] = React.useState({});
-  const { cartStatus, closeCart, openCart, checkoutState, setCount } =
-    useShopify();
+  const {
+    cartStatus,
+    closeCart,
+    openCart,
+    checkoutState,
+    setCount,
+    // fetchProductByQuery,
+  } = useShopify();
+
+  // const getProductStoreFrontVarinatId = async () => {
+  //   //  use this function to get shopify storefront varinat ID for the backend look under varinats for the varinat ID
+  //   const query = {
+  //     query: "variant:[slug:CALCPS30]",
+  //   };
+  //   const f = await fetchProductByQuery(query);
+  //   console.log(f[0]);
+  // };
 
   function handleOpen(e) {
     e.preventDefault();

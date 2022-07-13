@@ -17,7 +17,6 @@ const shopify = {
   shop: {},
   checkoutPage: {},
 };
-
 export default function shopifyDuck(state = shopify, action) {
   switch (action.type) {
     case CLIENT_CREATED:

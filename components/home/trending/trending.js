@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Loader from "react-loaders";
 import "loaders.css/loaders.min.css";
-import ProductSquareThumbnail from "../products/product-square-thumbnail";
+import TrendingItem from "./trending-item";
 
 export default function Trending(props) {
   const isLoaded = true;
@@ -50,10 +50,7 @@ export default function Trending(props) {
   const trendingItems = topSeller.map((each, index) => {
     return (
       <div className="mr-3" key={index}>
-        <ProductSquareThumbnail
-          product={each.item}
-          variants={each.item.variants}
-        />
+        <TrendingItem product={each.item} />
       </div>
     );
   });

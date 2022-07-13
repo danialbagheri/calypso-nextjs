@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../public/logoWhite.svg";
+import tct from "../../public/home-page/TCT.svg";
 import externalLink from "../../public/icons/external-link.svg";
 import Link from "next/link";
 import PaymentIcon from "./payment-icons";
@@ -30,6 +31,13 @@ export default class Footer extends React.Component {
                   className="footerLogo"
                   alt="Calypso"
                   width="140"
+                  height="67"
+                />
+                <Image
+                  src={tct}
+                  className="footerLogo"
+                  alt="Calypso"
+                  width="180"
                   height="67"
                 />
                 <p className="white">

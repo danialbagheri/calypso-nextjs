@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import MediaQuery from "react-responsive";
 import data from "../../data.json";
 import Link from "next/link";
+
 export default class BlogSlider extends React.Component {
   constructor(props) {
     super(props);
@@ -65,10 +66,10 @@ export default class BlogSlider extends React.Component {
     if (!isLoaded) {
       thumbnail = <div> Loading...</div>;
     } else {
-      thumbnail = blogs.map((blog) => {
+      thumbnail = blogs.map((blog, index) => {
         flipState = !flipState;
         return (
-          <Link href={`/advice/${blog.item.slug}/`} key={blog.id}>
+          <Link href={`/advice/${blog.item.slug}/`} key={index}>
             <a className="textCenter disableLink">
               <BlogThumbnail
                 blogImage={blog.item.image}
