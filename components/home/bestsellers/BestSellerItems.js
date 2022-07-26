@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import _ from "lodash";
 import StarRatingCustom from "../../common/star-rating-custom";
 import Link from "next/link";
 import Styles from "../../../styles/bestseller.module.css";
 import AddToBasketWithDropDown from "../../products/detail/add-to-basket-with-dropdown";
+import ShowPrice from "../../products/product-range/price/show-price";
 
 export default function BestSellerItems(props) {
   const i = props.item.item;
@@ -48,8 +49,10 @@ export default function BestSellerItems(props) {
         <p className={Styles.subTitle}>
           {i.sub_title} {i.variants[0].name}
         </p>
-        <p className={Styles.subTitle}>
-          <strong>£{activeVariant.price}</strong>
+        <p className={Styles.itemPrice}>
+          <strong>
+            <ShowPrice selectedVariant={activeVariant} />
+          </strong>
         </p>
         <div className={Styles.buttonContainer}>
           <AddToBasketWithDropDown

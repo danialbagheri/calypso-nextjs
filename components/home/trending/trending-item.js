@@ -48,7 +48,7 @@ export default function TrendingItem(props) {
             className="trending-box-star"
             halfStarSize="16px"
           />
-          <text>{product.review_average_score}</text>
+          <div>{product.review_average_score}</div>
         </div>
       </div>
     </div>

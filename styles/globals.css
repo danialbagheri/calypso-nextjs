@@ -382,6 +382,7 @@ nav ul {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   background-color: #fff;
   flex-wrap: wrap;
 }
@@ -1590,6 +1591,12 @@ a img {
 .white {
   color: white;
 }
+
+.calypso-footer{
+  padding-top: 50px;
+  /* padding-bottom: 30px; */
+}
+
 .calypsoOrange,
 .bg-calypso {
   background-color: #fc6b21;

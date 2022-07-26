@@ -128,7 +128,7 @@ export default function AddToBasketWithDropDown(props) {
 
 const divStyle = {
   singleVarinat: {
-    marginBottom: "2rem",
+    marginBottom: "1rem",
   },
   dropdown: {
     width: "100%",

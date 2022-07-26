@@ -2,7 +2,6 @@ import { useState } from "react";
 import ProductRange from "../../components/products/product-range/product-range";
 import "react-tabs/style/react-tabs.css";
 import Head from "next/head";
-import Image from "next/image";
 import FilterProducts from "../../components/products/filter-products";
 import _ from "lodash";
 
@@ -13,7 +12,6 @@ function Products(props) {
     [(item) => item.types[0].id, (item) => item.collection_names.length],
     ["asc", "desc"]
   );
-
   const [products, setProducts] = useState(ordered_products);
   const [limit, setLimit] = useState(10);
 

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import DispatchTime from "./detail/dispatch-time";
 import DirectionOfUse from "./detail/DirectionOfUse";
+import ShowPrice from "./detail/price/show-price";
 
 export default function ProductDescription(props) {
   const product = props.product;
@@ -84,10 +85,9 @@ export default function ProductDescription(props) {
         </p>
       ) : null}
       <h2 className="productPrice">
-        <span itemProp="priceCurrency" content="GBP">
-          £
+        <span>
+          <ShowPrice selectedVariant={selectedVariant} />
         </span>
-        <span>{parseFloat(selectedVariant.price).toFixed(2)}</span>
       </h2>
       {selectedVariant.size ? (
         <small>Size: {selectedVariant.size} | </small>

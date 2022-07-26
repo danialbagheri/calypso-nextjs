@@ -60,7 +60,7 @@ function Navigation() {
         <div className="navbar-content">
           <Link href="/">
             <a className="navbar-brand">
-              <img src={logo} alt="Calypso" width="140" height="67" />
+              <img src={logo} alt="Calypso" width="150" height="47" />
             </a>
           </Link>
           <ul

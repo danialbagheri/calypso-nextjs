@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import AddToBasketWithDropDown from "../detail/add-to-basket-with-dropdown";
 import StarRatingCustom from "../../common/star-rating-custom";
+import ShowPrice from "./price/show-price";
 
 export default function ProductRangeItem(props) {
   const { product } = props;
@@ -46,7 +47,7 @@ export default function ProductRangeItem(props) {
             <hr className="m-0" />
             <div className="mt-0 d-flex">
               <div>
-                <small>£{activeVariant.price}</small>
+                <ShowPrice selectedVariant={activeVariant} />
               </div>
             </div>
           </div>

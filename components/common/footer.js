@@ -22,24 +22,26 @@ export default class Footer extends React.Component {
     var date = new Date();
     return (
       <footer className="page-footer font-small ">
-        <div className="container-fluid calypsoOrange text-md-left">
+        <div className="container-fluid calypsoOrange text-md-left calypso-footer">
           <div className="container top30">
             <div className="row height250">
               <div className="col-md-5">
-                <Image
-                  src={logo}
-                  className="footerLogo"
-                  alt="Calypso"
-                  width="140"
-                  height="67"
-                />
-                <Image
-                  src={tct}
-                  className="footerLogo"
-                  alt="Calypso"
-                  width="180"
-                  height="67"
-                />
+                <div style={{ display: "flex", flexDirection: "flex-start" }}>
+                  <Image
+                    src={logo}
+                    className="footerLogo"
+                    alt="Calypso"
+                    width="70"
+                    height="67"
+                  />
+                  <Image
+                    src={tct}
+                    className="footerLogo"
+                    alt="Calypso"
+                    width="180"
+                    height="67"
+                  />
+                </div>
                 <p className="white">
                   Get 10% off when you join our Sun-Safe family.
                 </p>

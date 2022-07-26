@@ -55,6 +55,10 @@
   margin: 5px 0 0 0;
   font-size: 11px;
 }
+.itemPrice {
+  margin: 5px 0 9px 0;
+  font-size: 14px;
+}
 .starRating {
   margin-top: 8px;
   margin-right: 8px;
@@ -80,10 +84,6 @@
   background-color: #fc6b21;
   color: #fff;
   border: none;
-}
-.buttonContainer {
-  /* position: absolute;
-  bottom: 12px; */
 }
 
 .addToBasketWithDropDown{

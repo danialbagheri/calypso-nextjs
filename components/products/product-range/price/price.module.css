@@ -1,0 +1,12 @@
+.discountPercent{
+    /* font-family: Arial, sans-serif; */
+    color: #CC0C39 !important;
+        font-weight: 300 !important;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.oldPrice{
+    font-size: 12px;
+    color: #565959;
+    margin-left: 5px;
+}
