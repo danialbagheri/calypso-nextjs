@@ -31,8 +31,8 @@ export default function ShowPrice(props) {
           localStorage.setItem("currency", response.currency);
           setCurrency(response.currency);
         })
-        .catch((data, status) => {
-          console.log("Request failed");
+        .catch(() => {
+          console.error("IP-API Request failed");
         });
     }
   }, []);
