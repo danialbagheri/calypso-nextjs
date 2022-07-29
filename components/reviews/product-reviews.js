@@ -172,9 +172,12 @@ export default function ProductReviews(props) {
           </div>
         </div>
         <div>
-          <button onClick={() => openModal()} className="writeareview">
+          <a
+            href={`/products/${props.productSlug}/review`}
+            className="writeareview disableLink"
+          >
             WRITE A REVIEW
-          </button>
+          </a>
         </div>
       </div>
       {reviewModal}

@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Head from "next/head";
 import data from "../../../data.json";
 import BreadCrumb from "../../../components/common/breadcrumb";
