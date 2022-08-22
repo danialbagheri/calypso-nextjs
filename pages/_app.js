@@ -1,10 +1,11 @@
-import { SessionProvider } from "next-auth/react";
-import { useState } from "react";
+import * as React from "react";
+
+import {SessionProvider} from "next-auth/react";
 import { Provider } from "react-redux";
 import CookieConsent from "react-cookie-consent";
 import MailChimpSignUp from "../components/general/MailChimpSignUp";
 
-import RefreshTokenHandler from "../components/services/refreshTokenHandler";
+import RefreshTokenHandler from "../services/refreshTokenHandler";
 import "../styles/globals.css";
 import Header from "../components/header";
 import "../styles/bootstrap/css/bootstrap-theme.min.css";
@@ -15,7 +16,8 @@ import Footer from "../components/common/footer";
 import InfoBar from "../components/general/InforBar";
 
 function MyApp({ Component, pageProps }) {
-  const [interval, setInterval] = useState(0);
+  const [interval, setInterval] = React.useState(0);
+    
   return (
     <>
       <Head>

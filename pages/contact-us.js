@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import Link from "next/link";
-import Head from "next/head";
-import ContactUsForm from "../components/contact-form2";
+import React, {Component} from 'react'
+import Link from 'next/link'
+import Head from 'next/head'
+import ContactUsForm from '../components/contact-form2'
+
 class ContactUs extends Component {
   render() {
     return (
@@ -14,12 +15,12 @@ class ContactUs extends Component {
           <div className="col-md-6 col-12">
             <h5>Questions about our products or an order?</h5>
             <p className="">
-              Please take a look at our{" "}
+              Please take a look at our{' '}
               <a className="CalypsoOrangeText" href="/faq/">
                 Frequently Asked Questions
-              </a>{" "}
-              or get in touch with us by filling out the contact form.
-              Alternatively, please email or call our customer support team.
+              </a>{' '}
+              or get in touch with us by filling out the contact form. Alternatively, please email or call our customer
+              support team.
             </p>
             <p className="CalypsoOrangeText">
               <i className="far fa-envelope mr-1" />
@@ -85,8 +86,8 @@ class ContactUs extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default ContactUs;
+export default ContactUs
