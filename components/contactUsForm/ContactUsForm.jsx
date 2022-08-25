@@ -3,9 +3,10 @@ import * as React from 'react'
 import {Formik, Form, useField} from 'formik'
 import * as Yup from 'yup'
 import ReCAPTCHA from 'react-google-recaptcha'
-import data from '../data.json'
 
-const recaptchaRef = React.createRef()
+import {postContactUsSubmit} from '../../services'
+
+const reCaptchaRef = React.createRef()
 
 const MyTextInput = ({label, ...props}) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -63,15 +64,8 @@ const MySelect = ({label, ...props}) => {
 
 function submitContactForm(values, {setSubmitting, setFieldError, setStatus}) {
   setSubmitting(true)
-  const baseUrl = data.apiUrl
-  const finalUrl = baseUrl + `web/contact-us/`
-  fetch(finalUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(values),
-  })
+
+  postContactUsSubmit(values)
     .then(r => {
       if (r.status != 201) {
         setStatus('There was a problem')
@@ -174,11 +168,11 @@ const ContactUsForm = () => {
                 I would like to sign up to Calypso (Linco Care) newsletter.
               </MyCheckbox> */}
             <ReCAPTCHA
-              ref={recaptchaRef}
+              ref={reCaptchaRef}
               sitekey="6LfjPaEUAAAAAPGfkx7Nxp3glAdPGbLZE3lwY5c9"
               onChange={value => {
                 // setFieldValue("recaptcha", value);
-                setFieldValue('recaptcha', recaptchaRef.current.getValue())
+                setFieldValue('recaptcha', reCaptchaRef.current.getValue())
               }}
             />
             <div className="form-group mt-2">
@@ -188,7 +182,7 @@ const ContactUsForm = () => {
                 className="btn btn-wide"
                 // disabled={isSubmitting}
               >
-                Submit
+                Submit mamad
               </button>
             </div>
           </Form>
