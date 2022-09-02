@@ -13,7 +13,7 @@ export default function BeSunReady({ productData, blogs }) {
   return (
     <div>
       <Head>
-        <title>Be Sun Read by Calypso Sun</title>
+        <title>Be Sun Ready by Calypso Sun</title>
         <meta
           name="description"
           content="LEARNING HOW TO PROTECT YOURSELF FROM THE SUN"
