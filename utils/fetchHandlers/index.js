@@ -1,24 +1,25 @@
-import {BASE_URL} from '../../constants'
+import {BASE_URL} from '../../constants/servicesConstants/index'
 
 const errorHandler = async response => {
-  const error = await response.json()
-  error.status = response.status
+  if (response) {
+    const error = await response.json()
+    error.status = response.status
 
-  return Promise.reject(error)
+    return error
+  }
 }
 
-const get = ({endpoint, abortController}) =>
-  window
-    .fetch(`${BASE_URL}${endpoint}`, {
-      signal: abortController ? abortController.signal : undefined,
-    })
-    .then(async response => {
-      if (response.ok) {
-        return Promise.resolve(await response.json())
-      } else {
-        return errorHandler(response)
-      }
-    })
+const get = ({endpoint, abortController}) => {
+  return fetch(`${BASE_URL}${endpoint}`, {
+    signal: abortController ? abortController.signal : undefined,
+  }).then(async response => {
+    if (response.ok) {
+      return Promise.resolve(await response.json())
+    } else {
+      return errorHandler(response)
+    }
+  })
+}
 
 const post = ({endpoint, data, abortController}) =>
   window
