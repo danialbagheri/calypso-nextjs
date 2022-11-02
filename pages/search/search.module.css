@@ -1,0 +1,19 @@
+.search{
+    padding: 12px;
+}
+
+.searchTitle{
+    font-size: 18px;
+    color: #999999;
+
+    margin-right: 12px;
+}
+
+.searchValue{
+    font-size: 24px;
+}
+
+.noResult{
+    font-size: 24px;
+    color: #737272;
+}

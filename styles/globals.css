@@ -3165,3 +3165,10 @@ ul.stores img {
 .contant_box_404 {
   margin-top: -50px;
 }
+
+.centralize {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

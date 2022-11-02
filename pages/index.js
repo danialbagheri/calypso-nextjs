@@ -1,11 +1,9 @@
 import Head from "next/head";
-import HomeSlider from "../components/home/home-slider";
-import Trending from "../components/home/trending/trending";
-import StaySafe from "../components/home/stay-safe";
-import AsSeen from "../components/home/as-seen";
-import BlogSlider from "../components/blogs/blog-slider";
-import Instagram from "../components/common/instagram";
-import BestSeller from "../components/home/bestsellers/best-seller";
+
+import {AsSeen, BestSeller, BlogSlider, HomeSlider, Instagram, StaySafe, Trending} from 'components'
+
+import { getCollectionBanner} from 'services'
+
 function Home({ slides, isLoaded, trending, bestseller, secondarySlides }) {
   return (
     <div>
@@ -43,9 +41,9 @@ function Home({ slides, isLoaded, trending, bestseller, secondarySlides }) {
           <div className="container-fluid">
             <Trending trending={trending} />
           </div>
-          <div className="mt-5"></div>
+          <div className="mt-5"> </div>
           <HomeSlider slides={secondarySlides} isLoaded={isLoaded} />
-          <div className="mt-5"></div>
+          <div className="mt-5"> </div>
           <BestSeller bestseller={bestseller} />
           <StaySafe />
           <AsSeen />
@@ -57,22 +55,14 @@ function Home({ slides, isLoaded, trending, bestseller, secondarySlides }) {
   );
 }
 
-const getBannerSlides = async (slug) => {
-  const baseUrl = process.env.API_URL;
-  const endpoint = `web/slider/?slug=${slug}`;
-  const finalUrl = baseUrl + endpoint;
-  const res = await fetch(finalUrl);
-  const slides = await res.json();
-  return slides;
-};
-
 export async function getStaticProps(context) {
   const baseUrl = process.env.API_URL;
 
-  const slides = await getBannerSlides("homepage");
-  const secondarySlides = await getBannerSlides("secondary");
+  const slides = await getCollectionBanner('homepage')
+  const secondarySlides = await getCollectionBanner("secondary");
   // Now we will get the staff picked articles
   // api call for trending products
+
   const trendingUrl = baseUrl + `products/collections/trending/?resize_w=580`;
   const trendingResults = await fetch(trendingUrl);
   const trending = await trendingResults.json();
