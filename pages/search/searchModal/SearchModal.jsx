@@ -26,7 +26,7 @@ function SearchModal({setOpenSearchModal}) {
 
       getSearchData(value).then(response => {
         setAppState(prev => ({
-          ...prev, searchValues: {value:searchValue, results:[...response.results]}
+          ...prev, searchValues: {value: searchValue, results: [...response.results], count: response.count}
         }))
         setLoading(false)
         router.push({pathname:'search'}).then(() => {closeSearchModal()})

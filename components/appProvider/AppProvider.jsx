@@ -6,7 +6,8 @@ function AppProvider(props) {
   const initState = {
     searchValues:{
       value: '',
-      results:[]
+      results:[],
+      count:0,
     }
   }
   const [appState, setAppState] = React.useState(initState)

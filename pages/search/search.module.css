@@ -9,6 +9,15 @@
     margin-right: 12px;
 }
 
+.divider{
+    height: 1px;
+    width: 100%;
+
+    background-color: #999999;
+
+    margin-top: 12px;
+}
+
 .searchValue{
     font-size: 24px;
 }
@@ -16,4 +25,26 @@
 .noResult{
     font-size: 24px;
     color: #737272;
+}
+
+@media  screen and (max-width: 640px) {
+    .searchTitle{
+        font-size: 16px;
+    }
+
+    .searchValue{
+        font-size: 20px;
+    }
+
+}
+
+@media  screen and (max-width: 400px) {
+    .searchTitle{
+        font-size: 14px;
+    }
+
+    .searchValue{
+        font-size: 18px;
+    }
+
 }

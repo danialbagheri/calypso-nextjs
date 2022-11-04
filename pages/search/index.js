@@ -20,6 +20,11 @@ export default function SearchPage() {
         <span className={style.searchValue}>
           {appState.searchValues?.value}
         </span>
+        <div>
+          <span className={style.searchTitle}>Count: </span>
+          <span className={style.searchValue}>{appState.searchValues?.count}</span>
+        </div>
+        <div className={style.divider} > </div>
       </div>
       <div className="container">
         {!appState.searchValues.results.length?<div className={style.noResult}>No results found</div>:appState.searchValues?.results.map(p=>
