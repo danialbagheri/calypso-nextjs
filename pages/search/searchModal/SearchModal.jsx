@@ -63,8 +63,11 @@ function SearchModal({setOpenSearchModal}) {
   },[])
 
   return (
-    <div className={`${style.container} centralize`}>
-      <div className={style.searchContainer}>
+    <div className={`${style.container} centralize`} onClick={(e)=> {
+      e.stopPropagation()
+      closeSearchModal()
+    }}>
+      <div className={style.searchContainer} onClick={e => e.stopPropagation()}>
         <div className={style.searchInputContainer}>
           <input
             type='search'

@@ -12,6 +12,8 @@
 
 .searchContainer{
     width: 60%;
+
+    position: relative;
 }
 
 .searchInputContainer{
@@ -86,7 +88,10 @@
 }
 
 .loadingContainer{
-   margin-top: 20px
+   position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 @media  screen and (max-width: 640px) {
