@@ -1,0 +1,10 @@
+# Folders
+coverage
+build
+
+**/node_modules/*
+**/out/*
+**/.next/*
+
+# Files
+jsconfig.json

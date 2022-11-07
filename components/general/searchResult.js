@@ -2,6 +2,7 @@ import Link from "next/link";
 import AddToBasket from "../products/detail/add-to-basket";
 
 export default function SearchResultElements({ product }) {
+
   let tagNames = product.tags.slice(1, 6).map((t) => {
     return <div className="search-tag-icon">{t.name}</div>;
   });

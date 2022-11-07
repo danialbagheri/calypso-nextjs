@@ -1,4 +1,4 @@
-import {get, post, patch} from '../utils'
+import {get, post, patch} from 'utils'
 
 const postContactUsSubmit = data => {
   return post({endpoint: 'web/contact-us/', data})
@@ -12,4 +12,8 @@ const getCollection = collection => {
   return get({endpoint: `products/collections/${collection}/`})
 }
 
-export {postContactUsSubmit, getCollectionBanner, getCollection}
+const getSearchData = params => {
+  return get({endpoint:`web/search/?q=${params}`})
+}
+
+export {postContactUsSubmit, getCollectionBanner, getCollection, getSearchData}

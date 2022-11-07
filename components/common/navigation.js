@@ -12,13 +12,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import MegaMenu from "./megaMenu";
+import {SearchModal} from 'pages/search/searchModal'
 
 function Navigation() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [search, showSearch] = useState(false);
+  const [openSearchModal, setOpenSearchModal] = useState(false)
   const [showMegaMenu, toggleMegaMenu] = useState(false);
   const [productsPageMegaMenu, setProductPageMegaMenu] = useState([]);
   const { openCart } = useShopify();
+
+
   useEffect(() => {
     const navbar = document.getElementsByClassName("navbar-fixed-top")[0];
     let sticky = navbar.offsetTop;
@@ -138,18 +142,19 @@ function Navigation() {
             </li>
           </ul>
           <div className="icon-holder">
-            <Link href="/search/">
+            {/*<Link href="/search/">*/}
               <button
                 className="search-icon"
-                // onClick={() => showSearch(!search)}
+                onClick={() => setOpenSearchModal(true)}
                 aria-label="Search"
               >
                 <FontAwesomeIcon
                   icon={faSearch}
                   className="calypso-orange-text"
                 />
+                {openSearchModal?<SearchModal setOpenSearchModal={setOpenSearchModal}/>:null}
               </button>
-            </Link>
+            {/*</Link>*/}
             <button
               className="basket-icon"
               onClick={openCart}
