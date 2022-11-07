@@ -16,15 +16,10 @@ export default function SearchPage() {
         <title>Calypso - Search</title>
       </Head>
       <div className={style.search}>
-        <span className={style.searchTitle}>Showing results for:</span>
+        <span className={style.searchTitle}>Found {appState.searchValues?.count} results for:</span>
         <span className={style.searchValue}>
           {appState.searchValues?.value}
         </span>
-        <div>
-          <span className={style.searchTitle}>Count: </span>
-          <span className={style.searchValue}>{appState.searchValues?.count}</span>
-        </div>
-        <div className={style.divider} > </div>
       </div>
       <div className="container">
         {!appState.searchValues.results.length?<div className={style.noResult}>No results found</div>:appState.searchValues?.results.map(p=>
