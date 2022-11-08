@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import MegaMenu from "./megaMenu";
-import {SearchModal} from 'pages/search/searchModal'
+import {SearchModal} from 'components/searchModal'
 
 function Navigation() {
   const [mobileMenu, setMobileMenu] = useState(false);
