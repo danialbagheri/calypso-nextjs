@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import data from "../../data.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
-import SearchResultElements from "../../components/general/searchResult";
+import SearchResultElements from "components/general/SearchResultElements/SearchResultElements";
 import * as ga from "../../components/common/googleAnalytics";
 import { useRouter } from "next/router";
 import Head from "next/head";

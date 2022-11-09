@@ -6,7 +6,7 @@ import {
   faSearch,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
-import SearchResultElements from "./searchResult";
+import SearchResultElements from "components/general/SearchResultElements/SearchResultElements";
 
 export default function SearchBar({ visible, visibilitySetter }) {
   const [searchVal, setSearchValue] = useState("");

@@ -29,7 +29,7 @@ function SearchModal({setOpenSearchModal}) {
           ...prev, searchValues: {value: searchValue, results: [...response.results], count: response.count}
         }))
         setLoading(false)
-        router.push({pathname:'search'}).then(() => {closeSearchModal()})
+        router.push({pathname:'/search'}).then(() => {closeSearchModal()})
 
         return searchValue
 
@@ -78,7 +78,8 @@ function SearchModal({setOpenSearchModal}) {
             onKeyDown={(e) => searchOnEnter(e)}
             autoFocus
           />
-          <div className={style.searchIconContainer} onClick={()=>handleSearch(searchValue)}>
+
+          <div  onClick={()=>handleSearch(searchValue)}>
             <FontAwesomeIcon
               icon={faSearch}
               className="calypso-orange-text"

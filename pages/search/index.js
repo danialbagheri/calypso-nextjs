@@ -1,9 +1,7 @@
 import * as React from "react";
-
 import Head from "next/head";
 
-import {AppContext} from 'components/appProvider'
-import SearchResultElements from 'components/general/searchResult'
+import {AppContext, SearchResultElements} from 'components'
 
 import style from './search.module.css'
 
