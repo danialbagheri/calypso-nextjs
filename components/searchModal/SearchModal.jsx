@@ -10,6 +10,7 @@ import * as ga from 'components/common/googleAnalytics'
 import {getSearchData} from 'services'
 import {AppContext} from 'components/appProvider'
 
+
 import style from './searchModal.module.css'
 
 function SearchModal({setOpenSearchModal}) {
