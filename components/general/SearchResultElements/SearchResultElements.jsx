@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AddToBasket from "../products/detail/add-to-basket";
+import AddToBasket from "components/products/detail/add-to-basket";
 
 export default function SearchResultElements({ product }) {
 
@@ -14,12 +14,12 @@ export default function SearchResultElements({ product }) {
       <Link href={`/products/${product.slug}`} className="search-result-item">
         <a className="disableLink">
           <div className="col-md-12 col-xd-3">
-            <img
-              src={product.main_image}
-              width="100px"
-              alt={product.name}
-              className="search-result-image"
-            />
+            {/*<img*/}
+            {/*  src={product.main_image}*/}
+            {/*  width="100px"*/}
+            {/*  alt={product.name}*/}
+            {/*  className="search-result-image"*/}
+            {/*/>*/}
           </div>
           <div className="col-md-12 col-xd-9 mt-2">
             <h6 className="text-centre m-0">{product.name}</h6>
