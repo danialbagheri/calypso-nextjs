@@ -88,14 +88,15 @@ function SearchModal({setOpenSearchModal}) {
           </div>
         </div>
 
-        {loading?<div className={style.loadingContainer}>
-          <FontAwesomeIcon
-            spin
-            icon={faSpinner}
-            className='calypso-orange-text'
-            size={'2x'}
-          />
-        </div>:null}
+        {loading?
+          <div className={style.loadingContainer}>
+            <FontAwesomeIcon
+              spin
+              icon={faSpinner}
+              className='calypso-orange-text'
+              size={'2x'}
+            />
+          </div>:null}
       </div>
 
 

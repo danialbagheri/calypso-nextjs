@@ -19,7 +19,7 @@ export default function SearchPage() {
           {appState.searchValues?.value}
         </span>
       </div>
-      <div className="container">
+      <div className={`${style.searchElementContainer} `}>
         {!appState.searchValues.results.length?<div className={style.noResult}>No results found</div>:appState.searchValues?.results.map(p=>
           <SearchResultElements product={p} key={p.id} />
         )}
