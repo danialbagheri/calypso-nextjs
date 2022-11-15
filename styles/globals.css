@@ -469,23 +469,7 @@ nav ul {
 .search-result-item * {
   text-decoration: none;
 }
-.search-result-item-box {
-  min-height: 510px !important;
-  max-height: 510px !important;
-}
-.search-result-item-box:hover {
-  /* text-decoration: none; */
-  /* background-color: #fc6b21; */
-  color: #fc6b21;
-  border: 1px solid #fc6b21;
-}
-.search-tag-icon {
-  font-size: 1rem;
-  background-color: #d2d2d2;
-  padding: 2px 4px;
-  float: left;
-  margin: 2px;
-}
+
 
 .search-result-image {
   background-color: var(--light-gray);
@@ -3170,5 +3154,11 @@ ul.stores img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.bg_centralize {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 

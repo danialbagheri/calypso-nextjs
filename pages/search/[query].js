@@ -112,8 +112,8 @@ export default function Searched() {
           </button>
         </div>
       </div>
-      <div className="container mt-6">
-        <div className="row">{results}</div>
+      <div className="container mt-6" >
+        {results}
       </div>
     </div>
   );

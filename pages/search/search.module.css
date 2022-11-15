@@ -27,6 +27,15 @@
     color: #737272;
 }
 
+.searchElementContainer{
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    padding: 12px;
+}
+
 @media  screen and (max-width: 640px) {
     .searchTitle{
         font-size: 16px;
