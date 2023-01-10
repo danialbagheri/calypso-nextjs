@@ -38,9 +38,5 @@ export default function DispatchTime() {
   useEffect(() => {
     calculateTheDispatchTime()
   }, [])
-  return (
-    <>
-      🎅❄️ <strong>will be dispatched on 3rd of January</strong>{' '}
-    </>
-  )
+  return <>{dispatchTime}</>
 }
