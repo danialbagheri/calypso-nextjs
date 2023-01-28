@@ -1,22 +1,24 @@
 import * as React from 'react'
+import {MUIThemeProvider} from 'components/MUIThemeProvider'
 
 const AppContext = React.createContext(undefined)
 
 function AppProvider(props) {
   const initState = {
-    searchValues:{
+    searchValues: {
       value: '',
-      results:[],
-      count:0,
-    }
+      results: [],
+      count: 0,
+    },
   }
   const [appState, setAppState] = React.useState(initState)
 
-  const value = [appState,setAppState]
-
+  const value = [appState, setAppState]
   return (
-    <AppContext.Provider value={value} {...props}/>
+    <MUIThemeProvider>
+      <AppContext.Provider value={value} {...props} />
+    </MUIThemeProvider>
   )
 }
 
-export {AppProvider , AppContext}
+export {AppProvider, AppContext}
