@@ -9,10 +9,8 @@ const errorHandler = async response => {
   }
 }
 
-const get = ({endpoint, abortController}) => {
-  return fetch(`${BASE_URL}${endpoint}`, {
-    signal: abortController ? abortController.signal : undefined,
-  }).then(async response => {
+const get = ({endpoint, baseURL = BASE_URL}) => {
+  return fetch(`${baseURL}${endpoint}`).then(async response => {
     if (response.ok) {
       return Promise.resolve(await response.json())
     } else {

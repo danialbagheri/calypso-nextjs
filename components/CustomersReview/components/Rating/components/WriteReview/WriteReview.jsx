@@ -1,26 +1,32 @@
 import * as React from 'react'
 
+import {useRouter} from 'next/router'
+
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import Modal from '@mui/material/Modal'
-import Stack from '@mui/material/Stack'
+import {ReviewContext} from 'components/CustomersReview/ReviewProvider'
+import {useTheme} from '@mui/material'
 
 function WriteReview() {
-  const [open, setOpen] = React.useState(false)
-
-  const handleClose = () => {
-    setOpen(false)
-  }
+  const [reviewState] = React.useContext(ReviewContext)
+  const theme = useTheme()
 
   return (
     <Box textAlign={'center'}>
       <Button
         variant="contained"
-        onClick={() => setOpen(true)}
+        href={`./write-review?slug=${reviewState.product.slug}`}
+        target={'_blank'}
         sx={{
           padding: '12px 32px',
           borderRadius: 20,
+          '&:hover': {
+            color: theme.palette.grey.main,
+          },
+          '& svg path:hover': {
+            fill: theme.palette.grey.main,
+          },
         }}
         startIcon={
           <svg
@@ -49,14 +55,6 @@ function WriteReview() {
           Share your thoughts with other customers
         </Typography>
       </Box>
-      {/*<Modal*/}
-      {/*  open={open}*/}
-      {/*  onClose={handleClose}*/}
-      {/*  aria-labelledby="modal-modal-title"*/}
-      {/*  aria-describedby="modal-modal-description"*/}
-      {/*>*/}
-      {/*  WriteReviewModal*/}
-      {/*</Modal>*/}
     </Box>
   )
 }

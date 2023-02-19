@@ -4,6 +4,10 @@ const postContactUsSubmit = data => {
   return post({endpoint: 'web/contact-us/', data})
 }
 
+const postProductReview = (data, slug) => {
+  return post({endpoint: `reviews/product/${slug}/add/`, data})
+}
+
 const getCollectionBanner = slug => {
   return get({endpoint: `web/slider/?slug=${slug}`})
 }
@@ -13,7 +17,18 @@ const getCollection = collection => {
 }
 
 const getSearchData = params => {
-  return get({endpoint:`web/search/?q=${params}`})
+  return get({endpoint: `web/search/?q=${params}`})
 }
 
-export {postContactUsSubmit, getCollectionBanner, getCollection, getSearchData}
+const getSingleProduct = slug => {
+  return get({endpoint: `products/single/${slug}/`})
+}
+
+export {
+  postContactUsSubmit,
+  postProductReview,
+  getCollectionBanner,
+  getCollection,
+  getSearchData,
+  getSingleProduct,
+}
