@@ -13,17 +13,18 @@ function Variants(props) {
 
   const theme = useTheme()
 
-  const imageSelectHandler = (e, i) => {
+  const imageSelectHandler = (e, id) => {
     e.preventDefault()
-    props.changeHandler('image_ids', [product.variants[i].image_list[0].id])
-    setSelectedVariant(i)
+    props.changeHandler('variant', id)
+    setSelectedVariant(id)
   }
 
   React.useEffect(() => {
     const slug = window.location.search.split('slug=')[1]
     getSingleProduct(slug)
       .then(res => {
-        props.changeHandler('image_ids', [res.variants[0].image_list[0].id])
+        props.changeHandler('variant', res.variants[0].id)
+        setSelectedVariant(res.variants[0].id)
         setProduct({...res})
         setLoading(false)
       })
@@ -62,7 +63,7 @@ function Variants(props) {
                 sx={{
                   border: '2px solid',
                   borderColor:
-                    selectedVariant === i
+                    selectedVariant === variant.id
                       ? theme.palette.primary.main
                       : 'transparent',
                   borderRadius: '5px',
@@ -70,7 +71,7 @@ function Variants(props) {
                   cursor: 'pointer',
                   transition: '300ms',
                 }}
-                onClick={e => imageSelectHandler(e, i)}
+                onClick={e => imageSelectHandler(e, variant.id)}
               >
                 <Box
                   sx={{

@@ -8,6 +8,10 @@ const postProductReview = (data, slug) => {
   return post({endpoint: `reviews/product/${slug}/add/`, data})
 }
 
+const postReviewImage = image_base64 => {
+  return post({endpoint: 'reviews/images/', data: {image_base64}})
+}
+
 const getCollectionBanner = slug => {
   return get({endpoint: `web/slider/?slug=${slug}`})
 }
@@ -27,6 +31,7 @@ const getSingleProduct = slug => {
 export {
   postContactUsSubmit,
   postProductReview,
+  postReviewImage,
   getCollectionBanner,
   getCollection,
   getSearchData,

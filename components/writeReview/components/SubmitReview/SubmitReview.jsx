@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {postProductReview} from 'services'
+import {postProductReview, postReviewImage} from 'services'
 
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
@@ -15,7 +15,20 @@ function SubmitReview(props) {
 
   const submitHandler = () => {
     setLoading(true)
-    postProductReview(props.data, slug.current)
+    const promisesList = []
+    Object.values(props.base64Img).forEach(base64_img =>
+      promisesList.push(postReviewImage(base64_img)),
+    )
+    Promise.all(promisesList)
+      .then(imgArray => {
+        const imagesId = []
+        imgArray.forEach(img => imagesId.push(img.id))
+        return imagesId
+      })
+      .then(idArr => {
+        props.changeHandler('image_ids', idArr)
+      })
+      .then(() => postProductReview(props.data, slug.current))
       .then(() => {
         setLoading(false)
         setOpenSnackbar(true)
