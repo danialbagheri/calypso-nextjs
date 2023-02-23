@@ -1,0 +1,6 @@
+User-agent: Googlebot
+Disallow: /accounts/sku-image-request
+Disallow: /accounts/sku-image-request/
+
+User-agent: *
+Allow: /

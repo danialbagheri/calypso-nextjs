@@ -9,14 +9,15 @@
     "build-static": "next build && next export"
   },
   "dependencies": {
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "@mui/icons-material": "^5.0.4",
-    "@mui/material": "^5.0.4",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/material": "^5.11.10",
+    "@mui/styled-engine-sc": "^5.11.9",
     "@yazanaabed/react-tabs": "^2.3.6",
     "axios": "^0.27.2",
     "caniuse-lite": "^1.0.30001439",
@@ -51,6 +52,7 @@
     "sass": "^1.49.0",
     "shopify-buy": "^2.11.0",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.6",
     "yup": "^0.32.9"
   },
   "devDependencies": {
