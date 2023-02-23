@@ -20,14 +20,12 @@ function SubmitRequest(props) {
 
   const submitHandler = () => {
     setLoading(true)
-    console.log(props.data)
-    // postProductReview(props.data)
-    //   .then(res => {
-    //     console.log(res)
-    //     setLoading(false)
-    //     setOpenSnackbar(true)
-    //   })
-    //   .catch(err => setLoading(false))
+    postProductReview(props.data)
+      .then(res => {
+        setLoading(false)
+        setOpenSnackbar(true)
+      })
+      .catch(err => setLoading(false))
   }
 
   return (
