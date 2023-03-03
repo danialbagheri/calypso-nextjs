@@ -3,7 +3,6 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
-import Stack from '@mui/material/Stack'
 import {useTheme} from '@mui/material'
 
 function validateEmail(input) {
@@ -46,7 +45,7 @@ function EmailField(props) {
   const onBlurHandler = (type, value) => {
     //Control if the email address is correct or not
     if (type === EMAIL) {
-      if (!validateEmail(value)) {
+      if (!validateEmail(value.toLowerCase())) {
         setUserData(prev => ({
           ...prev,
           [type]: {

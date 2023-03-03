@@ -17,19 +17,36 @@ function postProductReview(data) {
 function SubmitRequest(props) {
   const [loading, setLoading] = React.useState(false)
   const [openSnackbar, setOpenSnackbar] = React.useState(false)
-
+  const [response, setResponse] = React.useState({status: 200})
   const submitHandler = () => {
     setLoading(true)
     postProductReview(props.data)
       .then(res => {
         setLoading(false)
+        setResponse(res)
         setOpenSnackbar(true)
+        console.log(res)
       })
-      .catch(err => setLoading(false))
+      .catch(err => {
+        console.log(err)
+        setLoading(false)
+      })
   }
 
   return (
     <Stack mt={16} mb={30} spacing={4} alignItems={'center'}>
+      {response?.status == 400 && (
+        <Typography variant="body2" color="red">
+          Following products SKU were incorrect
+          <br />
+          {response['invalid_sku_list']?.map(item => (
+            <>
+              {item}
+              <br />
+            </>
+          ))}
+        </Typography>
+      )}
       <Button
         variant={'contained'}
         sx={{minWidth: 310, padding: '16px 80px', borderRadius: 15}}
@@ -44,13 +61,19 @@ function SubmitRequest(props) {
       </Button>
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={5000}
+        autoHideDuration={10000}
         onClose={() => setOpenSnackbar(false)}
         key={'bottom' + 'center'}
         anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
       >
-        <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{width: '100%'}}>
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity={response?.status == 200 ? 'success' : 'error'}
+          sx={{width: '100%'}}
+        >
           Your request has been sent successfully! Please check your email.
+          <br />
+          {JSON.stringify(response, 0, 2)}
         </Alert>
       </Snackbar>
     </Stack>

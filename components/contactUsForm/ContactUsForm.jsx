@@ -69,14 +69,13 @@ function submitContactForm(values, {setSubmitting, setFieldError, setStatus}) {
     .then(r => {
       if (r.status != 201) {
         setStatus('There was a problem')
-        return r.json()
+        return r
       } else {
-        return r.json()
+        return setStatus('successfully submitted')
       }
     })
     .then(result => {
       setFieldError(result)
-      setResponse(result)
     })
     .catch(error => {
       setStatus(
