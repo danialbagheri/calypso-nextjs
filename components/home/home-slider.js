@@ -16,7 +16,6 @@ export default function HomeSlider({slides}) {
     dotsClass: 'dot',
   }
   const slider = slides[0].slider_slides.map(slide => {
-    console.log(slide)
     if (slide.slide.custom_slide) {
       return (
         <div className="banner" index={slide.slide.id} key={slide.slide.id}>
@@ -24,7 +23,6 @@ export default function HomeSlider({slides}) {
         </div>
       )
     } else {
-      console.log(slide.slide.lg_image)
       return (
         <div className="banner" index={slide.id} key={slide.id}>
           <Link href={slide.slide.link ? slide.slide.link : '/about'}>
