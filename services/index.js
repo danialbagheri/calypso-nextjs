@@ -28,6 +28,12 @@ const getSingleProduct = slug => {
   return get({endpoint: `products/single/${slug}/`})
 }
 
+const getProductReviews = slug => {
+  return get({endpoint: `reviews/product/?product_slug=${slug}`})
+}
+
+const patchReviewRate = () => {}
+
 export {
   postContactUsSubmit,
   postProductReview,
@@ -36,4 +42,5 @@ export {
   getCollection,
   getSearchData,
   getSingleProduct,
+  getProductReviews,
 }

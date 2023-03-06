@@ -7,8 +7,8 @@ import Grid from '@mui/material/Grid'
 function Descriptions() {
   return (
     <Grid item xs={12} md={8}>
-      <SearchBox />
-      <ReviewFilters />
+      {/*<SearchBox />*/}
+      {/*<ReviewFilters />*/}
       <Reviews />
     </Grid>
   )

@@ -7,32 +7,34 @@ import {ReviewDetail} from './ReviewDetail'
 import {ReviewContext} from 'components/CustomersReview/ReviewProvider'
 import {useTheme} from '@mui/material'
 
-function Reviews(props) {
+function Reviews() {
   const [reviewState] = React.useContext(ReviewContext)
+  console.log('REVIEW STATE::::', reviewState)
   const theme = useTheme()
 
   return (
     <Box>
-      <Typography color={'secondary'} variant={'h3'} mt={2}>
-        {reviewState.product.reviews.length} Reviews
+      <Typography color={'secondary'} variant={'h3'} mt={9}>
+        {reviewState.reviewData.results.length} Reviews
       </Typography>
       <Box mt={11}>
-        {reviewState.product.reviews.map(detail => (
-          <ReviewDetail {...detail} />
+        {reviewState.reviewData.results.map(detail => (
+          <ReviewDetail key={detail.id} {...detail} />
         ))}
       </Box>
-      <Box mt={15}>
-        <Pagination
-          count={10}
-          color={'primary'}
-          sx={{
-            '&': {
-              ul: {justifyContent: 'center'},
-              svg: {color: theme.palette.primary.main},
-            },
-          }}
-        />
-      </Box>
+      {/*TO DO ::: Implement pagination functionality  */}
+      {/*<Box mt={15}>*/}
+      {/*  <Pagination*/}
+      {/*    count={Math.ceil(+reviewState.reviewData.count / 10)}*/}
+      {/*    color={'primary'}*/}
+      {/*    sx={{*/}
+      {/*      '&': {*/}
+      {/*        ul: {justifyContent: 'center'},*/}
+      {/*        svg: {color: theme.palette.primary.main},*/}
+      {/*      },*/}
+      {/*    }}*/}
+      {/*  />*/}
+      {/*</Box>*/}
     </Box>
   )
 }

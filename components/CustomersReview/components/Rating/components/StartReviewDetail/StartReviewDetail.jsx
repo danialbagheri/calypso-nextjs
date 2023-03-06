@@ -16,8 +16,8 @@ import Typography from '@mui/material/Typography'
 function StartReviewDetail() {
   const [reviewState] = React.useContext(ReviewContext)
   const theme = useTheme()
-  const scoreChart = reviewState.product.score_chart
-  const totalRateCount = reviewState.starReviewCount
+  const scoreChart = reviewState.reviewData.score_chart
+  const totalRateCount = reviewState.reviewData.total_review_count
 
   const BorderLinearProgress = styled(LinearProgress)(({theme}) => ({
     height: 10,
@@ -41,12 +41,18 @@ function StartReviewDetail() {
         .map((key, i) => {
           return (
             <Stack
+              key={`${key}${i}`}
               direction={'row'}
               alignItems={'center'}
               sx={{marginTop: i !== 0 ? 3 : 0}}
               spacing={3}
             >
-              <Typography variant={'body3'}>{scoreChart[key]}</Typography>
+              <Typography
+                variant={'body3'}
+                sx={{width: '33px', textAlign: 'center'}}
+              >
+                {scoreChart[key]}
+              </Typography>
               <Box sx={{width: '50%', maxWidth: 160}}>
                 <BorderLinearProgress
                   variant="determinate"

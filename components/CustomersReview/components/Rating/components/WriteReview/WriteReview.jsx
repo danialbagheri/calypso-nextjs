@@ -16,7 +16,7 @@ function WriteReview() {
     <Box textAlign={'center'}>
       <Button
         variant="contained"
-        href={`./write-review?slug=${reviewState.product.slug}`}
+        href={`./write-review?slug=${reviewState.slug}`}
         target={'_blank'}
         sx={{
           padding: '12px 32px',

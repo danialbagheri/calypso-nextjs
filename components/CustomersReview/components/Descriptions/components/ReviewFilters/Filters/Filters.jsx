@@ -60,7 +60,7 @@ function Filters(props) {
   return (
     <Box>
       {filters.map(filter => (
-        <FiltersSelectBox title={filter.title} />
+        <FiltersSelectBox key={filter.title} title={filter.title} />
       ))}
     </Box>
   )

@@ -15,6 +15,8 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt'
 function ReviewDetail(props) {
   const theme = useTheme()
 
+  const reviewRateHandler = () => {}
+
   return (
     <Box mb={6}>
       <Typography variant={'h4'}>{props.customer_name}</Typography>
@@ -48,31 +50,32 @@ function ReviewDetail(props) {
           </Typography>
         </Box>
       )}
-      <Stack
-        direction={'row'}
-        alignItems={'center'}
-        justifyContent={'flex-end'}
-      >
-        <Typography variant={'body2'} color={'primary'}>
-          Did you find it useful?
-        </Typography>
-        <Stack ml={6} direction={'row'} alignItems={'center'}>
-          <IconButton color="primary">
-            <ThumbUpIcon />
-          </IconButton>
-          <Typography variant={'h5'} color={'primary'}>
-            {props.like}
-          </Typography>
-        </Stack>
-        <Stack ml={6} direction={'row'} alignItems={'center'}>
-          <IconButton color="primary">
-            <ThumbDownAltIcon />
-          </IconButton>
-          <Typography variant={'h5'} color={'primary'}>
-            {props.dislike}
-          </Typography>
-        </Stack>
-      </Stack>
+      {/*TO DO ::: implement like and dislike functionality*/}
+      {/*<Stack*/}
+      {/*  direction={'row'}*/}
+      {/*  alignItems={'center'}*/}
+      {/*  justifyContent={'flex-end'}*/}
+      {/*>*/}
+      {/*  <Typography variant={'body2'} color={'primary'}>*/}
+      {/*    Did you find it useful?*/}
+      {/*  </Typography>*/}
+      {/*  <Stack ml={6} direction={'row'} alignItems={'center'}>*/}
+      {/*    <IconButton onClick={() => reviewRateHandler('like')} color="primary">*/}
+      {/*      <ThumbUpIcon />*/}
+      {/*    </IconButton>*/}
+      {/*    <Typography variant={'h5'} color={'primary'}>*/}
+      {/*      {props.like}*/}
+      {/*    </Typography>*/}
+      {/*  </Stack>*/}
+      {/*  <Stack ml={6} direction={'row'} alignItems={'center'}>*/}
+      {/*    <IconButton color="primary">*/}
+      {/*      <ThumbDownAltIcon />*/}
+      {/*    </IconButton>*/}
+      {/*    <Typography variant={'h5'} color={'primary'}>*/}
+      {/*      {props.dislike}*/}
+      {/*    </Typography>*/}
+      {/*  </Stack>*/}
+      {/*</Stack>*/}
     </Box>
   )
 }

@@ -10,12 +10,13 @@ import {useTheme} from '@mui/material'
 
 function RatingScore() {
   const [reviewState] = React.useContext(ReviewContext)
+
   const theme = useTheme()
 
   return (
     <Stack direction={'row'} alignItems={'center'} spacing={3}>
       <Typography variant={'h2'} color={'secondary'}>
-        {reviewState.product.review_average_score}
+        {reviewState.reviewData.review_average_score.toFixed(1)}
       </Typography>
       <Rating
         sx={{
@@ -23,14 +24,19 @@ function RatingScore() {
             color: theme.palette.golden.main,
           },
         }}
-        defaultValue={Math.round(+reviewState.product.review_average_score)}
+        defaultValue={Math.round(+reviewState.reviewData.review_average_score)}
         readOnly
         emptyIcon={<StarIcon color={'grey'} fontSize="inherit" />}
       />
       <Stack direction={'row'} alignItems={'center'} spacing={2}>
-        <Typography variant={'h4'}>{reviewState.starReviewCount}</Typography>
         <Typography variant={'h4'}>
-          Rating<span>{reviewState.starReviewCount > 1 ? 's' : ''}</span>
+          {reviewState.reviewData.total_review_count}
+        </Typography>
+        <Typography variant={'h4'}>
+          Rating
+          <span>
+            {reviewState.reviewData.total_review_count > 1 ? 's' : ''}
+          </span>
         </Typography>
       </Stack>
     </Stack>

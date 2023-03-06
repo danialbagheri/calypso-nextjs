@@ -10,10 +10,14 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
 function CustomersReview(props) {
-  console.log('PROPS:::::', props)
+  if (!props.reviewData) return null
   return (
     <ScopedCssBaseline>
-      <ReviewProvider product={props.product}>
+      <ReviewProvider
+        product={props.product}
+        slug={props.slug}
+        reviewData={props.reviewData}
+      >
         <Box sx={{padding: {xs: '60px 36px', lg: '80px 144px'}}}>
           <Typography variant={'h3'} mb={8}>
             Customer reviews
@@ -29,12 +33,3 @@ function CustomersReview(props) {
 }
 
 export default CustomersReview
-
-export async function getStaticProps(context) {
-  const slug = context.params.slug
-  return {
-    props: {
-      slug,
-    },
-  }
-}
