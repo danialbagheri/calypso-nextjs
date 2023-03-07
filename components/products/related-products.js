@@ -1,11 +1,10 @@
-import Styles from "../../styles/relatedProducts.module.css";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Link from "next/link";
-import StarRatingCustom from "../common/star-rating-custom";
+import Styles from '../../styles/relatedProducts.module.css'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import StarRatingCustom from '../common/star-rating-custom'
 
-export default function RelatedProducts({ related }) {
+export default function RelatedProducts({related}) {
   const settings = {
     arrows: true,
     dots: true,
@@ -13,7 +12,7 @@ export default function RelatedProducts({ related }) {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
-    dotsClass: "dot",
+    dotsClass: 'dot',
     responsive: [
       {
         breakpoint: 1024,
@@ -40,7 +39,7 @@ export default function RelatedProducts({ related }) {
         },
       },
     ],
-  };
+  }
 
   const relatedProducts = related.map((product, index) => {
     return (
@@ -66,7 +65,7 @@ export default function RelatedProducts({ related }) {
                 value={product.review_average_score}
                 name={product.name}
                 className={Styles.starReview}
-                halfStarSize={"1.2rem"}
+                halfStarSize={'1.2rem'}
               />
               <p>
                 <strong>{product.name}</strong> <br />
@@ -77,12 +76,12 @@ export default function RelatedProducts({ related }) {
           </div>
         </a>
       </div>
-    );
-  });
+    )
+  })
   return (
     <div className="bg-secondary p-3">
       <h4 className="textCenter">You may also like</h4>
       <Slider {...settings}>{relatedProducts}</Slider>
     </div>
-  );
+  )
 }

@@ -1,65 +1,42 @@
-import * as React from "react";
+import * as React from 'react'
 
-import {SessionProvider} from "next-auth/react";
-import { Provider } from "react-redux";
-import CookieConsent from "react-cookie-consent";
-import MailChimpSignUp from "../components/general/MailChimpSignUp";
+import {SessionProvider} from 'next-auth/react'
+import {Provider} from 'react-redux'
+import CookieConsent from 'react-cookie-consent'
+import MailChimpSignUp from '../components/general/MailChimpSignUp'
 
-import RefreshTokenHandler from "../services/refreshTokenHandler";
-import "../styles/globals.css";
-import Header from "../components/header";
-import "../styles/bootstrap/css/bootstrap-theme.min.css";
-import "../styles/bootstrap/css/bootstrap.min.css";
-import Head from "next/head";
-import store from "../redux/store";
-import Footer from "../components/common/footer";
-import InfoBar from "../components/general/InforBar";
+import RefreshTokenHandler from '../services/refreshTokenHandler'
+import '../styles/globals.css'
+import Header from '../components/header'
+import '../styles/bootstrap/css/bootstrap-theme.min.css'
+import '../styles/bootstrap/css/bootstrap.min.css'
+import Head from 'next/head'
+import store from '../redux/store'
+import Footer from '../components/common/footer/footer'
+import InfoBar from '../components/general/InforBar'
 import {AppProvider} from 'components/appProvider'
 
-function MyApp({ Component, pageProps }) {
-  const [interval, setInterval] = React.useState(0);
-    
+function MyApp({Component, pageProps}) {
+  const [interval, setInterval] = React.useState(0)
+
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=1"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#da532c" />
         <link rel="stylesheet" href="https://use.typekit.net/kls3ash.css" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="theme-color" content="#000000" />
         <meta name="twitter:site" content="@calypsosuncare"></meta>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-        />
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
         {/* <!-- Google Tag Manager --> */}
         <script
           dangerouslySetInnerHTML={{
@@ -86,45 +63,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </Head>
       <AppProvider>
-      <SessionProvider session={pageProps.session} refetchInterval={interval}>
-        <Provider store={store}>
-          {/* <!-- Google Tag Manager (noscript) --> */}
-          <noscript
-            dangerouslySetInnerHTML={{
-              __html: `
+        <SessionProvider session={pageProps.session} refetchInterval={interval}>
+          <Provider store={store}>
+            {/* <!-- Google Tag Manager (noscript) --> */}
+            <noscript
+              dangerouslySetInnerHTML={{
+                __html: `
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-5WH5SJG"
             height="0"
             width="0"
             style="display:none;visibility:hidden"
           ></iframe>`,
-            }}
-          />
-          <Header />
-          <MailChimpSignUp />
-          <InfoBar />
-          <Component {...pageProps} />
-          <CookieConsent
-            containerClasses="cookie-css"
-            contentClasses="cookie-text disableBlur"
-            // buttonWrapperClasses="disableBlur"
-            // buttonClasses="disableBlur bg-calypso"
-            // onAccept={() => {
-            //   alert("Accept was triggered by clicking the Accept button");
-            // }}
-          >
-            <div className="cookie-background"> </div>
-            We use cookies to ensure that we give you the best experience on our
-            website.
-          </CookieConsent>
+              }}
+            />
+            <Header />
+            <MailChimpSignUp />
+            <InfoBar />
+            <Component {...pageProps} />
+            <CookieConsent
+              containerClasses="cookie-css"
+              contentClasses="cookie-text disableBlur"
+              // buttonWrapperClasses="disableBlur"
+              // buttonClasses="disableBlur bg-calypso"
+              // onAccept={() => {
+              //   alert("Accept was triggered by clicking the Accept button");
+              // }}
+            >
+              <div className="cookie-background"> </div>
+              We use cookies to ensure that we give you the best experience on our website.
+            </CookieConsent>
 
-          <Footer />
-          <RefreshTokenHandler setInterval={setInterval} />
-        </Provider>
-      </SessionProvider>
+            <Footer />
+            <RefreshTokenHandler setInterval={setInterval} />
+          </Provider>
+        </SessionProvider>
       </AppProvider>
     </>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp

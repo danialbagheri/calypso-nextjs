@@ -43,18 +43,21 @@
 
 @media only screen and (max-width: 475px) {
   .ProductImage {
-    height: 150px;
+    height: 200px;
     overflow: hidden;
   }
   .ProductImage img {
     width: auto;
-    height: 150px;
+    height: 200px;
   }
 }
 
 .starReview {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
+}
+.starReview .half-star-holder {
+  font-size: 1.6rem;
 }
 .starReview .half-star-holder img {
-  height: 10px !important;
+  height: 50px !important;
 }

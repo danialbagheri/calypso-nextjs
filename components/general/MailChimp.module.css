@@ -11,7 +11,7 @@
   height: 100%;
   position: fixed;
   right: 0;
-  z-index: 50;
+  z-index: 102;
   display: flex;
   transition: 0.5s cubic-bezier(0.17, 0.11, 0.71, 0.89);
 }
@@ -121,7 +121,7 @@
   .ModalbackgroundShown {
     display: block;
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 101; /* Sit on top */
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
@@ -134,7 +134,7 @@
   .NewsLetterContainerOpen,
   .NewsLetterContainerClose {
     flex-direction: column;
-    max-height: 546px;
+    max-height: 446px;
     width: 100%;
     margin: 0 auto;
     position: fixed;
@@ -144,7 +144,7 @@
   }
   .NewsLetterContainerClose {
     /* transform: translateY(calc(100vh - 116px)); */
-    transform: translateY(546px);
+    transform: translateY(446px);
     bottom: 37px;
   }
   .OfferContainer {
@@ -182,7 +182,7 @@
   .ImageContainer {
     min-width: 100vw;
     max-width: 100vw;
-    min-height: 240px;
-    max-height: 240px;
+    min-height: 140px;
+    max-height: 140px;
   }
 }

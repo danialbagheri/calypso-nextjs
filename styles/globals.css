@@ -1656,65 +1656,10 @@ a img {
 .paddingLeft20 {
   padding-left: 20px;
 }
-/* bottom bar */
-.bottom-bar {
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-}
 
-.linco-branding {
-  display: flex;
-}
-.linco-care-com {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: flex-end;
-  /* height: 15px; */
-}
-.linco-care-com img {
-  width: 14px;
-}
-.linco-branding img {
-  width: 50px;
-}
-.linco-care-com * {
-  margin-right: 5px;
-}
-.linco-care-com a {
-  cursor: pointer;
-  font-size: 1.7rem;
-  text-decoration: none;
-}
-.linco-logo {
-  width: 35px;
-  margin-right: 10px;
-}
 .payment-icon {
   width: 30px !important;
   height: 25px;
-}
-@media only screen and (max-width: 780px) {
-  .bottom-bar {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .linco-branding {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-  }
-  .linco-logo {
-    justify-content: center;
-  }
-  .linco-care-com {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-  }
 }
 
 .buttonWhite {
