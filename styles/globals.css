@@ -610,10 +610,11 @@ input.search-field:focus {
   text-decoration: none;
   color: black;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .banner {
-  /* height: 590px; */
+  cursor: pointer;
   margin-top: 0;
 }
 
@@ -2674,7 +2675,7 @@ ul.stores img {
 }
 
 .trending-item-parent {
-  margin-right: 30px !important;
+  margin-right: 10px !important;
 }
 .trending-box-image {
   width: 260px;
@@ -2696,13 +2697,11 @@ ul.stores img {
 .trending-star-review-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   align-items: center;
+  align-content: center;
+  gap: 6px;
 }
 
-.trending-star-review-container text {
-  margin-left: 4px;
-}
 .trending-box-star {
   font-size: 1.5rem;
   margin-bottom: -9px;

@@ -1,13 +1,14 @@
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Loader from "react-loaders";
-import "loaders.css/loaders.min.css";
-import TrendingItem from "./trending-item";
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import Loader from 'react-loaders'
+import 'loaders.css/loaders.min.css'
+import TrendingItem from './trending-item'
+import Box from '@mui/material/Box'
 
 export default function Trending(props) {
-  const isLoaded = true;
-  const topSeller = props.trending;
+  const isLoaded = true
+  const topSeller = props.trending
 
   const settings = {
     slidesToShow: 5,
@@ -45,31 +46,25 @@ export default function Trending(props) {
         },
       },
     ],
-  };
+  }
 
   const trendingItems = topSeller.map((each, index) => {
     return (
-      <div className="mr-3" key={index}>
+      <Box key={index}>
         <TrendingItem product={each.item} />
-      </div>
-    );
-  });
+      </Box>
+    )
+  })
 
   const trendingProducts = isLoaded ? (
     <Slider {...settings}>{trendingItems}</Slider>
   ) : (
-    <Loader
-      type="ball-pulse"
-      active={true}
-      color="orange"
-      size="Large"
-      className="p-2 general-loader"
-    />
-  );
+    <Loader type="ball-pulse" active={true} color="orange" size="Large" className="p-2 general-loader" />
+  )
   return (
     <div className="trending-slider">
       <h1>Trending</h1>
       {trendingProducts}
     </div>
-  );
+  )
 }
