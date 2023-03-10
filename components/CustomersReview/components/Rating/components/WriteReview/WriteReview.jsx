@@ -17,7 +17,6 @@ function WriteReview() {
       <Button
         variant="contained"
         href={`./write-review?slug=${reviewState.slug}`}
-        target={'_blank'}
         sx={{
           padding: '12px 32px',
           borderRadius: 20,

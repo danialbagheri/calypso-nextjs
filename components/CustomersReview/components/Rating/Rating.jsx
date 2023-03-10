@@ -9,16 +9,33 @@ import {
   StartReviewDetail,
   WriteReview,
 } from './components'
+import {ReviewContext} from 'components/CustomersReview/ReviewProvider'
 
 function Rating() {
+  const [reviewState] = React.useContext(ReviewContext)
+  const [hasReviewWithImg, setHasReviewWithImg] = React.useState(false)
+
+  React.useEffect(() => {
+    for (let i = 0; i < reviewState.reviewData.results.length; i++) {
+      if (reviewState.reviewData.results[i].images.length > 0) {
+        setHasReviewWithImg(true)
+        break
+      }
+    }
+  }, [])
+
   return (
     <Grid item xs={12} md={4} pr={6}>
       <RatingScore />
       <StartReviewDetail />
       <Divider sx={{marginBottom: 8, marginTop: 8}} />
       <WriteReview />
-      <Divider sx={{marginBottom: 8, marginTop: 8}} />
-      <ReviewWithImages />
+      {hasReviewWithImg ? (
+        <>
+          <Divider sx={{marginBottom: 8, marginTop: 8}} />
+          <ReviewWithImages />
+        </>
+      ) : null}
     </Grid>
   )
 }

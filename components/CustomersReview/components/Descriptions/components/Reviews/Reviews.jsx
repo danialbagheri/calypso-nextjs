@@ -9,8 +9,8 @@ import {useTheme} from '@mui/material'
 
 function Reviews() {
   const [reviewState] = React.useContext(ReviewContext)
-  console.log('REVIEW STATE::::', reviewState)
-  const theme = useTheme()
+
+  // const theme = useTheme()
 
   return (
     <Box>

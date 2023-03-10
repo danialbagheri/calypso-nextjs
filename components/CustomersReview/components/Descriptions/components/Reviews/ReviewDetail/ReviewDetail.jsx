@@ -37,19 +37,21 @@ function ReviewDetail(props) {
       <Stack direction={'row'} alignItems={'center'} gap={3}>
         <Typography variant={'h6'}>{props.title}</Typography>
         <Typography variant={'subtitle1'} color={'primary'}>
-          {props.approved ? 'Verified purchase' : ''}
+          {/*TO DO::: After implementing Verified purchase in back should be used*/}
+          {/*{props.approved ? 'Verified purchase' : ''}*/}
         </Typography>
       </Stack>
       <Box mt={2}>
         <Typography variant={'body1'}>{props.comment}</Typography>
       </Box>
-      {props.location && (
-        <Box mt={2}>
-          <Typography variant={'body1'} color={'secondary'}>
-            Reviewed in {props.location} 🇬🇧 on {dateFormat(props.date_created)}
-          </Typography>
-        </Box>
-      )}
+
+      <Box mt={2}>
+        <Typography variant={'body1'} color={'secondary'}>
+          {props.location ? `Reviewed in ${props.location} on` : null}{' '}
+          {dateFormat(props.date_created)}
+        </Typography>
+      </Box>
+
       {/*TO DO ::: implement like and dislike functionality*/}
       {/*<Stack*/}
       {/*  direction={'row'}*/}

@@ -159,13 +159,13 @@ function Product(props) {
       </section>
       <RelatedProduct related={product.related_products} />
       <div id="readReviews" />
+      <Faq {...product.faq_list} />
       <CustomersReview
         product={product}
         slug={props.slug}
         reviewData={props.reviewData}
         error={props.error}
       />
-      <Faq {...product.faq_list} />
       <Snackbar open={snackBarDetails.open} autoHideDuration={6000}>
         <Alert
           onClose={() => setSnackBarDetails(prev => ({...prev, open: false}))}

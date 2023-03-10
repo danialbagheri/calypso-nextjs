@@ -9,6 +9,7 @@ import {
   Recommendation,
   PhotoUpload,
   SubmitReview,
+  Breadcrumb,
 } from './components'
 
 import Box from '@mui/material/Box'
@@ -50,6 +51,7 @@ function WriteReview() {
           },
         }}
       >
+        <Breadcrumb />
         <Box
           sx={{
             '&': {
