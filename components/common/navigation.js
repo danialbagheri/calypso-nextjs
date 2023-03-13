@@ -1,58 +1,60 @@
-import { useState, useEffect } from "react";
-import { useShopify } from "../hooks";
-import logo from "../../public/logo.svg";
-import SearchBar from "../general/searchbar";
-import Link from "next/link";
-import ActiveLink from "./active-link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useState, useEffect} from 'react'
+import {useShopify} from '../hooks'
+import logo from '../../public/logo.svg'
+import SearchBar from '../general/searchbar'
+import Link from 'next/link'
+import ActiveLink from './active-link'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
   faShoppingCart,
   faSearch,
   faBars,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons'
 
-import MegaMenu from "./megaMenu";
+import MegaMenu from './megaMenu'
 import {SearchModal} from 'components/searchModal'
 
 function Navigation() {
-  const [mobileMenu, setMobileMenu] = useState(false);
-  const [search, showSearch] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState(false)
+  const [search, showSearch] = useState(false)
   const [openSearchModal, setOpenSearchModal] = useState(false)
-  const [showMegaMenu, toggleMegaMenu] = useState(false);
-  const [productsPageMegaMenu, setProductPageMegaMenu] = useState([]);
-  const { openCart } = useShopify();
-
+  const [showMegaMenu, toggleMegaMenu] = useState(false)
+  const [productsPageMegaMenu, setProductPageMegaMenu] = useState([])
+  const {openCart} = useShopify()
 
   useEffect(() => {
-    const navbar = document.getElementsByClassName("navbar-fixed-top")[0];
-    let sticky = navbar.offsetTop;
+    const navbar = document.getElementsByClassName('navbar-fixed-top')[0]
+    let sticky = navbar.offsetTop
     window.onscroll = () => {
       if (window.pageYOffset >= sticky) {
-        navbar.style.position = "fixed";
-        navbar.style.top = "0";
+        navbar.style.position = 'fixed'
+        navbar.style.top = '0'
       } else {
-        navbar.style.position = "relative";
-        navbar.style.marginTop = "0";
+        navbar.style.position = 'relative'
+        navbar.style.marginTop = '0'
       }
-    };
-  });
+    }
+  })
 
   useEffect(() => {
     const endPoint =
-      "https://service.calypsosun.com/api/products/collections/products-mega-menu/?resize_w=280";
+      'https://service.calypsosun.com/api/products/collections/products-mega-menu/?resize_w=280'
     fetch(endPoint)
-      .then((res) => res.json())
-      .then((data) => {
-        setProductPageMegaMenu(data.items);
-      });
-  }, []);
+      .then(res => res.json())
+      .then(data => {
+        setProductPageMegaMenu(data.items)
+      })
+      .catch(err => console.log(err))
+  }, [])
 
   const openResponsiveMenu = () => {
-    setMobileMenu(!mobileMenu);
-  };
-  function CloseMobileMenu(e) {
-    setMobileMenu(false);
+    setMobileMenu(!mobileMenu)
   }
+
+  function CloseMobileMenu(e) {
+    setMobileMenu(false)
+  }
+
   return (
     <>
       <SearchBar visible={search} visibilitySetter={showSearch} />
@@ -69,7 +71,7 @@ function Navigation() {
           </Link>
           <ul
             className={
-              mobileMenu ? "navbar-nav responsive fade-in" : "navbar-nav"
+              mobileMenu ? 'navbar-nav responsive fade-in' : 'navbar-nav'
             }
           >
             <li>
@@ -77,7 +79,7 @@ function Navigation() {
                 <a
                   itemProp="url"
                   className="nav-link"
-                  onClick={(e) => CloseMobileMenu(e)}
+                  onClick={e => CloseMobileMenu(e)}
                 >
                   Home
                 </a>
@@ -91,7 +93,7 @@ function Navigation() {
                 <a
                   itemProp="url"
                   className="nav-link"
-                  onClick={(e) => CloseMobileMenu(e)}
+                  onClick={e => CloseMobileMenu(e)}
                 >
                   Products
                 </a>
@@ -112,7 +114,7 @@ function Navigation() {
                 <a
                   itemProp="url"
                   className="nav-link"
-                  onClick={(e) => CloseMobileMenu(e)}
+                  onClick={e => CloseMobileMenu(e)}
                 >
                   Be Sun Ready
                 </a>
@@ -123,7 +125,7 @@ function Navigation() {
                 <a
                   itemProp="url"
                   className="nav-link"
-                  onClick={(e) => CloseMobileMenu(e)}
+                  onClick={e => CloseMobileMenu(e)}
                 >
                   Advice
                 </a>
@@ -134,7 +136,7 @@ function Navigation() {
                 <a
                   itemProp="url"
                   className="nav-link"
-                  onClick={(e) => CloseMobileMenu(e)}
+                  onClick={e => CloseMobileMenu(e)}
                 >
                   About Us
                 </a>
@@ -143,17 +145,19 @@ function Navigation() {
           </ul>
           <div className="icon-holder">
             {/*<Link href="/search/">*/}
-              <button
-                className="search-icon"
-                onClick={() => setOpenSearchModal(true)}
-                aria-label="Search"
-              >
-                <FontAwesomeIcon
-                  icon={faSearch}
-                  className="calypso-orange-text"
-                />
-                {openSearchModal?<SearchModal setOpenSearchModal={setOpenSearchModal}/>:null}
-              </button>
+            <button
+              className="search-icon"
+              onClick={() => setOpenSearchModal(true)}
+              aria-label="Search"
+            >
+              <FontAwesomeIcon
+                icon={faSearch}
+                className="calypso-orange-text"
+              />
+              {openSearchModal ? (
+                <SearchModal setOpenSearchModal={setOpenSearchModal} />
+              ) : null}
+            </button>
             {/*</Link>*/}
             <button
               className="basket-icon"
@@ -178,8 +182,8 @@ function Navigation() {
         </div>
       </nav>
     </>
-  );
+  )
 }
 
 // WithRouter enables React Router state management
-export default Navigation;
+export default Navigation

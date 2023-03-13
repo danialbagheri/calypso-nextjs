@@ -1,19 +1,14 @@
 import {BASE_URL} from '../../constants/servicesConstants/index'
 
-const errorHandler = async response => {
+const errorHandler = response => {
   if (response) {
-    const error = await response.json()
-    error.status = response.status
-
-    return error
+    return Promise.resolve(`error: ${response.statusText}`)
   }
 }
 
-const get = ({endpoint, abortController}) => {
-  return fetch(`${BASE_URL}${endpoint}`, {
-    signal: abortController ? abortController.signal : undefined,
-  }).then(async response => {
-    if (response.ok) {
+const get = ({endpoint, baseURL = BASE_URL}) => {
+  return fetch(`${baseURL}${endpoint}`).then(async response => {
+    if (+response.status < 400) {
       return Promise.resolve(await response.json())
     } else {
       return errorHandler(response)

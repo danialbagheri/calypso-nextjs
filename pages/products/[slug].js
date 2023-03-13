@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import * as React from 'react'
 import data from '../../data.json'
 import BreadCrumb from '../../components/common/breadcrumb'
 import ProductPageImage from '../../components/products/product-page-image'
@@ -6,39 +6,51 @@ import ProductDescription from '../../components/products/product-description'
 import ProductTabs from '../../components/products/product-tabs'
 import Head from 'next/head'
 import RelatedProduct from '../../components/products/related-products'
-import ProductReviews from '../../components/reviews/product-reviews'
 import QuestionAndAnswerRow from '../../components/question-and-answers/question-and-answers-row'
-import {useShopify} from '../../components/hooks'
+import {useShopify} from 'redux/ducks/shopify'
 import ProductSchema from '../../components/seo/product-schema'
+import {CustomersReview, Faq} from 'components'
+import {getProductReviews} from 'services'
+import Snackbar from '@mui/material/Snackbar'
+import {Alert} from '@mui/material'
 
 function Product(props) {
   const product = props.productData
   const childProducts = props.productData.variants
   const instagramPosts = product.variants.map(v => v.instagram_posts)
-  const [selectedPrice, setPrice] = useState(props.productData.variants[0].price)
-  const [selectedProduct, setSelectedProduct] = useState({
+
+  const [selectedPrice, setPrice] = React.useState(
+    props.productData.variants[0].price,
+  )
+
+  const [selectedProduct, setSelectedProduct] = React.useState({
     sku: props.productData.variants[0].sku,
   })
-
-  const [selectedChildVariation, setSelectedChildVariation] = useState(props.productData.variants[0].name)
-  const [selectedVariant, setSelectedVariant] = useState(props.productData.variants[0])
-  const [selectedChild, setChild] = useState(props.productData.variants[0].sku)
-  const [stores, setWheretoBuyStores] = useState(props.productData.variants[0].where_to_buy)
-  const [shopifyState, setShopifyState] = useState(null)
+  const [selectedChildVariation, setSelectedChildVariation] = React.useState(
+    props.productData.variants[0].name,
+  )
+  const [selectedVariant, setSelectedVariant] = React.useState(
+    props.productData.variants[0],
+  )
+  const [selectedChild, setChild] = React.useState(
+    props.productData.variants[0].sku,
+  )
+  const [stores, setWheretoBuyStores] = React.useState(
+    props.productData.variants[0].where_to_buy,
+  )
+  const [shopifyState, setShopifyState] = React.useState(null)
+  const [snackBarDetails, setSnackBarDetails] = React.useState({
+    open: false,
+    message: '',
+  })
 
   const {fetchProductByQuery} = useShopify()
 
-  useEffect(() => {
-    const query = {
-      query: `variant:[slug:${selectedChild}]`,
-    }
-    const f = fetchProductByQuery(query)
-    f.then(f => setShopifyState(f[0]))
-  }, [selectedChild])
-
   const handleChange = e => {
     e.preventDefault()
-    const selectedProduct = childProducts.find(product => product.sku === e.target.value)
+    const selectedProduct = childProducts.find(
+      product => product.sku === e.target.value,
+    )
     setSelectedVariant(selectedProduct)
     setPrice(selectedProduct.price)
     setWheretoBuyStores(selectedProduct.where_to_buy)
@@ -92,6 +104,13 @@ function Product(props) {
       selectedVariant={selectedVariant}
     />
   )
+
+  React.useEffect(() => {
+    if (props.error) {
+      setSnackBarDetails({open: true, message: props.error.split(':')[1]})
+    }
+  }, [props.error])
+
   return (
     <div>
       <ProductSchema product={product} selected={selectedProduct} />
@@ -111,9 +130,14 @@ function Product(props) {
         <div className="row productContainer">
           <div className="col-md-6 col-sm-6 col-xs-12">
             <BreadCrumb breadcrumbs={breadCrumbPath} />
-            <ProductPageImage imageList={imageList} selectedVariant={selectedVariant} />
+            <ProductPageImage
+              imageList={imageList}
+              selectedVariant={selectedVariant}
+            />
           </div>
-          <div className="col-md-6 col-sm-6 col-xs-12">{productDescription}</div>
+          <div className="col-md-6 col-sm-6 col-xs-12">
+            {productDescription}
+          </div>
         </div>
       </div>
       <section className="row product-second-row">
@@ -127,19 +151,25 @@ function Product(props) {
           />
         </div>
       </section>
-      <section className="faq-container">
-        <QuestionAndAnswerRow productSlug={product.slug} faq={product.faq_list} />
-      </section>
+      <Faq {...product.faq_list} />
+
       <RelatedProduct related={product.related_products} />
       <div id="readReviews" />
-      <ProductReviews
-        productSlug={product.slug}
-        ProductName={product.name}
-        childProducts={childProducts}
-        productReviews={product.reviews}
-        totalReviewCount={product.total_review_count}
-        reviewAverageScore={product.review_average_score}
+      <CustomersReview
+        product={product}
+        slug={props.slug}
+        reviewData={props.reviewData}
+        error={props.error}
       />
+      <Snackbar open={snackBarDetails.open} autoHideDuration={6000}>
+        <Alert
+          onClose={() => setSnackBarDetails(prev => ({...prev, open: false}))}
+          severity="error"
+          sx={{width: '100%'}}
+        >
+          {snackBarDetails.message}
+        </Alert>
+      </Snackbar>
     </div>
   )
 }
@@ -147,14 +177,25 @@ function Product(props) {
 export async function getStaticProps(context) {
   const slug = context.params.slug
   const baseUrl = data.apiUrl
-  const url = baseUrl + `products/single/${slug}/?resize_w=850`
+  const url = baseUrl + `products/single/${slug}/?resize_w=375`
   const res = await fetch(url)
+  let error = null
   const productData = await res.json()
+  let reviewData = await getProductReviews(slug)
+
+  if (typeof reviewData === 'string' && reviewData.includes('error')) {
+    error = reviewData
+    reviewData = null
+  }
+
   // key is needed here
   return {
     props: {
-      // key: productData.id,
+      key: productData.id,
       productData,
+      reviewData,
+      slug,
+      error,
     },
     revalidate: 120,
   }
@@ -180,6 +221,7 @@ export async function getStaticPaths() {
   const pageCount = Math.ceil(products.count / 10)
   let productResult = await getAllPages(pageCount, url)
   let slugPaths = []
+
   for (let i = 0; i < productResult.length; i++) {
     let slugs = productResult[i].map(item => {
       return {
