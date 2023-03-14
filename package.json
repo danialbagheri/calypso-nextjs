@@ -54,6 +54,7 @@
     "shopify-buy": "^2.11.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
+    "three": "^0.150.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {
