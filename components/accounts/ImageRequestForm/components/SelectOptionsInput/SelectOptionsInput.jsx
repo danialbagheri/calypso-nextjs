@@ -6,18 +6,27 @@ import {useTheme} from '@mui/material'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 
-function ImageFormat(props) {
+function SelectOptionsInput(props) {
+  const {fieldName, options, label, data} = props
   //constants
-  const IMAGE_FORMAT = 'image_format'
+  const formFieldName = fieldName
   const [metaData, setMetaData] = React.useState({
-    [IMAGE_FORMAT]: {value: 'PNG', errorState: false, errorText: ''},
+    [formFieldName]: {value: data[fieldName], errorState: false, errorText: ''},
   })
   const theme = useTheme()
 
   const field = {
-    id: IMAGE_FORMAT,
-    type: IMAGE_FORMAT,
+    id: formFieldName,
+    type: formFieldName,
   }
+
+  const OptionMenuItem = Object.keys(options).map((item, index) => {
+    return (
+      <MenuItem value={item} key={index}>
+        {options[item]}
+      </MenuItem>
+    )
+  })
 
   const inputHandler = e => {
     e.preventDefault()
@@ -34,13 +43,13 @@ function ImageFormat(props) {
   return (
     <Box key={field.id} sx={{mt: 2}}>
       <Typography variant={'h6'} mb={2}>
-        Image Format
+        {label}
       </Typography>
       <Select
         labelId="image-fomrat-select"
         id="demo-simple-select"
         value={metaData[field.type].value}
-        label="image_format"
+        label={formFieldName}
         onChange={e => inputHandler(e)}
         sx={{
           '&': {
@@ -54,11 +63,10 @@ function ImageFormat(props) {
           },
         }}
       >
-        <MenuItem value={'PNG'}>PNG</MenuItem>
-        <MenuItem value={'JPG'}>JPEG</MenuItem>
+        {OptionMenuItem}
       </Select>
     </Box>
   )
 }
 
-export default ImageFormat
+export default SelectOptionsInput
