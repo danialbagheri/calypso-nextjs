@@ -6,7 +6,6 @@ import ProductDescription from '../../components/products/product-description'
 import ProductTabs from '../../components/products/product-tabs'
 import Head from 'next/head'
 import RelatedProduct from '../../components/products/related-products'
-import QuestionAndAnswerRow from '../../components/question-and-answers/question-and-answers-row'
 import {useShopify} from 'redux/ducks/shopify'
 import ProductSchema from '../../components/seo/product-schema'
 import {CustomersReview, Faq} from 'components'
@@ -68,18 +67,15 @@ function Product(props) {
     },
     {name: product.slug, url: `/products/${product.slug}`},
   ]
-  let imageList = []
 
   let child = null
 
   if (childProducts.length === 1) {
     child = childProducts.map((child, index) => {
-      imageList = imageList.concat(child.image_list)
       return <p key={index}>{child.name}</p>
     })
   } else {
     let options = childProducts.map((child, index) => {
-      imageList = imageList.concat(child.image_list)
       return (
         <option value={child.sku} key={index}>
           {child.name}
@@ -121,8 +117,14 @@ function Product(props) {
         <meta name="description" content={product.plain_description} />
         <meta name="twitter:card" content="product" />
         <meta name="twitter:description" content={product.plain_description} />
-        <meta property="og:image" content={imageList[0].resized} />
-        <meta name="twitter:image" content={imageList[0].resized} />
+        <meta
+          property="og:image"
+          content={selectedVariant.image_list[0].resized}
+        />
+        <meta
+          name="twitter:image"
+          content={selectedVariant.image_list[0].resized}
+        />
         <meta property="og:price:amount" content={selectedPrice} />
         <meta property="og:price:currency" content="GBP" />
       </Head>
@@ -130,10 +132,7 @@ function Product(props) {
         <div className="row productContainer">
           <div className="col-md-6 col-sm-6 col-xs-12">
             <BreadCrumb breadcrumbs={breadCrumbPath} />
-            <ProductPageImage
-              imageList={imageList}
-              selectedVariant={selectedVariant}
-            />
+            <ProductPageImage selectedVariant={selectedVariant} />
           </div>
           <div className="col-md-6 col-sm-6 col-xs-12">
             {productDescription}
@@ -177,7 +176,7 @@ function Product(props) {
 export async function getStaticProps(context) {
   const slug = context.params.slug
   const baseUrl = data.apiUrl
-  const url = baseUrl + `products/single/${slug}/?resize_w=375`
+  const url = baseUrl + `products/single/${slug}/?resize_w=700`
   const res = await fetch(url)
   let error = null
   const productData = await res.json()

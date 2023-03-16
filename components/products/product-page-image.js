@@ -2,13 +2,14 @@ import {useState, useEffect} from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import {Image} from '@mui/icons-material'
 
 export default function ProductPageImage(props) {
   const [nav1, setNav1] = useState(null)
   const [nav2, setNav2] = useState(null)
   let slider1 = []
   let slider2 = []
-  let imageList = props.imageList
+  let imageList = props.selectedVariant.image_list
 
   function sortByImageType(a, b) {
     if (a.main) {
@@ -49,24 +50,27 @@ export default function ProductPageImage(props) {
 
   let images = imageList.map((image, index) => {
     return (
-      <div key={index}>
-        <picture>
-          <source srcSet={image.webp} type="image/webp" />
-          <source srcSet={image.resized} media="(max-width: 600px)" />
-          <img
-            src={image.image}
-            alt={image.alternate_text}
-            width={image.width}
-            height={image.height}
-            className="thumbnail-holder"
-          />
-        </picture>
-      </div>
+      <picture key={index}>
+        <source srcSet={image.webp} type="image/webp" />
+        <source srcSet={image.resized} media="(max-width: 600px)" />
+        <img
+          src={image.image}
+          alt={image.alternate_text}
+          width={image.width}
+          height={image.height}
+          className="thumbnail-holder"
+        />
+      </picture>
     )
   })
   return (
     <div className="product-photo-holder">
-      <Slider slidesToShow={1} asNavFor={nav2} ref={slider => (slider1 = slider)} className="main-image-slider">
+      <Slider
+        slidesToShow={1}
+        asNavFor={nav2}
+        ref={slider => (slider1 = slider)}
+        className="main-image-slider"
+      >
         {images}
       </Slider>
       <Slider

@@ -13,11 +13,10 @@ export default function threeD() {
     loader.load(
       '/assets/models/scalp.gltf',
       function (gltf) {
-        console.log(gltf.scene)
-        gltf.scene.position.set(0.6, -0.4, 1)
-        gltf.scene.scale.set(0.3, 0.3, 0.3)
-        gltf.scene.rotateY(-0.5)
-        setScene(gltf.scene)
+        gltf.scene.position.y = -2 // gltf.scene.scale.set(0.3, 0.3, 0.3)
+        const model = gltf.scene // gltf.scene.axis
+        // model.rotateY(-1.2)
+        setScene(model)
       },
       undefined,
       function (error) {
@@ -26,36 +25,128 @@ export default function threeD() {
     )
   }, [])
   React.useEffect(() => {
+    const sizes = {
+      width: window.innerWidth,
+      height: window.innerHeight,
+      camera: {
+        position: {
+          x: 29,
+          y: 10,
+          z: 20,
+        },
+        lookAt: {
+          x: 100,
+          y: 3,
+          z: 0,
+        },
+      },
+      ambientLight: {
+        color: 0xffffff,
+        intensity: 0.9,
+      },
+      directionalLight: {
+        color: 0xffffff,
+        intensity: 0.5,
+        position: {
+          x: 6,
+          y: 0,
+          z: 4,
+        },
+      },
+      renderer: {
+        pixelRatio: 6,
+      },
+    }
+
+    // renderer
     const renderer = new THREE.WebGLRenderer({
       canvas: canva.current,
       alpha: true,
     })
-    renderer.setSize(900, 900)
+
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(sizes.renderer.pixelRatio)
+    // camera
     const camera = new THREE.PerspectiveCamera(
-      40,
-      canva.current.clientWidth / canva.current.clientHeight,
-      0.01,
+      50,
+      sizes.width / sizes.height,
+      0.1,
       20000,
     )
-    camera.position.set(2, 3, 5)
+    camera.position.set(
+      sizes.camera.position.x,
+      sizes.camera.position.y,
+      sizes.camera.position.z,
+    )
 
-    const controls = new OrbitControls(camera, renderer.domElement)
-    controls.target.set(0, 0.2, 0)
+    // ambientLight
+    var ambientLight = new THREE.AmbientLight(
+      sizes.ambientLight.color,
+      sizes.ambientLight.intensity,
+    )
+    var directionalLight = new THREE.DirectionalLight(
+      sizes.directionalLight.color,
+      sizes.directionalLight.intensity,
+    )
+
+    // scene.position.x = camera.position.x
+    if (scene) {
+      // Box3
+      const box = new THREE.Box3()
+      // box3 bounding box
+      const boundingBox = box.setFromObject(scene)
+      console.log(boundingBox)
+      // create a grid helper
+      const size = 10
+      const divisions = 10
+      // const gridHelper = new THREE.GridHelper(size, divisions)
+      // scene.add(gridHelper)
+      // // axis helper
+      // const axesHelper = new THREE.AxesHelper(5)
+      // scene.add(axesHelper)
+      // // camera helper
+      // const cameraHelper = new THREE.CameraHelper(camera)
+      // scene.add(cameraHelper)
+      // // box helper
+      // const boxHelper = new THREE.Box3Helper(box, 0xffff00)
+      // scene.add(boxHelper)
+      // camera.position.set(boundingBox.max)
+      camera.lookAt(
+        sizes.camera.lookAt.x,
+        sizes.camera.lookAt.y,
+        sizes.camera.lookAt.z,
+      )
+      directionalLight.position.set(
+        sizes.directionalLight.position.x,
+        sizes.directionalLight.position.y,
+        sizes.directionalLight.position.z,
+      )
+      console.log(camera)
+      console.log(scene)
+      console.log(renderer)
+    }
+
+    // renderer.setScissor(1, 1, 1, 1)
+    // renderer.setClearColor(0xd2d2d2, 0.5) // border color
+    // renderer.clearColor() // clear color buffer
+    // controls
+    const controls = new OrbitControls(camera, canva.current)
+    // controls.target.set(0, 0.2, 0)
+
     controls.update()
-    controls.enablePan = true
+    controls.enablePan = false
+    controls.enableZoom = true
     controls.enableDamping = true
-    var ambientLight = new THREE.AmbientLight(0xffffff, 0.6)
-
-    var directionalLight = new THREE.DirectionalLight(0xdddddd, 0.8)
-    directionalLight.position.set(0, 1, 1)
+    controls.autoRotate = true
+    controls.autoRotateSpeed = 5
     function render() {
       requestAnimationFrame(render)
       if (scene) {
-        // camera.lookAt(scene.position)
-        scene.background = new THREE.Color('0xff0000')
+        // scene.background = new THREE.Color('0xff0000')
+
         scene.add(ambientLight)
         scene.add(directionalLight)
-        renderer.setClearColor(0xffffff, 0)
+        renderer.setClearColor(0xffffff, 1)
         renderer.render(scene, camera)
         setLoaded(true)
       }
@@ -64,7 +155,13 @@ export default function threeD() {
   }, [scene])
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center'}}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        border: '1px solid red',
+      }}
+    >
       <canvas ref={canva}></canvas>
     </div>
   )

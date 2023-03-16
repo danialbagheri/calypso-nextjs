@@ -23,7 +23,7 @@ function Faq(props) {
         </Typography>
 
         {Object.values(props).map(faqDetail => (
-          <Accordion key={faqDetail.id} disableSpacing disableGutters>
+          <Accordion key={faqDetail.id} disableGutters>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon color={'secondary'} />}
               aria-controls="panel1a-content"
@@ -34,11 +34,7 @@ function Faq(props) {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography variant={'body1'}>
-                <span
-                  dangerouslySetInnerHTML={{__html: faqDetail.answer}}
-                ></span>
-              </Typography>
+              <div dangerouslySetInnerHTML={{__html: faqDetail.answer}}></div>
             </AccordionDetails>
           </Accordion>
         ))}
