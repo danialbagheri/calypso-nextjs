@@ -12,11 +12,12 @@ export default function ProductPageImage(props) {
   let imageList = props.selectedVariant.image_list
 
   function sortByImageType(a, b) {
+    console.log(a)
     if (a.main) {
       return -2
     }
     if (a.image_type === 'PI') {
-      return -1
+      return 1
     }
     return 0
   }

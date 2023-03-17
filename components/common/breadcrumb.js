@@ -1,27 +1,31 @@
-import React from "react";
+import React from 'react'
+import Breadcrumbs from '@mui/material/Breadcrumbs'
+import Link from '@mui/material/Link'
 
-export default class BreadCrumb extends React.Component {
-  render() {
-    const { breadcrumbs } = this.props;
-
-    const children = breadcrumbs.map((child, index) => {
-      return (
-        <li property="itemListElement" typeof="ListItem" key={index}>
-          <a property="item" typeof="WebPage" href={child.url}>
-            <span property="name">{child.name}</span>
-          </a>
-          <meta property="position" content={index} />
-        </li>
-      );
-    });
-    return (
-      <ol
-        className="breadcrumb"
-        vocab="https://schema.org/"
-        typeof="BreadcrumbList"
-      >
-        {children}
-      </ol>
-    );
+export default function BreadCrumb(props) {
+  const {breadcrumbs} = props
+  function handleClick(event) {
+    event.preventDefault()
+    console.info('You clicked a breadcrumb.')
   }
+  const children = breadcrumbs.map((child, index) => {
+    return (
+      <Link
+        underline="hover"
+        color="inherit"
+        typeof="WebPage"
+        href={child.url}
+        key={index}
+      >
+        <span property="name">{child.name}</span>
+      </Link>
+    )
+  })
+  return (
+    <div role="presentation" onClick={handleClick} style={{margin: '10px'}}>
+      <Breadcrumbs aria-label="breadcrumb" typeof="BreadcrumbList">
+        {children}
+      </Breadcrumbs>
+    </div>
+  )
 }
