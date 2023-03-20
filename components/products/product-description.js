@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import ShareButton from '../common/shareButton'
 import {useShopify} from '../hooks'
-import StarRatingCustom from '../common/star-rating-custom'
+import Box from '@mui/material/Box'
 import * as ga from '../common/googleAnalytics'
 import ProductQuantity from './detail/product-quantity'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -9,6 +9,7 @@ import {faTruck} from '@fortawesome/free-solid-svg-icons'
 import DispatchTime from './detail/dispatch-time'
 import DirectionOfUse from './detail/DirectionOfUse'
 import ShowPrice from './detail/price/show-price'
+import StarRating from './StarRating/StarRating'
 
 export default function ProductDescription(props) {
   const product = props.product
@@ -51,23 +52,16 @@ export default function ProductDescription(props) {
         {product.name}
       </h1>
       <h3 className="productPrice">{product.sub_title}</h3>
-      <div className="review-count-product-description">
-        <div className="star-rating">
-          <StarRatingCustom
-            name={product.name}
-            // className="star-rating"
-            value={product.review_average_score}
-            halfStarSize={'2rem'}
-          />
-        </div>
-        <a href="#readReviews" className="read-reviews">
+      <Box sx={{display: 'flex', alignItems: 'flex-start', gap: 2, mt: 2}}>
+        <StarRating score={product.review_average_score} name={product.name} />
+        <a href="#readReviews">
           {product.total_review_count >= 1 ? (
             <span>Read {product.total_review_count} reviews</span>
           ) : (
             <span>Be the first to review to this product</span>
           )}
         </a>
-      </div>
+      </Box>
       <div
         className="text-lg mb-2"
         dangerouslySetInnerHTML={{
@@ -80,7 +74,8 @@ export default function ProductDescription(props) {
 
       {selectedVariant.inventory_quantity > 0 ? (
         <p className="text-sm">
-          <span style={{marginRight: '10px'}}>🟢</span> In stock - <DispatchTime />
+          <span style={{marginRight: '10px'}}>🟢</span> In stock -{' '}
+          <DispatchTime />
         </p>
       ) : null}
       <h2 className="productPrice">
@@ -88,9 +83,13 @@ export default function ProductDescription(props) {
           <ShowPrice selectedVariant={selectedVariant} />
         </span>
       </h2>
-      {selectedVariant.size ? <small>Size: {selectedVariant.size} | </small> : null}
+      {selectedVariant.size ? (
+        <small>Size: {selectedVariant.size} | </small>
+      ) : null}
 
-      {selectedVariant.price_per_100ml ? <small>£{selectedVariant.price_per_100ml} per 100ml</small> : null}
+      {selectedVariant.price_per_100ml ? (
+        <small>£{selectedVariant.price_per_100ml} per 100ml</small>
+      ) : null}
 
       <div className="deliveryInfo">
         <FontAwesomeIcon icon={faTruck} className="calypso-orange-text" />
@@ -103,15 +102,27 @@ export default function ProductDescription(props) {
       <div className="addToCartContainer">{props.child}</div>
 
       <div className="addToCartContainer">
-        <ProductQuantity selectedQuantity={selectedQuantity} setQuantity={setSelectedQuantity} />
+        <ProductQuantity
+          selectedQuantity={selectedQuantity}
+          setQuantity={setSelectedQuantity}
+        />
         <button
-          className={selectedVariant.inventory_quantity > 0 ? 'addToCart' : 'addToCartDisabed'}
+          className={
+            selectedVariant.inventory_quantity > 0
+              ? 'addToCart'
+              : 'addToCartDisabed'
+          }
           onClick={() => {
-            addToBasket(selectedVariant.shopify_storefront_variant_id, selectedQuantity)
+            addToBasket(
+              selectedVariant.shopify_storefront_variant_id,
+              selectedQuantity,
+            )
           }}
           disabled={selectedVariant.inventory_quantity > 0 ? false : true}
         >
-          {selectedVariant.inventory_quantity > 0 ? 'Add to Cart' : 'Out of Stock'}
+          {selectedVariant.inventory_quantity > 0
+            ? 'Add to Cart'
+            : 'Out of Stock'}
         </button>
       </div>
 

@@ -1,6 +1,14 @@
 import Head from 'next/head'
 
-import {AsSeen, BestSeller, BlogSlider, HomeSlider, Instagram, StaySafe, Trending, MUIThemeProvider} from 'components'
+import {
+  AsSeen,
+  BestSeller,
+  BlogSlider,
+  HomeSlider,
+  Instagram,
+  StaySafe,
+  Trending,
+} from 'components'
 
 import {getCollectionBanner} from 'services'
 
@@ -10,40 +18,40 @@ function Home({slides, isLoaded, trending, bestseller, secondarySlides}) {
       <Head>
         <title>Calypso Sun - Bring out the sunshine - Calypso</title>
         <meta
-          name='description'
-          content='Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers.'
+          name="description"
+          content="Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers."
         />
         <meta
-          name='twitter:card'
-          value='Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers.'
-        />
-
-        <meta
-          property='og:title'
-          content='Calypso Sun - Bring out the sunshine - Calypso'
+          name="twitter:card"
+          value="Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers."
         />
 
-        <meta property='og:type' content='article' />
-        <meta property='og:url' content='https://www.calypsosun.com/' />
         <meta
-          property='og:image'
-          content='https://calypsosun.com/social-media.png'
+          property="og:title"
+          content="Calypso Sun - Bring out the sunshine - Calypso"
+        />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.calypsosun.com/" />
+        <meta
+          property="og:image"
+          content="https://calypsosun.com/social-media.png"
         />
         <meta
-          property='og:description'
-          content='Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers.'
+          property="og:description"
+          content="Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers."
         />
       </Head>
 
       <main>
-        <section className='top-0'>
+        <section className="top-0">
           <HomeSlider slides={slides} isLoaded={isLoaded} />
-          <div className='container-fluid'>
+          <div className="container-fluid">
             <Trending trending={trending} />
           </div>
-          <div className='mt-5'></div>
+          <div className="mt-5"></div>
           <HomeSlider slides={secondarySlides} isLoaded={isLoaded} />
-          <div className='mt-5'></div>
+          <div className="mt-5"></div>
           <BestSeller bestseller={bestseller} />
           <StaySafe />
           <AsSeen />

@@ -1,13 +1,13 @@
-import { useState } from "react";
-import Link from "next/link";
+import {useState} from 'react'
+import Link from 'next/link'
 
-import AddToBasketWithDropDown from "../detail/add-to-basket-with-dropdown";
-import StarRatingCustom from "../../common/star-rating-custom";
-import ShowPrice from "./price/show-price";
+import AddToBasketWithDropDown from '../detail/add-to-basket-with-dropdown'
+import ShowPrice from './price/show-price'
+import StarRating from '../StarRating/StarRating'
 
 export default function ProductRangeItem(props) {
-  const { product } = props;
-  const [activeVariant, setActiveVariant] = useState(product.variants[0]);
+  const {product} = props
+  const [activeVariant, setActiveVariant] = useState(product.variants[0])
 
   return (
     <div
@@ -36,12 +36,10 @@ export default function ProductRangeItem(props) {
             <p className="mt-0 mb-0">
               <small>{product.sub_title}</small>
             </p>
-            <div style={{ marginTop: "0.5rem" }} className="mb-0 float-right">
-              <StarRatingCustom
-                value={product.review_average_score}
+            <div style={{marginTop: '0.5rem'}} className="mb-0 float-right">
+              <StarRating
                 name={product.name}
-                halfStarSize={"1.6rem"}
-                className="trending-box-star"
+                score={product.review_average_score}
               />
             </div>
             <hr className="m-0" />
@@ -59,5 +57,5 @@ export default function ProductRangeItem(props) {
         setActiveVariant={setActiveVariant}
       />
     </div>
-  );
+  )
 }

@@ -1,16 +1,17 @@
-import { useState } from "react";
-import _ from "lodash";
-import StarRatingCustom from "../../common/star-rating-custom";
-import Link from "next/link";
-import Styles from "../../../styles/bestseller.module.css";
-import AddToBasketWithDropDown from "../../products/detail/add-to-basket-with-dropdown";
-import ShowPrice from "../../products/product-range/price/show-price";
+import {useState} from 'react'
+import _ from 'lodash'
+import {Typography} from '@mui/material'
+import Link from 'next/link'
+import Styles from '../../../styles/bestseller.module.css'
+import AddToBasketWithDropDown from '../../products/detail/add-to-basket-with-dropdown'
+import ShowPrice from '../../products/product-range/price/show-price'
+import StarRating from 'components/products/StarRating/StarRating'
 
 export default function BestSellerItems(props) {
-  const i = props.item.item;
-  const [showButton, setShowButton] = useState(false);
-  const [activeVariant, setActiveVariant] = useState(i.variants[0]);
-  const showBox = () => setShowButton(!showButton);
+  const i = props.item.item
+  const [showButton, setShowButton] = useState(false)
+  const [activeVariant, setActiveVariant] = useState(i.variants[0])
+  const showBox = () => setShowButton(!showButton)
 
   return (
     <div
@@ -22,12 +23,9 @@ export default function BestSellerItems(props) {
       <Link href={`/products/${i.slug}`}>
         <a>
           <div className={Styles.starRating}>
-            <StarRatingCustom
-              name={i.name}
-              value={i.review_average_score}
-              className="trending-box-star"
-              halfStarSize="17px"
-            />
+            <Typography variant="body2">
+              <StarRating name={i.name} score={i.review_average_score} />
+            </Typography>
           </div>
           {showButton ? (
             <div className={Styles.lifeStylePicture}>
@@ -64,5 +62,5 @@ export default function BestSellerItems(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }

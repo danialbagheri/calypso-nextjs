@@ -12,7 +12,6 @@ export default function ProductPageImage(props) {
   let imageList = props.selectedVariant.image_list
 
   function sortByImageType(a, b) {
-    console.log(a)
     if (a.main) {
       return -2
     }

@@ -1,8 +1,7 @@
 import React from 'react'
-// import StarRatingComponent from "react-star-rating-component";
 import Link from 'next/link'
 import Image from 'next/image'
-import StarRatingCustom from '../../common/star-rating-custom'
+import StarRating from 'components/products/StarRating/StarRating'
 
 export default function TrendingItem(props) {
   const {product} = props
@@ -37,14 +36,14 @@ export default function TrendingItem(props) {
           <br />
           {product.sub_title}
         </p>
-        <p className="trending-box-price">From £{product.lowest_variant_price}</p>
+        <p className="trending-box-price">
+          From £{product.lowest_variant_price}
+        </p>
 
         <div className="trending-star-review-container">
-          <StarRatingCustom
+          <StarRating
             name={product.name}
-            value={product.review_average_score}
-            className="trending-box-star"
-            halfStarSize="16px"
+            score={product.review_average_score}
           />
           <div>{product.review_average_score}</div>
         </div>

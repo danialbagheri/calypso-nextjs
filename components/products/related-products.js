@@ -2,8 +2,7 @@ import Styles from '../../styles/relatedProducts.module.css'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import StarRatingCustom from '../common/star-rating-custom'
-
+import StarRating from './StarRating/StarRating'
 export default function RelatedProducts({related}) {
   const settings = {
     arrows: true,
@@ -61,11 +60,9 @@ export default function RelatedProducts({related}) {
             </div>
 
             <div className={Styles.bottomText}>
-              <StarRatingCustom
-                value={product.review_average_score}
+              <StarRating
+                score={product.review_average_score}
                 name={product.name}
-                className={Styles.starReview}
-                halfStarSize={'1.2rem'}
               />
               <p>
                 <strong>{product.name}</strong> <br />

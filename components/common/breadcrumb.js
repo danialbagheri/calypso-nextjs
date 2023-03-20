@@ -6,7 +6,6 @@ export default function BreadCrumb(props) {
   const {breadcrumbs} = props
   function handleClick(event) {
     event.preventDefault()
-    console.info('You clicked a breadcrumb.')
   }
   const children = breadcrumbs.map((child, index) => {
     return (

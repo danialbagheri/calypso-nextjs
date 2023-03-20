@@ -70,6 +70,9 @@
   position: absolute;
   right: 0;
 }
+.starRating > p > span {
+  font-size: 1.6rem;
+}
 
 .addToBasket {
   padding: 5px 10px;
