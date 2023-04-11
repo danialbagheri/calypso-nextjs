@@ -7,6 +7,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import {ReviewContext} from 'components/CustomersReview/ReviewProvider'
 import {useTheme} from '@mui/material'
+import Link from 'next/dist/client/link'
 
 function WriteReview() {
   const [reviewState] = React.useContext(ReviewContext)
@@ -16,7 +17,6 @@ function WriteReview() {
     <Box textAlign={'center'}>
       <Button
         variant="contained"
-        href={`./write-review?slug=${reviewState.slug}`}
         sx={{
           padding: '12px 32px',
           borderRadius: 20,
@@ -46,7 +46,7 @@ function WriteReview() {
           </svg>
         }
       >
-        <Typography variant={'body4'}>WRITE A REVIEW</Typography>
+        <Link href={`./write-review?slug=${reviewState.slug}`} variant={'body4'}>WRITE A REVIEW</Link>
       </Button>
 
       <Box mt={4}>
