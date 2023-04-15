@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-import {useRouter} from 'next/router'
-
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
@@ -46,7 +44,12 @@ function WriteReview() {
           </svg>
         }
       >
-        <Link href={`./write-review?slug=${reviewState.slug}`} variant={'body4'}>WRITE A REVIEW</Link>
+        <Link
+          href={`./write-review?slug=${reviewState.slug}`}
+          variant={'body4'}
+        >
+          WRITE A REVIEW
+        </Link>
       </Button>
 
       <Box mt={4}>
