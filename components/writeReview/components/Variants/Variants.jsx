@@ -37,7 +37,7 @@ function Variants(props) {
   return (
     <Box>
       <Box textAlign={'center'} mt={15}>
-        <Typography variant={'h3'}>Your Once A Day Review</Typography>
+        <Typography variant={'h3'}>Your {product.name} Review</Typography>
         {product.variants?.length > 1 ? (
           <Typography variant={'body3'}>
             Please select which product variant you are reviewing
