@@ -12,23 +12,25 @@ export default function TrendingItem(props) {
   }
   return (
     <div className="trending-item-parent">
-      <Link href={`/products/${product.slug}`}>
-        <a className="trending-box-image" onMouseEnter={toggleHover}>
-          <Image
-            src={product.main_image || '/advice/placeholder.png'}
-            alt={product.name}
-            className={hover ? 'd-none' : 'd-block'}
-            layout="fill"
-            objectFit="contain"
-          />
-          <Image
-            src={product.secondary_image || '/advice/placeholder.png'}
-            alt={product.name}
-            className={hover ? 'd-block' : 'd-none'}
-            layout="fill"
-            objectFit="cover"
-          />
-        </a>
+      <Link
+        href={`/products/${product.slug}`}
+        className="trending-box-image"
+        onMouseEnter={toggleHover}
+      >
+        <Image
+          src={product.main_image || '/advice/placeholder.png'}
+          alt={product.name}
+          className={hover ? 'd-none' : 'd-block'}
+          fill
+          sizes="(max-width: 450px) 150,(max-width: 768px) 262, (max-width: 1200px) 262, 262"
+        />
+        <Image
+          src={product.secondary_image || '/advice/placeholder.png'}
+          alt={product.name}
+          className={hover ? 'd-block' : 'd-none'}
+          fill
+          sizes="(max-width: 450px) 150,(max-width: 768px) 262, (max-width: 1200px) 262, 262"
+        />
       </Link>
       <div className="trending-box-text">
         <p>

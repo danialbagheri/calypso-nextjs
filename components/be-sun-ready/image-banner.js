@@ -1,16 +1,15 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react'
+import Image from 'next/image'
 export default class ImageBanner extends React.Component {
   render() {
     return (
       <div itemScope itemType="http://schema.org/FAQPage">
         <div className="faq-row">
-          <div style={{ width: "100%", height: "420px" }}>
+          <div style={{width: '100%', height: '420px'}}>
             <Image
               src="/be-sun-ready/banner-sun-safe.png"
               alt="Frequently Asked Questions"
               objectFit="cover"
-              layout="fill"
               objectPosition="right 50%"
             />
           </div>
@@ -23,6 +22,6 @@ export default class ImageBanner extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }

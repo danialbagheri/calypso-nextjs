@@ -1,6 +1,5 @@
 import * as React from 'react'
 
-import reviewImage from 'public/assets/review/logoWhite.png'
 import {
   ReviewRate,
   ReviewerInfo,
@@ -59,7 +58,7 @@ function WriteReview() {
               margin: '0 auto',
               paddingTop: '47.06%',
               width: '100%',
-              backgroundImage: `url("${reviewImage}")`,
+              backgroundImage: `url("/assets/review/logoWhite.png")`,
               backgroundPosition: 'center',
               backgroundSize: 'contain',
               backgroundRepeat: 'no-repeat',

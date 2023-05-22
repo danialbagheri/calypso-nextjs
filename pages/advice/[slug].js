@@ -1,17 +1,16 @@
-// import { useState, useEffect } from "react";
-import BlogSlider from "../../components/blogs/blog-slider";
-import ShareButton from "../../components/common/shareButton";
-import Image from "next/image";
-import data from "../../data.json";
-import Head from "next/head";
+import BlogSlider from '../../components/blogs/blog-slider'
+import ShareButton from '../../components/common/shareButton'
+import Image from 'next/image'
+import data from '../../data.json'
+import Head from 'next/head'
 
-function Article({ blog }) {
+function Article({blog}) {
   let blogColor = blog.backround_color_hex
     ? blog.backround_color_hex
-    : "#ffb900";
+    : '#ffb900'
   const customColor = {
     backgroundImage: `linear-gradient(to left,rgba(255, 0, 0, 0) 2%,${blogColor} 40%)`,
-  };
+  }
   const content = (
     <article
       className="jumbotron top20"
@@ -48,10 +47,9 @@ function Article({ blog }) {
               <picture>
                 <Image
                   itemProp="url contentUrl"
-                  src={blog.image || "/advice/placeholder.png"}
+                  src={blog.image || '/advice/placeholder.png'}
                   className="blog-post-image"
                   alt={blog.alt_text}
-                  layout="responsive"
                   height={blog.image_height}
                   width={blog.image_width}
                 />
@@ -69,7 +67,7 @@ function Article({ blog }) {
 
             <div
               itemProp="articleBody"
-              dangerouslySetInnerHTML={{ __html: blog.body }}
+              dangerouslySetInnerHTML={{__html: blog.body}}
             />
             {/* <RelatedProducts products={blog.related_products} /> */}
           </div>
@@ -79,64 +77,60 @@ function Article({ blog }) {
       <BlogSlider />
       <div className="top50" />
     </article>
-  );
-  const singleBlogPage = blog ? (
-    content
-  ) : (
-    <div className="p-2 general-loader" />
-  );
-  return singleBlogPage;
+  )
+  const singleBlogPage = blog ? content : <div className="p-2 general-loader" />
+  return singleBlogPage
 }
 
 export async function getStaticProps(context) {
-  const slug = context.params.slug;
-  const baseUrl = data.apiUrl;
-  const url = baseUrl + "blogs/all/" + slug + "/?resize_h=510";
-  const res = await fetch(url);
-  const blog = await res.json();
+  const slug = context.params.slug
+  const baseUrl = data.apiUrl
+  const url = baseUrl + 'blogs/all/' + slug + '/?resize_h=510'
+  const res = await fetch(url)
+  const blog = await res.json()
 
   return {
     props: {
       blog,
     },
     revalidate: 120,
-  };
+  }
 }
 
 async function getAllPages(pageCount, url) {
-  let pageNumber = 1;
-  let blogsResult = [];
+  let pageNumber = 1
+  let blogsResult = []
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    let paginatedUrl = url + `?page=${pageNumber}`;
-    const res = await fetch(paginatedUrl);
-    const blogs = await res.json();
-    blogsResult.push(blogs.results);
+    let paginatedUrl = url + `?page=${pageNumber}`
+    const res = await fetch(paginatedUrl)
+    const blogs = await res.json()
+    blogsResult.push(blogs.results)
   }
-  return blogsResult;
+  return blogsResult
 }
 
 export async function getStaticPaths() {
   // const baseUrl = data.apiUrl;
-  const baseUrl = "https://service.calypsosun.com/api/";
-  const url = baseUrl + `blogs/all/`;
-  const res = await fetch(url);
-  const blogs = await res.json();
-  const pageCount = Math.ceil(blogs.count / 10);
-  let blogsResult = await getAllPages(pageCount, url);
-  let slugPaths = [];
+  const baseUrl = 'https://service.calypsosun.com/api/'
+  const url = baseUrl + `blogs/all/`
+  const res = await fetch(url)
+  const blogs = await res.json()
+  const pageCount = Math.ceil(blogs.count / 10)
+  let blogsResult = await getAllPages(pageCount, url)
+  let slugPaths = []
   for (let i = 0; i < blogsResult.length; i++) {
-    let slugs = blogsResult[i].map((item) => {
+    let slugs = blogsResult[i].map(item => {
       return {
         params: {
           slug: item.slug,
         },
-      };
-    });
-    Array.prototype.push.apply(slugPaths, slugs);
+      }
+    })
+    Array.prototype.push.apply(slugPaths, slugs)
   }
   return {
     paths: slugPaths,
     fallback: false,
-  };
+  }
 }
-export default Article;
+export default Article

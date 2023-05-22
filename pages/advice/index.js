@@ -1,34 +1,34 @@
-import { useState } from "react";
-import BreadCrumb from "../../components/common/breadcrumb";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import Styles from "../../styles/adviceIndex.module.css";
-import _ from "lodash";
+import {useState} from 'react'
+import BreadCrumb from '../../components/common/breadcrumb'
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+import Styles from '../../styles/adviceIndex.module.css'
+import _ from 'lodash'
 // import BlogFilters from "../../components/blogs/blog-filters";
 
-export default function Advice({ posts, count }) {
-  const [blogs, setBlogs] = useState(posts);
-  const [limit, setLimit] = useState(10);
-  const [maxLimit, setMaxLimit] = useState(false);
+export default function Advice({posts, count}) {
+  const [blogs, setBlogs] = useState(posts)
+  const [limit, setLimit] = useState(10)
+  const [maxLimit, setMaxLimit] = useState(false)
 
   function loadMore() {
-    const newLimit = limit + 10;
+    const newLimit = limit + 10
     if (newLimit >= blogs.length) {
-      setLimit(blogs.length);
-      setMaxLimit(true);
+      setLimit(blogs.length)
+      setMaxLimit(true)
     } else {
-      setLimit(newLimit);
+      setLimit(newLimit)
     }
   }
 
-  let thumbnail;
+  let thumbnail
   const breadcrumbPath = [
-    { name: "Home", url: "/" },
-    { name: "Articles", url: "/articles" },
-  ];
+    {name: 'Home', url: '/'},
+    {name: 'Articles', url: '/articles'},
+  ]
   if (!blogs) {
-    thumbnail = <div> Loading...</div>;
+    thumbnail = <div> Loading...</div>
   } else {
     thumbnail = blogs.slice(0, limit).map((blog, index) => {
       return (
@@ -37,12 +37,10 @@ export default function Advice({ posts, count }) {
             <div className="blog-card bg-white">
               <div className="blog-image">
                 <Image
-                  src={blog.resized || "/advice/placeholder.png"}
+                  src={blog.resized || '/advice/placeholder.png'}
                   alt={blog.image_alt_text}
-                  layout="fill"
-                  objectFit="cover"
-                  // height={blog.image_height}
-                  // width={blog.image_width}
+                  fill
+                  style={{objectFit: 'cover'}}
                 />
               </div>
               <div className={Styles.CardBody}>
@@ -57,8 +55,8 @@ export default function Advice({ posts, count }) {
             </div>
           </Link>
         </div>
-      );
-    });
+      )
+    })
   }
   return (
     <div className="container-fluid bg-secondary mt-0">
@@ -82,8 +80,8 @@ export default function Advice({ posts, count }) {
           {maxLimit ? null : (
             <button
               className="text-centre btn btn-outline-calypso mb-3"
-              onClick={(evt) => {
-                loadMore(evt);
+              onClick={evt => {
+                loadMore(evt)
               }}
             >
               Load More
@@ -92,34 +90,34 @@ export default function Advice({ posts, count }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 async function getAllPages(pageCount, url) {
-  let pageNumber = 1;
-  let blogResult = [];
+  let pageNumber = 1
+  let blogResult = []
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    let paginatedUrl = url + `&page=${pageNumber}`;
-    const res = await fetch(paginatedUrl);
-    const product = await res.json();
-    blogResult.push(product.results);
+    let paginatedUrl = url + `&page=${pageNumber}`
+    const res = await fetch(paginatedUrl)
+    const product = await res.json()
+    blogResult.push(product.results)
   }
-  return blogResult;
+  return blogResult
 }
 
 export async function getStaticProps() {
-  const baseUrl = process.env.API_URL;
-  const endpoint = "blogs/all/?resize_w=500";
-  const finalUrl = baseUrl + endpoint;
-  const res = await fetch(finalUrl);
-  const articles = await res.json();
-  const pageCount = Math.ceil(articles.count / 10);
-  let blogResult = await getAllPages(pageCount, finalUrl);
+  const baseUrl = process.env.API_URL
+  const endpoint = 'blogs/all/?resize_w=500'
+  const finalUrl = baseUrl + endpoint
+  const res = await fetch(finalUrl)
+  const articles = await res.json()
+  const pageCount = Math.ceil(articles.count / 10)
+  let blogResult = await getAllPages(pageCount, finalUrl)
 
   if (!articles) {
     return {
       notFound: true,
       isLoaded: false,
-    };
+    }
   }
 
   return {
@@ -128,5 +126,5 @@ export async function getStaticProps() {
       isLoaded: true,
     }, // will be passed to the page component as props
     revalidate: 120,
-  };
+  }
 }

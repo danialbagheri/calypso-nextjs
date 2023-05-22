@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react'
+import Image from 'next/image'
 
 export default function AboutUsBanner() {
   return (
@@ -7,10 +7,9 @@ export default function AboutUsBanner() {
       <Image
         src="/about-us/about-us-banner.jpg"
         alt="Frequently Asked Questions"
-        layout="responsive"
         width={1400}
         height={530}
       />
     </div>
-  );
+  )
 }

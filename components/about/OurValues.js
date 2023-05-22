@@ -1,13 +1,13 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react'
+import Image from 'next/image'
 
 export default function OurValues() {
   // Declare a new state variable, which we'll call "count"
-  const ourValues = require("../../public/about-us/our-values.png");
+  const ourValues = '/about-us/our-values.png'
 
   return (
     <section
-      style={{ backgroundImage: `url(${ourValues})` }}
+      style={{backgroundImage: `url(${ourValues})`}}
       className="our-values-container container-fluid"
     >
       <div className="our-values-icon-holder">
@@ -18,8 +18,8 @@ export default function OurValues() {
               <Image
                 src="/about-us/quality-icon.png"
                 alt="Quality icon"
-                width="70px"
-                height="97px"
+                width="70"
+                height="97"
               />
             </div>
             <h5 className="text-centre calypso-orange-text">QUALITY</h5>
@@ -34,8 +34,8 @@ export default function OurValues() {
               <Image
                 src="/about-us/ethical-award-icon.png"
                 alt="Quality icon"
-                width="70px"
-                height="97px"
+                width="70"
+                height="97"
               />
             </div>
             <h5 className="text-centre calypso-orange-text">ETHICS</h5>
@@ -50,8 +50,8 @@ export default function OurValues() {
               <Image
                 src="/about-us/innovation-icon.png"
                 alt="Quality icon"
-                width="97px"
-                height="97px"
+                width="97"
+                height="97"
               />
             </div>
             <h5 className="text-centre calypso-orange-text">INNOVATION</h5>
@@ -64,5 +64,5 @@ export default function OurValues() {
         </div>
       </div>
     </section>
-  );
+  )
 }

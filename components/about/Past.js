@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react'
+import Image from 'next/image'
 
 export default function Past() {
   // Declare a new state variable, which we'll call "count"
@@ -12,7 +12,6 @@ export default function Past() {
             alt="Calypso 1999 to 2019 products"
             width={1400}
             height={713}
-            layout="responsive"
           />
         </div>
         <div className="col-4 col-md-4 text-centre col-sm-12 our-history-row-text">
@@ -33,5 +32,5 @@ export default function Past() {
         </div>
       </div>
     </section>
-  );
+  )
 }

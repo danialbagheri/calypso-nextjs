@@ -1,15 +1,15 @@
 // import React from "react";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import Slider from "react-slick";
-import TopBar from "./topbar";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import React, {useState, useEffect} from 'react'
+import Image from 'next/image'
+import Slider from 'react-slick'
+import TopBar from './topbar'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
-import data from "../../data.json";
+import data from '../../data.json'
 export default function InfoBar() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [items, setItems] = useState(null)
   const settings = {
     infinite: false,
     slidesToShow: 3,
@@ -41,39 +41,33 @@ export default function InfoBar() {
         },
       },
     ],
-  };
+  }
   // Similar to componentDidMount and componentDidUpdate:
   async function getInfoBarStatus() {
-    const endpoint = data.apiUrl + "web/top-bars/";
-    const res = await fetch(endpoint);
-    const json = await res.json();
-    setItems(json[0].items);
-    setIsLoaded(true);
+    const endpoint = data.apiUrl + 'web/top-bars/'
+    const res = await fetch(endpoint)
+    const json = await res.json()
+    setItems(json[0].items)
+    setIsLoaded(true)
   }
   useEffect(() => {
     // Update the document title using the browser API
-    getInfoBarStatus();
-  }, []);
+    getInfoBarStatus()
+  }, [])
 
   if (isLoaded) {
-    const infoBarItems = items.map((item) => {
+    const infoBarItems = items.map(item => {
       return (
         <div key={item.id}>
           <div className="info-bar-item">
             <div className="info-bar-icon">
-              <Image
-                src={item.icon}
-                layout="responsive"
-                width={22}
-                height={23}
-                alt={item.text}
-              />
+              <Image src={item.icon} width={23} height={23} alt={item.text} />
             </div>
             <div className="text-centre">{item.text}</div>
           </div>
         </div>
-      );
-    });
+      )
+    })
     return (
       <>
         <TopBar />
@@ -81,8 +75,8 @@ export default function InfoBar() {
           <Slider {...settings}>{infoBarItems}</Slider>
         </div>
       </>
-    );
+    )
   } else {
-    return null;
+    return null
   }
 }

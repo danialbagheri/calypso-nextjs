@@ -64,10 +64,8 @@ function Navigation() {
         itemType="https://schema.org/SiteNavigationElement"
       >
         <div className="navbar-content">
-          <Link href="/">
-            <a className="navbar-brand">
-              <img src={logo} alt="Calypso" width="150" height="47" />
-            </a>
+          <Link href="/" className="navbar-brand">
+            <img src={logo} alt="Calypso" width="150" height="47" />
           </Link>
           <ul
             className={
@@ -75,28 +73,27 @@ function Navigation() {
             }
           >
             <li>
-              <ActiveLink exact href="/">
-                <a
-                  itemProp="url"
-                  className="nav-link"
-                  onClick={e => CloseMobileMenu(e)}
-                >
-                  Home
-                </a>
+              <ActiveLink
+                exact="true"
+                href="/"
+                itemProp="url"
+                className="nav-link"
+                onClick={e => CloseMobileMenu(e)}
+              >
+                Home
               </ActiveLink>
             </li>
             <li
               onMouseEnter={() => toggleMegaMenu(true)}
               onMouseLeave={() => toggleMegaMenu(false)}
             >
-              <ActiveLink href="/products">
-                <a
-                  itemProp="url"
-                  className="nav-link"
-                  onClick={e => CloseMobileMenu(e)}
-                >
-                  Products
-                </a>
+              <ActiveLink
+                href="/products"
+                itemProp="url"
+                className="nav-link"
+                onClick={e => CloseMobileMenu(e)}
+              >
+                Products
               </ActiveLink>
               {showMegaMenu && <MegaMenu products={productsPageMegaMenu} />}
             </li>
@@ -110,41 +107,37 @@ function Navigation() {
             </ActiveLink>
           </li> */}
             <li>
-              <ActiveLink href="/be-sun-ready">
-                <a
-                  itemProp="url"
-                  className="nav-link"
-                  onClick={e => CloseMobileMenu(e)}
-                >
-                  Be Sun Ready
-                </a>
+              <ActiveLink
+                href="/be-sun-ready"
+                itemProp="url"
+                className="nav-link"
+                onClick={e => CloseMobileMenu(e)}
+              >
+                Be Sun Ready
               </ActiveLink>
             </li>
             <li>
-              <ActiveLink href="/advice">
-                <a
-                  itemProp="url"
-                  className="nav-link"
-                  onClick={e => CloseMobileMenu(e)}
-                >
-                  Advice
-                </a>
+              <ActiveLink
+                href="/advice"
+                itemProp="url"
+                className="nav-link"
+                onClick={e => CloseMobileMenu(e)}
+              >
+                Advice
               </ActiveLink>
             </li>
             <li>
-              <ActiveLink href="/about">
-                <a
-                  itemProp="url"
-                  className="nav-link"
-                  onClick={e => CloseMobileMenu(e)}
-                >
-                  About Us
-                </a>
+              <ActiveLink
+                href="/about"
+                itemProp="url"
+                className="nav-link"
+                onClick={e => CloseMobileMenu(e)}
+              >
+                About Us
               </ActiveLink>
             </li>
           </ul>
           <div className="icon-holder">
-            {/*<Link href="/search/">*/}
             <button
               className="search-icon"
               onClick={() => setOpenSearchModal(true)}
@@ -158,7 +151,6 @@ function Navigation() {
                 <SearchModal setOpenSearchModal={setOpenSearchModal} />
               ) : null}
             </button>
-            {/*</Link>*/}
             <button
               className="basket-icon"
               onClick={openCart}

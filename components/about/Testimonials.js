@@ -16,11 +16,10 @@ export default function Testimonials() {
           >
             <text
               id="_"
-              data-name="“"
               fill="#707070"
-              font-size="130"
-              font-family="Baskerville-Bold, Baskerville"
-              font-weight="700"
+              fontSize="130"
+              fontFamily="Baskerville-Bold, Baskerville"
+              fontWeight="700"
             >
               <tspan x="0" y="117">
                 “
@@ -47,12 +46,11 @@ export default function Testimonials() {
           >
             <text
               id="_"
-              data-name="”"
               transform="translate(39 117)"
               fill="#707070"
-              font-size="130"
-              font-family="Baskerville-Bold, Baskerville"
-              font-weight="700"
+              fontSize="130"
+              fontFamily="Baskerville-Bold, Baskerville"
+              fontWeight="700"
             >
               <tspan x="-38.594" y="0">
                 ”
@@ -73,11 +71,11 @@ export default function Testimonials() {
               readOnly
               emptyIcon={<StarIcon />}
             />
-            <p className="testimonial-credit">
+            <div className="testimonial-credit">
               <span>Rhonda</span>
               <br />
               <small className="handwritten">via Facebook</small>
-            </p>
+            </div>
           </div>
         </div>
       </div>

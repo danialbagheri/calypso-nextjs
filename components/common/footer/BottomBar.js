@@ -1,6 +1,6 @@
 import React from 'react'
 import PaymentIcon from './payment-icons'
-import lincoDropLet from '../../../public/home-page/Droplets.png'
+// import lincoDropLet from 'public/home-page/Droplets.png'
 import LinkIcon from '@mui/icons-material/Link'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
@@ -45,13 +45,25 @@ export default function BottomBar() {
           }}
         >
           <Box>
-            <img width={26} src={lincoDropLet} alt="Linco Care logo Icon" loading="lazy" height="auto" />
+            <img
+              width={26}
+              src={'/home-page/Droplets.png'}
+              alt="Linco Care logo Icon"
+              loading="lazy"
+              height="auto"
+            />
           </Box>
-          <p>Copyright&#169; Linco Care Ltd {date.getFullYear()} | United Kingdom</p>
+          <p>
+            Copyright&#169; Linco Care Ltd {date.getFullYear()} | United Kingdom
+          </p>
         </Box>
         <Box>
           <Box sx={{display: 'flex', gap: 2}}>
-            <a href="https://lincocare.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://lincocare.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               lincocare.com <LinkIcon />
             </a>
             <PaymentIcon />

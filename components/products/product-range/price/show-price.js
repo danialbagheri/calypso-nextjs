@@ -40,14 +40,16 @@ export default function ShowPrice(props) {
 
   if (selectedVariant.compare_at_price) {
     // calculate the discount
-    const discount = (selectedVariant.compare_at_price - selectedVariant.price) / selectedVariant.compare_at_price
+    const discount =
+      (selectedVariant.compare_at_price - selectedVariant.price) /
+      selectedVariant.compare_at_price
     const discountPercent = Math.round(discount * 100)
     return (
       <div className="product-price">
         <span className={PriceCss.discountPercent}>-{discountPercent}%</span>
         <span className="product-price-new">{priceGenerator()}</span>
         <span className={PriceCss.oldPrice}>
-          <s> was: {compareAtPriceGenerator()}</s>
+          was: {compareAtPriceGenerator()}
         </span>
       </div>
     )

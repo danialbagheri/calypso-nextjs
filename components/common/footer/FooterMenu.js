@@ -6,9 +6,7 @@ export default function FooterMenu(props) {
 
   const menuListItem = menuItems?.map((item, index) => (
     <li key={index}>
-      <Link href={item.url}>
-        <a>{item.name}</a>
-      </Link>
+      <Link href={item.url}>{item.name}</Link>
     </li>
   ))
   return (

@@ -21,37 +21,35 @@ export default function BestSellerItems(props) {
       className={Styles.collectionItem}
     >
       <Link href={`/products/${i.slug}`}>
-        <a>
-          <div className={Styles.starRating}>
-            <Typography variant="body2">
-              <StarRating name={i.name} score={i.review_average_score} />
-            </Typography>
+        <div className={Styles.starRating}>
+          <Typography variant="body2">
+            <StarRating name={i.name} score={i.review_average_score} />
+          </Typography>
+        </div>
+        {showButton ? (
+          <div className={Styles.lifeStylePicture}>
+            <picture>
+              <img src={i.secondary_image_resized} alt={i.name} />
+            </picture>
           </div>
-          {showButton ? (
-            <div className={Styles.lifeStylePicture}>
-              <picture>
-                <img src={i.secondary_image_resized} alt={i.name} />
-              </picture>
-            </div>
-          ) : (
-            <div className={Styles.itemPicture}>
-              <picture>
-                <img src={i.main_image_resized} alt={i.name} />
-              </picture>
-            </div>
-          )}
-        </a>
+        ) : (
+          <div className={Styles.itemPicture}>
+            <picture>
+              <img src={i.main_image_resized} alt={i.name} />
+            </picture>
+          </div>
+        )}
       </Link>
       <div className={Styles.itemBody}>
         <h6 className={Styles.subTitle}>{i.name}</h6>
         <p className={Styles.subTitle}>
           {i.sub_title} {i.variants[0].name}
         </p>
-        <p className={Styles.itemPrice}>
+        <div className={Styles.itemPrice}>
           <strong>
             <ShowPrice selectedVariant={activeVariant} />
           </strong>
-        </p>
+        </div>
         <div className={Styles.buttonContainer}>
           <AddToBasketWithDropDown
             product={i}

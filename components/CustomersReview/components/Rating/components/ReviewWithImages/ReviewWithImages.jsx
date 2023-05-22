@@ -51,8 +51,8 @@ function ReviewWithImages() {
               >
                 <Image
                   src={image.image}
-                  layout="fill"
-                  objectFit="contain"
+                  fill
+                  styles={{objectFit: 'cover'}}
                   sizes="100vw"
                 />
               </Box>

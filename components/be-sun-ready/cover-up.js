@@ -1,19 +1,14 @@
-import Image from "next/image";
-import Styles from "../../styles/sunready.module.css";
-import Animation from "../../styles/animation.module.css";
-import coverUpIcon from "../../public/be-sun-ready/svgs/coverup.svg";
+import Image from 'next/image'
+import Styles from '../../styles/sunready.module.css'
+import Animation from '../../styles/animation.module.css'
+import coverUpIcon from '../../public/be-sun-ready/svgs/coverup.svg'
 
 export default function CoverUp() {
   return (
     <div className="mt-4 mb-4">
-      <div style={{ height: "153px", backgroundColor: "#FC954D" }}></div>
+      <div style={{height: '153px', backgroundColor: '#FC954D'}}></div>
       <div className={Styles.sunReadyIcons}>
-        <img
-          src={coverUpIcon}
-          height="178px"
-          width="178px"
-          layout="responsive"
-        />
+        <Image src={coverUpIcon} height="178" width="178" />
       </div>
       <div className="container">
         <h4 className={Styles.sunReadyTitle}>Cover Up</h4>
@@ -28,9 +23,8 @@ export default function CoverUp() {
             <div className="col-md-6">
               <Image
                 src="/be-sun-ready/kids-beach.png"
-                height="928px"
-                width="695px"
-                layout="responsive"
+                height="928"
+                width="695"
                 className={Animation.slideFromLeft}
               />
             </div>
@@ -63,5 +57,5 @@ export default function CoverUp() {
         </div>
       </div>
     </div>
-  );
+  )
 }

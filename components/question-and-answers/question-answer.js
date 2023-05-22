@@ -1,46 +1,40 @@
-import React from "react";
+import React from 'react'
+import {Typography} from '@mui/material'
+import {styled} from '@mui/material/styles'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import MuiAccordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
 
-export default class QuestionAnswer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dropdown: "none",
-      isOpen: false,
-    };
-    this.openDropDown = this.openDropDown.bind(this);
-  }
-  openDropDown() {
-    const newDropdown = this.state.dropdown === "none" ? "block" : "none";
-    this.setState({
-      dropdown: newDropdown,
-      isOpen: !this.state.isOpen,
-    });
-  }
-  render() {
-    const { question, answer } = this.props;
+const Accordion = styled(props => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({theme}) => ({
+  border: `none`,
+  '&:not(:last-child)': {
+    borderBottom: 0,
+  },
+  '&:before': {
+    display: 'none',
+  },
+  mb: 3,
+}))
 
-    return (
-      <div itemScope itemType="https://schema.org/Question" className="topic">
-        <div onClick={this.openDropDown} className="open">
-          <h2
-            style={{ cursor: "pointer" }}
-            itemProp="name"
-            className="question mb-2"
-          >
-            {question}
-          </h2>
-        </div>
-        <div
-          itemProp="suggestedAnswer acceptedAnswer"
-          itemScope
-          itemType="http://schema.org/Answer"
-          className={this.state.isOpen ? "show-answer" : "hide-answer"}
-        >
-          <div itemProp="text" className="answer">
-            <div dangerouslySetInnerHTML={{ __html: answer }}></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+export default function QuestionAnswer(props) {
+  const {question, answer} = props
+  return (
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography variant="h4" color="secondary">
+          {question}
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <div dangerouslySetInnerHTML={{__html: answer}}></div>
+      </AccordionDetails>
+    </Accordion>
+  )
 }

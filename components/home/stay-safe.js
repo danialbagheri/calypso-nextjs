@@ -1,37 +1,37 @@
-import React from "react";
+import React from 'react'
 // import YouTube from "react-youtube";
 // import MediaQuery from "react-responsive";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Image from "next/image";
-import Link from "next/link";
-import Styles from "../../styles/homepage/staySafewithCalypso.module.css";
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import Image from 'next/image'
+import Link from 'next/link'
+import Styles from '../../styles/homepage/staySafewithCalypso.module.css'
 
 export default function StaySafe() {
   const videos = [
     {
-      image: "/video-thumbnails/holly.png",
-      title: "Once a day for Kids",
-      link: "https://www.youtube.com/watch?v=6kgF4jr6kbE&list=PLQitqtgpPbJTuQKDE899W_3A8LHCKTWBl&index=6",
-      width: "1586px",
-      height: "849px",
+      image: '/video-thumbnails/holly.png',
+      title: 'Once a day for Kids',
+      link: 'https://www.youtube.com/watch?v=6kgF4jr6kbE&list=PLQitqtgpPbJTuQKDE899W_3A8LHCKTWBl&index=6',
+      width: '1586px',
+      height: '849px',
     },
     {
-      image: "/video-thumbnails/kelly.png",
-      title: "Sun Safety tips for Families",
-      link: "https://www.youtube.com/watch?v=KW2GYWJLWQs",
-      width: "1586px",
-      height: "849px",
+      image: '/video-thumbnails/kelly.png',
+      title: 'Sun Safety tips for Families',
+      link: 'https://www.youtube.com/watch?v=KW2GYWJLWQs',
+      width: '1586px',
+      height: '849px',
     },
     {
-      image: "/video-thumbnails/rte.png",
-      title: "How much sunscreen should you apply?",
-      link: "https://www.youtube.com/watch?v=dCmwR67ZeEw&t=368s",
-      width: "1586px",
-      height: "849px",
+      image: '/video-thumbnails/rte.png',
+      title: 'How much sunscreen should you apply?',
+      link: 'https://www.youtube.com/watch?v=dCmwR67ZeEw&t=368s',
+      width: '1586px',
+      height: '849px',
     },
-  ];
+  ]
   const settings = {
     arrows: true,
     dots: true,
@@ -39,8 +39,8 @@ export default function StaySafe() {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    dotsClass: "dot",
-    lazyLoad: "progressive",
+    dotsClass: 'dot',
+    lazyLoad: 'progressive',
     responsive: [
       {
         breakpoint: 1024,
@@ -67,38 +67,37 @@ export default function StaySafe() {
         },
       },
     ],
-  };
+  }
 
   let videoThumbnails = videos.map((video, index) => {
     return (
       <div className={Styles.VideoThumbnailContainer} key={index}>
-        <Link href={video.link}>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className={Styles.videoThumbnails}
+        <Link
+          href={video.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={Styles.videoThumbnails}
+        >
+          <div
+            className="bg-calypso text-white m-0 slick-slide-title"
+            style={{
+              backgroundImage: `url(${video.image})`,
+              width: '100%',
+              height: '210px',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center center',
+              borderRadius: '25px',
+            }}
           >
-            <div
-              className="bg-calypso text-white m-0 slick-slide-title"
-              style={{
-                backgroundImage: `url(${video.image})`,
-                width: "100%",
-                height: "210px",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center center",
-                borderRadius: "25px",
-              }}
-            >
-              <div className={Styles.OverlayColor}>
-                <div className={Styles.Title}>{video.title}</div>
-              </div>
+            <div className={Styles.OverlayColor}>
+              <div className={Styles.Title}>{video.title}</div>
             </div>
-          </a>
+          </div>
         </Link>
       </div>
-    );
-  });
+    )
+  })
 
   return (
     <div className="container-fluid yellow-background top50">
@@ -108,7 +107,7 @@ export default function StaySafe() {
           <img
             alt="Stay safe with Calypso"
             className="stay-safe top30"
-            src={require("../../public/home-page/Stay-Safe-with-Calypso.png")}
+            src={'/home-page/Stay-Safe-with-Calypso.png'}
           />
           <p className={Styles.text}>
             Unsure of how best to keep your family protected from the sun this
@@ -120,5 +119,5 @@ export default function StaySafe() {
         <div className="col-2 col-md-2" />
       </div>
     </div>
-  );
+  )
 }

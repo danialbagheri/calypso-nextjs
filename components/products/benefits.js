@@ -1,39 +1,30 @@
-import React from "react";
-export default class Benefits extends React.Component {
-  render() {
-    let benefits;
-    if (this.props.benefits) {
-      benefits = this.props.benefits.map((benefit, index) => {
-        return (
-          <li key={index}>
-            <div className="benefitsItem">
-              <img src={benefit.icon} alt={benefit.name} loading="lazy" />
-              <p className="textCenter" style={{ fontSize: "14px" }}>
-                {benefit.name}
-              </p>
-            </div>
-          </li>
-        );
-      });
-    } else {
-      benefits = "None";
-    }
-    let ingredients;
-    if (this.props.ingredients) {
-      return (ingredients = (
-        <p>
-          <strong>Ingredients:</strong>
-          {this.props.ingredients}
-        </p>
-      ));
-    } else {
-      ingredients = "";
-    }
+import React from 'react'
+import Image from 'next/image'
+import {Typography} from '@mui/material'
+
+export default function Benefits(props) {
+  const {benefits, ingredients} = props
+  const benefitsIcon = benefits.map((benefit, index) => {
     return (
-      <div>
-        <ul className="benefits">{benefits}</ul>
-        {ingredients}
-      </div>
-    );
-  }
+      <li key={index}>
+        <div className="benefitsItem">
+          <Image
+            src={benefit.icon}
+            alt={benefit.name}
+            loading="lazy"
+            width="68"
+            height="68"
+          />
+          <Typography className="textCenter" sx={{mt: 2}}>
+            {benefit.name}
+          </Typography>
+        </div>
+      </li>
+    )
+  })
+  return (
+    <>
+      <ul className="benefits">{benefitsIcon}</ul>
+    </>
+  )
 }

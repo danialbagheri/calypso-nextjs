@@ -95,13 +95,7 @@ export default function ImageReviewModal({open, setOpen, data}) {
               gap={4}
             >
               <Box>
-                <Image
-                  src={mainImgSrc.src}
-                  layout="responsive"
-                  objectFit="contain"
-                  width="100%"
-                  height="100%"
-                />
+                <Image src={mainImgSrc.src} width="100" height="100" />
               </Box>
               <Typography variant={'h6'} sx={{marginBottom: -2}}>
                 Images in this review

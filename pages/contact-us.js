@@ -19,8 +19,8 @@ class ContactUs extends Component {
               <a className="CalypsoOrangeText" href="/faq/">
                 Frequently Asked Questions
               </a>{' '}
-              or get in touch with us by filling out the contact form. Alternatively, please email or call our customer
-              support team.
+              or get in touch with us by filling out the contact form.
+              Alternatively, please email or call our customer support team.
             </p>
             <p className="CalypsoOrangeText">
               <i className="far fa-envelope mr-1" />
@@ -37,14 +37,14 @@ class ContactUs extends Component {
             <h5>Before contacting us please check this information</h5>
             <ul className="text-lg">
               <li>
-                <Link href="/privacy-policy">
-                  <a className="disableLink">Privacy Policy</a>
+                <Link href="/privacy-policy" className="disableLink">
+                  Privacy Policy
                 </Link>
               </li>
 
               <li className="mt-1">
-                <Link href="/returns-policy">
-                  <a className="disableLink">Delivery & Return Policy</a>
+                <Link href="/returns-policy" className="disableLink">
+                  Delivery & Return Policy
                 </Link>
               </li>
             </ul>

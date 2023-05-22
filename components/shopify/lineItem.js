@@ -1,27 +1,27 @@
-import React from "react";
-import { useShopify } from "../hooks";
+import React from 'react'
+import {useShopify} from '../hooks'
 
 export default function LineItem(props) {
-  const { checkoutState, updateQuantity, removeLineItem } = useShopify();
+  const {checkoutState, updateQuantity, removeLineItem} = useShopify()
 
   function decrementQuantity(lineItemId, lineItemQuantity, e) {
-    e.preventDefault();
-    const checkoutId = checkoutState.id;
-    const updatedQuantity = lineItemQuantity - 1;
-    updateQuantity(lineItemId, updatedQuantity, checkoutId);
+    e.preventDefault()
+    const checkoutId = checkoutState.id
+    const updatedQuantity = lineItemQuantity - 1
+    updateQuantity(lineItemId, updatedQuantity, checkoutId)
   }
 
   function incrementQuantity(lineItemId, lineItemQuantity, e) {
-    e.preventDefault();
-    const checkoutId = checkoutState.id;
-    const updatedQuantity = lineItemQuantity + 1;
-    updateQuantity(lineItemId, updatedQuantity, checkoutId);
+    e.preventDefault()
+    const checkoutId = checkoutState.id
+    const updatedQuantity = lineItemQuantity + 1
+    updateQuantity(lineItemId, updatedQuantity, checkoutId)
   }
 
   function deleteLineItem(lineItemId, e) {
-    e.preventDefault();
-    const checkoutId = checkoutState.id;
-    removeLineItem(checkoutId, lineItemId);
+    e.preventDefault()
+    const checkoutId = checkoutState.id
+    removeLineItem(checkoutId, lineItemId)
   }
 
   return (
@@ -49,7 +49,7 @@ export default function LineItem(props) {
                   <div className="Line-item__quantity-container">
                     <button
                       className="Line-item__quantity-update"
-                      onClick={(e) =>
+                      onClick={e =>
                         decrementQuantity(lineItem.id, lineItem.quantity, e)
                       }
                     >
@@ -60,19 +60,21 @@ export default function LineItem(props) {
                     </span>
                     <button
                       className="Line-item__quantity-update"
-                      onClick={(e) => {
-                        incrementQuantity(lineItem.id, lineItem.quantity, e);
+                      onClick={e => {
+                        incrementQuantity(lineItem.id, lineItem.quantity, e)
                       }}
                     >
                       +
                     </button>
                   </div>
                   <span className="Line-item__price">
-                    {(lineItem.quantity * lineItem.variant.price).toFixed(2)}
+                    {(
+                      lineItem.quantity * lineItem.variant.price.amount
+                    ).toFixed(2)}
                   </span>
                   <button
                     className="Line-item__remove"
-                    onClick={(e) => deleteLineItem(lineItem.id, e)}
+                    onClick={e => deleteLineItem(lineItem.id, e)}
                   >
                     ×
                   </button>
@@ -80,8 +82,8 @@ export default function LineItem(props) {
               </div>
               <hr />
             </div>
-          );
+          )
         })}
     </li>
-  );
+  )
 }

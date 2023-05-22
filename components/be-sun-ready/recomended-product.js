@@ -1,11 +1,11 @@
-import Link from "next/link";
-import Image from "next/image";
-import Styles from "../../styles/sunready.module.css";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Link from 'next/link'
+import Image from 'next/image'
+import Styles from '../../styles/sunready.module.css'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
-export default function RecommendedProducts({ products }) {
+export default function RecommendedProducts({products}) {
   // const [productsData, setProductsData] = useState(products);
   // products ? setProductsData(products) : setProductsData([]);
   const settings = {
@@ -15,7 +15,7 @@ export default function RecommendedProducts({ products }) {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    dotsClass: "dot",
+    dotsClass: 'dot',
     responsive: [
       {
         breakpoint: 1024,
@@ -42,39 +42,36 @@ export default function RecommendedProducts({ products }) {
         },
       },
     ],
-  };
+  }
 
-  const recommendedProducts = products.map((product) => {
-    const firstImage = product.variants[0].image_list[0];
+  const recommendedProducts = products.map(product => {
+    const firstImage = product.variants[0].image_list[0]
     return (
       <div>
         <div className={Styles.productHolder}>
           <Link href={`/products/${product.slug}`} key={product.id}>
-            <a className="disableLink">
-              <div className={Styles.productImageHolder}>
-                <Image
-                  src={firstImage.image}
-                  width={firstImage.width}
-                  height={firstImage.height}
-                  layout="responsive"
-                />
-              </div>
-              <div className="text-centre">
-                <h6>{product.name}</h6>
-                <p>
-                  {product.sub_title}
-                  <br />
-                </p>
-                <p>
-                  <strong>from £{product.lowest_variant_price}</strong>
-                </p>
-              </div>
-            </a>
+            <div className={Styles.productImageHolder}>
+              <Image
+                src={firstImage.image}
+                width={firstImage.width}
+                height={firstImage.height}
+              />
+            </div>
+            <div className="text-centre">
+              <h6>{product.name}</h6>
+              <p>
+                {product.sub_title}
+                <br />
+              </p>
+              <p>
+                <strong>from £{product.lowest_variant_price}</strong>
+              </p>
+            </div>
           </Link>
         </div>
       </div>
-    );
-  });
+    )
+  })
   return (
     <div className="mt-4 mb-0">
       <div className="bg-secondary p-3">
@@ -82,5 +79,5 @@ export default function RecommendedProducts({ products }) {
         <Slider {...settings}>{recommendedProducts}</Slider>
       </div>
     </div>
-  );
+  )
 }

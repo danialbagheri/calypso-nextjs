@@ -1,9 +1,8 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react'
+import Image from 'next/image'
 export default function Future() {
   // Declare a new state variable, which we'll call "count"
-  const futureOne = require("../../public/about-us/future-1.png");
-  const futureTwo = require("../../public/about-us/future-2.png");
+
   return (
     <section className="container-fluid mt-5 mb-5">
       <div className="row">
@@ -34,7 +33,6 @@ export default function Future() {
             <Image
               src="/about-us/future-1.png"
               alt="Calypso 1999 to 2019 products"
-              layout="responsive"
               width={388}
               height={440}
               // objectFit="contain"
@@ -44,7 +42,6 @@ export default function Future() {
             <Image
               src="/about-us/future-2.png"
               alt="Calypso 1999 to 2019 products"
-              layout="responsive"
               width={388}
               height={440}
             />
@@ -52,5 +49,5 @@ export default function Future() {
         </div>
       </div>
     </section>
-  );
+  )
 }

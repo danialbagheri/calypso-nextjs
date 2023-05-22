@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export default class AsSeen extends React.Component {
   render() {
@@ -10,28 +10,28 @@ export default class AsSeen extends React.Component {
             <img
               className="asSeenImage"
               alt="Closer Magazine"
-              src={require("../../public/asSeenLogo/closerlogo.png")}
+              src={'/asSeenLogo/closerlogo.png'}
             />
           </div>
           <div className="col-lg-3 col-md-3 col-xs-6 top15">
             <img
               className="asSeenImage"
               alt="Best"
-              src={require("../../public/asSeenLogo/bestlogo.png")}
+              src={'/asSeenLogo/bestlogo.png'}
             />
           </div>
           <div className="col-lg-3 col-md-3 col-xs-6 top15">
             <img
               className="asSeenImage"
               alt="Daily Record"
-              src={require("../../public/asSeenLogo/dailyrecordlogo.png")}
+              src={'/asSeenLogo/dailyrecordlogo.png'}
             />
           </div>
           <div className="col-lg-3 col-md-3 col-xs-6 top15">
             <img
               className="asSeenImage"
               alt="Evening Stand"
-              src={require("../../public/asSeenLogo/eveningstandardlogo.png")}
+              src={'/asSeenLogo/eveningstandardlogo.png'}
             />
           </div>
         </div>
@@ -40,33 +40,33 @@ export default class AsSeen extends React.Component {
             <img
               className="asSeenImage"
               alt="Metro"
-              src={require("../../public/asSeenLogo/metrologo.png")}
+              src={'/asSeenLogo/metrologo.png'}
             />
           </div>
           <div className="col-lg-3 col-md-3 col-xs-6 top15">
             <img
               className="asSeenImage"
               alt="RealPeople Magazine"
-              src={require("../../public/asSeenLogo/realpeoplelogo.png")}
+              src={'/asSeenLogo/realpeoplelogo.png'}
             />
           </div>
           <div className="col-lg-3 col-md-3 col-xs-6 top15">
             <img
               className="asSeenImage"
               alt="Reveal"
-              src={require("../../public/asSeenLogo/reveallogo.png")}
+              src={'/asSeenLogo/reveallogo.png'}
             />
           </div>
           <div className="col-lg-3 col-md-3 col-xs-6 top15">
             <img
               className="asSeenImage"
               alt="Woman Magazine"
-              src={require("../../public/asSeenLogo/womanlogo.png")}
+              src={'/asSeenLogo/womanlogo.png'}
             />
           </div>
         </div>
         <span className="top30" />
       </div>
-    );
+    )
   }
 }

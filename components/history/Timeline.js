@@ -1,16 +1,16 @@
-import Styles from "../../styles/timeline.module.css";
+import Styles from '../../styles/timeline.module.css'
 
 export default function Timeline() {
   // Declare a new state variable, which we'll call "count"
-  const dryOilImage = require("../../public/history/dryoil-tv-ad.png");
-  const afterSunRange = require("../../public/history/aftersunrange.png");
-  const onceADay = require("../../public/history/once-a-day-calypso.png");
-  const marieCurie = require("../../public/history/mariecurie.png");
-  const pressAndProtect = require("../../public/history/pressprotect.png");
-  const which = require("../../public/history/which.png");
-  const tvAd = require("../../public/history/tvad.png");
-  const scalp = require("../../public/history/scalp.png");
-  const findTheFeeling = require("../../public/history/findthefeeling.png");
+  const dryOilImage = '/history/dryoil-tv-ad.png'
+  const afterSunRange = '/history/aftersunrange.png'
+  const onceADay = '/history/once-a-day-calypso.png'
+  const marieCurie = '/history/mariecurie.png'
+  const pressAndProtect = '/history/pressprotect.png'
+  const which = '/history/which.png'
+  const tvAd = '/history/tvad.png'
+  const scalp = '/history/scalp.png'
+  const findTheFeeling = '/history/findthefeeling.png'
   return (
     <div className={Styles.timeline}>
       <div className={`${Styles.timelineContainer} ${Styles.left}`}>
@@ -250,5 +250,5 @@ export default function Timeline() {
         </div>
       </div>
     </div>
-  );
+  )
 }

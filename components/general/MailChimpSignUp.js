@@ -45,20 +45,36 @@ export default function MailChimpSignUp() {
   return (
     <>
       <div
-        className={shouldShow() ? Styles.ModalbackgroundShown : Styles.ModalbackgroundHidden}
+        className={
+          shouldShow()
+            ? Styles.ModalbackgroundShown
+            : Styles.ModalbackgroundHidden
+        }
         onClick={() => setShowPopUpSetting()}
       />
-      <div className={shouldShow() ? Styles.NewsLetterContainerOpen : Styles.NewsLetterContainerClose}>
-        <div className={Styles.OfferContainer} onClick={() => setShowPopUpSetting()}>
+      <div
+        className={
+          shouldShow()
+            ? Styles.NewsLetterContainerOpen
+            : Styles.NewsLetterContainerClose
+        }
+      >
+        <div
+          className={Styles.OfferContainer}
+          onClick={() => setShowPopUpSetting()}
+        >
           <i className={Styles.ToggleIcon} />
           <div className={Styles.Offer}>GET 10% OFF</div>
         </div>
         <div className={Styles.Content}>
-          <div className={Styles.ImageContainer} onClick={() => setShowPopUpSetting()}>
+          <div
+            className={Styles.ImageContainer}
+            onClick={() => setShowPopUpSetting()}
+          >
             <Image
-              src={require('../../public/home-page/calypso-newsletter-subscription.jpg')}
-              layout="fill"
-              objectFit="cover"
+              src={'/home-page/calypso-newsletter-subscription.jpg'}
+              fill
+              style={{objectFit: 'cover'}}
             />
           </div>
           <div className={Styles.signUpFormContainer}>
@@ -77,14 +93,19 @@ export default function MailChimpSignUp() {
             >
               <input type="hidden" name="u" value="a123cd45678ef90g7h1j7k9lm" />
               <input type="hidden" name="id" value="ab2c468d10" />
-              <input className={Styles.EmailInput} type="email" name="MERGE0" placeholder="Email Address" />
+              <input
+                className={Styles.EmailInput}
+                type="email"
+                name="MERGE0"
+                placeholder="Email Address"
+              />
 
               <button className={Styles.subscribeButton} type="submit">
                 SUBSCRIBE
               </button>
               <p className={Styles.smallText}>
-                By entering your email, you are opting in to receiving emails from Calypso. You can opt out anytime.
-                Privacy policy
+                By entering your email, you are opting in to receiving emails
+                from Calypso. You can opt out anytime. Privacy policy
               </p>
             </form>
           </div>

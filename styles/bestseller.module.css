@@ -3,6 +3,12 @@
   max-width: 1440px;
   margin: 0 auto;
 }
+.ContainerImage {
+  border: 1px solid red;
+  width: '100px';
+  height: '100px';
+  position: 'relative';
+}
 .productContainer {
   width: 100%;
   margin: 20px;

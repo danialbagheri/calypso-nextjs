@@ -1,47 +1,46 @@
-import Image from "next/image";
-import Link from "next/link";
-import Styles from "../../styles/sunready.module.css";
-import ApplyIcon from "../../public/be-sun-ready/svgs/apply.svg";
+import Image from 'next/image'
+import Link from 'next/link'
+import Styles from '../../styles/sunready.module.css'
+import ApplyIcon from '../../public/be-sun-ready/svgs/apply.svg'
 
-export default function ApplyBefore({ blogs }) {
-  const blogRow = blogs.map((blog) => {
+export default function ApplyBefore({blogs}) {
+  const blogRow = blogs.map(blog => {
     return (
       <div className="col-12 col-md-4 col-sm-4 col-xs-12">
-        <Link href={`/advice/${blog.item.slug}`}>
-          <a className="disableLink text-centre">
-            <div className="blog-card bg-white">
-              <div className="blog-image">
-                <Image
-                  src={blog.item.resized || "/advice/placeholder.png"}
-                  alt={blog.item.image_alt_text}
-                  layout="responsive"
-                  height={blog.item.image_height}
-                  width={blog.item.image_width}
-                />
-              </div>
-              <div className="card-body mt-2">
-                <p className="card-title text-centre">{blog.item.title}</p>
-                <p className="read-more">
-                  <small>Read Now</small>
-                </p>
-              </div>
+        <Link
+          href={`/advice/${blog.item.slug}`}
+          className="disableLink text-centre"
+        >
+          <div className="blog-card bg-white">
+            <div className="blog-image">
+              <Image
+                src={blog.item.resized || '/advice/placeholder.png'}
+                alt={blog.item.image_alt_text}
+                height={blog.item.image_height}
+                width={blog.item.image_width}
+              />
             </div>
-          </a>
+            <div className="card-body mt-2">
+              <p className="card-title text-centre">{blog.item.title}</p>
+              <p className="read-more">
+                <small>Read Now</small>
+              </p>
+            </div>
+          </div>
         </Link>
       </div>
-    );
-  });
+    )
+  })
 
   return (
     <div className="mt-4 mb-4">
-      <div style={{ height: "153px", backgroundColor: "#FC954D" }}></div>
+      <div style={{height: '153px', backgroundColor: '#FC954D'}}></div>
       <div className={Styles.sunReadyIcons}>
-        <img
+        <Image
           src={ApplyIcon}
           alt="Apply sunscreen before going out icon"
-          height="178px"
-          width="178px"
-          layout="responsive"
+          height="178"
+          width="178"
         />
       </div>
       <div className="container">
@@ -60,5 +59,5 @@ export default function ApplyBefore({ blogs }) {
         <div className="row">{blogRow}</div>
       </div>
     </div>
-  );
+  )
 }

@@ -6,7 +6,6 @@ import ProductDescription from '../../components/products/product-description'
 import ProductTabs from '../../components/products/product-tabs'
 import Head from 'next/head'
 import RelatedProduct from '../../components/products/related-products'
-import {useShopify} from 'redux/ducks/shopify'
 import ProductSchema from '../../components/seo/product-schema'
 import {CustomersReview, Faq} from 'components'
 import {getProductReviews} from 'services'
@@ -16,7 +15,6 @@ import {Alert} from '@mui/material'
 function Product(props) {
   const product = props.productData
   const childProducts = props.productData.variants
-  const instagramPosts = product.variants.map(v => v.instagram_posts)
 
   const [selectedPrice, setPrice] = React.useState(
     props.productData.variants[0].price,
@@ -42,8 +40,6 @@ function Product(props) {
     open: false,
     message: '',
   })
-
-  const {fetchProductByQuery} = useShopify()
 
   const handleChange = e => {
     e.preventDefault()
