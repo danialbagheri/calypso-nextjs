@@ -3,11 +3,11 @@ import Head from 'next/head'
 import {
   AsSeen,
   BestSeller,
-  BlogSlider,
   HomeSlider,
   Instagram,
   StaySafe,
   Trending,
+  BlogSlider,
 } from 'components'
 
 import {getCollectionBanner} from 'services'

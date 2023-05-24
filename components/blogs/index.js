@@ -1,5 +1,5 @@
 import BlogFilters from './blog-filters'
-import BlogSlider from './blog-slider'
+import {BlogSlider} from './blogSlider'
 import BlogThumbnail from './blog-thumbnail'
 
-export {BlogFilters, BlogSlider, BlogThumbnail}
+export {BlogFilters, BlogThumbnail, BlogSlider}

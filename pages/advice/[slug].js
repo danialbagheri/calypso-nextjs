@@ -1,4 +1,4 @@
-import BlogSlider from '../../components/blogs/blog-slider'
+import {BlogSlider} from 'components'
 import ShareButton from '../../components/common/shareButton'
 import Image from 'next/image'
 import data from '../../data.json'

@@ -1,5 +1,7 @@
 import {get, post, patch} from 'utils'
 
+/* ------------------------------ POST Requests ----------------------------- */
+
 const postContactUsSubmit = data => {
   return post({endpoint: 'web/contact-us/', data})
 }
@@ -11,7 +13,9 @@ const postProductReview = (data, slug) => {
 const postReviewImage = image_base64 => {
   return post({endpoint: 'reviews/images/', data: {image_base64}})
 }
+/* -------------------------------------------------------------------------- */
 
+/* ------------------------------ GET Requests ------------------------------ */
 const getCollectionBanner = slug => {
   return get({endpoint: `web/slider/?slug=${slug}`})
 }
@@ -32,7 +36,10 @@ const getProductReviews = slug => {
   return get({endpoint: `reviews/product/?product_slug=${slug}`})
 }
 
-const patchReviewRate = () => {}
+const getBlogs = blog => {
+  return get({endpoint: `blogs/collections/${blog}`})
+}
+/* -------------------------------------------------------------------------- */
 
 export {
   postContactUsSubmit,
@@ -43,4 +50,5 @@ export {
   getSearchData,
   getSingleProduct,
   getProductReviews,
+  getBlogs,
 }
