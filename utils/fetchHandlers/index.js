@@ -2,7 +2,7 @@ import {BASE_URL} from '../../constants/servicesConstants/index'
 
 const errorHandler = response => {
   if (response) {
-    return Promise.resolve(`error: ${response.statusText}`)
+    return Promise.reject(`${response.statusText}`)
   }
 }
 

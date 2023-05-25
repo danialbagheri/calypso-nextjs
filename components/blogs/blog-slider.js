@@ -7,7 +7,7 @@ import MediaQuery from 'react-responsive'
 import data from '../../data.json'
 import Link from 'next/link'
 
-export default class BlogSlider extends React.Component {
+export default class OldBlogSlider extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
