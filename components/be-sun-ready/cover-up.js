@@ -8,7 +8,7 @@ export default function CoverUp() {
     <div className="mt-4 mb-4">
       <div style={{height: '153px', backgroundColor: '#FC954D'}}></div>
       <div className={Styles.sunReadyIcons}>
-        <Image src={coverUpIcon} height="178" width="178" />
+        <Image alt="cover up" src={coverUpIcon} height={178} width={178} />
       </div>
       <div className="container">
         <h4 className={Styles.sunReadyTitle}>Cover Up</h4>
@@ -22,6 +22,7 @@ export default function CoverUp() {
           <div className="row">
             <div className="col-md-6">
               <Image
+                alt="kids beach"
                 src="/be-sun-ready/kids-beach.png"
                 height="928"
                 width="695"

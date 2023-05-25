@@ -7,7 +7,7 @@ export default function SunFactor() {
     <div id="sun-factor">
       <div style={{height: '153px', backgroundColor: '#FC954D'}}></div>
       <div className={Styles.sunReadyIcons}>
-        <img src={spfCircle} height="178px" width="178px" />
+        <img src={spfCircle} height={178} width={178} />
       </div>
       <div className="container">
         <h4 className={Styles.sunReadyTitle}>Choose the right SPF</h4>

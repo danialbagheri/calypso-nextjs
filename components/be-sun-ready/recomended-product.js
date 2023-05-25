@@ -4,6 +4,7 @@ import Styles from '../../styles/sunready.module.css'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import {Box} from '@mui/system'
 
 export default function RecommendedProducts({products}) {
   // const [productsData, setProductsData] = useState(products);
@@ -44,19 +45,20 @@ export default function RecommendedProducts({products}) {
     ],
   }
 
-  const recommendedProducts = products.map(product => {
+  const recommendedProducts = products.map((product, i) => {
     const firstImage = product.variants[0].image_list[0]
     return (
-      <div>
+      <div key={product.id}>
         <div className={Styles.productHolder}>
           <Link href={`/products/${product.slug}`} key={product.id}>
-            <div className={Styles.productImageHolder}>
+            <Box sx={{width: '100%', height: '400px', position: 'relative'}}>
               <Image
+                alt={product.name}
                 src={firstImage.image}
-                width={firstImage.width}
-                height={firstImage.height}
+                fill
+                style={{objectFit: 'contain'}}
               />
-            </div>
+            </Box>
             <div className="text-centre">
               <h6>{product.name}</h6>
               <p>
