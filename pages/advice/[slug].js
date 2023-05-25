@@ -3,6 +3,7 @@ import ShareButton from '../../components/common/shareButton'
 import Image from 'next/image'
 import data from '../../data.json'
 import Head from 'next/head'
+import {Box} from '@mui/system'
 
 function Article({blog}) {
   let blogColor = blog.backround_color_hex
@@ -44,16 +45,27 @@ function Article({blog}) {
                 </div>
                 <p className="flatRight">{blog.read_time}</p>
               </div>
-              <picture>
+              <Box
+                sx={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '400px',
+                  borderRadius: 2,
+                  overflow: 'hidden',
+                }}
+              >
                 <Image
                   itemProp="url contentUrl"
                   src={blog.image || '/advice/placeholder.png'}
                   className="blog-post-image"
                   alt={blog.alt_text}
-                  height={blog.image_height}
-                  width={blog.image_width}
+                  fill={true}
+                  style={{objectFit: 'cover'}}
+                  // height={blog.image_height}
+                  // width={blog.image_width}
                 />
-              </picture>
+              </Box>
+
               <meta itemProp="width" content="640" />
               <meta itemProp="height" content="320" />
             </figure>
