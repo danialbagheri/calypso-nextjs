@@ -3,7 +3,6 @@ import * as React from 'react'
 import {SessionProvider} from 'next-auth/react'
 import {Provider} from 'react-redux'
 import CookieConsent from 'react-cookie-consent'
-import MailChimpSignUp from '../components/general/MailChimpSignUp'
 
 import RefreshTokenHandler from '../services/refreshTokenHandler'
 import '../styles/globals.css'
@@ -15,6 +14,7 @@ import store from '../redux/store'
 import Footer from '../components/common/footer/footer'
 import InfoBar from '../components/general/InforBar'
 import {AppProvider} from 'components/appProvider'
+import {MailjetSignUp} from 'components'
 
 function MyApp({Component, pageProps}) {
   const [interval, setInterval] = React.useState(0)
@@ -23,20 +23,43 @@ function MyApp({Component, pageProps}) {
     <>
       <Head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=1"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#da532c" />
         <link rel="stylesheet" href="https://use.typekit.net/kls3ash.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="theme-color" content="#000000" />
         <meta name="twitter:site" content="@calypsosuncare"></meta>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        />
         {/* <!-- Google Tag Manager --> */}
         <script
           dangerouslySetInnerHTML={{
@@ -78,7 +101,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               }}
             />
             <Header />
-            <MailChimpSignUp />
+            <MailjetSignUp />
+
             <InfoBar />
             <Component {...pageProps} />
             <CookieConsent
@@ -91,7 +115,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               // }}
             >
               <div className="cookie-background"> </div>
-              We use cookies to ensure that we give you the best experience on our website.
+              We use cookies to ensure that we give you the best experience on
+              our website.
             </CookieConsent>
 
             <Footer />

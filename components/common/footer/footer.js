@@ -4,9 +4,10 @@ import Image from 'next/image'
 import logo from '../../../public/logoWhite.svg'
 import tct from '../../../public/home-page/TCT.svg'
 import BottomBar from './BottomBar'
-import SubscriptonForm from './SubscriptonForm'
+
 import SocialMediaIcons from './SocialMediaIcons'
 import FooterMenu from './FooterMenu'
+import {SubscribeForm} from './subscribeForm'
 
 const FooterMainMenu = [
   {
@@ -61,11 +62,25 @@ export default function Footer() {
           <div className="row height250">
             <div className="col-md-5">
               <div style={{display: 'flex', flexDirection: 'flex-start'}}>
-                <Image src={logo} className="footerLogo" alt="Calypso" width="70" height="67" />
-                <Image src={tct} className="footerLogo" alt="Calypso" width="180" height="67" />
+                <Image
+                  src={logo}
+                  className="footerLogo"
+                  alt="Calypso"
+                  width="70"
+                  height="67"
+                />
+                <Image
+                  src={tct}
+                  className="footerLogo"
+                  alt="Calypso"
+                  width="180"
+                  height="67"
+                />
               </div>
-              <p className="white">Get 10% off when you join our Sun-Safe family.</p>
-              <SubscriptonForm />
+              <p className="white">
+                Get 10% off when you join our Sun-Safe family.
+              </p>
+              <SubscribeForm />
             </div>
 
             <div className="col-md-2 col-xs-6">
