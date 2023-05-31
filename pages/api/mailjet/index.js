@@ -1,6 +1,6 @@
 export default function mailjetFunctions(req, res) {
   const CALYPSO_LIST_ID = '86980'
-  const {name, email} = req.body
+  const {firstName, lastName, email} = req.body
 
   const mailjet = require('node-mailjet').apiConnect(
     process.env.MJ_APIKEY_PUBLIC,
@@ -14,27 +14,29 @@ export default function mailjetFunctions(req, res) {
       Email,
     })
 
-  const addContactInList = contactId =>
+  const addContactInList = (firstName, lastName, email) =>
     mailjet
-      .post('contact', {version: 'v3'})
-      .id(contactId)
-      .action('managecontactslists')
+      .post('contactslist', {version: 'v3'})
+      .id(CALYPSO_LIST_ID)
+      .action('managecontact')
       .request({
-        ContactsLists: [
-          {
-            Action: 'addforce',
-            ListID: CALYPSO_LIST_ID,
-          },
-        ],
+        Name: firstName,
+        Properties: {firstname: firstName, lastname: lastName},
+        Action: 'addnoforce',
+        Email: email,
       })
+
+  // addContactInList(res.body.Data[0].ID)
 
   const mailjetAddContact = (Name, Email) =>
     addContactHandler({Name, Email})
-      .then(res => addContactInList(res.body.Data[0].ID))
+      .then(res =>
+        addContactInList(firstName, lastName, res.body.Data[0].Email),
+      )
       .then(res => res)
 
   if (email) {
-    mailjetAddContact(name, email)
+    mailjetAddContact(firstName, email)
       .then(response =>
         res
           .status(response.response.status)

@@ -1,12 +1,22 @@
 import {Button} from '@mui/base'
-import {Alert, Box, CircularProgress, Snackbar, TextField} from '@mui/material'
+import {
+  Alert,
+  Box,
+  CircularProgress,
+  Collapse,
+  Snackbar,
+  TextField,
+} from '@mui/material'
 import * as React from 'react'
 import {registerContact} from 'services'
 
 function SubscribeForm() {
+  const SUBSCRIPTION_STATE = 'subscriptionState'
+  const SIGNED_UP = 'signedUp'
+
   const [fieldData, setFieldData] = React.useState({
     email: '',
-    name: '',
+    firstName: '',
     lastName: '',
   })
   const [error, setError] = React.useState('')
@@ -16,6 +26,7 @@ function SubscribeForm() {
     message: '',
   })
   const [snackBarOpen, setSnackBarOpen] = React.useState(false)
+  const [showFields, setShowFields] = React.useState(false)
 
   const fieldStyle = {
     borderRadius: 1,
@@ -57,27 +68,31 @@ function SubscribeForm() {
 
   const submitHandler = e => {
     e.preventDefault()
+
     if (!fieldData.email) {
-      setError('This field is required!')
+      setError('Email is required.')
       return
     } else if (!emailValidator(fieldData.email)) {
-      setError('The Email format is not correct!')
+      setError('Please enter a correct email address.')
       return
     } else {
       setLoading(true)
       setError('')
       const data = {
-        name: `${fieldData.name} ${fieldData.lastName}`,
+        firstName: fieldData.firstName,
+        lastName: fieldData.lastName,
         email: fieldData.email,
       }
       registerContact(data).then(res => {
         if (res.status < 400) {
+          localStorage.setItem(SUBSCRIPTION_STATE, SIGNED_UP)
           setLoading(false)
           setApiResponse({
-            message: 'You have subscribed successfully!',
+            message: <span>Thank you for subscribing &#128522;</span>,
             success: true,
           })
           setSnackBarOpen(true)
+          setTimeout(() => setShowFields(false), 2000)
         } else {
           res.json().then(res => {
             setLoading(false)
@@ -100,12 +115,9 @@ function SubscribeForm() {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '12px',
+          gap: showFields ? '12px' : '6px',
           flexGrow: 1,
-          maxWidth: '300px',
-          '& button': {
-            background: '#f5af3f',
-          },
+          maxWidth: '220px',
         }}
       >
         <TextField
@@ -118,26 +130,66 @@ function SubscribeForm() {
           onChange={e => changeHandler('email', e.target.value)}
           helperText={error}
           error={error}
+          onClick={e => setShowFields(true)}
         />
-        <TextField
-          id="outlined"
-          label="Name"
-          type="text"
-          sx={{...fieldStyle}}
-          value={fieldData.name}
-          onChange={e => changeHandler('name', e.target.value)}
-        />
-        <TextField
-          id="outlined"
-          label="Last name"
-          type="text"
-          sx={{...fieldStyle}}
-          value={fieldData.lastName}
-          onChange={e => changeHandler('lastName', e.target.value)}
-        />
-        <Button variant="contained" onClick={e => submitHandler(e)}>
-          {loading ? <CircularProgress size={23} /> : 'SUBSCRIBE'}
-        </Button>
+        <Collapse
+          sx={{flexGrow: 1, '& .MuiCollapse-wrapperInner': {width: '100%'}}}
+          orientation="vertical"
+          in={showFields}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
+              width: '100%',
+            }}
+          >
+            <TextField
+              id="outlined"
+              label="First Name"
+              type="text"
+              sx={{...fieldStyle}}
+              value={fieldData.firstName}
+              onChange={e => changeHandler('firstName', e.target.value)}
+            />
+            <TextField
+              id="outlined"
+              label="Last Name"
+              type="text"
+              sx={{...fieldStyle}}
+              value={fieldData.lastName}
+              onChange={e => changeHandler('lastName', e.target.value)}
+            />
+          </Box>
+        </Collapse>
+        <Box
+          sx={{
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            '&>button': {
+              border: 'none',
+              padding: '4px 20px',
+              background: '#f5af3f',
+              borderRadius: 1,
+              width: '120px',
+              height: '28px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+          }}
+        >
+          <Button
+            sx={{border: 'none'}}
+            variant="contained"
+            onClick={e => submitHandler(e)}
+          >
+            {loading ? <CircularProgress size={23} /> : 'SUBSCRIBE'}
+          </Button>
+        </Box>
       </Box>
       <Snackbar
         open={snackBarOpen}

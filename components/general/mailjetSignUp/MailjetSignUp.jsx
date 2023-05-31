@@ -7,10 +7,13 @@ import CircularProgress from '@mui/material/CircularProgress'
 import {registerContact} from 'services'
 
 export default function MailjetSignUp() {
+  const SUBSCRIPTION_STATE = 'subscriptionState'
+  const SIGNED_UP = 'signedUp'
+
   const [showPopUp, setShowPopUp] = React.useState(false)
   const [fieldData, setFieldData] = React.useState({
     email: '',
-    name: '',
+    firstName: '',
     lastName: '',
   })
   const [error, setError] = React.useState('')
@@ -20,6 +23,9 @@ export default function MailjetSignUp() {
     message: '',
   })
   const [snackBarOpen, setSnackBarOpen] = React.useState(false)
+
+  const subPanelOpenState = React.useRef(false)
+  const subscriptionState = React.useRef(false)
 
   const fieldStyle = {
     width: '100%',
@@ -36,6 +42,7 @@ export default function MailjetSignUp() {
     },
   }
 
+  /* -------------------------------- Function -------------------------------- */
   const setShowPopUpSetting = () => {
     setShowPopUp(!showPopUp)
   }
@@ -53,27 +60,31 @@ export default function MailjetSignUp() {
 
   const submitHandler = e => {
     e.preventDefault()
+
     if (!fieldData.email) {
-      setError('This field is required!')
+      setError('Email is required.')
       return
     } else if (!emailValidator(fieldData.email)) {
-      setError('The Email format is not correct!')
+      setError('Please enter a correct email address.')
       return
     } else {
       setLoading(true)
       setError('')
       const data = {
-        name: `${fieldData.name} ${fieldData.lastName}`,
+        firstName: fieldData.firstName,
+        lastName: fieldData.lastName,
         email: fieldData.email,
       }
       registerContact(data).then(res => {
         if (res.status < 400) {
+          localStorage.setItem(SUBSCRIPTION_STATE, SIGNED_UP)
           setLoading(false)
           setApiResponse({
-            message: 'You have subscribed successfully!',
+            message: <span>Thank you for subscribing &#128522;</span>,
             success: true,
           })
           setSnackBarOpen(true)
+          setTimeout(() => setShowPopUp(false), 2000)
         } else {
           res.json().then(res => {
             setLoading(false)
@@ -91,12 +102,29 @@ export default function MailjetSignUp() {
     }
   }
 
+  const onScroll = () => {
+    const {pageYOffset} = window
+    if (pageYOffset > 1000 && !subPanelOpenState.current) {
+      subPanelOpenState.current = true
+      window.removeEventListener('scroll', onScroll, {passive: true})
+      setShowPopUp(true)
+    }
+  }
+  /* -------------------------------------------------------------------------- */
+
   React.useEffect(() => {
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && showPopUp) {
         setShowPopUp(false)
       }
     })
+
+    //add eventlistener to window
+    window.addEventListener('scroll', onScroll, {passive: true})
+    // remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('scroll', onScroll, {passive: true})
+    }
   }, [])
 
   return (
@@ -137,10 +165,7 @@ export default function MailjetSignUp() {
         </div>
 
         <div className={Styles.Content}>
-          <div
-            className={Styles.ImageContainer}
-            // onClick={() => setShowPopUpSetting()}
-          >
+          <div className={Styles.ImageContainer}>
             <Image
               src={'/home-page/calypso-newsletter-subscription.jpg'}
               fill
@@ -173,36 +198,36 @@ export default function MailjetSignUp() {
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '7px',
+                gap: '10px',
                 flexGrow: 1,
               }}
             >
               <TextField
+                id="outlined"
+                label="First Name"
+                type="text"
+                sx={{...fieldStyle}}
+                value={fieldData.firstName}
+                onChange={e => changeHandler('firstName', e.target.value)}
+              />
+              <TextField
+                id="outlined"
+                label="Last Name"
+                type="text"
+                sx={{...fieldStyle}}
+                value={fieldData.lastName}
+                onChange={e => changeHandler('lastName', e.target.value)}
+              />
+              <TextField
                 required
                 id="outlined-required"
-                label="Email address"
+                label="Email"
                 type="email"
                 sx={{...fieldStyle}}
                 value={fieldData.email}
                 onChange={e => changeHandler('email', e.target.value)}
                 helperText={error}
                 error={error}
-              />
-              <TextField
-                id="outlined"
-                label="Name"
-                type="text"
-                sx={{...fieldStyle}}
-                value={fieldData.name}
-                onChange={e => changeHandler('name', e.target.value)}
-              />
-              <TextField
-                id="outlined"
-                label="Last name"
-                type="text"
-                sx={{...fieldStyle}}
-                value={fieldData.lastName}
-                onChange={e => changeHandler('lastName', e.target.value)}
               />
               <Button
                 color="primary"

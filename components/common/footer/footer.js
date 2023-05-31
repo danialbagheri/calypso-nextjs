@@ -54,7 +54,7 @@ const helpMenu = [
   },
 ]
 
-export default function Footer() {
+export default function Footer({showSubscription}) {
   return (
     <footer className="page-footer font-small ">
       <div className="container-fluid calypsoOrange text-md-left calypso-footer">
@@ -80,7 +80,7 @@ export default function Footer() {
               <p className="white">
                 Get 10% off when you join our Sun-Safe family.
               </p>
-              <SubscribeForm />
+              {showSubscription ? <SubscribeForm /> : false}
             </div>
 
             <div className="col-md-2 col-xs-6">

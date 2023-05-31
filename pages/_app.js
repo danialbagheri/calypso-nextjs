@@ -17,7 +17,19 @@ import {AppProvider} from 'components/appProvider'
 import {MailjetSignUp} from 'components'
 
 function MyApp({Component, pageProps}) {
+  const SUBSCRIPTION_STATE = 'subscriptionState'
+  const SIGNED_UP = 'signedUp'
+
   const [interval, setInterval] = React.useState(0)
+  const [showSubscription, setShowSubscription] = React.useState(false)
+
+  React.useEffect(() => {
+    const subscriptionState = localStorage.getItem(SUBSCRIPTION_STATE)
+
+    if (!subscriptionState || subscriptionState !== SIGNED_UP) {
+      setShowSubscription(true)
+    }
+  }, [])
 
   return (
     <>
@@ -101,7 +113,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               }}
             />
             <Header />
-            <MailjetSignUp />
+            {showSubscription ? <MailjetSignUp /> : null}
 
             <InfoBar />
             <Component {...pageProps} />
@@ -119,7 +131,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               our website.
             </CookieConsent>
 
-            <Footer />
+            <Footer showSubscription={showSubscription} />
             <RefreshTokenHandler setInterval={setInterval} />
           </Provider>
         </SessionProvider>

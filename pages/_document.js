@@ -1,9 +1,9 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, {Html, Head, Main, NextScript} from 'next/document'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    const initialProps = await Document.getInitialProps(ctx)
+    return {...initialProps}
   }
 
   render() {
@@ -16,8 +16,9 @@ class MyDocument extends Document {
         </body>
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.includes"></script>
       </Html>
-    );
+    )
   }
 }
+;``
 
-export default MyDocument;
+export default MyDocument
