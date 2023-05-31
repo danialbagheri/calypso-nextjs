@@ -115,23 +115,12 @@ function SubscribeForm() {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: showFields ? '12px' : '6px',
+          gap: '12px',
           flexGrow: 1,
           maxWidth: '220px',
         }}
       >
-        <TextField
-          required
-          id="outlined-required"
-          label="Email address"
-          type="email"
-          sx={{...fieldStyle}}
-          value={fieldData.email}
-          onChange={e => changeHandler('email', e.target.value)}
-          helperText={error}
-          error={error}
-          onClick={e => setShowFields(true)}
-        />
+        {' '}
         <Collapse
           sx={{flexGrow: 1, '& .MuiCollapse-wrapperInner': {width: '100%'}}}
           orientation="vertical"
@@ -163,6 +152,18 @@ function SubscribeForm() {
             />
           </Box>
         </Collapse>
+        <TextField
+          required
+          id="outlined-required"
+          label="Email address"
+          type="email"
+          sx={{...fieldStyle}}
+          value={fieldData.email}
+          onChange={e => changeHandler('email', e.target.value)}
+          helperText={error}
+          error={error}
+          onClick={e => setShowFields(true)}
+        />
         <Box
           sx={{
             textAlign: 'center',
