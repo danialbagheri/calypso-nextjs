@@ -1,4 +1,4 @@
-import {get, post, patch} from 'utils'
+import {get, post, patch, nextPost} from 'utils'
 
 /* ------------------------------ POST Requests ----------------------------- */
 
@@ -39,6 +39,13 @@ const getProductReviews = slug => {
 const getBlogs = blog => {
   return get({endpoint: `blogs/collections/${blog}`})
 }
+
+/* ------------------------------ Next requests ----------------------------- */
+const registerContact = data => {
+  return nextPost({endpoint: '/api/mailjet', data})
+}
+/* -------------------------------------------------------------------------- */
+
 /* -------------------------------------------------------------------------- */
 
 export {
@@ -51,4 +58,5 @@ export {
   getSingleProduct,
   getProductReviews,
   getBlogs,
+  registerContact,
 }

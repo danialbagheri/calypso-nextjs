@@ -52,4 +52,15 @@ const patch = ({endpoint, data, abortController}) =>
       }
     })
 
-export {get, post, patch}
+const nextPost = ({endpoint, data, abortController}) => {
+  return window.fetch(endpoint, {
+    method: 'POST',
+    signal: abortController ? abortController.signal : undefined,
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+    body: JSON.stringify(data),
+  })
+}
+
+export {get, post, patch, nextPost}
