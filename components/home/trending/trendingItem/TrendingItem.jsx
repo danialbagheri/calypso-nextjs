@@ -69,6 +69,8 @@ function TrendingItem({item}) {
           borderRadius: 1,
 
           overflow: 'hidden',
+
+          backgroundColor: '#E7EBEE',
         }}
         onMouseEnter={e => mouseHoverHandler(e, 'enter')}
         onMouseLeave={e => mouseHoverHandler(e, 'leave')}
@@ -96,7 +98,7 @@ function TrendingItem({item}) {
           readOnly
           precision={0.5}
         />
-        <Typography variant={'body2'}>{review_average_score}</Typography>
+        <Typography>{review_average_score}</Typography>
       </Box>
     </Box>
   )
