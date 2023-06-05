@@ -8,6 +8,7 @@ import {registerContact} from 'services'
 
 export default function MailjetSignUp() {
   const SUBSCRIPTION_STATE = 'subscriptionState'
+  const SUB_PANEL_OPEN = 'sub panel open'
   const SIGNED_UP = 'signedUp'
 
   const [showPopUp, setShowPopUp] = React.useState(false)
@@ -24,8 +25,7 @@ export default function MailjetSignUp() {
   })
   const [snackBarOpen, setSnackBarOpen] = React.useState(false)
 
-  const subPanelOpenState = React.useRef(false)
-  const subscriptionState = React.useRef(false)
+  const subPanelOpenState = localStorage.getItem(SUB_PANEL_OPEN)
 
   const fieldStyle = {
     width: '100%',
@@ -75,55 +75,67 @@ export default function MailjetSignUp() {
         lastName: fieldData.lastName,
         email: fieldData.email,
       }
-      registerContact(data).then(res => {
-        if (res.status < 400) {
-          localStorage.setItem(SUBSCRIPTION_STATE, SIGNED_UP)
-          setLoading(false)
-          setApiResponse({
-            message: <span>Thank you for subscribing &#128522;</span>,
-            success: true,
-          })
-          setSnackBarOpen(true)
-          setTimeout(() => setShowPopUp(false), 2000)
-        } else {
-          res.json().then(res => {
+      registerContact(data)
+        .then(res => {
+          if (res.status < 400) {
+            localStorage.setItem(SUBSCRIPTION_STATE, SIGNED_UP)
             setLoading(false)
             setApiResponse({
-              message: res.message,
-              success: false,
+              message: <span>Thank you for subscribing &#128522;</span>,
+              success: true,
             })
             setSnackBarOpen(true)
-            if (res.message.includes('Email already exists')) {
-              setError('This email address already exists!')
-            }
+            setTimeout(() => setShowPopUp(false), 2000)
+          } else {
+            res.json().then(res => {
+              setLoading(false)
+              setApiResponse({
+                message: res.message,
+                success: false,
+              })
+              setSnackBarOpen(true)
+              if (res.message.includes('Email already exists')) {
+                setError('This email address already exists!')
+              }
+            })
+          }
+        })
+        .catch(err => {
+          setLoading(false)
+          setApiResponse({
+            message: err,
+            success: false,
           })
-        }
-      })
+          setSnackBarOpen(true)
+          setError(err)
+        })
     }
   }
 
   const onScroll = () => {
     const {pageYOffset} = window
-    if (pageYOffset > 1000 && !subPanelOpenState.current) {
-      subPanelOpenState.current = true
+    if (pageYOffset > 1000 && subPanelOpenState !== 'open') {
       window.removeEventListener('scroll', onScroll, {passive: true})
       setShowPopUp(true)
+      localStorage.setItem(SUB_PANEL_OPEN, 'open')
     }
   }
   /* -------------------------------------------------------------------------- */
 
   React.useEffect(() => {
-    document.addEventListener('keydown', e => {
+    window.addEventListener('keydown', e => {
       if (e.key === 'Escape' && showPopUp) {
         setShowPopUp(false)
       }
     })
 
-    //add eventlistener to window
-    window.addEventListener('scroll', onScroll, {passive: true})
-    // remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener('scroll', onScroll, {passive: true})
+    if (subPanelOpenState !== 'open') {
+      //add eventlistener to window
+      window.addEventListener('scroll', onScroll, {passive: true})
+      // remove event on unmount to prevent a memory leak with the cleanup
+      return () => {
+        window.removeEventListener('scroll', onScroll, {passive: true})
+      }
     }
   }, [])
 

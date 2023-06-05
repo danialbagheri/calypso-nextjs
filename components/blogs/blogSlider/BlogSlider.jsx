@@ -30,8 +30,6 @@ function BlogSlider() {
   React.useEffect(() => {
     const containerWidth = sliderContainer.current.clientWidth
 
-    console.log('sliderContainer.current.clientWidth', containerWidth)
-
     if (containerWidth < 540) {
       setSlidesNo(1)
     } else if (containerWidth < 1330) {
@@ -51,8 +49,6 @@ function BlogSlider() {
         }
       })
   }, [])
-
-  console.log(blogItems)
 
   return (
     <Box mt={{xs: 5, sm: 10}}>
