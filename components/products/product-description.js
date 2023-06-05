@@ -10,13 +10,13 @@ import DispatchTime from './detail/dispatch-time'
 import DirectionOfUse from './detail/DirectionOfUse'
 import ShowPrice from './detail/price/show-price'
 import StarRating from './StarRating/StarRating'
+import {Typography} from '@mui/material'
+import Products from 'pages/products'
 
 export default function ProductDescription(props) {
-  const product = props.product
-  const selectedVariant = props.selectedVariant
+  const {product, selectedVariant, setVariant} = props
   const {addVariant, checkoutState, openCart} = useShopify()
   const [selectedQuantity, setSelectedQuantity] = useState(1)
-  // const [price, setPrice] = useState(props.price);
 
   function addToBasket(variantId, quantity) {
     const lineItemsToAdd = [
@@ -46,6 +46,15 @@ export default function ProductDescription(props) {
     })
     setSelectedQuantity(1)
   }
+
+  const handleChange = e => {
+    e.preventDefault()
+    const selectedProduct = product.variants.find(
+      product => product.sku === e.target.value,
+    )
+    setVariant(selectedProduct)
+  }
+
   return (
     <div className="productDescription">
       <h1 className="productTitle" itemProp="name">
@@ -99,32 +108,46 @@ export default function ProductDescription(props) {
           <span style={{color: 'grey'}}>Standard UK delivery £3</span>
         </div>
       </div>
-      <div className="addToCartContainer">{props.child}</div>
-
       <div className="addToCartContainer">
-        <ProductQuantity
-          selectedQuantity={selectedQuantity}
-          setQuantity={setSelectedQuantity}
-        />
-        <button
-          className={
-            selectedVariant.inventory_quantity > 0
-              ? 'addToCart'
-              : 'addToCartDisabed'
-          }
-          onClick={() => {
-            addToBasket(
-              selectedVariant.shopify_storefront_variant_id,
-              selectedQuantity,
-            )
-          }}
-          disabled={selectedVariant.inventory_quantity > 0 ? false : true}
-        >
-          {selectedVariant.inventory_quantity > 0
-            ? 'Add to Cart'
-            : 'Out of Stock'}
-        </button>
+        {product.variants.length === 1 ? (
+          <Typography>{Products.variants[0].name}</Typography>
+        ) : (
+          <select
+            className="ProductOptionSelector"
+            onChange={e => handleChange(e)}
+          >
+            {product.variants.map(variant => (
+              <option value={variant.sku} key={variant.id}>
+                {variant.name}
+                {'    '}
+                {variant.size}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
+
+      {selectedVariant.inventory_quantity > 0 ? (
+        <div className="addToCartContainer">
+          <ProductQuantity
+            selectedQuantity={selectedQuantity}
+            setQuantity={setSelectedQuantity}
+          />
+          <button
+            className={'addToCart'}
+            onClick={() => {
+              addToBasket(
+                selectedVariant.shopify_storefront_variant_id,
+                selectedQuantity,
+              )
+            }}
+          >
+            Add to Cart
+          </button>
+        </div>
+      ) : (
+        <div></div>
+      )}
 
       <div className="ShareButtonOnProductPage">
         <ShareButton />

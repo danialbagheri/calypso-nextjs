@@ -2531,6 +2531,7 @@ a img {
 }
 .img-thumbnail-product {
   height: 100px;
+  margin-top: 12px;
 }
 .img-thumbnail-product img {
   width: 50px;
@@ -2591,6 +2592,10 @@ a img {
   height: 40px;
   background-color: #fff;
   margin-bottom: 20px;
+
+  border-radius: 5px;
+
+  cursor: pointer;
 }
 
 .ProductOptionSelector:focus {
@@ -2602,18 +2607,7 @@ a img {
   width: 220px;
 }
 
-.productContainer {
-  /* height: 800px; */
-  background: -webkit-linear-gradient(
-    top,
-    rgb(255, 255, 255) 0%,
-    rgb(243, 243, 243) 100%
-  );
-}
-
 .product-second-row {
-  background-color: #f7f7f7;
-  /* height: 400px; */
   padding: 1rem;
 }
 
