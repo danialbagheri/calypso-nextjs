@@ -1,51 +1,21 @@
-import React, {useState} from 'react'
-import ShareButton from '../common/shareButton'
-import {useShopify} from '../hooks'
+import * as React from 'react'
+
 import Box from '@mui/material/Box'
-import * as ga from '../common/googleAnalytics'
-import ProductQuantity from './detail/product-quantity'
+import Typography from '@mui/material/Typography'
+
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTruck} from '@fortawesome/free-solid-svg-icons'
-import DispatchTime from './detail/dispatch-time'
-import DirectionOfUse from './detail/DirectionOfUse'
-import ShowPrice from './detail/price/show-price'
-import StarRating from './StarRating/StarRating'
-import {Typography} from '@mui/material'
-import Products from 'pages/products'
 
-export default function ProductDescription(props) {
+import DispatchTime from '../detail/dispatch-time'
+import DirectionOfUse from '../detail/DirectionOfUse'
+import ShowPrice from '../detail/price/show-price'
+import StarRating from '../StarRating/StarRating'
+import ShareButton from 'components/common/shareButton'
+import {AddButton} from './addButton'
+import {OutOfStock} from './outOfStock'
+
+const ProductDescription = props => {
   const {product, selectedVariant, setVariant} = props
-  const {addVariant, checkoutState, openCart} = useShopify()
-  const [selectedQuantity, setSelectedQuantity] = useState(1)
-
-  function addToBasket(variantId, quantity) {
-    const lineItemsToAdd = [
-      {
-        variantId: variantId,
-        quantity: parseInt(quantity, 10),
-      },
-    ]
-    addVariant(checkoutState.id, lineItemsToAdd)
-    openCart()
-    ga.event({
-      action: 'add_to_cart',
-      params: [
-        {
-          product: props.productName,
-          item: [
-            {
-              id: selectedVariant.sku,
-              name: product.name,
-              price: selectedVariant.price,
-              brand: 'Calypso',
-              variant: selectedVariant.name,
-            },
-          ],
-        },
-      ],
-    })
-    setSelectedQuantity(1)
-  }
 
   const handleChange = e => {
     e.preventDefault()
@@ -56,7 +26,7 @@ export default function ProductDescription(props) {
   }
 
   return (
-    <div className="productDescription">
+    <div className="productDescription col-md-6 col-sm-6 col-xs-12">
       <h1 className="productTitle" itemProp="name">
         {product.name}
       </h1>
@@ -110,7 +80,7 @@ export default function ProductDescription(props) {
       </div>
       <div className="addToCartContainer">
         {product.variants.length === 1 ? (
-          <Typography>{Products.variants[0].name}</Typography>
+          <Typography>{product.variants[0].name}</Typography>
         ) : (
           <select
             className="ProductOptionSelector"
@@ -128,25 +98,9 @@ export default function ProductDescription(props) {
       </div>
 
       {selectedVariant.inventory_quantity > 0 ? (
-        <div className="addToCartContainer">
-          <ProductQuantity
-            selectedQuantity={selectedQuantity}
-            setQuantity={setSelectedQuantity}
-          />
-          <button
-            className={'addToCart'}
-            onClick={() => {
-              addToBasket(
-                selectedVariant.shopify_storefront_variant_id,
-                selectedQuantity,
-              )
-            }}
-          >
-            Add to Cart
-          </button>
-        </div>
+        <AddButton selectedVariant={selectedVariant} product={product} />
       ) : (
-        <div></div>
+        <OutOfStock selectedVariant={selectedVariant} />
       )}
 
       <div className="ShareButtonOnProductPage">
@@ -155,3 +109,5 @@ export default function ProductDescription(props) {
     </div>
   )
 }
+
+export default ProductDescription

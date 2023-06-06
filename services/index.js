@@ -13,6 +13,10 @@ const postProductReview = (data, slug) => {
 const postReviewImage = image_base64 => {
   return post({endpoint: 'reviews/images/', data: {image_base64}})
 }
+
+const postOutOfStockEmail = data => {
+  return post({endpoint: 'users/stock-reports/', data})
+}
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------ GET Requests ------------------------------ */
@@ -59,4 +63,5 @@ export {
   getProductReviews,
   getBlogs,
   registerContact,
+  postOutOfStockEmail,
 }

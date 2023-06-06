@@ -2,15 +2,14 @@ import * as React from 'react'
 import data from '../../data.json'
 import BreadCrumb from '../../components/common/breadcrumb'
 import ProductPageImage from '../../components/products/product-page-image'
-import ProductDescription from '../../components/products/product-description'
 import ProductTabs from '../../components/products/product-tabs'
 import Head from 'next/head'
 import RelatedProduct from '../../components/products/related-products'
 import ProductSchema from '../../components/seo/product-schema'
-import {CustomersReview, Faq} from 'components'
+import {CustomersReview, Faq, ProductDescription} from 'components'
 import {getProductReviews} from 'services'
 import Snackbar from '@mui/material/Snackbar'
-import {Alert} from '@mui/material'
+import Alert from '@mui/material/Alert'
 
 function Product(props) {
   const {productData, reviewData, slug, error} = props
@@ -32,8 +31,6 @@ function Product(props) {
     },
     {name: productData.slug, url: `/products/${productData.slug}`},
   ]
-
-  console.log('variant:::', variant)
 
   React.useEffect(() => {
     if (error) {
@@ -65,16 +62,14 @@ function Product(props) {
             <BreadCrumb breadcrumbs={breadCrumbPath} />
             <ProductPageImage selectedVariant={variant} />
           </div>
-          <div className="col-md-6 col-sm-6 col-xs-12">
-            <ProductDescription
-              product={productData}
-              selectedVariant={variant}
-              setVariant={setVariant}
-            />
-          </div>
+          <ProductDescription
+            product={productData}
+            selectedVariant={variant}
+            setVariant={setVariant}
+          />
         </div>
       </div>
-      <section className="row product-second-row">
+      <div className="row product-second-row">
         <div className="container">
           <ProductTabs
             benefits={productData.tags}
@@ -84,7 +79,7 @@ function Product(props) {
             selectedChild={variant.sku}
           />
         </div>
-      </section>
+      </div>
       <Faq {...productData.faq_list} />
 
       <RelatedProduct related={productData.related_products} />
