@@ -2,159 +2,93 @@ import * as React from 'react'
 import data from '../../data.json'
 import BreadCrumb from '../../components/common/breadcrumb'
 import ProductPageImage from '../../components/products/product-page-image'
-import ProductDescription from '../../components/products/product-description'
 import ProductTabs from '../../components/products/product-tabs'
 import Head from 'next/head'
 import RelatedProduct from '../../components/products/related-products'
 import ProductSchema from '../../components/seo/product-schema'
-import {CustomersReview, Faq} from 'components'
+import {CustomersReview, Faq, ProductDescription} from 'components'
 import {getProductReviews} from 'services'
 import Snackbar from '@mui/material/Snackbar'
-import {Alert} from '@mui/material'
+import Alert from '@mui/material/Alert'
 
 function Product(props) {
-  const product = props.productData
-  const childProducts = props.productData.variants
+  const {productData, reviewData, slug, error} = props
 
-  const [selectedPrice, setPrice] = React.useState(
-    props.productData.variants[0].price,
-  )
+  const variants = productData.variants
 
-  const [selectedProduct, setSelectedProduct] = React.useState({
-    sku: props.productData.variants[0].sku,
-  })
-  const [selectedChildVariation, setSelectedChildVariation] = React.useState(
-    props.productData.variants[0].name,
-  )
-  const [selectedVariant, setSelectedVariant] = React.useState(
-    props.productData.variants[0],
-  )
-  const [selectedChild, setChild] = React.useState(
-    props.productData.variants[0].sku,
-  )
-  const [stores, setWheretoBuyStores] = React.useState(
-    props.productData.variants[0].where_to_buy,
-  )
-  const [shopifyState, setShopifyState] = React.useState(null)
+  const [variant, setVariant] = React.useState(variants[0])
   const [snackBarDetails, setSnackBarDetails] = React.useState({
     open: false,
     message: '',
   })
 
-  const handleChange = e => {
-    e.preventDefault()
-    const selectedProduct = childProducts.find(
-      product => product.sku === e.target.value,
-    )
-    setSelectedVariant(selectedProduct)
-    setPrice(selectedProduct.price)
-    setWheretoBuyStores(selectedProduct.where_to_buy)
-    setChild(selectedProduct.sku)
-    setSelectedChildVariation(selectedProduct.name)
-    setSelectedProduct({sku: selectedProduct.sku})
-  }
-
   const breadCrumbPath = [
     {name: 'Home', url: '/'},
     {name: 'Products', url: '/products/'},
     {
-      name: product.types[0],
-      url: `/products/?category=${encodeURIComponent(product.types[0])}`,
+      name: productData.types[0],
+      url: `/products/?category=${encodeURIComponent(productData.types[0])}`,
     },
-    {name: product.slug, url: `/products/${product.slug}`},
+    {name: productData.slug, url: `/products/${productData.slug}`},
   ]
 
-  let child = null
-
-  if (childProducts.length === 1) {
-    child = childProducts.map((child, index) => {
-      return <p key={index}>{child.name}</p>
-    })
-  } else {
-    let options = childProducts.map((child, index) => {
-      return (
-        <option value={child.sku} key={index}>
-          {child.name}
-          {'    '}
-          {child.size}
-        </option>
-      )
-    })
-    child = (
-      <select className="ProductOptionSelector" onChange={e => handleChange(e)}>
-        {options}
-      </select>
-    )
-  }
-
-  const productDescription = (
-    <ProductDescription
-      // clean from here
-      shopifyState={shopifyState}
-      child={child}
-      product={product}
-      selectedVariant={selectedVariant}
-    />
-  )
-
   React.useEffect(() => {
-    if (props.error) {
-      setSnackBarDetails({open: true, message: props.error.split(':')[1]})
+    if (error) {
+      setSnackBarDetails({open: true, message: error.split(':')[1]})
     }
-  }, [props.error])
+  }, [error])
 
   return (
     <div>
-      <ProductSchema product={product} selected={selectedProduct} />
+      <ProductSchema product={productData} selected={{sku: variant.sku}} />
       <Head>
         <title>
-          Calypso - {product.name} - {product.sub_title}
+          Calypso - {productData.name} - {productData.sub_title}
         </title>
-        <meta name="description" content={product.plain_description} />
+        <meta name="description" content={productData.plain_description} />
         <meta name="twitter:card" content="product" />
-        <meta name="twitter:description" content={product.plain_description} />
         <meta
-          property="og:image"
-          content={selectedVariant.image_list[0].resized}
+          name="twitter:description"
+          content={productData.plain_description}
         />
-        <meta
-          name="twitter:image"
-          content={selectedVariant.image_list[0].resized}
-        />
-        <meta property="og:price:amount" content={selectedPrice} />
+        <meta property="og:image" content={variant.image_list[0].resized} />
+        <meta name="twitter:image" content={variant.image_list[0].resized} />
+        <meta property="og:price:amount" content={variant.price} />
         <meta property="og:price:currency" content="GBP" />
       </Head>
       <div className="container-fluid">
-        <div className="row productContainer">
+        <div className="row">
           <div className="col-md-6 col-sm-6 col-xs-12">
             <BreadCrumb breadcrumbs={breadCrumbPath} />
-            <ProductPageImage selectedVariant={selectedVariant} />
+            <ProductPageImage selectedVariant={variant} />
           </div>
-          <div className="col-md-6 col-sm-6 col-xs-12">
-            {productDescription}
-          </div>
-        </div>
-      </div>
-      <section className="row product-second-row">
-        <div className="container">
-          <ProductTabs
-            benefits={product.tags}
-            ingredients={product.ingredients}
-            stores={stores}
-            childProducts={selectedChildVariation}
-            selectedChild={selectedChild}
+          <ProductDescription
+            product={productData}
+            selectedVariant={variant}
+            setVariant={setVariant}
           />
         </div>
-      </section>
-      <Faq {...product.faq_list} />
+      </div>
+      <div className="row product-second-row">
+        <div className="container">
+          <ProductTabs
+            benefits={productData.tags}
+            ingredients={productData.ingredients}
+            stores={variant.where_to_buy}
+            childProducts={variant.name}
+            selectedChild={variant.sku}
+          />
+        </div>
+      </div>
+      <Faq {...productData.faq_list} />
 
-      <RelatedProduct related={product.related_products} />
+      <RelatedProduct related={productData.related_products} />
       <div id="readReviews" />
       <CustomersReview
-        product={product}
-        slug={props.slug}
-        reviewData={props.reviewData}
-        error={props.error}
+        product={productData}
+        slug={slug}
+        reviewData={reviewData}
+        error={error}
       />
       <Snackbar open={snackBarDetails.open} autoHideDuration={6000}>
         <Alert

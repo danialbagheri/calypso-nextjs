@@ -1,13 +1,25 @@
-import React from 'react'
 import Image from 'next/image'
-import {Typography} from '@mui/material'
+
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
 export default function Benefits(props) {
-  const {benefits, ingredients} = props
-  const benefitsIcon = benefits.map((benefit, index) => {
-    return (
-      <li key={index}>
-        <div className="benefitsItem">
+  const {benefits} = props
+
+  return (
+    <Box
+      sx={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}
+    >
+      {benefits.map(benefit => (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+          mt={2}
+        >
           <Image
             src={benefit.icon}
             alt={benefit.name}
@@ -15,16 +27,11 @@ export default function Benefits(props) {
             width="68"
             height="68"
           />
-          <Typography className="textCenter" sx={{mt: 2}}>
+          <Typography mt={2} textAlign="center" sx={{maxWidth: '100px'}}>
             {benefit.name}
           </Typography>
-        </div>
-      </li>
-    )
-  })
-  return (
-    <>
-      <ul className="benefits">{benefitsIcon}</ul>
-    </>
+        </Box>
+      ))}
+    </Box>
   )
 }

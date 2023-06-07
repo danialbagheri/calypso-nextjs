@@ -34,7 +34,7 @@ export default function ProductTabs(props) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Benefits benefits={benefits} ingredients={ingredients} />
+        <Benefits benefits={benefits} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <WhereToBuy
