@@ -1,36 +1,37 @@
 import * as React from 'react'
-import data from '../../data.json'
-import BreadCrumb from '../../components/common/breadcrumb'
-import ProductPageImage from '../../components/products/product-page-image'
-import ProductTabs from '../../components/products/product-tabs'
+
+/* ---------------------------- NextJs Components --------------------------- */
 import Head from 'next/head'
+/* -------------------------------------------------------------------------- */
+
+/* ----------------------------- MUI Components ----------------------------- */
+import Box from '@mui/material/Box'
+import Alert from '@mui/material/Alert'
+import Snackbar from '@mui/material/Snackbar'
+/* -------------------------------------------------------------------------- */
+
+import data from '../../data.json'
+import ProductPageImage from '../../components/products/product-page-image'
 import RelatedProduct from '../../components/products/related-products'
 import ProductSchema from '../../components/seo/product-schema'
-import {CustomersReview, Faq, ProductDescription} from 'components'
-import {getProductReviews} from 'services'
-import Snackbar from '@mui/material/Snackbar'
-import Alert from '@mui/material/Alert'
+
+import {
+  CustomersReview,
+  Faq,
+  ProductBreadCrumb,
+  ProductDescription,
+} from 'components'
+import {getProductData, getProductReviews} from 'services'
 
 function Product(props) {
   const {productData, reviewData, slug, error} = props
-
   const variants = productData.variants
 
-  const [variant, setVariant] = React.useState(variants[0])
+  const [selectedVariant, setSelectedVariant] = React.useState(variants[0])
   const [snackBarDetails, setSnackBarDetails] = React.useState({
     open: false,
     message: '',
   })
-
-  const breadCrumbPath = [
-    {name: 'Home', url: '/'},
-    {name: 'Products', url: '/products/'},
-    {
-      name: productData.types[0],
-      url: `/products/?category=${encodeURIComponent(productData.types[0])}`,
-    },
-    {name: productData.slug, url: `/products/${productData.slug}`},
-  ]
 
   React.useEffect(() => {
     if (error) {
@@ -40,7 +41,10 @@ function Product(props) {
 
   return (
     <div>
-      <ProductSchema product={productData} selected={{sku: variant.sku}} />
+      <ProductSchema
+        product={productData}
+        selected={{sku: selectedVariant.sku}}
+      />
       <Head>
         <title>
           Calypso - {productData.name} - {productData.sub_title}
@@ -51,38 +55,52 @@ function Product(props) {
           name="twitter:description"
           content={productData.plain_description}
         />
-        <meta property="og:image" content={variant.image_list[0].resized} />
-        <meta name="twitter:image" content={variant.image_list[0].resized} />
-        <meta property="og:price:amount" content={variant.price} />
+        <meta
+          property="og:image"
+          content={selectedVariant.image_list[0].resized}
+        />
+        <meta
+          name="twitter:image"
+          content={selectedVariant.image_list[0].resized}
+        />
+        <meta property="og:price:amount" content={selectedVariant.price} />
         <meta property="og:price:currency" content="GBP" />
       </Head>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-6 col-sm-6 col-xs-12">
-            <BreadCrumb breadcrumbs={breadCrumbPath} />
-            <ProductPageImage selectedVariant={variant} />
-          </div>
+      <Box
+        sx={{
+          padding: {xs: 6, sm: 12},
+        }}
+      >
+        <ProductBreadCrumb style={{marginBottom: 20}} product={productData} />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: {
+              xs: 'column',
+              sm: 'row',
+            },
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            gap: {xs: 6, sm: 8},
+            '&>div': {
+              width: {xs: '100%', sm: '50%'},
+              maxWidth: {xs: 'unset', sm: 460},
+            },
+          }}
+        >
+          <ProductPageImage selectedVariant={selectedVariant} />
           <ProductDescription
             product={productData}
-            selectedVariant={variant}
-            setVariant={setVariant}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
           />
-        </div>
-      </div>
-      <div className="row product-second-row">
-        <div className="container">
-          <ProductTabs
-            benefits={productData.tags}
-            ingredients={productData.ingredients}
-            stores={variant.where_to_buy}
-            childProducts={variant.name}
-            selectedChild={variant.sku}
-          />
-        </div>
-      </div>
+        </Box>
+      </Box>
+
       <Faq {...productData.faq_list} />
 
       <RelatedProduct related={productData.related_products} />
+
       <div id="readReviews" />
       <CustomersReview
         product={productData}
@@ -105,11 +123,9 @@ function Product(props) {
 
 export async function getStaticProps(context) {
   const slug = context.params.slug
-  const baseUrl = data.apiUrl
-  const url = baseUrl + `products/single/${slug}/?resize_w=700`
-  const res = await fetch(url)
   let error = null
-  const productData = await res.json()
+
+  const productData = await getProductData(slug)
   let reviewData = await getProductReviews(slug)
 
   if (typeof reviewData === 'string' && reviewData.includes('error')) {

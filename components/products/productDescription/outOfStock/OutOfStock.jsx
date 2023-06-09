@@ -57,10 +57,16 @@ function OutOfStock(props) {
       ) : (
         <>
           {' '}
-          <Typography textAlign={'center'} variant="h3">
+          <Typography
+            textAlign={'center'}
+            sx={{typography: {xs: 'h6', md: 'h5'}}}
+          >
             OUT OF STOCK
           </Typography>
-          <Typography textAlign={'center'} variant="h6">
+          <Typography
+            textAlign={'center'}
+            sx={{typography: {xs: 'body4', md: 'h6'}}}
+          >
             We will let you know when this product is available again!
           </Typography>
           <TextField
@@ -82,10 +88,10 @@ function OutOfStock(props) {
               endAdornment: (
                 <Button
                   sx={{
-                    height: 50,
+                    height: {xs: 40, sm: 50},
                     width: 150,
-                    minWidth: 150,
-                    minHeight: 50,
+                    minWidth: {xs: 115, md: 150},
+                    minHeight: {xs: 40, md: 50},
                     textTransform: 'none',
                     fontWeight: 700,
                     fontSize: 16,

@@ -3,6 +3,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import {Image} from '@mui/icons-material'
+import {Box} from '@mui/material'
 
 export default function ProductPageImage(props) {
   const [nav1, setNav1] = useState(null)
@@ -64,7 +65,7 @@ export default function ProductPageImage(props) {
     )
   })
   return (
-    <div className="product-photo-holder">
+    <Box sx={{position: {xs: 'relative', sm: 'sticky'}, top: 0}}>
       <Slider
         slidesToShow={1}
         asNavFor={nav2}
@@ -87,6 +88,6 @@ export default function ProductPageImage(props) {
       >
         {images}
       </Slider>
-    </div>
+    </Box>
   )
 }

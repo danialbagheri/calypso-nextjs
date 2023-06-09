@@ -7,7 +7,7 @@ const errorHandler = response => {
 }
 
 const get = async ({endpoint, baseURL = BASE_URL}) => {
-  const timeout = 8000
+  const timeout = 80000
   const controller = new AbortController()
   const id = setTimeout(() => controller.abort(), timeout)
 

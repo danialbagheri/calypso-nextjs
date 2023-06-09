@@ -1,5 +1,8 @@
 import * as React from 'react'
 
+import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
+
 import {useShopify} from '../../../hooks'
 
 import * as ga from '../../../common/googleAnalytics'
@@ -40,23 +43,25 @@ function AddButton(props) {
     setSelectedQuantity(1)
   }
   return (
-    <div className="addToCartContainer">
+    <Stack direction={{xs: 'column', sm: 'row'}} gap={4} alignItems="flex-end">
       <ProductQuantity
         selectedQuantity={selectedQuantity}
         setQuantity={setSelectedQuantity}
       />
-      <button
-        className={'addToCart'}
+      <Button
         onClick={() => {
           addToBasket(
             selectedVariant.shopify_storefront_variant_id,
             selectedQuantity,
           )
         }}
+        sx={{fontWeight: 700}}
+        variant="contained"
+        fullWidth
       >
         Add to Cart
-      </button>
-    </div>
+      </Button>
+    </Stack>
   )
 }
 

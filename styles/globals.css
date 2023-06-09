@@ -1490,10 +1490,6 @@ input.search-field:focus {
   /* width: 420px;
   height: 252px; 
 } */
-.product-photo-holder {
-  width: 75%;
-  float: right;
-}
 
 .product-photo-holder .slick-prev {
   left: 0 !important;
@@ -2285,27 +2281,6 @@ a img {
 
 /* SingleProductPage */
 
-.productDescription {
-  max-width: 600px;
-}
-
-.productTitle {
-  font-weight: 900;
-  font-size: 34px;
-  color: #ff6b00;
-  margin-bottom: 0;
-}
-
-.productPrice {
-  font-weight: 900;
-  font-size: 34px;
-  margin-top: 0;
-  padding-top: 0;
-  top: 0;
-  bottom: 0;
-  margin: 0;
-}
-
 .addToCartContainer {
   gap: 2rem;
 }
@@ -2323,6 +2298,7 @@ a img {
   align-items: flex-start;
   align-content: center;
   text-align: center;
+  margin-top: 8px;
 }
 
 .productQuantity {
