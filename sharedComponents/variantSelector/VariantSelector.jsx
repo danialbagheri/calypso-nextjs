@@ -89,7 +89,11 @@ function VariantSelector(props) {
               onChange={e => handleChange(e)}
             >
               {variants.map(variant => (
-                <option value={variant.sku} key={variant.id}>
+                <option
+                  value={variant.sku}
+                  key={variant.id}
+                  selected={selectedVariant.sku === variant.sku}
+                >
                   {variant.name}
                   {'    '}
                   {variant.size}

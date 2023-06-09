@@ -11,7 +11,7 @@ export default function Benefits(props) {
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         flexWrap: 'wrap',
-        gap: 4,
+        gap: 12,
         p: 2,
       }}
     >

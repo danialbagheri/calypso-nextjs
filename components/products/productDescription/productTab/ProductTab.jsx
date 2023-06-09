@@ -5,7 +5,6 @@ import Tab from '@mui/material/Tab'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import {Benefits} from './benefits'
-
 function TabPanel(props) {
   const {children, value, index, ...other} = props
 
@@ -87,6 +86,13 @@ const ProductTab = props => {
 
       <TabPanel value={value} index={2}>
         {selectedVariant.ingredients.join(', ')}
+
+        <Typography variant="body1" sx={{mt: 8}}>
+          The ingredients listed correspond to the current state of production.
+          Since we regularly adjust our formulations to incorporate new
+          scientific findings, the declaration of ingredients specified on the
+          package applies in each case.
+        </Typography>
       </TabPanel>
     </Box>
   )
