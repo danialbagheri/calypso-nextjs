@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 
 export default class WhereToBuy extends React.Component {
   render() {
-    const { stores, childProducts } = this.props;
+    const {stores, childProducts} = this.props
 
-    let thisProductStore;
+    let thisProductStore
     if (stores.length >= 1) {
       thisProductStore = stores.map((store, index) => {
         return (
@@ -13,20 +13,22 @@ export default class WhereToBuy extends React.Component {
               <img src={store.stockist.logo} alt={store.stockist.name} />
             </a>
           </li>
-        );
-      });
+        )
+      })
     } else {
-      thisProductStore = <li>All good pharmacies.</li>;
+      thisProductStore = <li>All good pharmacies.</li>
     }
-    let products;
+    let products
 
-    products = <p>{childProducts} is available from:</p>;
+    products = <p>{childProducts} is available from:</p>
 
     return (
       <div>
-        <div className="childProduct">{products}</div>
-        <ul className="stores">{thisProductStore}</ul>
+        <div>{products}</div>
+        <ul style={{marginTop: -5}} className="stores">
+          {thisProductStore}
+        </ul>
       </div>
-    );
+    )
   }
 }

@@ -2,35 +2,32 @@ import * as React from 'react'
 
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import {Stack} from '@mui/material'
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faTruck} from '@fortawesome/free-solid-svg-icons'
+import {VariantSelector} from 'sharedComponents'
+import ShareButton from 'components/common/shareButton'
 
 import DispatchTime from '../detail/dispatch-time'
-import DirectionOfUse from '../detail/DirectionOfUse'
 import ShowPrice from '../detail/price/show-price'
 import StarRating from '../StarRating/StarRating'
-import ShareButton from 'components/common/shareButton'
 import {AddButton} from './addButton'
 import {OutOfStock} from './outOfStock'
+import {ProductTab} from './productTab'
+import {VariantSize} from './variantSize'
+import {DeliveryInfo} from './deliveryInfo'
+import {ProductDropDown} from './productDropDown'
 
 const ProductDescription = props => {
-  const {product, selectedVariant, setVariant} = props
-
-  const handleChange = e => {
-    e.preventDefault()
-    const selectedProduct = product.variants.find(
-      product => product.sku === e.target.value,
-    )
-    setVariant(selectedProduct)
-  }
+  const {product, selectedVariant, setSelectedVariant} = props
 
   return (
-    <div className="productDescription col-md-6 col-sm-6 col-xs-12">
-      <h1 className="productTitle" itemProp="name">
+    <Stack gap={4}>
+      <Typography color={'#ff6b00'} variant={'h2'}>
         {product.name}
-      </h1>
-      <h3 className="productPrice">{product.sub_title}</h3>
+      </Typography>
+
+      <Typography variant={'h3'}>{product.sub_title}</Typography>
+
       <Box sx={{display: 'flex', alignItems: 'flex-start', gap: 2, mt: 2}}>
         <StarRating score={product.review_average_score} name={product.name} />
         <a href="#readReviews">
@@ -41,61 +38,32 @@ const ProductDescription = props => {
           )}
         </a>
       </Box>
-      <div
-        className="text-lg mb-2"
+      <Box
         dangerouslySetInnerHTML={{
           __html: product.description,
         }}
+        sx={{textAlign: 'justify'}}
       />
-      <DirectionOfUse direction={product.direction_of_use} />
-
-      <div className="top20" />
+      <ProductTab product={product} selectedVariant={selectedVariant} />
 
       {selectedVariant.inventory_quantity > 0 ? (
-        <p className="text-sm">
+        <Box mt={10}>
           <span style={{marginRight: '10px'}}>🟢</span> In stock -{' '}
           <DispatchTime />
-        </p>
-      ) : null}
-      <h2 className="productPrice">
-        <span>
-          <ShowPrice selectedVariant={selectedVariant} />
-        </span>
-      </h2>
-      {selectedVariant.size ? (
-        <small>Size: {selectedVariant.size} | </small>
+        </Box>
       ) : null}
 
-      {selectedVariant.price_per_100ml ? (
-        <small>£{selectedVariant.price_per_100ml} per 100ml</small>
-      ) : null}
+      <VariantSize selectedVariant={selectedVariant} />
 
-      <div className="deliveryInfo">
-        <FontAwesomeIcon icon={faTruck} className="calypso-orange-text" />
-        <div style={{textAlign: 'left'}}>
-          Buy 2 or more products for <strong>Free UK Delivery</strong>
-          <br />
-          <span style={{color: 'grey'}}>Standard UK delivery £3</span>
-        </div>
-      </div>
-      <div className="addToCartContainer">
-        {product.variants.length === 1 ? (
-          <Typography>{product.variants[0].name}</Typography>
-        ) : (
-          <select
-            className="ProductOptionSelector"
-            onChange={e => handleChange(e)}
-          >
-            {product.variants.map(variant => (
-              <option value={variant.sku} key={variant.id}>
-                {variant.name}
-                {'    '}
-                {variant.size}
-              </option>
-            ))}
-          </select>
-        )}
-      </div>
+      <Typography variant="h2" color={'#ec6b1d'}>
+        <ShowPrice selectedVariant={selectedVariant} />
+      </Typography>
+
+      <VariantSelector
+        variants={product.variants}
+        selectedVariant={selectedVariant}
+        setSelectedVariant={setSelectedVariant}
+      />
 
       {selectedVariant.inventory_quantity > 0 ? (
         <AddButton selectedVariant={selectedVariant} product={product} />
@@ -103,10 +71,14 @@ const ProductDescription = props => {
         <OutOfStock selectedVariant={selectedVariant} />
       )}
 
+      <DeliveryInfo />
+
       <div className="ShareButtonOnProductPage">
         <ShareButton />
       </div>
-    </div>
+
+      <ProductDropDown selectedVariant={selectedVariant} product={product} />
+    </Stack>
   )
 }
 

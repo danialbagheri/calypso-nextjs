@@ -36,6 +36,10 @@ const getSingleProduct = slug => {
   return get({endpoint: `products/single/${slug}/`})
 }
 
+const getProductData = slug => {
+  return get({endpoint: `products/single/${slug}/?resize_w=700`})
+}
+
 const getProductReviews = slug => {
   return get({endpoint: `reviews/product/?product_slug=${slug}`})
 }
@@ -64,4 +68,5 @@ export {
   getBlogs,
   registerContact,
   postOutOfStockEmail,
+  getProductData,
 }
