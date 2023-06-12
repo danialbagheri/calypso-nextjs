@@ -11,7 +11,6 @@ import Snackbar from '@mui/material/Snackbar'
 /* -------------------------------------------------------------------------- */
 
 import data from '../../data.json'
-import ProductPageImage from '../../components/products/product-page-image'
 import RelatedProduct from '../../components/products/related-products'
 import ProductSchema from '../../components/seo/product-schema'
 
@@ -20,6 +19,7 @@ import {
   Faq,
   ProductBreadCrumb,
   ProductDescription,
+  ProductImageSlider,
 } from 'components'
 import {getProductData, getProductReviews} from 'services'
 
@@ -88,7 +88,7 @@ function Product(props) {
             },
           }}
         >
-          <ProductPageImage selectedVariant={selectedVariant} />
+          <ProductImageSlider selectedVariant={selectedVariant} />
           <ProductDescription
             product={productData}
             selectedVariant={selectedVariant}

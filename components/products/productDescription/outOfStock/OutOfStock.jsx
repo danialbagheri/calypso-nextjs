@@ -97,6 +97,7 @@ function OutOfStock(props) {
                     fontSize: 16,
                     borderRadius: 3,
                     background: '#ec6b1d',
+                    color: 'white',
 
                     '& .MuiCircularProgress-svg ': {
                       color: 'white',

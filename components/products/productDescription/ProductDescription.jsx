@@ -55,7 +55,7 @@ const ProductDescription = props => {
 
       <VariantSize selectedVariant={selectedVariant} />
 
-      <Typography variant="h2" color={'#ec6b1d'}>
+      <Typography variant="h2" color={'#FF6B00'}>
         <ShowPrice selectedVariant={selectedVariant} />
       </Typography>
 

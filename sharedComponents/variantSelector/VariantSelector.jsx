@@ -33,7 +33,7 @@ function VariantSelector(props) {
           width: 38,
           height: 38,
           color: '#fff',
-          backgroundColor: isInStock ? '#ec6b1d' : '#cdcdcd',
+          backgroundColor: isInStock ? '#FF6B00' : '#cdcdcd',
           padding: 2,
           borderRadius: '50%',
           border: '1px solid white',
