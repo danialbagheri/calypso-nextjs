@@ -30,8 +30,8 @@ function VariantSelector(props) {
     return (
       <Box
         sx={{
-          width: 38,
-          height: 38,
+          width: 44,
+          height: 44,
           color: '#fff',
           backgroundColor: isInStock ? '#FF6B00' : '#cdcdcd',
           padding: 2,
