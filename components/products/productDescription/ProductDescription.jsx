@@ -71,7 +71,7 @@ const ProductDescription = props => {
         <OutOfStock selectedVariant={selectedVariant} />
       )}
 
-      <DeliveryInfo />
+      {/* <DeliveryInfo /> */}
 
       <div className="ShareButtonOnProductPage">
         <ShareButton />
