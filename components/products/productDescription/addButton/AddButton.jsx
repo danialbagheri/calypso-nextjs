@@ -43,11 +43,12 @@ function AddButton(props) {
     setSelectedQuantity(1)
   }
   return (
-    <Stack direction={{xs: 'column', sm: 'row'}} gap={4} alignItems="flex-end">
+    <Stack direction={'row'} gap={4} alignItems="center">
       <ProductQuantity
         selectedQuantity={selectedQuantity}
         setQuantity={setSelectedQuantity}
       />
+
       <Button
         onClick={() => {
           addToBasket(
@@ -55,9 +56,17 @@ function AddButton(props) {
             selectedQuantity,
           )
         }}
-        sx={{fontWeight: 700}}
+        sx={{
+          fontWeight: 700,
+          color: 'white',
+          borderRadius: '10px',
+          '&:hover': {backgroundColor: '#ff6b00'},
+          height: '52px',
+          boxShadow: 'none',
+        }}
         variant="contained"
         fullWidth
+        size="large"
       >
         Add to Cart
       </Button>
