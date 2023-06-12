@@ -44,7 +44,7 @@ function OutOfStock(props) {
   }
 
   return (
-    <Stack spacing={5} mb={3} sx={{backgroundColor: '#fde3d3', padding: 4}}>
+    <Stack spacing={5} mb={3} sx={{backgroundColor: '#FCF5EC', padding: 4}}>
       {emailSubmit ? (
         <>
           <Typography textAlign={'center'} variant="h3">
