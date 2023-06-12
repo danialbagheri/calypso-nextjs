@@ -5,15 +5,15 @@ import Slider from 'react-slick'
 
 function ProductImageSlider(props) {
   const {selectedVariant} = props
-  console.log('selectedVariant:::', selectedVariant)
+
   const settings = {
     customPaging: function (i) {
       return (
         <Image
-          src={selectedVariant.image_list[i]?.image}
+          src={selectedVariant.image_list[i]?.resized}
           alt={selectedVariant.image_list[i]?.alternate_text}
-          width={60}
-          height={60}
+          fill={true}
+          style={{objectFit: 'cover'}}
         />
       )
     },
@@ -33,6 +33,11 @@ function ProductImageSlider(props) {
         '& .slick-arrow': {
           top: '40%',
         },
+
+        '& .slick-arrow:before': {
+          color: '#999 !important',
+        },
+
         '& .slick-arrow.slick-next': {
           right: '-23px !important',
         },
@@ -69,7 +74,6 @@ function ProductImageSlider(props) {
               width: '100%',
               height: '500px',
               position: 'relative',
-              backgroundColor: '#E7EBEE',
             }}
           >
             <Image
