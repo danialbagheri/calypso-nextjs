@@ -35,11 +35,11 @@ function ProductImageSlider(props) {
         },
 
         '& .slick-arrow:before': {
-          color: '#999 !important',
+          display: 'none !important',
         },
 
-        '& .slick-arrow.slick-next': {
-          right: '-23px !important',
+        '& .slick-arrow': {
+          display: 'none !important',
         },
 
         '&>.slick-initialized>ul': {
