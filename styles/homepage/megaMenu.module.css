@@ -1,45 +1,48 @@
-.MegaMenuContainer{
-    display: block;
-    position: absolute;
-    background-color: #fff;
-    width: 100%;
-    left: 0;
-    z-index: 1;
-    height: 330px;
-    margin-top:28px; 
-    border-top: 1px solid #F66B03;
-    border-bottom: 1px solid #e5e5e5;
+.MegaMenuContainer {
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  left: 0;
+  z-index: 10;
+  height: 290px;
+  margin-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.MegaMenuItems{
-    margin-top: 10px;
-    display: flex;
-    height: 240px;
-    gap: 5rem;
-    justify-content: center;
-    align-items: flex-end;
-    text-align: center;
-    cursor: pointer;
+.MegaMenuItems {
+  margin-top: 10px;
+  display: flex;
+  height: 200px;
+  gap: 5rem;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
+  cursor: pointer;
 }
-.MegaMenuShopAll{
-    margin-top: 30px;
-    text-align: center !important;
+.MegaMenuShopAll {
+  margin-top: 30px;
+  text-align: center !important;
 }
-.MegaMenuItem p{
-    margin-top: 10px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 1.5rem;
+.MegaMenuItem p {
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 .MegaMenuItemimage img {
-    width: 100px;
+  width: 100px;
 }
-.MegaMenuItem p :hover{
-    margin-top: -40px;
+.MegaMenuItem p :hover {
+  margin-top: -40px;
 }
 @media only screen and (max-width: 768px) {
-    .MegaMenuContainer{
-        display: none;
-    }
+  .MegaMenuContainer {
+    display: none;
+  }
 }

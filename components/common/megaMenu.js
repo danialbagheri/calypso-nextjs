@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import MegaMenuStyle from 'styles/homepage/megaMenu.module.css'
 import Link from 'next/link'
+import Box from '@mui/material/Box'
 
 function MegaMenuItem(props) {
   const {items} = props
@@ -14,13 +15,12 @@ function MegaMenuItem(props) {
         )}`}
         className={MegaMenuStyle.MegaMenuItem}
       >
-        <div style={{position: 'relative', width: '88px', height: '120px'}}>
+        <div style={{position: 'relative', width: '88px', height: '100px'}}>
           <Image
             src={item.item.main_image_resized}
             alt={item.item.name}
             fill
-            styles={{objectFit: 'contain'}}
-            sizes={'100vw'}
+            style={{objectFit: 'contain'}}
           />
           {/* <picture>
             <source srcSet={item.item.main_image_webp} type="image/webp" />

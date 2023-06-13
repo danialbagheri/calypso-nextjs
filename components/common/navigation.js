@@ -26,15 +26,17 @@ function Navigation() {
     const navbar = document.getElementsByClassName('navbar-fixed-top')[0]
     let sticky = navbar.offsetTop
     window.onscroll = () => {
-      if (window.pageYOffset >= sticky) {
+      if (window.pageYOffset >= 10) {
         navbar.style.position = 'fixed'
         navbar.style.top = '0'
+        navbar.style.boxShadow = '0 0 4px 2px rgba(0,0,0,0.3)'
       } else {
         navbar.style.position = 'relative'
         navbar.style.marginTop = '0'
+        navbar.style.boxShadow = 'none'
       }
     }
-  })
+  }, [])
 
   useEffect(() => {
     const endPoint =
@@ -103,9 +105,9 @@ function Navigation() {
               className="nav-link"
               href="/products/"
             >
-              Mix & Match
-            </ActiveLink>
-          </li> */}
+                   Mix & Match
+                  </ActiveLink>
+             </li> */}
             <li>
               <ActiveLink
                 href="/be-sun-ready"
