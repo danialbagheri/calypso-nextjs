@@ -18,11 +18,17 @@ function WriteReview() {
         sx={{
           padding: '12px 32px',
           borderRadius: 20,
+          color: 'white',
+          fontWeight: 'bold',
+          boxShadow: 'none',
           '&:hover': {
-            color: theme.palette.grey.main,
+            backgroundColor: theme.palette.primary.main,
           },
           '& svg path:hover': {
             fill: theme.palette.grey.main,
+          },
+          '& a': {
+            textDecoration: 'none',
           },
         }}
         startIcon={
