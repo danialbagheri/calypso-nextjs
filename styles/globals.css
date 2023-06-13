@@ -3379,12 +3379,6 @@ ul.stores img {
   justify-content: center;
 }
 
-.info-bar {
-  background-color: #f2f2f2;
-  padding: 10px 0;
-  margin-top: 10px;
-}
-
 .top-bar {
   /* position: fixed; */
   margin-top: -12px;

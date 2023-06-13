@@ -1,15 +1,29 @@
 // import React from "react";
-import React, {useState, useEffect} from 'react'
-import Image from 'next/image'
+import * as React from 'react'
+/* -------------------------------- Libraries ------------------------------- */
 import Slider from 'react-slick'
+/* -------------------------------------------------------------------------- */
+
+/* ----------------------------- MUI Components ----------------------------- */
+import {Box, Typography, useTheme} from '@mui/material'
+import * as Icon from '@mui/icons-material'
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------- Local Components ---------------------------- */
 import TopBar from './topbar'
+import data from '../../data.json'
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------- CSS Files ------------------------------- */
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+/* -------------------------------------------------------------------------- */
 
-import data from '../../data.json'
 export default function InfoBar() {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [items, setItems] = useState(null)
+  const [isLoaded, setIsLoaded] = React.useState(false)
+  const [items, setItems] = React.useState(null)
+  const theme = useTheme()
+
   const settings = {
     infinite: false,
     slidesToShow: 3,
@@ -42,7 +56,10 @@ export default function InfoBar() {
       },
     ],
   }
-  // Similar to componentDidMount and componentDidUpdate:
+
+  //TO DO::: We should import icons from backend
+  const icons = ['Place', 'LocalShipping', 'Star']
+
   async function getInfoBarStatus() {
     const endpoint = data.apiUrl + 'web/top-bars/'
     const res = await fetch(endpoint)
@@ -50,30 +67,39 @@ export default function InfoBar() {
     setItems(json[0].items)
     setIsLoaded(true)
   }
-  useEffect(() => {
-    // Update the document title using the browser API
+
+  React.useEffect(() => {
     getInfoBarStatus()
   }, [])
 
   if (isLoaded) {
-    const infoBarItems = items.map(item => {
+    const infoBarItems = items.map((item, i) => {
+      const ItemIcon = Icon[icons[i]]
       return (
-        <div key={item.id}>
-          <div className="info-bar-item">
-            <div className="info-bar-icon">
-              <Image src={item.icon} width={23} height={23} alt={item.text} />
-            </div>
-            <div className="text-centre">{item.text}</div>
-          </div>
-        </div>
+        <Box
+          key={item.id}
+          sx={{alignItems: 'center'}}
+          className="info-bar-item"
+        >
+          <Box className="info-bar-icon">
+            <ItemIcon color="primary" />
+          </Box>
+          <Typography className="text-centre">{item.text}</Typography>
+        </Box>
       )
     })
     return (
       <>
         <TopBar />
-        <div className="info-bar">
+        <Box
+          sx={{
+            backgroundColor: theme.palette.sand.main,
+            padding: '10px 0',
+          }}
+          className="info-bar"
+        >
           <Slider {...settings}>{infoBarItems}</Slider>
-        </div>
+        </Box>
       </>
     )
   } else {

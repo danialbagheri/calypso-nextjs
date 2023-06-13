@@ -1,9 +1,25 @@
-import Styles from '../../styles/relatedProducts.module.css'
+/* -------------------------------- Libraries ------------------------------- */
 import Slider from 'react-slick'
+/* -------------------------------------------------------------------------- */
+
+/* ----------------------------- MUI Components ----------------------------- */
+import {Box} from '@mui/material'
+import {useTheme} from '@emotion/react'
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------- Local Components ---------------------------- */
+import StarRating from './StarRating/StarRating'
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------------- Style --------------------------------- */
+import Styles from '../../styles/relatedProducts.module.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import StarRating from './StarRating/StarRating'
+/* -------------------------------------------------------------------------- */
+
 export default function RelatedProducts({related}) {
+  const theme = useTheme()
+
   const settings = {
     arrows: true,
     dots: true,
@@ -76,9 +92,9 @@ export default function RelatedProducts({related}) {
     )
   })
   return (
-    <div className="bg-secondary p-3">
+    <Box sx={{backgroundColor: theme.palette.sand.main, p: 3}}>
       <h4 className="textCenter">You may also like</h4>
       <Slider {...settings}>{relatedProducts}</Slider>
-    </div>
+    </Box>
   )
 }
