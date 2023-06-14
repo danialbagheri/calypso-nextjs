@@ -56,7 +56,6 @@ export default function Cart(props) {
   function applyDiscountApplication(checkoutState) {
     try {
       if (checkoutState && checkoutState.discountApplications.length >= 1) {
-        console.log(checkoutState.discountApplications)
         // checkoutState.discountApplications.map(item => {
         //   setDiscountItem({
         //     title: item.title,

@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import BreadCrumb from '../../components/common/breadcrumb'
-import ProductRangeItem from '../../components/products/product-range/ProductRangeItem'
-import HomeSlider from '../../components/home/home-slider'
+import {HomeSlider, ProductRangeItem} from 'components'
+import BreadCrumb from 'components/common/breadcrumb'
+
 //Services
 import {getCollection} from 'services'
 
@@ -20,7 +20,9 @@ export default function CollectionName(props) {
 
   return (
     <div>
-      {collection.slider && collection.slider.slides > 1 ? <HomeSlider slides={collection.slider.slides} /> : null}
+      {collection.slider && collection.slider.slides > 1 ? (
+        <HomeSlider slides={collection.slider.slides} />
+      ) : null}
       <div className="container">
         <div style={{padding: 10}}>
           <BreadCrumb breadcrumbs={breadCrumbPath} />

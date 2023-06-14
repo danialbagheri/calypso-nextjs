@@ -70,7 +70,6 @@ export default class Contact extends React.Component {
     const baseUrl = data.apiUrl
     const finalUrl = baseUrl + `web/contact-us/`
     const myBody = fields
-    console.log(JSON.stringify(myBody))
     fetch(finalUrl, {
       method: 'POST',
       headers: {

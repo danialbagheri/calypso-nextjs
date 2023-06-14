@@ -1,6 +1,7 @@
 import Image from 'next/image'
-import Styles from 'styles/bestseller.module.css'
+
 import {Box} from '@mui/material'
+
 import BestSellerItems from './BestSellerItems'
 
 export default function BestSeller(props) {
@@ -13,7 +14,7 @@ export default function BestSeller(props) {
   const collectionHTML = (
     <div>
       {collection ? (
-        <div className={Styles.Container}>
+        <div>
           <Box
             sx={{
               position: 'relative',
@@ -34,7 +35,21 @@ export default function BestSeller(props) {
             <source srcSet={collection.resized} media="(max-width: 600px)" />
             <img src={collection.image} alt="Calypso Best Seller products" />
           </div> */}
-          <div className={Styles.productContainer}>{collectionItems}</div>
+          <Box
+            sx={{
+              width: '100%',
+
+              padding: 5,
+
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gridTemplateRows: 'auto',
+              rowGap: 9,
+              columnGap: 5,
+            }}
+          >
+            {collectionItems}
+          </Box>
         </div>
       ) : null}
     </div>

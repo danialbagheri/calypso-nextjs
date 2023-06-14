@@ -1,4 +1,3 @@
-import React from 'react'
 import Rating from '@mui/material/Rating'
 import StarIcon from '@mui/icons-material/Star'
 

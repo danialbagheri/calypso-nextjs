@@ -4,11 +4,11 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import {Stack} from '@mui/material'
 
-import {VariantSelector} from 'sharedComponents'
+import {ShowPrice, VariantSelector} from 'sharedComponents'
 import ShareButton from 'components/common/shareButton'
 
 import DispatchTime from '../detail/dispatch-time'
-import ShowPrice from '../detail/price/show-price'
+
 import StarRating from '../StarRating/StarRating'
 import {AddButton} from './addButton'
 import {OutOfStock} from './outOfStock'

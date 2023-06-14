@@ -5,6 +5,7 @@ import {Alert, Box, Snackbar, TextField, Typography} from '@mui/material'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import {registerContact} from 'services'
+import Link from 'next/link'
 
 export default function MailjetSignUp() {
   const SUBSCRIPTION_STATE = 'subscriptionState'
@@ -193,6 +194,7 @@ export default function MailjetSignUp() {
             display: 'flex',
             flexDirection: 'column',
             gap: 3,
+            backgroundColor: 'rgba(252, 245, 236, 0.7)',
           }}
         >
           <Typography variant="h5" textAlign={'center'}>
@@ -254,7 +256,8 @@ export default function MailjetSignUp() {
 
           <p className={Styles.smallText}>
             By entering your email, you are opting in to receiving emails from
-            Calypso. You can opt out anytime. Privacy policy
+            Calypso. You can opt out anytime.
+            <Link href={'/privacy-policy'}>Privacy policy</Link>
           </p>
         </Box>
       </div>

@@ -95,6 +95,11 @@ export default function InfoBar() {
           sx={{
             backgroundColor: theme.palette.sand.main,
             padding: '10px 0',
+
+            '& .slick-track': {
+              display: 'flex',
+              alignItems: 'center',
+            },
           }}
           className="info-bar"
         >
