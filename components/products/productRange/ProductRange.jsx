@@ -6,10 +6,11 @@ export default function ProductRange(props) {
     <Box
       sx={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 300px))',
         gridTemplateRows: 'auto',
-        rowGap: 9,
-        columnGap: 5,
+        rowGap: 4,
+        columnGap: 3,
+        justifyContent: 'center',
       }}
     >
       {props.products.length < 1 ? (

@@ -1,10 +1,11 @@
 import _ from 'lodash'
 import {useShopify} from '../../../hooks'
-import {Box, Button} from '@mui/material'
+import {Box, Button, useTheme} from '@mui/material'
 import {VariantSelector} from 'sharedComponents'
 
 export default function AddToBasketWithDropDown(props) {
   const {addVariant, checkoutState, openCart} = useShopify()
+  const theme = useTheme()
   const {activeVariant, setActiveVariant} = props
   const variants = props.product.variants
 
@@ -71,7 +72,13 @@ export default function AddToBasketWithDropDown(props) {
         fullWidth
         sx={{
           fontWeight: 700,
+          '&:hover': {
+            // backgroundColor: theme.palette.sand.main,
+            boxShadow: `0 0 2px 1px ${theme.palette.primary.main}`,
+            borderColor: 'transparent',
+          },
         }}
+        color={'darkGrey'}
       >
         {inStock() ? 'ADD TO CART' : 'OUT OF STOCK'}
       </Button>

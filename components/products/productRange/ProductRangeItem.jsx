@@ -53,6 +53,12 @@ export default function ProductRangeItem(props) {
             height: '300px',
             margin: '0 auto',
             position: 'relative',
+            transition: 'all 200ms',
+            borderRadius: 1,
+            '&:hover': {
+              transform: 'scale(1.05)',
+              boxShadow: `0 0 2px 1px ${theme.palette.primary.main}`,
+            },
           }}
         >
           {product.collection_names.length > 0 ? (
