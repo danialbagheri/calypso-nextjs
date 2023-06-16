@@ -17,6 +17,9 @@ const theme = createTheme({
     grey: {
       main: '#E2E2E2',
     },
+    darkGrey: {
+      main: '#414141',
+    },
     sand: {
       main: '#FCF5EC',
     },

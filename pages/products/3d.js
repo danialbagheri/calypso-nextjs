@@ -95,7 +95,6 @@ export default function threeD() {
       const box = new THREE.Box3()
       // box3 bounding box
       const boundingBox = box.setFromObject(scene)
-      console.log(boundingBox)
       // create a grid helper
       const size = 10
       const divisions = 10
@@ -121,9 +120,6 @@ export default function threeD() {
         sizes.directionalLight.position.y,
         sizes.directionalLight.position.z,
       )
-      console.log(camera)
-      console.log(scene)
-      console.log(renderer)
     }
 
     // renderer.setScissor(1, 1, 1, 1)

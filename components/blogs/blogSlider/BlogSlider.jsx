@@ -51,9 +51,9 @@ function BlogSlider() {
   }, [])
 
   return (
-    <Box mt={{xs: 5, sm: 10}}>
-      <Typography variant={'h1'} align="center">
-        EDITOR'S PICKS
+    <Box mt={{xs: 10, sm: 20}}>
+      <Typography textAlign={'center'}>
+        <h1>EDITOR'S PICKS</h1>
       </Typography>
 
       <Box

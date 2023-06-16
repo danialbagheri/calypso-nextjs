@@ -1,24 +1,29 @@
 import Image from 'next/image'
-import Styles from 'styles/bestseller.module.css'
+
 import {Box} from '@mui/material'
+
 import BestSellerItems from './BestSellerItems'
 
 export default function BestSeller(props) {
   const collection = props.bestseller
 
-  const collectionItems = collection.items.slice(0, 6).map((item, index) => {
-    return <BestSellerItems item={item} key={index} />
-  })
-
-  const collectionHTML = (
-    <div>
+  return (
+    <Box sx={{maxWidth: '1440px', margin: '0 auto'}}>
+      <h1 className="textCenter">Top Seller products</h1>
       {collection ? (
-        <div className={Styles.Container}>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 5,
+            flexDirection: {xs: 'column', lg: 'row'},
+            padding: 5,
+          }}
+        >
           <Box
             sx={{
               position: 'relative',
               width: '100%',
-              height: {xs: '400px', md: '400px', lg: '900px'},
+              height: {xs: '500px', sm: '600px', lg: 'unset'},
             }}
           >
             <Image
@@ -26,23 +31,26 @@ export default function BestSeller(props) {
               alt="Calypso Best Seller products"
               fill
               style={{objectFit: 'cover'}}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </Box>
-          {/* <div>
-            <source srcSet={collection.webp} type="image/webp" />
-            <source srcSet={collection.resized} media="(max-width: 600px)" />
-            <img src={collection.image} alt="Calypso Best Seller products" />
-          </div> */}
-          <div className={Styles.productContainer}>{collectionItems}</div>
-        </div>
+          <Box
+            sx={{
+              width: '100%',
+
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gridTemplateRows: 'auto',
+              rowGap: 4,
+              columnGap: 2,
+            }}
+          >
+            {collection.items.slice(0, 6).map((item, index) => (
+              <BestSellerItems item={item} key={index} />
+            ))}
+          </Box>
+        </Box>
       ) : null}
-    </div>
-  )
-  return (
-    <div>
-      <h1 className="textCenter">Top Seller products</h1>
-      {collectionHTML}
-    </div>
+    </Box>
   )
 }

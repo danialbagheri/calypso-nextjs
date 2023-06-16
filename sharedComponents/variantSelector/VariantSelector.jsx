@@ -5,11 +5,15 @@ import {useSearchParams} from 'next/navigation'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-function VariantSelector(props) {
+function VariantSelector({
+  variants,
+  selectedVariant,
+  setSelectedVariant,
+  ...props
+}) {
   const searchParams = useSearchParams()
 
   const urlSku = searchParams.get('sku')
-  const {variants, selectedVariant, setSelectedVariant} = props
 
   const isAllVarSPF = variants.every(variant => variant.name.startsWith('SPF'))
   const isSingleVariant = variants.length === 1
@@ -48,6 +52,7 @@ function VariantSelector(props) {
           setSelectedVariant(variant)
         }}
         textAlign={'center'}
+        className={'SPF_variants'}
       >
         {variantName}
       </Box>
@@ -76,7 +81,16 @@ function VariantSelector(props) {
   }, [urlSku])
 
   return (
-    <Box sx={{display: 'flex', alignItems: 'center', gap: '12px'}} {...props}>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        flexWrap: 'wrap',
+      }}
+      {...props}
+      className={'main_variant_selector_con'}
+    >
       {isAllVarSPF ? (
         variants.map(variant => renderVariant(variant))
       ) : (
