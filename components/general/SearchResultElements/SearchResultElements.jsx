@@ -25,7 +25,7 @@ function SearchResultElements({product}) {
       key={product.id}
     >
       <Box
-        sx={{cursor: 'pointer'}}
+        sx={{cursor: 'pointer', mb: 6}}
         onClick={e => {
           setLoading(true)
           e.preventDefault()
@@ -38,13 +38,16 @@ function SearchResultElements({product}) {
           sx={{
             position: 'relative',
             height: 250,
-            background: theme.palette.sand.main,
+            background: theme.palette.grey.main,
           }}
         >
           <Image fill src={product.main_image} style={{objectFit: 'contain'}} />
         </Box>
         <Typography sx={{mt: 2}} variant="h4">
           {product.name}
+        </Typography>
+        <Typography sx={{mt: 2}} variant="h6">
+          {product.sub_title}
         </Typography>
       </Box>
       {/* <div className={`text-centre ${style.productSubTitle}`}>
