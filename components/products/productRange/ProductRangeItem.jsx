@@ -48,7 +48,8 @@ export default function ProductRangeItem(props) {
       >
         <Box
           sx={{
-            backgroundColor: '#f8f8fb',
+            background:
+              'linear-gradient(180deg, rgba(245,245,247,1) 84%, rgba(255,255,255,1) 85%)',
             width: '100%',
             height: '300px',
             margin: '0 auto',
@@ -56,8 +57,8 @@ export default function ProductRangeItem(props) {
             transition: 'all 200ms',
             borderRadius: 1,
             '&:hover': {
-              transform: 'scale(1.05)',
-              boxShadow: `0 0 2px 1px ${theme.palette.primary.main}`,
+              background:
+                'linear-gradient(180deg, rgba(252,245,236,1) 84%, rgba(255,255,255,1) 85%)',
             },
           }}
         >
@@ -65,7 +66,6 @@ export default function ProductRangeItem(props) {
             <Box
               sx={{
                 borderRadius: '3px',
-                opacity: 0.8,
                 fontSize: '11px',
                 fontWeight: 700,
                 zIndex: 2,
@@ -73,7 +73,8 @@ export default function ProductRangeItem(props) {
                 top: 10,
                 right: 20,
                 color: 'white',
-                backgroundColor: theme.palette.primary.main,
+                backgroundColor: '#fff',
+                color: 'black',
                 padding: '3px 10px',
               }}
             >

@@ -35,18 +35,17 @@ export default function BestSellerItems(props) {
       >
         <Box
           sx={{
-            backgroundColor: '#f8f8fb',
+            background: 'rgba(245,245,247,1)',
             width: '100%',
             height: '300px',
             margin: '0 auto',
             position: 'relative',
-
             cursor: 'pointer',
           }}
         >
           <Image
             fill={true}
-            style={{objectFit: 'contain'}}
+            style={{objectFit: 'cover'}}
             src={showButton ? i.secondary_image_resized : i.main_image_resized}
             alt={i.name}
           />
