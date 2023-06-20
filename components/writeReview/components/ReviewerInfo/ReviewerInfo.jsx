@@ -58,23 +58,58 @@ function ReviewerInfo(props) {
   }
 
   const onBlurHandler = (type, value) => {
-    //Control if the email address is correct or not
-    if (type === EMAIL) {
-      if (!validateEmail(value)) {
-        setUserData(prev => ({
-          ...prev,
-          [type]: {
-            ...prev[type],
-            errorState: true,
-            errorText: 'Please Enter a valid email address',
-          },
-        }))
-      } else if (userData[type].errorState) {
-        setUserData(prev => ({
-          ...prev,
-          [type]: {...prev[type], errorState: false, errorText: ''},
-        }))
-      }
+    switch (type) {
+      case USERNAME:
+        if (!value) {
+          setUserData(prev => ({
+            ...prev,
+            [type]: {
+              ...prev[type],
+              errorState: true,
+              errorText: 'Please enter your name.',
+            },
+          }))
+        } else if (userData[type].errorState) {
+          setUserData(prev => ({
+            ...prev,
+            [type]: {
+              ...prev[type],
+              errorState: false,
+              errorText: '',
+            },
+          }))
+        }
+        break
+      case EMAIL:
+        if (!value) {
+          setUserData(prev => ({
+            ...prev,
+            [type]: {
+              ...prev[type],
+              errorState: true,
+              errorText: 'Please enter your email address.',
+            },
+          }))
+        } else if (!validateEmail(value)) {
+          setUserData(prev => ({
+            ...prev,
+            [type]: {
+              ...prev[type],
+              errorState: true,
+              errorText: 'Please enter a valid email address.',
+            },
+          }))
+        } else if (userData[type].errorState) {
+          setUserData(prev => ({
+            ...prev,
+            [type]: {
+              ...prev[type],
+              errorState: false,
+              errorText: '',
+            },
+          }))
+        }
+        break
     }
   }
 
@@ -106,8 +141,18 @@ function ReviewerInfo(props) {
             }}
             placeholder={field.placeholder}
             onBlur={e => onBlurHandler(field.type, e.target.value)}
-            error={userData[field.type].errorState}
-            helperText={userData[field.type].errorText}
+            error={
+              userData[field.type].errorState || props.error[field.type]?.state
+            }
+            helperText={
+              userData[field.type].errorText ? (
+                <Typography>{userData[field.type].errorText}</Typography>
+              ) : (
+                props.error[field.type]?.state && (
+                  <Typography>{props.error[field.type]?.message}</Typography>
+                )
+              )
+            }
           />
         </Box>
       ))}

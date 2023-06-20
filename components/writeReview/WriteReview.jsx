@@ -15,6 +15,11 @@ import Box from '@mui/material/Box'
 
 function WriteReview() {
   const [base64Img, setBase64Img] = React.useState({})
+  const [error, setError] = React.useState({
+    username: {state: false, message: ''},
+    email: {state: false, message: ''},
+    score: {state: false, message: ''},
+  })
   //This object is the same as the body for api request
   const reviewData = React.useRef({
     username: '',
@@ -38,6 +43,8 @@ function WriteReview() {
     data: reviewData.current,
     setBase64Img,
     base64Img,
+    error,
+    setError,
   }
 
   return (
