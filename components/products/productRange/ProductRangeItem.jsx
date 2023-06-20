@@ -71,7 +71,7 @@ export default function ProductRangeItem(props) {
                 zIndex: 2,
                 position: 'absolute',
                 top: 10,
-                right: 20,
+                right: 10,
                 color: 'white',
                 backgroundColor: '#fff',
                 color: 'black',

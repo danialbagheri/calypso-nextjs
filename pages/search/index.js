@@ -4,10 +4,11 @@ import Head from 'next/head'
 import {AppContext, SearchResultElements} from 'components'
 
 import style from './search.module.css'
-import {Box, Typography, Container} from '@mui/material'
+import {Box, Typography, Container, useTheme} from '@mui/material'
 import Link from 'next/link'
 
 export default function SearchPage() {
+  const theme = useTheme()
   const [appState] = React.useContext(AppContext)
 
   return (
@@ -42,7 +43,12 @@ export default function SearchPage() {
                   <SearchResultElements product={p} key={p.id} />
                 ))}
               </Box>
-              <Typography variant="h6" sx={{p: 4}} textAlign={'center'}>
+              <Typography
+                color={theme.palette.palm.main}
+                variant="h6"
+                sx={{p: 8}}
+                textAlign={'center'}
+              >
                 Not what you're looking for? Check our{' '}
                 <Link href={'https://uk.cocoandeve.com/collections/all'}>
                   shop all page
