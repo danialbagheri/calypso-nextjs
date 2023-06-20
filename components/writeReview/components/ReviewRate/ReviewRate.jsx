@@ -27,14 +27,14 @@ function ReviewRate(props) {
             border: '1px solid',
             p: 2,
             borderRadius: 2,
-            borderColor: props.error.score.state ? 'red' : 'transparent',
+            borderColor: props.error.score?.state ? 'red' : 'transparent',
           }}
         />
       </Box>
-      {props.error.score.state ? (
+      {props.error.score?.state ? (
         <Box sx={{pt: 4, color: 'red'}}>
           <Typography variant="h6" textAlign={'center'}>
-            {props.error.score.message}
+            {props.error.score?.message}
           </Typography>
         </Box>
       ) : null}
