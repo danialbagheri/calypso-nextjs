@@ -50,9 +50,7 @@ export default function SearchPage() {
                 textAlign={'center'}
               >
                 Not what you're looking for? Check our{' '}
-                <Link href={'https://uk.cocoandeve.com/collections/all'}>
-                  shop all page
-                </Link>
+                <Link href={'/products/'}>product page</Link>
               </Typography>
             </Box>
           )}
