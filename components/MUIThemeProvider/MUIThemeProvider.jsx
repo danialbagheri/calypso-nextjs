@@ -5,7 +5,6 @@ import {createTheme, ThemeProvider} from '@mui/material/styles'
 const theme = createTheme({
   palette: {
     primary: {
-      // main: '#FB4C1E',
       main: '#FF6B00',
     },
     secondary: {
@@ -20,9 +19,19 @@ const theme = createTheme({
     darkGrey: {
       main: '#414141',
     },
+    sun: {main: '#F5AF3F'},
+    palm: {
+      main: '#226F61',
+    },
     sand: {
       main: '#FCF5EC',
     },
+    earth: {
+      main: '#3C1510',
+    },
+    success: {main: '#2ECC71'},
+    warning: {main: '#F1C40F'},
+    failure: {main: '#E74C3C'},
   },
   spacing: 4,
   typography: {
