@@ -1,14 +1,13 @@
 import * as React from 'react'
 
 import {
-  ReviewRate,
-  ReviewerInfo,
-  Variants,
-  ReviewBody,
-  Recommendation,
-  PhotoUpload,
-  SubmitReview,
   Breadcrumb,
+  PhotoUpload,
+  ReviewBody,
+  ReviewerInfo,
+  ReviewRate,
+  SubmitReview,
+  Variants,
 } from './components'
 
 import Box from '@mui/material/Box'
@@ -22,8 +21,8 @@ function WriteReview() {
   })
   //This object is the same as the body for api request
   const reviewData = React.useRef({
-    username: '',
-    email: '',
+    customer_name: '',
+    customer_email: '',
     location: '',
     title: '',
     comment: '',
@@ -65,7 +64,7 @@ function WriteReview() {
               margin: '0 auto',
               paddingTop: '47.06%',
               width: '100%',
-              backgroundImage: `url("/assets/review/logoWhite.png")`,
+              backgroundImage: 'url("/assets/review/logoWhite.png")',
               backgroundPosition: 'center',
               backgroundSize: 'contain',
               backgroundRepeat: 'no-repeat',

@@ -20,8 +20,8 @@ function SubmitReview(props) {
 
   const fieldsConductHandler = data => {
     const fieldsError = {}
-    if (!data.username) {
-      fieldsError.username = {
+    if (!data.customer_name) {
+      fieldsError.customer_name = {
         state: true,
         message: 'Please enter your name.',
       }
@@ -32,13 +32,13 @@ function SubmitReview(props) {
         message: 'Please select a star rating between 1 and 5.',
       }
     }
-    if (!data.email) {
-      fieldsError.email = {
+    if (!data.customer_email) {
+      fieldsError.customer_email = {
         state: true,
         message: 'Please enter your email address.',
       }
-    } else if (!validateEmail(data.email)) {
-      fieldsError.email = {
+    } else if (!validateEmail(data.customer_email)) {
+      fieldsError.customer_email = {
         state: true,
         message: 'Please enter a valid email address.',
       }
@@ -52,20 +52,25 @@ function SubmitReview(props) {
         severity: 'error',
         message: (
           <>
-            {Object.values(fieldsError).map(error => (
-              <Typography>{error.message}</Typography>
+            {Object.values(fieldsError).map((error, i) => (
+              <Typography key={i}>{error.message}</Typography>
             ))}
           </>
         ),
       })
       return true
-    } else return false
+    }
+    return false
   }
 
-  const submitHandler = () => {
+  const submitHandler = e => {
+    e.preventDefault()
     setLoading(true)
 
+    //Finding out if there is a field empty or have errors.
     const errorState = fieldsConductHandler(props.data)
+
+    console.log('porps.data::', props.data)
     if (!errorState) {
       const promisesList = []
       Object.values(props.base64Img).forEach(base64_img =>
@@ -80,7 +85,9 @@ function SubmitReview(props) {
         .then(idArr => {
           props.changeHandler('image_ids', idArr)
         })
-        .then(() => postProductReview(props.data, slug.current))
+        .then(() => {
+          postProductReview(props.data, slug.current)
+        })
         .then(() => {
           setLoading(false)
           setSnackBarState({
@@ -89,7 +96,14 @@ function SubmitReview(props) {
             message: 'Your review has been send successfully!',
           })
         })
-        .catch(err => setLoading(false))
+        .catch(err => {
+          setSnackBarState({
+            state: true,
+            severity: 'error',
+            message: err || 'Something went wrong! please try later.',
+          })
+          setLoading(false)
+        })
     } else {
       setLoading(false)
     }
@@ -100,34 +114,48 @@ function SubmitReview(props) {
   }, [])
 
   return (
-    <Stack mt={16} mb={30} spacing={4} alignItems={'center'}>
+    <Stack alignItems={'center'} mb={30} mt={16} spacing={4}>
       <Typography
-        sx={{width: '100%'}}
-        variant={'body3'}
         color={'primary'}
+        sx={{width: '100%'}}
         textAlign={'center'}
+        variant={'body3'}
       >
         Ready to share your experience?
       </Typography>
       <Button
-        variant={'contained'}
-        sx={{minWidth: 310, padding: '16px 80px', borderRadius: 15}}
-        onClick={submitHandler}
         loading={loading}
+        onClick={e => submitHandler(e)}
+        sx={{
+          minWidth: 310,
+          padding: '16px 80px',
+          borderRadius: 15,
+          color: 'white',
+
+          boxShadow: 'unset',
+          '&:hover': {
+            backgroundColor: 'primary.main',
+          },
+          '& span': {
+            fontSize: '16px',
+            fontWeight: '700',
+          },
+        }}
+        variant={'contained'}
       >
         {loading ? (
-          <CircularProgress sx={{color: 'white'}} size={20} thickness={6} />
+          <CircularProgress size={20} sx={{color: 'white'}} thickness={6} />
         ) : (
           <Typography variant={'body4'}>SUBMIT THE REVIEW</Typography>
         )}
       </Button>
 
       <Snackbar
-        open={snackBarState.state}
-        autoHideDuration={5000}
-        onClose={() => setSnackBarState(prev => ({...prev, state: false}))}
-        key={'bottom' + 'center'}
         anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+        autoHideDuration={5000}
+        key={'bottom' + 'center'}
+        onClose={() => setSnackBarState(prev => ({...prev, state: false}))}
+        open={snackBarState.state}
       >
         <Alert
           onClose={() => setSnackBarState(prev => ({...prev, state: false}))}

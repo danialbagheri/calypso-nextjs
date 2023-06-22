@@ -1,4 +1,4 @@
-import {get, post, patch, nextPost} from 'utils'
+import {get, nextPost, patch, post} from 'utils'
 
 /* ------------------------------ POST Requests ----------------------------- */
 
