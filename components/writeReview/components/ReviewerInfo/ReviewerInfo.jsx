@@ -27,6 +27,7 @@ function ReviewerInfo(props) {
       placeholder: 'Your Full Name',
       label: 'Full name',
       mode: 'text',
+      required: true,
     },
     {
       id: EMAIL,
@@ -34,6 +35,7 @@ function ReviewerInfo(props) {
       placeholder: 'Your Email Address',
       label: 'Email address',
       mode: 'email',
+      required: true,
     },
     {
       id: LOCATION,
@@ -115,32 +117,16 @@ function ReviewerInfo(props) {
 
   return (
     <Stack mt={5} spacing={5}>
-      <Typography variant={'h3'} textAlign={'center'}>
+      <Typography textAlign={'center'} variant={'h3'}>
         Reviewer info
       </Typography>
       {fields.map(field => (
         <Box key={field.id}>
-          <Typography variant={'h6'} mb={2}>
+          <Typography mb={2} variant={'h6'}>
             {field.label}
           </Typography>
           <TextField
             controls={true}
-            onChange={e => inputHandler(e, field.type)}
-            inputMode={field.mode}
-            value={userData[field.type].value}
-            sx={{
-              '&': {
-                '.MuiInputBase-root': {borderRadius: 20},
-                input: {
-                  color: theme.palette.primary.main,
-                  ...theme.typography.body4,
-                  padding: '10px 15px',
-                },
-                width: '100%',
-              },
-            }}
-            placeholder={field.placeholder}
-            onBlur={e => onBlurHandler(field.type, e.target.value)}
             error={
               userData[field.type].errorState || props.error[field.type]?.state
             }
@@ -153,6 +139,22 @@ function ReviewerInfo(props) {
                 )
               )
             }
+            inputMode={field.mode}
+            onBlur={e => onBlurHandler(field.type, e.target.value)}
+            onChange={e => inputHandler(e, field.type)}
+            placeholder={field.placeholder}
+            sx={{
+              '&': {
+                '.MuiInputBase-root': {borderRadius: 20},
+                input: {
+                  color: theme.palette.primary.main,
+                  ...theme.typography.body4,
+                  padding: '10px 15px',
+                },
+                width: '100%',
+              },
+            }}
+            value={userData[field.type].value}
           />
         </Box>
       ))}

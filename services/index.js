@@ -7,7 +7,7 @@ const postContactUsSubmit = data => {
 }
 
 const postProductReview = (data, slug) => {
-  return post({endpoint: `reviews/product/${slug}/add/`, data})
+  return post({endpoint: `reviews/prod/${slug}/add/`, data})
 }
 
 const postReviewImage = image_base64 => {

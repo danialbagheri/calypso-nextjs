@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && next build",
     "start": "next start",
-    "build-static": "next build && next export"
+    "build-static": "next build && next export",
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -62,8 +63,10 @@
     "@svgr/webpack": "^8.0.1",
     "css-loader": "^6.7.3",
     "eslint": "^8.40.0",
+    "eslint-config-next": "^13.4.7",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.32.2"
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }
