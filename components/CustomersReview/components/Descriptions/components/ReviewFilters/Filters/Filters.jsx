@@ -1,6 +1,5 @@
 import * as React from 'react'
 
-import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
@@ -8,7 +7,7 @@ import Box from '@mui/material/Box'
 import {useTheme} from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
-function Filters(props) {
+function Filters() {
   const filters = [
     {title: 'All Variants'},
     {title: 'Rating'},
@@ -26,6 +25,7 @@ function Filters(props) {
     return (
       <FormControl
         color={'secondary'}
+        size="small"
         sx={{
           m: 1,
           minWidth: 120,
@@ -38,13 +38,12 @@ function Filters(props) {
             '& fieldset': {borderColor: theme.palette.secondary.main},
           },
         }}
-        size="small"
       >
         <Select
-          value={filter}
-          onChange={handleChange}
           displayEmpty
           IconComponent={() => <KeyboardArrowDownIcon color={'secondary'} />}
+          onChange={handleChange}
+          value={filter}
         >
           <MenuItem value="">
             <em>{title}</em>

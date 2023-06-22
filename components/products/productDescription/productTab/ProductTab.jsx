@@ -10,10 +10,10 @@ function TabPanel(props) {
 
   return (
     <div
-      role="tabpanel"
+      aria-labelledby={`simple-tab-${index}`}
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      role="tabpanel"
       {...other}
     >
       {value === index && (
@@ -51,10 +51,8 @@ const ProductTab = props => {
     <Box sx={{width: '100%'}}>
       <Box sx={{borderBottom: 1, borderColor: 'rgba(255, 94, 43, 0.4)'}}>
         <Tabs
-          value={value}
-          onChange={handleChange}
           aria-label="basic tabs example"
-          variant="fullWidth"
+          onChange={handleChange}
           sx={{
             borderColor: 'blue',
             '& .Mui-selected': {
@@ -67,6 +65,8 @@ const ProductTab = props => {
               color: 'gray',
             },
           }}
+          value={value}
+          variant="fullWidth"
         >
           <Tab label="Directions" {...a11yProps(0)} />
           <Tab label="Benefits" {...a11yProps(1)} />
@@ -84,10 +84,10 @@ const ProductTab = props => {
 
       {value === 1 ? <Benefits tags={product.tags} /> : null}
 
-      <TabPanel value={value} index={2}>
+      <TabPanel index={2} value={value}>
         {selectedVariant.ingredients.join(', ')}
 
-        <Typography variant="body1" sx={{mt: 8}}>
+        <Typography sx={{mt: 8}} variant="body1">
           The ingredients listed correspond to the current state of production.
           Since we regularly adjust our formulations to incorporate new
           scientific findings, the declaration of ingredients specified on the

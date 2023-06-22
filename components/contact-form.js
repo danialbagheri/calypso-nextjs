@@ -5,6 +5,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 const recaptchaRef = React.createRef()
 
 const validEmailRegex = RegExp(
+  // eslint-disable-next-line
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
 )
 const validateForm = errors => {
@@ -40,7 +41,7 @@ export default class Contact extends React.Component {
       fields: {...this.state.fields, [e.target.name]: e.target.value},
     })
     const {name, value} = e.target
-    let errors = this.state.errors
+    const errors = this.state.errors
 
     switch (name) {
       case 'name':
@@ -68,7 +69,7 @@ export default class Contact extends React.Component {
 
   openTicket(fields) {
     const baseUrl = data.apiUrl
-    const finalUrl = baseUrl + `web/contact-us/`
+    const finalUrl = baseUrl + 'web/contact-us/'
     const myBody = fields
     fetch(finalUrl, {
       method: 'POST',
@@ -123,10 +124,10 @@ export default class Contact extends React.Component {
           <input
             className="form-control"
             name="name"
-            placeholder="Full Name"
-            value={this.state.fields.Name}
             onChange={this.handleChange}
+            placeholder="Full Name"
             required
+            value={this.state.fields.Name}
           />
           {errors.name.length > 0 && (
             <span className="error">{errors.name}</span>
@@ -138,12 +139,12 @@ export default class Contact extends React.Component {
           </label>
           <input
             className="form-control"
-            type="email"
             name="email"
-            placeholder="Email"
-            value={this.state.fields.email}
             onChange={this.handleChange}
+            placeholder="Email"
             required
+            type="email"
+            value={this.state.fields.email}
           />
           {errors.email.length > 0 && (
             <span className="error">{errors.email}</span>
@@ -154,17 +155,17 @@ export default class Contact extends React.Component {
           <input
             className="form-control"
             name="address"
+            onChange={this.handleChange}
             placeholder="City, Country"
             value={this.state.fields.address}
-            onChange={this.handleChange}
           />
         </div>
         <div className="form-group">
           <label>REASON FOR CONTACT:</label>
           <select
             className="form-control"
-            name="reason"
             defaultValue={this.state.fields.reason}
+            name="reason"
             onChange={this.handleChange}
           >
             <option value="Product Question">Product Question</option>
@@ -189,28 +190,28 @@ export default class Contact extends React.Component {
           <textarea
             className="form-control"
             name="message"
-            placeholder="Message"
-            value={this.state.fields.description}
             onChange={this.handleChange}
-            rows="6"
+            placeholder="Message"
             required
+            rows="6"
+            value={this.state.fields.description}
           />
           {errors.message.length > 0 && (
             <span className="error">{errors.message}</span>
           )}
         </div>
         <ReCAPTCHA
+          onChange={this.recaptchaChange}
           ref={recaptchaRef}
           sitekey="6LfjPaEUAAAAAPGfkx7Nxp3glAdPGbLZE3lwY5c9"
-          onChange={this.recaptchaChange}
         />
         <p>
           {response.success} {response.message}
         </p>
         <button
           className="btn btn-wide "
-          type="submit"
           onClick={e => this.onSubmit(e)}
+          type="submit"
         >
           Submit
         </button>

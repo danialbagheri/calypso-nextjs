@@ -14,21 +14,21 @@ function RatingScore() {
   const theme = useTheme()
 
   return (
-    <Stack direction={'row'} alignItems={'center'} spacing={3}>
-      <Typography variant={'h2'} color={'secondary'}>
+    <Stack alignItems={'center'} direction={'row'} spacing={3}>
+      <Typography color={'secondary'} variant={'h2'}>
         {reviewState.reviewData.review_average_score.toFixed(1)}
       </Typography>
       <Rating
+        defaultValue={Math.round(+reviewState.reviewData.review_average_score)}
+        emptyIcon={<StarIcon color={'grey'} fontSize="inherit" />}
+        readOnly
         sx={{
           '& .MuiRating-icon': {
             color: theme.palette.golden.main,
           },
         }}
-        defaultValue={Math.round(+reviewState.reviewData.review_average_score)}
-        readOnly
-        emptyIcon={<StarIcon color={'grey'} fontSize="inherit" />}
       />
-      <Stack direction={'row'} alignItems={'center'} spacing={2}>
+      <Stack alignItems={'center'} direction={'row'} spacing={2}>
         <Typography variant={'h4'}>
           {reviewState.reviewData.total_review_count}
         </Typography>

@@ -3,11 +3,11 @@ import Head from 'next/head'
 import {
   AsSeen,
   BestSeller,
+  BlogSlider,
   HomeSlider,
   Instagram,
   StaySafe,
   Trending,
-  BlogSlider,
 } from 'components'
 
 import {getCollectionBanner} from 'services'
@@ -18,8 +18,8 @@ function Home({slides, isLoaded, trending, bestseller, secondarySlides}) {
       <Head>
         <title>Calypso Sun - Bring out the sunshine - Calypso</title>
         <meta
-          name="description"
           content="Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers."
+          name="description"
         />
         <meta
           name="twitter:card"
@@ -27,30 +27,30 @@ function Home({slides, isLoaded, trending, bestseller, secondarySlides}) {
         />
 
         <meta
-          property="og:title"
           content="Calypso Sun - Bring out the sunshine - Calypso"
+          property="og:title"
         />
 
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.calypsosun.com/" />
+        <meta content="article" property="og:type" />
+        <meta content="https://www.calypsosun.com/" property="og:url" />
         <meta
-          property="og:image"
           content="https://calypsosun.com/social-media.png"
+          property="og:image"
         />
         <meta
-          property="og:description"
           content="Calypso sun are suitable for the whole family and protect all skin types from the harmful effects of both UVA and UVB rays. Try Calypso Once a Day sunscreen, aftersun products or new range of Calypso hand sanitisers."
+          property="og:description"
         />
       </Head>
 
       <main>
         <section className="top-0">
-          <HomeSlider slides={slides} isLoaded={isLoaded} />
+          <HomeSlider isLoaded={isLoaded} slides={slides} />
           <div className="container-fluid">
             <Trending trending={trending} />
           </div>
           <div className="mt-5"></div>
-          <HomeSlider slides={secondarySlides} isLoaded={isLoaded} />
+          <HomeSlider isLoaded={isLoaded} slides={secondarySlides} />
           <div className="mt-5"></div>
           <BestSeller bestseller={bestseller} />
           <StaySafe />
@@ -63,7 +63,7 @@ function Home({slides, isLoaded, trending, bestseller, secondarySlides}) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const baseUrl = process.env.API_URL
 
   const slides = await getCollectionBanner('homepage')
@@ -71,11 +71,11 @@ export async function getStaticProps(context) {
   // Now we will get the staff picked articles
   // api call for trending products
 
-  const trendingUrl = baseUrl + `products/collections/trending/?resize_w=580`
+  const trendingUrl = baseUrl + 'products/collections/trending/?resize_w=580'
   const trendingResults = await fetch(trendingUrl)
   const trending = await trendingResults.json()
   // Best product collections
-  const bestSellerEndPoint = baseUrl + `products/collections/best_seller/`
+  const bestSellerEndPoint = baseUrl + 'products/collections/best_seller/'
   const bestSellerResults = await fetch(bestSellerEndPoint)
   const bestSeller = await bestSellerResults.json()
   if (!slides || !secondarySlides) {

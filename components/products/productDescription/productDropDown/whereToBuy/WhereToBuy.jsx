@@ -9,8 +9,8 @@ export default class WhereToBuy extends React.Component {
       thisProductStore = stores.map((store, index) => {
         return (
           <li key={index}>
-            <a href={store.url} target="_blank" rel="noopener noreferrer">
-              <img src={store.stockist.logo} alt={store.stockist.name} />
+            <a href={store.url} rel="noopener noreferrer" target="_blank">
+              <img alt={store.stockist.name} src={store.stockist.logo} />
             </a>
           </li>
         )
@@ -18,14 +18,13 @@ export default class WhereToBuy extends React.Component {
     } else {
       thisProductStore = <li>All good pharmacies.</li>
     }
-    let products
 
-    products = <p>{childProducts} is available from:</p>
+    const products = <p>{childProducts} is available from:</p>
 
     return (
       <div>
         <div>{products}</div>
-        <ul style={{marginTop: -5}} className="stores">
+        <ul className="stores" style={{marginTop: -5}}>
           {thisProductStore}
         </ul>
       </div>

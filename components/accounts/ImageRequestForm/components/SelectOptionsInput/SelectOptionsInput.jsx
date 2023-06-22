@@ -22,7 +22,7 @@ function SelectOptionsInput(props) {
 
   const OptionMenuItem = Object.keys(options).map((item, index) => {
     return (
-      <MenuItem value={item} key={index}>
+      <MenuItem key={index} value={item}>
         {options[item]}
       </MenuItem>
     )
@@ -42,14 +42,13 @@ function SelectOptionsInput(props) {
 
   return (
     <Box key={field.id} sx={{mt: 2}}>
-      <Typography variant={'h6'} mb={2}>
+      <Typography mb={2} variant={'h6'}>
         {label}
       </Typography>
       <Select
-        labelId="image-fomrat-select"
         id="demo-simple-select"
-        value={metaData[field.type].value}
         label={formFieldName}
+        labelId="image-fomrat-select"
         onChange={e => inputHandler(e)}
         sx={{
           '&': {
@@ -62,6 +61,7 @@ function SelectOptionsInput(props) {
             width: '100%',
           },
         }}
+        value={metaData[field.type].value}
       >
         {OptionMenuItem}
       </Select>

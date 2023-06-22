@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from 'next/image'
 
 export default function Past() {
@@ -8,10 +7,10 @@ export default function Past() {
       <div className="row">
         <div className="col-8 col-md-8 col-sm-12 pt-1">
           <Image
-            src="/about-us/calypso-history.jpg"
             alt="Calypso 1999 to 2019 products"
-            width={1400}
             height={713}
+            src="/about-us/calypso-history.jpg"
+            width={1400}
           />
         </div>
         <div className="col-4 col-md-4 text-centre col-sm-12 our-history-row-text">
@@ -23,9 +22,10 @@ export default function Past() {
             has over 60 products, which have received numerous awards, including
             the Which? Best Buy Award.
           </p>
+          {/* eslint-disable-next-line */}
           <a
-            href="/about/history"
             className="btn bt-round btn-round-calypso mt-4"
+            href="/about/history"
           >
             OUR HISTORY
           </a>

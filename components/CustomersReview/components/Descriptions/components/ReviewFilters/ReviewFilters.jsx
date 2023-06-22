@@ -8,7 +8,6 @@ import TuneIcon from '@mui/icons-material/Tune'
 
 import {Filters} from './Filters'
 
-
 function FilterDialog(props) {
   const {onClose, open} = props
 
@@ -29,7 +28,7 @@ export default function ReviewFilters() {
     setOpen(true)
   }
 
-  const handleClose = (value) => {
+  const handleClose = () => {
     setOpen(false)
   }
 
@@ -38,15 +37,16 @@ export default function ReviewFilters() {
       <Box sx={{display: {sm: 'none', md: 'block'}}}>
         <Filters />
       </Box>
-      <Button sx={{borderRadius: 5, display: {sm: 'flex', md: 'none'}}} color={'secondary'} variant='outlined'
-              onClick={handleClickOpen}
-              startIcon={<TuneIcon />}>
+      <Button
+        color={'secondary'}
+        onClick={handleClickOpen}
+        startIcon={<TuneIcon />}
+        sx={{borderRadius: 5, display: {sm: 'flex', md: 'none'}}}
+        variant="outlined"
+      >
         More filters
       </Button>
-      <FilterDialog
-        open={open}
-        onClose={handleClose}
-      />
+      <FilterDialog onClose={handleClose} open={open} />
     </Box>
   )
 }

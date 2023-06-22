@@ -33,14 +33,14 @@ export default function Timeline() {
           <h2>Launch dry oil spray</h2>
           <a
             href="https://www.youtube.com/watch?v=Q_WNF5bYQbc"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             <img
-              src={dryOilImage}
               alt="Calypso TV advert Dry Oil"
-              width="100%"
               className="mb-2"
+              src={dryOilImage}
+              width="100%"
             />
           </a>
           <p>
@@ -64,10 +64,10 @@ export default function Timeline() {
             individual needs.
           </p>
           <img
-            src={afterSunRange}
             alt="Calypso First After Sun Range"
-            width="100%"
             className="mb-2 mt-3"
+            src={afterSunRange}
+            width="100%"
           />
         </div>
       </div>
@@ -89,10 +89,10 @@ export default function Timeline() {
             </div>
             <div className="col-12 col-xs-12 col-md-6">
               <img
-                src={onceADay}
                 alt="Calypso Once a day"
-                width="100%"
                 className="mb-2 mt-3"
+                src={onceADay}
+                width="100%"
               />
             </div>
           </div>
@@ -109,10 +109,10 @@ export default function Timeline() {
             fantastic work carried out by the charity.
           </p>
           <img
-            src={marieCurie}
             alt="Calypso First After Sun Range"
-            width="163px"
             className="mb-2 mt-3"
+            src={marieCurie}
+            width="163px"
           />
         </div>
       </div>
@@ -121,10 +121,10 @@ export default function Timeline() {
         <div className={Styles.content}>
           <h2>Development of the Press and Protect range</h2>
           <img
-            src={pressAndProtect}
             alt="Calypso Press and Protect"
-            width="100%"
             className="mb-2 mt-3"
+            src={pressAndProtect}
+            width="100%"
           />
           <p>
             Calypso’s innovative Press and Protect range was launched in 2013.
@@ -147,10 +147,10 @@ export default function Timeline() {
             £1.20 per 100ml.
           </p>
           <img
-            src={which}
             alt="Calypso Press and Protect which magazine award"
-            width="156px"
             className="mb-2 mt-3"
+            src={which}
+            width="156px"
           />
         </div>
       </div>
@@ -172,10 +172,10 @@ export default function Timeline() {
             </div>
             <div className="col-12 col-xs-12 col-md-6">
               <img
-                src={scalp}
                 alt="Calypso Press and Protect which magazine award"
-                width="100%"
                 className="mb-2 mt-3"
+                src={scalp}
+                width="100%"
               />
             </div>
           </div>
@@ -187,14 +187,14 @@ export default function Timeline() {
           <h2>START OF 2-year TV ad campaign</h2>
           <a
             href="https://www.youtube.com/watch?v=2AVCGz4VUHo"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             <img
-              src={tvAd}
               alt="Calypso Press and Protect which magazine award"
-              width="100%"
               className="mb-2 mt-3"
+              src={tvAd}
+              width="100%"
             />
           </a>
           <p>
@@ -233,10 +233,10 @@ export default function Timeline() {
         <div className={Styles.content}>
           <h2>Find the feeling campaign</h2>
           <img
-            src={findTheFeeling}
             alt="Calypso Billboard campaign find the feeling"
-            width="100%"
             className="mb-2 mt-3"
+            src={findTheFeeling}
+            width="100%"
           />
           <p>
             Calypso launched its Find the Feeling campaign in 2019, which aimed

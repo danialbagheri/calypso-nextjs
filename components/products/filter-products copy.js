@@ -1,49 +1,49 @@
-import _ from "lodash";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
+import _ from 'lodash'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faSearch} from '@fortawesome/free-solid-svg-icons'
+import Link from 'next/link'
 
 export default function FilterProducts(props) {
+  const limit = 2
   function sortLimit(filteredProducts) {
     if (limit <= filteredProducts.length) {
       if (filteredProducts.length > 10) {
-        props.setLimit(10);
-        props.setMaxLimit(false);
+        props.setLimit(10)
+        props.setMaxLimit(false)
       } else {
-        props.setLimit(filteredProducts.length);
-        props.setMaxLimit(true);
+        props.setLimit(filteredProducts.length)
+        props.setMaxLimit(true)
       }
     } else {
-      props.setLimit(filteredProducts.length);
-      props.setMaxLimit(true);
+      props.setLimit(filteredProducts.length)
+      props.setMaxLimit(true)
     }
   }
   function filterProductsByCategory(productType) {
-    const filteredProducts = props.products.filter((product) => {
-      if (productType != "") {
+    const filteredProducts = props.products.filter(product => {
+      if (productType != '') {
         return _.find(product.types, function (o) {
-          return o.name == productType;
-        });
-      } else {
-        return product;
+          return o.name == productType
+        })
       }
-    });
-    props.setProducts(filteredProducts);
-    sortLimit(filteredProducts);
+      return product
+    })
+    props.setProducts(filteredProducts)
+    sortLimit(filteredProducts)
   }
   function filterByProperties(value) {
-    const filteredProducts = props.products.filter((product) => {
-      let variants = _.find(product.variants, function (o) {
+    const filteredProducts = props.products.filter(product => {
+      const variants = _.find(product.variants, function (o) {
         if (o.name == value) {
-          product.main_image = o.image_list[0].image; // replaces the main image with variant image
-          return o;
+          product.main_image = o.image_list[0].image // replaces the main image with variant image
+          return o
         }
-      });
-      return variants;
-    });
+      })
+      return variants
+    })
 
-    props.setProducts(filteredProducts);
-    props.sortLimit(filteredProducts);
+    props.setProducts(filteredProducts)
+    props.sortLimit(filteredProducts)
   }
   return (
     <>
@@ -56,7 +56,7 @@ export default function FilterProducts(props) {
         <label>Categories</label>
         <select
           className="form-select product-page-select"
-          onChange={(e) => filterProductsByCategory(e.target.value)}
+          onChange={e => filterProductsByCategory(e.target.value)}
         >
           <option value="">All</option>
           <option value="Sun protection">Sun Protection</option>
@@ -69,9 +69,9 @@ export default function FilterProducts(props) {
       <div className="col-md-3 col-12 col-xs-12 col-sm-5 mt-1 mb-1 product-page-filter-item">
         <label className="ml-2">Filter By</label>
         <select
-          className="form-select"
           aria-label="Filter by"
-          onChange={(e) => filterByProperties(e.target.value)}
+          className="form-select"
+          onChange={e => filterByProperties(e.target.value)}
         >
           <optgroup label="SPF">
             <option value="SPF 10">10</option>
@@ -92,9 +92,9 @@ export default function FilterProducts(props) {
       <div className="col-md-2 col-12 col-xs-12 mt-1 col-sm-5 mb-1 product-page-filter-item">
         <label className="ml-2">Show</label>
         <select
-          className="form-select mr-2"
           aria-label="Select Product Shown per page"
-          onChange={(e) => props.setLimit(parseInt(e.target.value))}
+          className="form-select mr-2"
+          onChange={e => props.setLimit(parseInt(e.target.value))}
         >
           <option value="10">10</option>
           <option value="15">15</option>
@@ -103,11 +103,11 @@ export default function FilterProducts(props) {
       </div>
       <div className="col-md-1 col-12 col-xs-12 mt-1 mb-1 col-sm-2 product-page-filter-item">
         <Link href="/search/">
-          <button className="product-page-search" aria-label="Search">
-            <FontAwesomeIcon icon={faSearch} className="product-page-search" />
+          <button aria-label="Search" className="product-page-search">
+            <FontAwesomeIcon className="product-page-search" icon={faSearch} />
           </button>
         </Link>
       </div>
     </>
-  );
+  )
 }

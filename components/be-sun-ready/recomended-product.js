@@ -45,7 +45,7 @@ export default function RecommendedProducts({products}) {
     ],
   }
 
-  const recommendedProducts = products.map((product, i) => {
+  const recommendedProducts = products.map(product => {
     const firstImage = product.variants[0].image_list[0]
     return (
       <div key={product.id}>
@@ -54,8 +54,8 @@ export default function RecommendedProducts({products}) {
             <Box sx={{width: '100%', height: '400px', position: 'relative'}}>
               <Image
                 alt={product.name}
-                src={firstImage.image}
                 fill
+                src={firstImage.image}
                 style={{objectFit: 'contain'}}
               />
             </Box>

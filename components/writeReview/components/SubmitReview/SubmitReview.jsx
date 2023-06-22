@@ -70,7 +70,6 @@ function SubmitReview(props) {
     //Finding out if there is a field empty or have errors.
     const errorState = fieldsConductHandler(props.data)
 
-    console.log('porps.data::', props.data)
     if (!errorState) {
       const promisesList = []
       Object.values(props.base64Img).forEach(base64_img =>

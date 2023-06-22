@@ -77,9 +77,9 @@ export default function InfoBar() {
       const ItemIcon = Icon[icons[i]]
       return (
         <Box
+          className="info-bar-item"
           key={item.id}
           sx={{alignItems: 'center'}}
-          className="info-bar-item"
         >
           <Box className="info-bar-icon">
             <ItemIcon color="primary" />
@@ -92,6 +92,7 @@ export default function InfoBar() {
       <>
         <TopBar />
         <Box
+          className="info-bar"
           sx={{
             backgroundColor: theme.palette.sand.main,
             padding: '10px 0',
@@ -101,13 +102,11 @@ export default function InfoBar() {
               alignItems: 'center',
             },
           }}
-          className="info-bar"
         >
           <Slider {...settings}>{infoBarItems}</Slider>
         </Box>
       </>
     )
-  } else {
-    return null
   }
+  return null
 }

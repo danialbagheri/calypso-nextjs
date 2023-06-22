@@ -1,3 +1,3 @@
-import ContactUsForm from "./ContactUsForm";
+import ContactUsForm from './ContactUsForm'
 
 export {ContactUsForm}

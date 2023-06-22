@@ -1,44 +1,44 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useEffect, useState} from 'react'
+import {useRouter} from 'next/router'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
   faFacebook,
-  faTwitter,
-  faTumblr,
   faPinterest,
-} from "@fortawesome/free-brands-svg-icons";
-import { faShareAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
-export default function ShareButton({ text, media }) {
-  const [displayIcon, setDisplayIcon] = useState(false);
+  faTumblr,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons'
+import {faShareAlt, faTimes} from '@fortawesome/free-solid-svg-icons'
+export default function ShareButton({text, media}) {
+  const [displayIcon, setDisplayIcon] = useState(false)
 
   function showSharingIcons() {
-    setDisplayIcon(!displayIcon);
+    setDisplayIcon(!displayIcon)
   }
 
-  const twitterBaseUrl = "https://twitter.com/intent/tweet?source=";
-  const facebookBaseUrl = "https://www.facebook.com/sharer/sharer.php?u=";
-  const pinterestBaseUrl = "http://pinterest.com/pin/create/button/?url=";
-  const tumblrBaseUrl = "http://www.tumblr.com/share?v=3&u=";
-  const router = useRouter();
-  let locationUrl = "https://calypsosun.com" + router.asPath;
-  let uriMedia;
+  const twitterBaseUrl = 'https://twitter.com/intent/tweet?source='
+  const facebookBaseUrl = 'https://www.facebook.com/sharer/sharer.php?u='
+  const pinterestBaseUrl = 'http://pinterest.com/pin/create/button/?url='
+  const tumblrBaseUrl = 'http://www.tumblr.com/share?v=3&u='
+  const router = useRouter()
+  const locationUrl = 'https://calypsosun.com' + router.asPath
+  let uriMedia
   useEffect(() => {
     // locationUrl = router.asPath
-    uriMedia = encodeURI(media);
-  });
+    uriMedia = encodeURI(media)
+  })
 
   const twitterUrl =
-    twitterBaseUrl + locationUrl + "&text=" + text + "&via=calypsosuncare";
-  const facebookUrl = facebookBaseUrl + locationUrl + "&quote=" + text;
+    twitterBaseUrl + locationUrl + '&text=' + text + '&via=calypsosuncare'
+  const facebookUrl = facebookBaseUrl + locationUrl + '&quote=' + text
   const pinterestUrl =
     pinterestBaseUrl +
     locationUrl +
-    "&media=" +
+    '&media=' +
     uriMedia +
-    "&description=" +
-    text;
-  const mailTo = "mailto:?subject=" + text + "&body=" + locationUrl;
-  const tumblrUrl = tumblrBaseUrl + locationUrl + +"&quote=" + text + "&s=";
+    '&description=' +
+    text
+  const mailTo = 'mailto:?subject=' + text + '&body=' + locationUrl
+  const tumblrUrl = tumblrBaseUrl + locationUrl + +'&quote=' + text + '&s='
 
   const icons =
     displayIcon === false ? (
@@ -53,8 +53,8 @@ export default function ShareButton({ text, media }) {
         <li>
           <a
             href={twitterUrl}
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             title="Tweet"
           >
             <FontAwesomeIcon icon={faTwitter} />
@@ -63,9 +63,9 @@ export default function ShareButton({ text, media }) {
         <li>
           <a
             href={facebookUrl}
-            title="Share on Facebook"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
+            title="Share on Facebook"
           >
             <FontAwesomeIcon icon={faFacebook} />
           </a>
@@ -73,8 +73,8 @@ export default function ShareButton({ text, media }) {
         <li>
           <a
             href={tumblrUrl}
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             title="Post to Tumblr"
           >
             <FontAwesomeIcon icon={faTumblr} />
@@ -83,8 +83,8 @@ export default function ShareButton({ text, media }) {
         <li>
           <a
             href={pinterestUrl}
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             title="Pin it"
           >
             <FontAwesomeIcon icon={faPinterest} />
@@ -93,8 +93,8 @@ export default function ShareButton({ text, media }) {
         <li>
           <a
             href={mailTo}
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             title="Send email"
           >
             <i className="fa fa-at" />
@@ -106,6 +106,6 @@ export default function ShareButton({ text, media }) {
           </button>
         </li>
       </ul>
-    );
-  return <div>{icons}</div>;
+    )
+  return <div>{icons}</div>
 }

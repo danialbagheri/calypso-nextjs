@@ -4,7 +4,7 @@ import Head from 'next/head'
 import {AppContext, SearchResultElements} from 'components'
 
 import style from './search.module.css'
-import {Box, Typography, Container, useTheme} from '@mui/material'
+import {Box, Container, Typography, useTheme} from '@mui/material'
 import Link from 'next/link'
 
 export default function SearchPage() {
@@ -40,16 +40,16 @@ export default function SearchPage() {
                 }}
               >
                 {appState.searchValues?.results.map(p => (
-                  <SearchResultElements product={p} key={p.id} />
+                  <SearchResultElements key={p.id} product={p} />
                 ))}
               </Box>
               <Typography
                 color={theme.palette.palm.main}
-                variant="h6"
                 sx={{p: 8}}
                 textAlign={'center'}
+                variant="h6"
               >
-                Not what you're looking for? Check our{' '}
+                Not what you&rsquo;re looking for? Check our{' '}
                 <Link href={'/products/'}>product page</Link>
               </Typography>
             </Box>

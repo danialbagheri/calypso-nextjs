@@ -47,6 +47,7 @@ function TrendingItem({item}) {
 
   return (
     <Box
+      onClick={e => clickHandler(e)}
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -56,13 +57,13 @@ function TrendingItem({item}) {
 
         cursor: 'pointer',
       }}
-      onClick={e => clickHandler(e)}
     >
       <Box
+        onMouseEnter={e => mouseHoverHandler(e, 'enter')}
+        onMouseLeave={e => mouseHoverHandler(e, 'leave')}
         sx={{
           position: 'relative',
 
-          height: '230px',
           width: {xs: '150px', smd: '240px', lg: '260px'},
           height: {xs: '230px', smd: '360px', lg: '400px'},
 
@@ -72,10 +73,8 @@ function TrendingItem({item}) {
 
           backgroundColor: '#E7EBEE',
         }}
-        onMouseEnter={e => mouseHoverHandler(e, 'enter')}
-        onMouseLeave={e => mouseHoverHandler(e, 'leave')}
       >
-        <Image src={imageSrc} alt={name} fill objectFit="cover" />
+        <Image alt={name} fill objectFit="cover" src={imageSrc} />
       </Box>
       <Box>
         <Typography variant={'h4'}>{name}</Typography>
@@ -93,10 +92,10 @@ function TrendingItem({item}) {
         }}
       >
         <Rating
-          name="size-medium"
           defaultValue={Number(review_average_score)}
-          readOnly
+          name="size-medium"
           precision={0.5}
+          readOnly
         />
         <Typography>{review_average_score}</Typography>
       </Box>

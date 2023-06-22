@@ -34,12 +34,12 @@ function SubmitRequest(props) {
   }
 
   return (
-    <Stack mt={16} mb={30} spacing={4} alignItems={'center'}>
+    <Stack alignItems={'center'} mb={30} mt={16} spacing={4}>
       {response?.status == 400 && (
-        <Typography variant="body2" color="red">
+        <Typography color="red" variant="body2">
           Following products SKU were incorrect
           <br />
-          {response['invalid_sku_list']?.map(item => (
+          {response.invalid_sku_list?.map(item => (
             <>
               {item}
               <br />
@@ -48,23 +48,23 @@ function SubmitRequest(props) {
         </Typography>
       )}
       <Button
-        variant={'contained'}
-        sx={{minWidth: 310, padding: '16px 80px', borderRadius: 15}}
-        onClick={submitHandler}
         disabled={loading}
+        onClick={submitHandler}
+        sx={{minWidth: 310, padding: '16px 80px', borderRadius: 15}}
+        variant={'contained'}
       >
         {loading ? (
-          <CircularProgress sx={{color: 'white'}} size={20} thickness={6} />
+          <CircularProgress size={20} sx={{color: 'white'}} thickness={6} />
         ) : (
           <Typography variant={'body4'}>SUBMIT THE REQUEST</Typography>
         )}
       </Button>
       <Snackbar
-        open={openSnackbar}
-        autoHideDuration={10000}
-        onClose={() => setOpenSnackbar(false)}
-        key={'bottom' + 'center'}
         anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+        autoHideDuration={10000}
+        key={'bottom' + 'center'}
+        onClose={() => setOpenSnackbar(false)}
+        open={openSnackbar}
       >
         <Alert
           onClose={() => setOpenSnackbar(false)}

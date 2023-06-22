@@ -1,12 +1,12 @@
 import * as React from 'react'
 
 import {
-  SkuList,
   EmailField,
   ImageFormat,
   Recaptcha,
-  SubmitRequest,
   SelectOptionsInput,
+  SkuList,
+  SubmitRequest,
 } from './components'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -66,22 +66,22 @@ function ImageRequestForm() {
         }}
       >
         <Box mt={14} px={8}>
-          <Typography variant={'h2'} mb={2}>
+          <Typography mb={2} variant={'h2'}>
             Product Image request form
           </Typography>
           <EmailField {...value} />
           <SkuList {...value} />
           <ImageFormat {...value} />
           <SelectOptionsInput
-            options={imageTypeOptions}
             fieldName={'image_type'}
             label={'Image Type'}
+            options={imageTypeOptions}
             {...value}
           />
           <SelectOptionsInput
-            options={ImageAngleOptions}
             fieldName={'image_angle'}
             label={'Image Angle'}
+            options={ImageAngleOptions}
             {...value}
           />
           <Recaptcha {...value} />

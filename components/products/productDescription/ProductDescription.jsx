@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import {Stack} from '@mui/material'
@@ -14,7 +12,6 @@ import {AddButton} from './addButton'
 import {OutOfStock} from './outOfStock'
 import {ProductTab} from './productTab'
 import {VariantSize} from './variantSize'
-import {DeliveryInfo} from './deliveryInfo'
 import {ProductDropDown} from './productDropDown'
 
 const ProductDescription = props => {
@@ -29,7 +26,7 @@ const ProductDescription = props => {
       <Typography variant={'h3'}>{product.sub_title}</Typography>
 
       <Box sx={{display: 'flex', alignItems: 'flex-start', gap: 2, mt: 2}}>
-        <StarRating score={product.review_average_score} name={product.name} />
+        <StarRating name={product.name} score={product.review_average_score} />
         <a href="#readReviews">
           {product.total_review_count >= 1 ? (
             <span>Read {product.total_review_count} reviews</span>
@@ -55,18 +52,18 @@ const ProductDescription = props => {
 
       <VariantSize selectedVariant={selectedVariant} />
 
-      <Typography variant="h2" color={'#FF6B00'}>
+      <Typography color={'#FF6B00'} variant="h2">
         <ShowPrice selectedVariant={selectedVariant} />
       </Typography>
 
       <VariantSelector
-        variants={product.variants}
         selectedVariant={selectedVariant}
         setSelectedVariant={setSelectedVariant}
+        variants={product.variants}
       />
 
       {selectedVariant.inventory_quantity > 0 ? (
-        <AddButton selectedVariant={selectedVariant} product={product} />
+        <AddButton product={product} selectedVariant={selectedVariant} />
       ) : (
         <OutOfStock selectedVariant={selectedVariant} />
       )}
@@ -77,7 +74,7 @@ const ProductDescription = props => {
         <ShareButton />
       </div>
 
-      <ProductDropDown selectedVariant={selectedVariant} product={product} />
+      <ProductDropDown product={product} selectedVariant={selectedVariant} />
     </Stack>
   )
 }

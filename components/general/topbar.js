@@ -1,29 +1,28 @@
 // import React from "react";
-import React, { useState, useEffect } from "react";
-import data from "../../data.json";
+import {useEffect, useState} from 'react'
+import data from '../../data.json'
 
 export default function TopBar() {
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null)
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     // Update the document title using the browser API
     async function getTopBarStatus() {
-      const endpoint = data.apiUrl + "web/configuration/top_bar/";
-      const res = await fetch(endpoint);
-      const json = await res.json();
-      setMessage(json);
+      const endpoint = data.apiUrl + 'web/configuration/top_bar/'
+      const res = await fetch(endpoint)
+      const json = await res.json()
+      setMessage(json)
     }
-    getTopBarStatus();
-  }, []);
+    getTopBarStatus()
+  }, [])
 
   if (message && message.active) {
     return (
       <div className="top-bar">
         <p className="text-white text-centre">{message.value}</p>
       </div>
-    );
-  } else {
-    return null;
+    )
   }
+  return null
 }

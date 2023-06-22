@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import data from '../../data.json'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faArrowLeft, faSearch} from '@fortawesome/free-solid-svg-icons'
@@ -48,7 +48,9 @@ export default function SearchBar({visible, visibilitySetter}) {
       </div>
     )
   } else if (searchResultCount >= 1) {
-    results = searchResult.map(p => <SearchResultElements product={p} />)
+    results = searchResult.map((p, i) => (
+      <SearchResultElements key={i} product={p} />
+    ))
   } else if (searchResultCount == 0) {
     results = <span>Nothing found</span>
   } else {
@@ -76,12 +78,12 @@ export default function SearchBar({visible, visibilitySetter}) {
           </button>
           <input
             className="search-field"
-            name="searchVal"
-            value={searchVal}
-            placeholder="Search our catalogue 🧴 🌞 🏖️"
             list="searchOptions"
+            name="searchVal"
             onChange={e => handleChange(e)}
             onKeyDown={e => searchOnEnter(e)}
+            placeholder="Search our catalogue 🧴 🌞 🏖️"
+            value={searchVal}
           />
           <datalist id="searchOptions">
             <option value="Once a day" />
@@ -96,9 +98,9 @@ export default function SearchBar({visible, visibilitySetter}) {
           </datalist>
 
           <button
-            type="submit"
             className="search-menu-button search-icon"
             onClick={e => search(e)}
+            type="submit"
           >
             <FontAwesomeIcon icon={faSearch} />
           </button>

@@ -21,6 +21,7 @@ const ProductBreadCrumb = props => {
 
   return (
     <Breadcrumbs
+      aria-label="breadcrumb"
       sx={{
         '& a': {
           textDecoration: 'none',
@@ -28,11 +29,12 @@ const ProductBreadCrumb = props => {
         '& a:hover': {color: '#ec6b1d'},
         '&>ol li:last-child': {fontWeight: 'bold'},
       }}
-      aria-label="breadcrumb"
       {...props}
     >
       {breadCrumbPath.map((path, i) => (
-        <Link href={path.url}>{path.name}</Link>
+        <Link href={path.url} key={i}>
+          {path.name}
+        </Link>
       ))}
     </Breadcrumbs>
   )

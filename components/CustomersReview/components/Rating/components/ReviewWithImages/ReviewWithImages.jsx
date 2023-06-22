@@ -18,13 +18,20 @@ function ReviewWithImages() {
         <span>Reviews with images</span>
       </div>
       <Box
-        sx={{display: 'flex', rowGap: 2, columnGap: 3, flexWrap: 'wrap'}}
         className={styles.imagesContainer}
+        sx={{display: 'flex', rowGap: 2, columnGap: 3, flexWrap: 'wrap'}}
       >
         {reviewState.reviewData.results.map(res => {
           if (res.images.length) {
             return res.images.map((image, i) => (
               <Box
+                key={i}
+                onClick={() => {
+                  setModalDetail({
+                    open: !modalDetail.open,
+                    data: {image, review: res},
+                  })
+                }}
                 sx={{
                   position: 'relative ',
                   paddingBottom: 2,
@@ -41,19 +48,12 @@ function ReviewWithImages() {
                     border: '1px solid #E2E2E2',
                   },
                 }}
-                key={i}
-                onClick={() => {
-                  setModalDetail({
-                    open: !modalDetail.open,
-                    data: {image, review: res},
-                  })
-                }}
               >
                 <Image
-                  src={image.image}
                   fill
-                  styles={{objectFit: 'cover'}}
                   sizes="100vw"
+                  src={image.image}
+                  styles={{objectFit: 'cover'}}
                 />
               </Box>
             ))
@@ -62,9 +62,9 @@ function ReviewWithImages() {
       </Box>
       {modalDetail.open ? (
         <ImageReviewModal
+          data={modalDetail.data}
           open={modalDetail.open}
           setOpen={state => setModalDetail({open: state, data: null})}
-          data={modalDetail.data}
         />
       ) : null}
     </div>

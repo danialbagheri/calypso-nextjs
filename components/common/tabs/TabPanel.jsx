@@ -1,16 +1,15 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import {Typography, Box} from '@mui/material'
+import {Box} from '@mui/material'
 
 export default function TabPanel(props) {
   const {children, value, index, ...other} = props
 
   return (
     <div
-      role="tabpanel"
+      aria-labelledby={`simple-tab-${index}`}
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      role="tabpanel"
       {...other}
     >
       {value === index && <Box sx={{p: 3}}>{children}</Box>}

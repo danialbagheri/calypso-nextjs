@@ -1,4 +1,3 @@
-import React from 'react'
 import Rating from '@mui/material/Rating'
 import StarIcon from '@mui/icons-material/Star'
 
@@ -9,17 +8,17 @@ export default function Testimonials() {
       <div className="row mt-4">
         <div className="col-md-2 col-sm-2 col-2 col-xs-12">
           <svg
-            xmlns="https://www.w3.org/2000/svg"
-            width="100"
             height="150"
             viewBox="0 0 100 150"
+            width="100"
+            xmlns="https://www.w3.org/2000/svg"
           >
             <text
-              id="_"
               fill="#707070"
-              fontSize="130"
               fontFamily="Baskerville-Bold, Baskerville"
+              fontSize="130"
               fontWeight="700"
+              id="_"
             >
               <tspan x="0" y="117">
                 “
@@ -38,19 +37,19 @@ export default function Testimonials() {
         </div>
         <div className="col-md-2 col-sm-2 col-2 col-xs-12">
           <svg
-            xmlns="https://www.w3.org/2000/svg"
-            width="78"
+            className="quotation-mark-end"
             height="150"
             viewBox="0 0 78 150"
-            className="quotation-mark-end"
+            width="78"
+            xmlns="https://www.w3.org/2000/svg"
           >
             <text
+              fill="#707070"
+              fontFamily="Baskerville-Bold, Baskerville"
+              fontSize="130"
+              fontWeight="700"
               id="_"
               transform="translate(39 117)"
-              fill="#707070"
-              fontSize="130"
-              fontFamily="Baskerville-Bold, Baskerville"
-              fontWeight="700"
             >
               <tspan x="-38.594" y="0">
                 ”
@@ -61,15 +60,15 @@ export default function Testimonials() {
         <div className="row">
           <div className="text-centre">
             <Rating
+              defaultValue={5}
+              emptyIcon={<StarIcon />}
+              readOnly
               sx={{
                 '& .MuiRating-icon': {
                   color: 'palette.golden.main',
                 },
                 fontSize: '44px',
               }}
-              defaultValue={5}
-              readOnly
-              emptyIcon={<StarIcon />}
             />
             <div className="testimonial-credit">
               <span>Rhonda</span>

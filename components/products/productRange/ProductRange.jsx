@@ -21,8 +21,8 @@ export default function ProductRange(props) {
         </Box>
       ) : (
         <>
-          {props.products.slice(0, props.limit).map((product, i) => (
-            <ProductRangeItem product={product} key={product.id} />
+          {props.products.slice(0, props.limit).map(product => (
+            <ProductRangeItem key={product.id} product={product} />
           ))}
         </>
       )}

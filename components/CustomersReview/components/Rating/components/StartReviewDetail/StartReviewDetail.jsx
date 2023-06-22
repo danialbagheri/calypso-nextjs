@@ -41,33 +41,33 @@ function StartReviewDetail() {
         .map((key, i) => {
           return (
             <Stack
-              key={`${key}${i}`}
-              direction={'row'}
               alignItems={'center'}
-              sx={{marginTop: i !== 0 ? 3 : 0}}
+              direction={'row'}
+              key={`${key}${i}`}
               spacing={3}
+              sx={{marginTop: i !== 0 ? 3 : 0}}
             >
               <Typography
-                variant={'body3'}
                 sx={{width: '33px', textAlign: 'center'}}
+                variant={'body3'}
               >
                 {scoreChart[key]}
               </Typography>
               <Box sx={{width: '50%', maxWidth: 160}}>
                 <BorderLinearProgress
-                  variant="determinate"
                   value={(scoreChart[key] / totalRateCount) * 100}
+                  variant="determinate"
                 />
               </Box>
               <Rating
+                defaultValue={5 - i}
+                emptyIcon={<StarIcon color={'grey'} fontSize="inherit" />}
+                readOnly
                 sx={{
                   '& .MuiRating-icon': {
                     color: theme.palette.golden.main,
                   },
                 }}
-                defaultValue={5 - i}
-                readOnly
-                emptyIcon={<StarIcon color={'grey'} fontSize="inherit" />}
               />
             </Stack>
           )

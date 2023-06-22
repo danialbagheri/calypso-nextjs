@@ -13,10 +13,11 @@ import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons'
 export default function ProductDropDown(props) {
   const [expanded, setExpanded] = React.useState(false)
 
-  const {selectedVariant, product} = props
+  const {selectedVariant} = props
   return (
     <Box>
       <Accordion
+        onChange={(e, isExpanded) => setExpanded(isExpanded)}
         sx={{
           boxShadow: 'none',
           '& .MuiButtonBase-root': {
@@ -31,24 +32,23 @@ export default function ProductDropDown(props) {
           },
           '& .MuiCollapse-entered': {borderBottom: '1px solid black'},
         }}
-        onChange={(e, isExpanded) => setExpanded(isExpanded)}
       >
         <AccordionSummary
+          aria-controls="panel1a-content"
           expandIcon={
             <FontAwesomeIcon
               color="#FF6B00"
               icon={expanded ? faMinus : faPlus}
             />
           }
-          aria-controls="panel1a-content"
           id="panel1a-header"
         >
           <Typography>Where to Buy</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <WhereToBuy
-            stores={selectedVariant.where_to_buy}
             childProducts={selectedVariant.name}
+            stores={selectedVariant.where_to_buy}
           />
         </AccordionDetails>
       </Accordion>

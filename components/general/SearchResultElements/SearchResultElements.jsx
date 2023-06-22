@@ -2,8 +2,6 @@ import * as React from 'react'
 
 import {useRouter} from 'next/router'
 
-import {AddToBasket} from './addToBasket'
-
 import style from './searchResultElements.module.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSpinner} from '@fortawesome/free-solid-svg-icons/faSpinner'
@@ -16,16 +14,15 @@ function SearchResultElements({product}) {
   const router = useRouter()
   return (
     <Box
+      key={product.id}
       sx={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         gap: 2,
       }}
-      key={product.id}
     >
       <Box
-        sx={{cursor: 'pointer', mb: 6}}
         onClick={e => {
           setLoading(true)
           e.preventDefault()
@@ -33,6 +30,7 @@ function SearchResultElements({product}) {
             setLoading(false)
           })
         }}
+        sx={{cursor: 'pointer', mb: 6}}
       >
         <Box
           sx={{
@@ -41,7 +39,12 @@ function SearchResultElements({product}) {
             background: theme.palette.grey.main,
           }}
         >
-          <Image fill src={product.main_image} style={{objectFit: 'contain'}} />
+          <Image
+            alt={'image'}
+            fill
+            src={product.main_image}
+            style={{objectFit: 'contain'}}
+          />
         </Box>
         <Typography sx={{mt: 2}} variant="h4">
           {product.name}
@@ -63,10 +66,10 @@ function SearchResultElements({product}) {
       {loading ? (
         <div className={style.loadingContainer}>
           <FontAwesomeIcon
-            spin
-            icon={faSpinner}
             className="calypso-orange-text"
+            icon={faSpinner}
             size={'2x'}
+            spin
           />
         </div>
       ) : null}

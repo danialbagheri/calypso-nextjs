@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faPlus, faMinus} from '@fortawesome/free-solid-svg-icons'
+import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons'
 
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
@@ -17,9 +17,8 @@ export default function ProductQuantity(props) {
 
   return (
     <ButtonGroup
-      disableElevation
-      variant="outline"
       aria-label="Disabled elevation buttons"
+      disableElevation
       sx={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -36,6 +35,7 @@ export default function ProductQuantity(props) {
           width: '50%',
         },
       }}
+      variant="outline"
     >
       <Button onClick={() => decrementQuantity(props.selectedQuantity)}>
         <FontAwesomeIcon icon={faMinus} />

@@ -49,29 +49,29 @@ function Product(props) {
         <title>
           Calypso - {productData.name} - {productData.sub_title}
         </title>
-        <meta name="description" content={productData.plain_description} />
-        <meta name="twitter:card" content="product" />
+        <meta content={productData.plain_description} name="description" />
+        <meta content="product" name="twitter:card" />
         <meta
-          name="twitter:description"
           content={productData.plain_description}
+          name="twitter:description"
         />
         <meta
+          content={selectedVariant.image_list[0].resized}
           property="og:image"
-          content={selectedVariant.image_list[0].resized}
         />
         <meta
-          name="twitter:image"
           content={selectedVariant.image_list[0].resized}
+          name="twitter:image"
         />
-        <meta property="og:price:amount" content={selectedVariant.price} />
-        <meta property="og:price:currency" content="GBP" />
+        <meta content={selectedVariant.price} property="og:price:amount" />
+        <meta content="GBP" property="og:price:currency" />
       </Head>
       <Box
         sx={{
           padding: {xs: 6, sm: 12},
         }}
       >
-        <ProductBreadCrumb style={{marginBottom: 20}} product={productData} />
+        <ProductBreadCrumb product={productData} style={{marginBottom: 20}} />
         <Box
           sx={{
             display: 'flex',
@@ -103,12 +103,12 @@ function Product(props) {
 
       <div id="readReviews" />
       <CustomersReview
-        product={productData}
-        slug={slug}
-        reviewData={reviewData}
         error={error}
+        product={productData}
+        reviewData={reviewData}
+        slug={slug}
       />
-      <Snackbar open={snackBarDetails.open} autoHideDuration={6000}>
+      <Snackbar autoHideDuration={6000} open={snackBarDetails.open}>
         <Alert
           onClose={() => setSnackBarDetails(prev => ({...prev, open: false}))}
           severity="error"
@@ -148,9 +148,9 @@ export async function getStaticProps(context) {
 
 async function getAllPages(pageCount, url) {
   let pageNumber = 1
-  let productResult = []
+  const productResult = []
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    let paginatedUrl = url + `?page=${pageNumber}`
+    const paginatedUrl = url + `?page=${pageNumber}`
     const res = await fetch(paginatedUrl)
     const products = await res.json()
     productResult.push(products.results)
@@ -160,15 +160,15 @@ async function getAllPages(pageCount, url) {
 
 export async function getStaticPaths() {
   const baseUrl = data.apiUrl
-  const url = baseUrl + `products/product/`
+  const url = baseUrl + 'products/product/'
   const res = await fetch(url)
   const products = await res.json()
   const pageCount = Math.ceil(products.count / 10)
-  let productResult = await getAllPages(pageCount, url)
-  let slugPaths = []
+  const productResult = await getAllPages(pageCount, url)
+  const slugPaths = []
 
   for (let i = 0; i < productResult.length; i++) {
-    let slugs = productResult[i].map(item => {
+    const slugs = productResult[i].map(item => {
       return {
         params: {
           slug: item.slug,

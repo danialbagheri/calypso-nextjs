@@ -65,14 +65,17 @@ function EmailField(props) {
 
   return (
     <Box key={field.id}>
-      <Typography variant={'h6'} mb={2}>
+      <Typography mb={2} variant={'h6'}>
         {field.label}
       </Typography>
       <TextField
         controls={true}
-        onChange={e => inputHandler(e, field.type)}
+        error={userData[field.type].errorState}
+        helperText={userData[field.type].errorText}
         inputMode={field.mode}
-        value={userData[field.type].value}
+        onBlur={e => onBlurHandler(field.type, e.target.value)}
+        onChange={e => inputHandler(e, field.type)}
+        placeholder={field.placeholder}
         sx={{
           '&': {
             '.MuiInputBase-root': {borderRadius: 20},
@@ -84,10 +87,7 @@ function EmailField(props) {
             width: '100%',
           },
         }}
-        placeholder={field.placeholder}
-        onBlur={e => onBlurHandler(field.type, e.target.value)}
-        error={userData[field.type].errorState}
-        helperText={userData[field.type].errorText}
+        value={userData[field.type].value}
       />
     </Box>
   )

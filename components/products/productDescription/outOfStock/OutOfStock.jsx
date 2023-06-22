@@ -25,13 +25,15 @@ function OutOfStock(props) {
     if (validateEmail(email)) {
       setLoading(true)
       const data = {email, variant_id: selectedVariant.id}
-      if (error) setError({state: false, text: ''})
+      if (error) {
+        setError({state: false, text: ''})
+      }
       postOutOfStockEmail(data)
-        .then(response => {
+        .then(() => {
           setLoading(false)
           setEmailSubmit(true)
         })
-        .catch(err => {
+        .catch(() => {
           setLoading(false)
           setError({
             state: true,
@@ -44,7 +46,7 @@ function OutOfStock(props) {
   }
 
   return (
-    <Stack spacing={5} mb={3} sx={{backgroundColor: '#FCF5EC', padding: 4}}>
+    <Stack mb={3} spacing={5} sx={{backgroundColor: '#FCF5EC', padding: 4}}>
       {emailSubmit ? (
         <>
           <Typography textAlign={'center'} variant="h3">
@@ -58,35 +60,24 @@ function OutOfStock(props) {
         <>
           {' '}
           <Typography
-            textAlign={'center'}
             sx={{typography: {xs: 'h6', md: 'h5'}}}
+            textAlign={'center'}
           >
             OUT OF STOCK
           </Typography>
           <Typography
-            textAlign={'center'}
             sx={{typography: {xs: 'body4', md: 'h6'}}}
+            textAlign={'center'}
           >
             We will let you know when this product is available again!
           </Typography>
           <TextField
             error={error.state}
-            sx={{
-              '& fieldset': {border: 'none'},
-              '&>.MuiInputBase-root': {
-                backgroundColor: '#fff',
-                paddingRight: 0,
-                borderRadius: 3,
-              },
-            }}
             helperText={error.text}
-            size={'small'}
-            placeholder={'Enter your email'}
-            value={email}
-            onChange={e => changeHandler(e)}
             InputProps={{
               endAdornment: (
                 <Button
+                  onClick={e => submitHandler(e)}
                   sx={{
                     height: {xs: 40, sm: 50},
                     width: 150,
@@ -104,12 +95,23 @@ function OutOfStock(props) {
                     },
                   }}
                   variant="contained"
-                  onClick={e => submitHandler(e)}
                 >
                   {loading ? <CircularProgress size={35} /> : 'Notify me!'}
                 </Button>
               ),
             }}
+            onChange={e => changeHandler(e)}
+            placeholder={'Enter your email'}
+            size={'small'}
+            sx={{
+              '& fieldset': {border: 'none'},
+              '&>.MuiInputBase-root': {
+                backgroundColor: '#fff',
+                paddingRight: 0,
+                borderRadius: 3,
+              },
+            }}
+            value={email}
           />
         </>
       )}

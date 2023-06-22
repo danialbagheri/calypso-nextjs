@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import { useShopify } from "../hooks";
+import {useEffect, useState} from 'react'
+import {useShopify} from '../hooks'
 
 export default function LipBalmDeal() {
-  const [product, setProduct] = useState(null);
-  const [isLoaded, setLoaded] = useState(false);
-  const { fetchProductByQuery, addVariant, checkoutState } = useShopify();
+  const [product, setProduct] = useState(null)
+  const [isLoaded, setLoaded] = useState(false)
+  const {fetchProductByQuery, addVariant, checkoutState} = useShopify()
 
   useEffect(() => {
     const query = {
-      query: `product:[id:533727871031]`,
-    };
+      query: 'product:[id:533727871031]',
+    }
 
-    const f = fetchProductByQuery(query);
-    f.then((f) => {
-      setProduct(f[0]);
-      setLoaded(true);
-    });
-  }, []);
+    const f = fetchProductByQuery(query)
+    f.then(f => {
+      setProduct(f[0])
+      setLoaded(true)
+    })
+  }, [])
 
   function addToBasket(variantId, quantity) {
     const lineItemsToAdd = [
@@ -24,9 +24,9 @@ export default function LipBalmDeal() {
         variantId: variantId,
         quantity: parseInt(quantity, 10),
       },
-    ];
-    addVariant(checkoutState.id, lineItemsToAdd);
-    setLoaded(false);
+    ]
+    addVariant(checkoutState.id, lineItemsToAdd)
+    setLoaded(false)
   }
   return (
     <div>
@@ -39,14 +39,14 @@ export default function LipBalmDeal() {
             <div className="deal_item_image">
               {product.images[0] ? (
                 <img
-                  src={product.images[0].src}
                   alt={`${product.title} product shot`}
+                  src={product.images[0].src}
                 />
               ) : null}
             </div>
             <div className="deal_item_content">
               <div className="deal_item_title">{product.title}</div>
-              <div className="deal_item_offer" style={{ color: "#D83030" }}>
+              <div className="deal_item_offer" style={{color: '#D83030'}}>
                 FREE Valentine’s Gift (worth £4.99)
               </div>
               {/* <div>{product.id}</div> */}
@@ -58,5 +58,5 @@ export default function LipBalmDeal() {
         </div>
       )}
     </div>
-  );
+  )
 }

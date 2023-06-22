@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import {Component} from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import ContactUsForm from '../components/contact-form2'
@@ -15,7 +15,7 @@ class ContactUs extends Component {
           <div className="col-md-6 col-12">
             <h5>Questions about our products or an order?</h5>
             <p className="">
-              Please take a look at our{' '}
+              {/* eslint-disable-next-line */}
               <a className="CalypsoOrangeText" href="/faq/">
                 Frequently Asked Questions
               </a>{' '}
@@ -37,13 +37,13 @@ class ContactUs extends Component {
             <h5>Before contacting us please check this information</h5>
             <ul className="text-lg">
               <li>
-                <Link href="/privacy-policy" className="disableLink">
+                <Link className="disableLink" href="/privacy-policy">
                   Privacy Policy
                 </Link>
               </li>
 
               <li className="mt-1">
-                <Link href="/returns-policy" className="disableLink">
+                <Link className="disableLink" href="/returns-policy">
                   Delivery & Return Policy
                 </Link>
               </li>

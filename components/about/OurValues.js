@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from 'next/image'
 
 export default function OurValues() {
@@ -7,8 +6,8 @@ export default function OurValues() {
 
   return (
     <section
-      style={{backgroundImage: `url(${ourValues})`}}
       className="our-values-container container-fluid"
+      style={{backgroundImage: `url(${ourValues})`}}
     >
       <div className="our-values-icon-holder">
         <h3 className="text-centre calypso-orange-text">Our Values</h3>
@@ -16,10 +15,10 @@ export default function OurValues() {
           <div className="col-12 col-md-4 col-xs-12">
             <div className="our-value-icon">
               <Image
-                src="/about-us/quality-icon.png"
                 alt="Quality icon"
-                width="70"
                 height="97"
+                src="/about-us/quality-icon.png"
+                width="70"
               />
             </div>
             <h5 className="text-centre calypso-orange-text">QUALITY</h5>
@@ -32,10 +31,10 @@ export default function OurValues() {
           <div className="col-12 col-md-4 col-xs-12">
             <div className="our-value-icon">
               <Image
-                src="/about-us/ethical-award-icon.png"
                 alt="Quality icon"
-                width="70"
                 height="97"
+                src="/about-us/ethical-award-icon.png"
+                width="70"
               />
             </div>
             <h5 className="text-centre calypso-orange-text">ETHICS</h5>
@@ -48,10 +47,10 @@ export default function OurValues() {
           <div className="col-12 col-md-4 col-xs-12">
             <div className="our-value-icon-innovation">
               <Image
-                src="/about-us/innovation-icon.png"
                 alt="Quality icon"
-                width="97"
                 height="97"
+                src="/about-us/innovation-icon.png"
+                width="97"
               />
             </div>
             <h5 className="text-centre calypso-orange-text">INNOVATION</h5>

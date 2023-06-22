@@ -1,11 +1,9 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import Pagination from '@mui/material/Pagination'
 
 import {ReviewDetail} from './ReviewDetail'
 import {ReviewContext} from 'components/CustomersReview/ReviewProvider'
-import {useTheme} from '@mui/material'
 
 function Reviews() {
   const [reviewState] = React.useContext(ReviewContext)
@@ -14,7 +12,7 @@ function Reviews() {
 
   return (
     <Box>
-      <Typography color={'secondary'} variant={'h3'} mt={9}>
+      <Typography color={'secondary'} mt={9} variant={'h3'}>
         {reviewState.reviewData.results.length} Reviews
       </Typography>
       <Box mt={11}>

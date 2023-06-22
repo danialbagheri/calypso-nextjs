@@ -1,1 +1,1 @@
-export { default as shopifyState } from "./shopify";
+export {default as shopifyState} from './shopify'

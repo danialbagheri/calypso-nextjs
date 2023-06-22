@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import data from '../../data.json'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faArrowLeft, faSearch} from '@fortawesome/free-solid-svg-icons'
@@ -69,7 +69,7 @@ export default function Searched() {
     )
   } else if (searchResultCount >= 1) {
     results = searchResult.map(p => (
-      <SearchResultElements product={p} key={p.id} />
+      <SearchResultElements key={p.id} product={p} />
     ))
   } else if (searchResultCount == 0) {
     results = <span>Nothing found</span>
@@ -86,26 +86,26 @@ export default function Searched() {
         <div className="search-box" id="search-form">
           <button
             className="search-menu-button search-icon"
-            type="button"
             onClick={() => router.back()}
+            type="button"
           >
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
 
           <input
             className="search-field"
-            name="searchVal"
-            value={searchVal}
-            placeholder="Search our catalogue 🧴 🌞 🏖️"
             list="searchOptions"
+            name="searchVal"
             onChange={e => handleChange(e)}
             onKeyDown={e => searchOnEnter(e)}
+            placeholder="Search our catalogue 🧴 🌞 🏖️"
+            value={searchVal}
           />
 
           <button
-            type="submit"
             className="search-menu-button search-icon"
             onClick={e => search(e)}
+            type="submit"
           >
             <FontAwesomeIcon icon={faSearch} />
           </button>

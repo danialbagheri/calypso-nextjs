@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import {Box, Typography} from '@mui/material'
 
 import Image from 'next/image'
@@ -18,6 +16,7 @@ function BlogImage(props) {
 
   return (
     <Box
+      onClick={e => clickHandler(e)}
       sx={{
         width: {xs: 280, ssm: 420, sm: 250, md: 280, lg: 420},
         position: 'relative',
@@ -26,7 +25,6 @@ function BlogImage(props) {
         overflow: 'hidden',
         marginBottom: 5,
       }}
-      onClick={e => clickHandler(e)}
     >
       <Box
         sx={{
@@ -36,11 +34,11 @@ function BlogImage(props) {
         }}
       >
         <Image
-          src={item.image}
-          fill={true}
           alt={item.image_alt_text}
-          style={{objectFit: 'cover'}}
+          fill={true}
           loading="lazy"
+          src={item.image}
+          style={{objectFit: 'cover'}}
         />
       </Box>
 
@@ -53,7 +51,7 @@ function BlogImage(props) {
           transform: index % 2 ? 'rotateY(180deg)' : null,
         }}
       >
-        <Image src={blogCurve} fill={true} style={{objectFit: 'cover'}} />
+        <Image fill={true} src={blogCurve} style={{objectFit: 'cover'}} />
       </Box>
       <Box
         sx={{
@@ -78,10 +76,10 @@ function BlogImage(props) {
         </Typography>
 
         <Typography
-          textAlign={'center'}
-          sx={{color: '#4daff6', cursor: 'pointer'}}
           mt={1}
           onClick={e => clickHandler(e)}
+          sx={{color: '#4daff6', cursor: 'pointer'}}
+          textAlign={'center'}
         >
           Read More
         </Typography>
