@@ -1,7 +1,6 @@
-import React from 'react'
 import {useShopify} from '../hooks'
 
-export default function LineItem(props) {
+export default function LineItem() {
   const {checkoutState, updateQuantity, removeLineItem} = useShopify()
 
   function decrementQuantity(lineItemId, lineItemQuantity, e) {
@@ -29,12 +28,12 @@ export default function LineItem(props) {
       {checkoutState.lineItems &&
         checkoutState.lineItems.map((lineItem, i) => {
           return (
-            <div key={`${lineItem.title}` + i} className="lineItemDiv">
+            <div className="lineItemDiv" key={`${lineItem.title}` + i}>
               <div className="Line-item__img">
                 {lineItem.variant.image ? (
                   <img
-                    src={lineItem.variant.image.src}
                     alt={`${lineItem.title} product shot`}
+                    src={lineItem.variant.image.src}
                   />
                 ) : null}
               </div>

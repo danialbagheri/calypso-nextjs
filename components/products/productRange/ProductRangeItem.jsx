@@ -6,7 +6,7 @@ import {useRouter} from 'next/navigation'
 /* -------------------------------------------------------------------------- */
 
 /* ----------------------------- MUI Components ----------------------------- */
-import {Box, Typography, useTheme} from '@mui/material'
+import {Box, Typography} from '@mui/material'
 /* -------------------------------------------------------------------------- */
 
 /* ---------------------------- Local Components ---------------------------- */
@@ -18,7 +18,6 @@ import {ShowPrice} from 'sharedComponents'
 export default function ProductRangeItem(props) {
   const {product} = props
 
-  const theme = useTheme()
   const router = useRouter()
   const [activeVariant, setActiveVariant] = React.useState(product.variants[0])
 
@@ -36,14 +35,14 @@ export default function ProductRangeItem(props) {
       }}
     >
       <Box
+        onClick={() => {
+          router.push(`/products/${product.slug}`)
+        }}
         sx={{
           display: 'flex',
           flexDirection: 'column',
           gap: 3,
           cursor: 'pointer',
-        }}
-        onClick={() => {
-          router.push(`/products/${product.slug}`)
         }}
       >
         <Box
@@ -74,7 +73,6 @@ export default function ProductRangeItem(props) {
                 right: 10,
                 color: 'white',
                 backgroundColor: '#fff',
-                color: 'black',
                 padding: '3px 10px',
               }}
             >
@@ -82,14 +80,14 @@ export default function ProductRangeItem(props) {
             </Box>
           ) : null}
           <Image
+            alt={product.name}
             fill={true}
-            style={{objectFit: 'contain'}}
             src={
               activeVariant.image_list[0]
                 ? activeVariant.image_list[0].image
                 : product.main_image
             }
-            alt={product.name}
+            style={{objectFit: 'contain'}}
           />
         </Box>
         <Typography variant="h5">{product.name}</Typography>
@@ -101,8 +99,8 @@ export default function ProductRangeItem(props) {
         <hr className="m-0" />
         <ShowPrice selectedVariant={activeVariant} />
         <AddToBasketWithDropDown
-          product={product}
           activeVariant={activeVariant}
+          product={product}
           setActiveVariant={setActiveVariant}
         />
       </Box>

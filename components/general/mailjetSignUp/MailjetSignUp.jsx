@@ -68,49 +68,48 @@ export default function MailjetSignUp() {
     } else if (!emailValidator(fieldData.email)) {
       setError('Please enter a correct email address.')
       return
-    } else {
-      setLoading(true)
-      setError('')
-      const data = {
-        firstName: fieldData.firstName,
-        lastName: fieldData.lastName,
-        email: fieldData.email,
-      }
-      registerContact(data)
-        .then(res => {
-          if (res.status < 400) {
-            localStorage.setItem(SUBSCRIPTION_STATE, SIGNED_UP)
-            setLoading(false)
-            setApiResponse({
-              message: <span>Thank you for subscribing &#128522;</span>,
-              success: true,
-            })
-            setSnackBarOpen(true)
-            setTimeout(() => setShowPopUp(false), 2000)
-          } else {
-            res.json().then(res => {
-              setLoading(false)
-              setApiResponse({
-                message: res.message,
-                success: false,
-              })
-              setSnackBarOpen(true)
-              if (res.message.includes('Email already exists')) {
-                setError('This email address already exists!')
-              }
-            })
-          }
-        })
-        .catch(err => {
+    }
+    setLoading(true)
+    setError('')
+    const data = {
+      firstName: fieldData.firstName,
+      lastName: fieldData.lastName,
+      email: fieldData.email,
+    }
+    registerContact(data)
+      .then(res => {
+        if (res.status < 400) {
+          localStorage.setItem(SUBSCRIPTION_STATE, SIGNED_UP)
           setLoading(false)
           setApiResponse({
-            message: err,
-            success: false,
+            message: <span>Thank you for subscribing &#128522;</span>,
+            success: true,
           })
           setSnackBarOpen(true)
-          setError(err)
+          setTimeout(() => setShowPopUp(false), 2000)
+        } else {
+          res.json().then(res => {
+            setLoading(false)
+            setApiResponse({
+              message: res.message,
+              success: false,
+            })
+            setSnackBarOpen(true)
+            if (res.message.includes('Email already exists')) {
+              setError('This email address already exists!')
+            }
+          })
+        }
+      })
+      .catch(err => {
+        setLoading(false)
+        setApiResponse({
+          message: err,
+          success: false,
         })
-    }
+        setSnackBarOpen(true)
+        setError(err)
+      })
   }
 
   const onScroll = () => {
@@ -143,6 +142,7 @@ export default function MailjetSignUp() {
   return (
     <>
       <Box
+        onClick={() => setShowPopUp(false)}
         sx={{
           display: showPopUp ? 'block' : 'none',
           position: 'fixed',
@@ -154,7 +154,6 @@ export default function MailjetSignUp() {
           zIndex: 50,
           transition: 'all 1s',
         }}
-        onClick={() => setShowPopUp(false)}
       />
 
       <div
@@ -180,8 +179,8 @@ export default function MailjetSignUp() {
         <div className={Styles.Content}>
           <div className={Styles.ImageContainer}>
             <Image
-              src={'/home-page/calypso-newsletter-subscription.jpg'}
               fill
+              src={'/home-page/calypso-newsletter-subscription.jpg'}
               style={{objectFit: 'cover'}}
             />
           </div>
@@ -197,7 +196,7 @@ export default function MailjetSignUp() {
             backgroundColor: 'rgba(252, 245, 236, 0.7)',
           }}
         >
-          <Typography variant="h5" textAlign={'center'}>
+          <Typography textAlign={'center'} variant="h5">
             Sign up to get 10% off your first order
           </Typography>
           <Box className={Styles.infoContainer}>
@@ -219,35 +218,35 @@ export default function MailjetSignUp() {
               <TextField
                 id="outlined"
                 label="First Name"
-                type="text"
-                sx={{...fieldStyle}}
-                value={fieldData.firstName}
                 onChange={e => changeHandler('firstName', e.target.value)}
+                sx={{...fieldStyle}}
+                type="text"
+                value={fieldData.firstName}
               />
               <TextField
                 id="outlined"
                 label="Last Name"
-                type="text"
-                sx={{...fieldStyle}}
-                value={fieldData.lastName}
                 onChange={e => changeHandler('lastName', e.target.value)}
+                sx={{...fieldStyle}}
+                type="text"
+                value={fieldData.lastName}
               />
               <TextField
-                required
+                error={error}
+                helperText={error}
                 id="outlined-required"
                 label="Email"
-                type="email"
-                sx={{...fieldStyle}}
-                value={fieldData.email}
                 onChange={e => changeHandler('email', e.target.value)}
-                helperText={error}
-                error={error}
+                required
+                sx={{...fieldStyle}}
+                type="email"
+                value={fieldData.email}
               />
               <Button
                 color="primary"
-                variant="contained"
                 onClick={e => submitHandler(e)}
                 sx={{'&>span': {color: 'white'}}}
+                variant="contained"
               >
                 {loading ? <CircularProgress size={23} /> : 'SUBSCRIBE'}
               </Button>
@@ -262,10 +261,10 @@ export default function MailjetSignUp() {
         </Box>
       </div>
       <Snackbar
-        open={snackBarOpen}
+        anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
         autoHideDuration={6000}
         onClose={handleClose}
-        anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+        open={snackBarOpen}
       >
         <Alert
           onClose={handleClose}

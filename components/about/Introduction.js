@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Introduction() {
   // Declare a new state variable, which we'll call "count"
   return (
@@ -9,13 +7,13 @@ export default function Introduction() {
         We’re Calypso™, we have been protecting your skin since 1988
       </h3>
       <p className="text-centre introduction">
-        Calypso is a British sun care brand which aims to provide customers
-        with quality sun care products at exceptionally low prices. Calypso sun
+        Calypso is a British sun care brand which aims to provide customers with
+        quality sun care products at exceptionally low prices. Calypso sun
         protection is available to buy from Morrisons, Asda, Wilko, TK Maxx,
         Matalan, Home Bargains, B&M Bargains, Bodycare, TJ Hughes, Well
-        Pharmacy, Semichem and independent pharmacies. Our products are not only
-        available to buy in the UK, but also many countries around the globe. 
+        Pharmacy, Semichem and independent pharmacies. Our products are not only
+        available to buy in the UK, but also many countries around the globe.
       </p>
     </section>
-  );
+  )
 }

@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import {dateFormat} from 'utils'
 
 import Box from '@mui/material/Box'
@@ -8,14 +6,9 @@ import Rating from '@mui/material/Rating'
 import StarIcon from '@mui/icons-material/Star'
 import {useTheme} from '@mui/material'
 import Stack from '@mui/material/Stack'
-import IconButton from '@mui/material/IconButton'
-import ThumbUpIcon from '@mui/icons-material/ThumbUp'
-import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt'
 
 function ReviewDetail(props) {
   const theme = useTheme()
-
-  const reviewRateHandler = () => {}
 
   return (
     <Box mb={6}>
@@ -23,20 +16,20 @@ function ReviewDetail(props) {
 
       <Box mt={2}>
         <Rating
+          defaultValue={props.score}
+          emptyIcon={<StarIcon color={'grey'} fontSize="inherit" />}
+          readOnly
           sx={{
             '& .MuiRating-icon': {
               color: theme.palette.golden.main,
             },
           }}
-          defaultValue={props.score}
-          readOnly
-          emptyIcon={<StarIcon color={'grey'} fontSize="inherit" />}
         />
       </Box>
 
-      <Stack direction={'row'} alignItems={'center'} gap={3}>
+      <Stack alignItems={'center'} direction={'row'} gap={3}>
         <Typography variant={'h6'}>{props.title}</Typography>
-        <Typography variant={'subtitle1'} color={'primary'}>
+        <Typography color={'primary'} variant={'subtitle1'}>
           {/*TO DO::: After implementing Verified purchase in back should be used*/}
           {/*{props.approved ? 'Verified purchase' : ''}*/}
         </Typography>
@@ -46,7 +39,7 @@ function ReviewDetail(props) {
       </Box>
 
       <Box mt={2}>
-        <Typography variant={'body1'} color={'secondary'}>
+        <Typography color={'secondary'} variant={'body1'}>
           {props.location ? `Reviewed in ${props.location} on` : null}{' '}
           {dateFormat(props.date_created)}
         </Typography>

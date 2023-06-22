@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import {useShopify} from '../../../hooks'
 import {Box, Button, useTheme} from '@mui/material'
 import {VariantSelector} from 'sharedComponents'
@@ -13,16 +12,13 @@ export default function AddToBasketWithDropDown(props) {
     if (!variant) {
       if (activeVariant.inventory_quantity > 0) {
         return true
-      } else {
-        return false
       }
-    } else {
-      if (variant.inventory_quantity > 0) {
-        return true
-      } else {
-        return false
-      }
+      return false
     }
+    if (variant.inventory_quantity > 0) {
+      return true
+    }
+    return false
   }
 
   function addToBasket(variantId, quantity) {
@@ -59,17 +55,17 @@ export default function AddToBasketWithDropDown(props) {
       }}
     >
       <VariantSelector
-        variants={variants}
         selectedVariant={activeVariant}
         setSelectedVariant={setActiveVariant}
+        variants={variants}
       />
       <Button
+        color={'darkGrey'}
+        disabled={!inStock()}
+        fullWidth
         onClick={() => {
           addToBasket(activeVariant.shopify_storefront_variant_id, 1)
         }}
-        disabled={!inStock()}
-        variant="outlined"
-        fullWidth
         sx={{
           fontWeight: 700,
           '&:hover': {
@@ -78,7 +74,7 @@ export default function AddToBasketWithDropDown(props) {
             borderColor: 'transparent',
           },
         }}
-        color={'darkGrey'}
+        variant="outlined"
       >
         {inStock() ? 'ADD TO CART' : 'OUT OF STOCK'}
       </Button>

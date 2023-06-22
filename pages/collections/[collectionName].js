@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import {HomeSlider, ProductRangeItem} from 'components'
 import BreadCrumb from 'components/common/breadcrumb'
 
@@ -12,10 +10,10 @@ export default function CollectionName(props) {
     {name: 'Home', url: '/'},
     {name: 'Collections', url: '/collections/'},
     {name: collection.name, url: `/${collection.slug}/`},
-    ``,
+    '',
   ]
   const collectionItems = collection.items.map((item, index) => {
-    return <ProductRangeItem product={item.item} key={index} />
+    return <ProductRangeItem key={index} product={item.item} />
   })
 
   return (

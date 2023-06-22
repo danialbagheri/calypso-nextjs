@@ -43,19 +43,21 @@ function AddButton(props) {
     setSelectedQuantity(1)
   }
   return (
-    <Stack direction={'row'} gap={4} alignItems="center">
+    <Stack alignItems="center" direction={'row'} gap={4}>
       <ProductQuantity
         selectedQuantity={selectedQuantity}
         setQuantity={setSelectedQuantity}
       />
 
       <Button
+        fullWidth
         onClick={() => {
           addToBasket(
             selectedVariant.shopify_storefront_variant_id,
             selectedQuantity,
           )
         }}
+        size="large"
         sx={{
           fontWeight: 700,
           color: 'white',
@@ -65,8 +67,6 @@ function AddButton(props) {
           boxShadow: 'none',
         }}
         variant="contained"
-        fullWidth
-        size="large"
       >
         Add to Cart
       </Button>

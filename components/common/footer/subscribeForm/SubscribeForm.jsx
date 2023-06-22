@@ -75,39 +75,38 @@ function SubscribeForm() {
     } else if (!emailValidator(fieldData.email)) {
       setError('Please enter a correct email address.')
       return
-    } else {
-      setLoading(true)
-      setError('')
-      const data = {
-        firstName: fieldData.firstName,
-        lastName: fieldData.lastName,
-        email: fieldData.email,
-      }
-      registerContact(data).then(res => {
-        if (res.status < 400) {
-          localStorage.setItem(SUBSCRIPTION_STATE, SIGNED_UP)
+    }
+    setLoading(true)
+    setError('')
+    const data = {
+      firstName: fieldData.firstName,
+      lastName: fieldData.lastName,
+      email: fieldData.email,
+    }
+    registerContact(data).then(res => {
+      if (res.status < 400) {
+        localStorage.setItem(SUBSCRIPTION_STATE, SIGNED_UP)
+        setLoading(false)
+        setApiResponse({
+          message: <span>Thank you for subscribing &#128522;</span>,
+          success: true,
+        })
+        setSnackBarOpen(true)
+        setTimeout(() => setShowFields(false), 2000)
+      } else {
+        res.json().then(res => {
           setLoading(false)
           setApiResponse({
-            message: <span>Thank you for subscribing &#128522;</span>,
-            success: true,
+            message: res.message,
+            success: false,
           })
           setSnackBarOpen(true)
-          setTimeout(() => setShowFields(false), 2000)
-        } else {
-          res.json().then(res => {
-            setLoading(false)
-            setApiResponse({
-              message: res.message,
-              success: false,
-            })
-            setSnackBarOpen(true)
-            if (res.message.includes('Email already exists')) {
-              setError('This email address already exists!')
-            }
-          })
-        }
-      })
-    }
+          if (res.message.includes('Email already exists')) {
+            setError('This email address already exists!')
+          }
+        })
+      }
+    })
   }
   return (
     <>
@@ -122,9 +121,9 @@ function SubscribeForm() {
       >
         {' '}
         <Collapse
-          sx={{flexGrow: 1, '& .MuiCollapse-wrapperInner': {width: '100%'}}}
-          orientation="vertical"
           in={showFields}
+          orientation="vertical"
+          sx={{flexGrow: 1, '& .MuiCollapse-wrapperInner': {width: '100%'}}}
         >
           <Box
             sx={{
@@ -137,32 +136,32 @@ function SubscribeForm() {
             <TextField
               id="outlined"
               label="First Name"
-              type="text"
-              sx={{...fieldStyle}}
-              value={fieldData.firstName}
               onChange={e => changeHandler('firstName', e.target.value)}
+              sx={{...fieldStyle}}
+              type="text"
+              value={fieldData.firstName}
             />
             <TextField
               id="outlined"
               label="Last Name"
-              type="text"
-              sx={{...fieldStyle}}
-              value={fieldData.lastName}
               onChange={e => changeHandler('lastName', e.target.value)}
+              sx={{...fieldStyle}}
+              type="text"
+              value={fieldData.lastName}
             />
           </Box>
         </Collapse>
         <TextField
-          required
+          error={error}
+          helperText={error}
           id="outlined-required"
           label="Email address"
-          type="email"
-          sx={{...fieldStyle}}
-          value={fieldData.email}
           onChange={e => changeHandler('email', e.target.value)}
-          helperText={error}
-          error={error}
-          onClick={e => setShowFields(true)}
+          onClick={() => setShowFields(true)}
+          required
+          sx={{...fieldStyle}}
+          type="email"
+          value={fieldData.email}
         />
         <Box
           sx={{
@@ -184,19 +183,19 @@ function SubscribeForm() {
           }}
         >
           <Button
+            onClick={e => submitHandler(e)}
             sx={{border: 'none'}}
             variant="contained"
-            onClick={e => submitHandler(e)}
           >
             {loading ? <CircularProgress size={23} /> : 'SUBSCRIBE'}
           </Button>
         </Box>
       </Box>
       <Snackbar
-        open={snackBarOpen}
+        anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
         autoHideDuration={6000}
         onClose={handleClose}
-        anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+        open={snackBarOpen}
       >
         <Alert
           onClose={handleClose}

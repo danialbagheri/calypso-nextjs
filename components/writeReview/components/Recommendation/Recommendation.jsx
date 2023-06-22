@@ -46,15 +46,15 @@ function Recommendation() {
   }
   return (
     <Stack
-      justifyContent={'space-between'}
-      mt={17}
       alignItems={{xs: 'flex-start', md: 'center'}}
       direction={{md: 'row'}}
+      justifyContent={'space-between'}
+      mt={17}
     >
       <Typography variant={'body3'}>
         Would you recommend this product?
       </Typography>
-      <Stack alignItems={'center'} spacing={6} direction={'row'}>
+      <Stack alignItems={'center'} direction={'row'} spacing={6}>
         <Box>
           <label>
             <Typography variant={'body3'}>Yes</Typography>

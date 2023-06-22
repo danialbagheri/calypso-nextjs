@@ -2,9 +2,9 @@ export default function SunBanner() {
   return (
     <figure className="sun-animation">
       <section
+        aria-label="Animation of the sun rising very quickly"
         class="animation__block"
         role="img"
-        aria-label="Animation of the sun rising very quickly"
       >
         {/* <div class="hill front red-dk" />
             <div class="hill back red" /> */}
@@ -18,5 +18,5 @@ export default function SunBanner() {
         </div>
       </section>
     </figure>
-  );
+  )
 }

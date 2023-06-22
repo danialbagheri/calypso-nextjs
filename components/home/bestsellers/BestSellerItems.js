@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-import _ from 'lodash'
-
 import {Box, Typography} from '@mui/material'
 
 import {useRouter} from 'next/router'
@@ -28,10 +26,10 @@ export default function BestSellerItems(props) {
       }}
     >
       <Box
+        onClick={() => router.push(`/products/${i.slug}`)}
         onMouseEnter={showBox}
         onMouseLeave={showBox}
         sx={{display: 'flex', flexDirection: 'column', gap: 2}}
-        onClick={() => router.push(`/products/${i.slug}`)}
       >
         <Box
           sx={{
@@ -44,10 +42,10 @@ export default function BestSellerItems(props) {
           }}
         >
           <Image
-            fill={true}
-            style={{objectFit: 'cover'}}
-            src={showButton ? i.secondary_image_resized : i.main_image_resized}
             alt={i.name}
+            fill={true}
+            src={showButton ? i.secondary_image_resized : i.main_image_resized}
+            style={{objectFit: 'cover'}}
           />
         </Box>
 
@@ -60,8 +58,8 @@ export default function BestSellerItems(props) {
         <StarRating name={i.name} score={i.review_average_score} />
         <ShowPrice selectedVariant={activeVariant} />
         <AddToBasketWithDropDown
-          product={i}
           activeVariant={activeVariant}
+          product={i}
           setActiveVariant={setActiveVariant}
         />
       </Box>

@@ -1,6 +1,5 @@
 import {Box} from '@mui/material'
 import Image from 'next/image'
-import * as React from 'react'
 import Slider from 'react-slick'
 
 function ProductImageSlider(props) {
@@ -10,9 +9,9 @@ function ProductImageSlider(props) {
     customPaging: function (i) {
       return (
         <Image
-          src={selectedVariant.image_list[i]?.resized}
           alt={selectedVariant.image_list[i]?.alternate_text}
           fill={true}
+          src={selectedVariant.image_list[i]?.resized}
           style={{objectFit: 'cover'}}
         />
       )
@@ -32,13 +31,10 @@ function ProductImageSlider(props) {
 
         '& .slick-arrow': {
           top: '40%',
-        },
-
-        '& .slick-arrow:before': {
           display: 'none !important',
         },
 
-        '& .slick-arrow': {
+        '& .slick-arrow:before': {
           display: 'none !important',
         },
 
@@ -70,6 +66,7 @@ function ProductImageSlider(props) {
       <Slider {...settings}>
         {selectedVariant.image_list.map((img, i) => (
           <Box
+            key={i}
             sx={{
               width: '100%',
               height: '500px',
@@ -77,9 +74,9 @@ function ProductImageSlider(props) {
             }}
           >
             <Image
-              src={img.image}
               alt={img.alternate_text}
               fill={true}
+              src={img.image}
               style={{objectFit: 'contain'}}
             />
           </Box>

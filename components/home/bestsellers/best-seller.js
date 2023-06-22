@@ -27,9 +27,9 @@ export default function BestSeller(props) {
             }}
           >
             <Image
-              src={collection.image}
               alt="Calypso Best Seller products"
               fill
+              src={collection.image}
               style={{objectFit: 'cover'}}
               // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />

@@ -10,7 +10,7 @@ function SkuList(props) {
   const [fieldRawData, setFildRawData] = React.useState({
     [BODY]: '',
   })
-  const [fieldData, setFieldData] = React.useState({
+  const [, setFieldData] = React.useState({
     [BODY]: '',
   })
   const theme = useTheme()
@@ -26,8 +26,8 @@ function SkuList(props) {
   const onChange = (e, type) => {
     e.preventDefault()
 
-    let content = e.target.value
-    let result = content.split('\n').filter(n => n)
+    const content = e.target.value
+    const result = content.split('\n').filter(n => n)
     props.changeHandler(type, result)
     setFieldData(prev => ({
       ...prev,
@@ -41,10 +41,14 @@ function SkuList(props) {
 
   return (
     <Box key={field.id} sx={{mt: 2}}>
-      <Typography variant={'h6'} mb={2}>
+      <Typography mb={2} variant={'h6'}>
         {field.label}
       </Typography>
       <TextField
+        minRows={field.lines}
+        multiline={Boolean(field.lines)}
+        onChange={e => onChange(e, field.type)}
+        placeholder={field.placeholder}
         sx={{
           '&': {
             '.MuiInputBase-root': {borderRadius: 5},
@@ -61,10 +65,6 @@ function SkuList(props) {
           },
         }}
         value={fieldRawData[field.type]}
-        onChange={e => onChange(e, field.type)}
-        placeholder={field.placeholder}
-        multiline={Boolean(field.lines)}
-        minRows={field.lines}
       />
     </Box>
   )

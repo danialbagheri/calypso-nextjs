@@ -1,25 +1,23 @@
-import React from 'react'
 import Image from 'next/image'
 import MegaMenuStyle from 'styles/homepage/megaMenu.module.css'
 import Link from 'next/link'
-import Box from '@mui/material/Box'
 
 function MegaMenuItem(props) {
   const {items} = props
   const megaMenuItem = items.map(item => {
     return (
       <Link
-        key={item.item.id}
+        className={MegaMenuStyle.MegaMenuItem}
         href={`/products?limit=41&category=${encodeURIComponent(
           item.item.types[0],
         )}`}
-        className={MegaMenuStyle.MegaMenuItem}
+        key={item.item.id}
       >
         <div style={{position: 'relative', width: '88px', height: '100px'}}>
           <Image
-            src={item.item.main_image_resized}
             alt={item.item.name}
             fill
+            src={item.item.main_image_resized}
             style={{objectFit: 'contain'}}
           />
           {/* <picture>
@@ -42,6 +40,7 @@ export default function MegaMenu(props) {
         <MegaMenuItem items={products} />
       </div>
       <div className={MegaMenuStyle.MegaMenuShopAll}>
+        {/* eslint-disable-next-line */}
         <a href="/products">Shop All</a>
       </div>
     </div>

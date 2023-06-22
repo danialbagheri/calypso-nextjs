@@ -62,15 +62,16 @@ function SearchModal({setOpenSearchModal}) {
             },
           })
         })
-        .catch(err => {
-          console.log(err)
+        .catch(() => {
           setLoading(false)
         })
     }
   }
 
   const searchOnEnter = e => {
-    if (e.code === 'Enter') handleSearch(searchValue)
+    if (e.code === 'Enter') {
+      handleSearch(searchValue)
+    }
   }
 
   const closeSearchModal = () => {
@@ -79,42 +80,43 @@ function SearchModal({setOpenSearchModal}) {
 
   React.useEffect(() => {
     window.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeSearchModal()
+      if (e.key === 'Escape') {
+        closeSearchModal()
+      }
     })
   }, [])
 
   return (
     <Box
       className={`${style.container} centralize`}
-      sx={{backgroundColor: '#fcf5ecef'}}
       onClick={e => {
         e.stopPropagation()
         closeSearchModal()
       }}
+      sx={{backgroundColor: '#fcf5ecef'}}
     >
       <Box
+        className={style.searchContainer}
+        onClick={e => e.stopPropagation()}
         sx={{
           maxWidth: 600,
           '& label': {fontSize: 20},
           '& input': {fontSize: 22},
         }}
-        className={style.searchContainer}
-        onClick={e => e.stopPropagation()}
       >
         <TextField
-          id="outlined-adornment-search"
-          variant="standard"
-          type="search"
-          fullWidth
-          onKeyDown={e => searchOnEnter(e)}
-          value={searchValue}
-          onChange={e => setSearchValue(e.target.value)}
-          autoFocus
           autoComplete="off"
+          autoFocus
+          fullWidth
+          id="outlined-adornment-search"
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
+                  onClick={e => {
+                    e.preventDefault()
+                    handleSearch(searchValue)
+                  }}
                   sx={{
                     '&.MuiButtonBase-root': {
                       width: 60,
@@ -127,24 +129,25 @@ function SearchModal({setOpenSearchModal}) {
                     },
                   }}
                   type="submit"
-                  onClick={e => {
-                    e.preventDefault()
-                    handleSearch(searchValue)
-                  }}
                 >
-                  <SearchIcon fontSize="large" color={'primary'} />
+                  <SearchIcon color={'primary'} fontSize="large" />
                 </IconButton>
               </InputAdornment>
             ),
           }}
           label="Search our catalogue 🧴 🌞 🏖️"
+          onChange={e => setSearchValue(e.target.value)}
+          onKeyDown={e => searchOnEnter(e)}
           sx={{p: '12px 0'}}
+          type="search"
+          value={searchValue}
+          variant="standard"
         />
 
         {loading ? (
           <Box
-            sx={{'& svg': {width: 'unset !important'}}}
             className={style.loadingContainer}
+            sx={{'& svg': {width: 'unset !important'}}}
           >
             <CircularProgress />
           </Box>

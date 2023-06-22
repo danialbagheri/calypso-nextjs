@@ -33,14 +33,13 @@ function ImageFormat(props) {
 
   return (
     <Box key={field.id} sx={{mt: 2}}>
-      <Typography variant={'h6'} mb={2}>
+      <Typography mb={2} variant={'h6'}>
         Image Format
       </Typography>
       <Select
-        labelId="image-fomrat-select"
         id="demo-simple-select"
-        value={metaData[field.type].value}
         label="image_format"
+        labelId="image-fomrat-select"
         onChange={e => inputHandler(e)}
         sx={{
           '&': {
@@ -53,6 +52,7 @@ function ImageFormat(props) {
             width: '100%',
           },
         }}
+        value={metaData[field.type].value}
       >
         <MenuItem value={'PNG'}>PNG</MenuItem>
         <MenuItem value={'JPG'}>JPEG</MenuItem>

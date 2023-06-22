@@ -26,12 +26,10 @@ export default function DispatchTime() {
       setDispatchTime('Usually dispatched on Monday.')
     } else if (isFriday(today) && isEvening(today)) {
       setDispatchTime('Dispatched on Monday morning.')
+    } else if (isEvening(today)) {
+      setDispatchTime('Dispatched next day.')
     } else {
-      if (isEvening(today)) {
-        setDispatchTime('Dispatched next day.')
-      } else {
-        setDispatchTime('Order before 3:00 pm for same day dispatch.')
-      }
+      setDispatchTime('Order before 3:00 pm for same day dispatch.')
     }
   }
 

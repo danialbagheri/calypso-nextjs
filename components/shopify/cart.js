@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCheckCircle} from '@fortawesome/free-solid-svg-icons'
 import * as ga from '../common/googleAnalytics'
 
-export default function Cart(props) {
+export default function Cart() {
   const [discountItem, setDiscountItem] = React.useState({
     title: '',
     percentage: '',
@@ -86,7 +86,7 @@ export default function Cart(props) {
     }
 
     function getCount() {
-      let lineItems =
+      const lineItems =
         checkoutState.lineItems && checkoutState.lineItems.length > 0
           ? checkoutState.lineItems
           : []
@@ -125,8 +125,8 @@ export default function Cart(props) {
           {discountItem.title.length > 0 ? (
             <div className="Cart-info clearfix cart__discount__code">
               <FontAwesomeIcon
-                icon={faCheckCircle}
                 className="discount__code__icon"
+                icon={faCheckCircle}
               />
               <div className=" Cart-info__small">
                 Automatic discount applied: <br />

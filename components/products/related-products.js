@@ -64,21 +64,21 @@ export default function RelatedProducts({related}) {
             <div className={Styles.ProductImage}>
               <picture>
                 <source srcSet={product.webp} type="image/webp" />
-                <source srcSet={product.resized} media="(max-width: 600px)" />
+                <source media="(max-width: 600px)" srcSet={product.resized} />
                 <img
-                  src={product.main_image}
-                  height={product.img_height}
-                  width={product.img_width}
                   alt={product.name}
+                  height={product.img_height}
                   loading="lazy"
+                  src={product.main_image}
+                  width={product.img_width}
                 />
               </picture>
             </div>
 
             <div className={Styles.bottomText}>
               <StarRating
-                score={product.review_average_score}
                 name={product.name}
+                score={product.review_average_score}
               />
               <p>
                 <strong>{product.name}</strong> <br />

@@ -14,19 +14,19 @@ function Recaptcha(props) {
   }
 
   const onChange = (e, type) => {
-    let content = e
+    const content = e
     props.changeHandler(type, content)
   }
 
   return (
     <Box key={field.id} sx={{mt: 2}}>
       <ReCAPTCHA
-        ref={reCaptchaRef}
-        sitekey="6LfjPaEUAAAAAPGfkx7Nxp3glAdPGbLZE3lwY5c9"
-        onChange={value => {
+        onChange={() => {
           // setFieldValue("recaptcha", value);
           onChange(reCaptchaRef.current.getValue(), field.type)
         }}
+        ref={reCaptchaRef}
+        sitekey="6LfjPaEUAAAAAPGfkx7Nxp3glAdPGbLZE3lwY5c9"
       />
     </Box>
   )

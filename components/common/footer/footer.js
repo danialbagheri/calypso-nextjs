@@ -1,5 +1,3 @@
-import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../../public/logoWhite.svg'
 import tct from '../../../public/home-page/TCT.svg'
@@ -63,18 +61,18 @@ export default function Footer({showSubscription}) {
             <div className="col-md-5">
               <div style={{display: 'flex', flexDirection: 'flex-start'}}>
                 <Image
-                  src={logo}
-                  className="footerLogo"
                   alt="Calypso"
-                  width="70"
+                  className="footerLogo"
                   height="67"
+                  src={logo}
+                  width="70"
                 />
                 <Image
-                  src={tct}
-                  className="footerLogo"
                   alt="Calypso"
-                  width="180"
+                  className="footerLogo"
                   height="67"
+                  src={tct}
+                  width="180"
                 />
               </div>
               <p className="white">

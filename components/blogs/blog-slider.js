@@ -44,7 +44,7 @@ export default class OldBlogSlider extends React.Component {
   }
 
   render() {
-    const {isLoaded, error, blogs} = this.state
+    const {isLoaded, blogs} = this.state
     const settings = {
       arrows: true,
       dots: false,
@@ -70,16 +70,16 @@ export default class OldBlogSlider extends React.Component {
         flipState = !flipState
         return (
           <Link
+            className="textCenter disableLink"
             href={`/advice/${blog.item.slug}/`}
             key={index}
-            className="textCenter disableLink"
           >
             <BlogThumbnail
-              blogImage={blog.item.image}
               altText={blog.item.image_alt_text}
+              blogImage={blog.item.image}
+              button="Read More"
               flipImage={flipState}
               title={blog.item.title}
-              button="Read More"
             />
           </Link>
         )
@@ -88,7 +88,7 @@ export default class OldBlogSlider extends React.Component {
 
     return (
       <div className="container">
-        <h1 className="textCenter">EDITOR'S PICKS</h1>
+        <h1 className="textCenter">EDITOR&rsquo;S PICKS</h1>
         <MediaQuery query="(min-device-width: 500px)">
           <Slider {...settings} className="blogSlider top50">
             {thumbnail}

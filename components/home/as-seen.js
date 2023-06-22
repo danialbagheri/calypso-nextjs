@@ -3,35 +3,35 @@ import {Typography} from '@mui/material'
 function AsSeen() {
   return (
     <div className="row top50 mb-4">
-      <Typography variant="h2" textAlign={'center'}>
+      <Typography textAlign={'center'} variant="h2">
         As seen in
       </Typography>
       <div className="container top30">
         <div className="col-lg-3 col-md-3 col-xs-6 top15">
           <img
-            className="asSeenImage"
             alt="Closer Magazine"
+            className="asSeenImage"
             src={'/asSeenLogo/closerlogo.png'}
           />
         </div>
         <div className="col-lg-3 col-md-3 col-xs-6 top15">
           <img
-            className="asSeenImage"
             alt="Best"
+            className="asSeenImage"
             src={'/asSeenLogo/bestlogo.png'}
           />
         </div>
         <div className="col-lg-3 col-md-3 col-xs-6 top15">
           <img
-            className="asSeenImage"
             alt="Daily Record"
+            className="asSeenImage"
             src={'/asSeenLogo/dailyrecordlogo.png'}
           />
         </div>
         <div className="col-lg-3 col-md-3 col-xs-6 top15">
           <img
-            className="asSeenImage"
             alt="Evening Stand"
+            className="asSeenImage"
             src={'/asSeenLogo/eveningstandardlogo.png'}
           />
         </div>
@@ -39,29 +39,29 @@ function AsSeen() {
       <div className="container top30">
         <div className="col-lg-3 col-md-3 col-xs-6 top15">
           <img
-            className="asSeenImage"
             alt="Metro"
+            className="asSeenImage"
             src={'/asSeenLogo/metrologo.png'}
           />
         </div>
         <div className="col-lg-3 col-md-3 col-xs-6 top15">
           <img
-            className="asSeenImage"
             alt="RealPeople Magazine"
+            className="asSeenImage"
             src={'/asSeenLogo/realpeoplelogo.png'}
           />
         </div>
         <div className="col-lg-3 col-md-3 col-xs-6 top15">
           <img
-            className="asSeenImage"
             alt="Reveal"
+            className="asSeenImage"
             src={'/asSeenLogo/reveallogo.png'}
           />
         </div>
         <div className="col-lg-3 col-md-3 col-xs-6 top15">
           <img
-            className="asSeenImage"
             alt="Woman Magazine"
+            className="asSeenImage"
             src={'/asSeenLogo/womanlogo.png'}
           />
         </div>

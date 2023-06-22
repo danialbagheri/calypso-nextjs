@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import { useShopify } from "../hooks";
+import {useEffect, useState} from 'react'
+import {useShopify} from '../hooks'
 
 export default function DealItem() {
-  const [product, setProduct] = useState(null);
-  const [isLoaded, setLoaded] = useState(false);
-  const { fetchProductByQuery, addVariant, checkoutState } = useShopify();
+  const [product, setProduct] = useState(null)
+  const [isLoaded, setLoaded] = useState(false)
+  const {fetchProductByQuery, addVariant, checkoutState} = useShopify()
 
   useEffect(() => {
     const query = {
-      query: `product:[id:6783989088393]`,
-    };
+      query: 'product:[id:6783989088393]',
+    }
 
-    const f = fetchProductByQuery(query);
-    f.then((f) => {
-      setProduct(f[0]);
-      setLoaded(true);
-    });
-  }, []);
+    const f = fetchProductByQuery(query)
+    f.then(f => {
+      setProduct(f[0])
+      setLoaded(true)
+    })
+  }, [])
 
   function addToBasket(variantId, quantity) {
     const lineItemsToAdd = [
@@ -24,8 +24,8 @@ export default function DealItem() {
         variantId: variantId,
         quantity: parseInt(quantity, 10),
       },
-    ];
-    addVariant(checkoutState.id, lineItemsToAdd);
+    ]
+    addVariant(checkoutState.id, lineItemsToAdd)
   }
   return (
     <div>
@@ -38,8 +38,8 @@ export default function DealItem() {
             <div className="deal_item_image">
               {product.images[0] ? (
                 <img
-                  src={product.images[0].src}
                   alt={`${product.title} product shot`}
+                  src={product.images[0].src}
                 />
               ) : null}
             </div>
@@ -58,5 +58,5 @@ export default function DealItem() {
         </div>
       )}
     </div>
-  );
+  )
 }

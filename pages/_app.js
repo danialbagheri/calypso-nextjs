@@ -36,37 +36,37 @@ function MyApp({Component, pageProps}) {
       <Head>
         <meta charSet="utf-8" />
         <meta
-          name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=1"
+          name="viewport"
         />
         <link
+          href="/apple-touch-icon.png"
           rel="apple-touch-icon"
           sizes="180x180"
-          href="/apple-touch-icon.png"
         />
         <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
           href="/favicon-32x32.png"
-        />
-        <link
           rel="icon"
+          sizes="32x32"
           type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
         />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#da532c" />
-        <link rel="stylesheet" href="https://use.typekit.net/kls3ash.css" />
         <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          href="/favicon-16x16.png"
+          rel="icon"
+          sizes="16x16"
+          type="image/png"
         />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="twitter:site" content="@calypsosuncare"></meta>
+        <link href="/site.webmanifest" rel="manifest" />
+        <link color="#da532c" href="/safari-pinned-tab.svg" rel="mask-icon" />
+        <link href="https://use.typekit.net/kls3ash.css" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
+        <meta content="#da532c" name="msapplication-TileColor" />
+        <meta content="#ffffff" name="theme-color" />
+        <meta content="#000000" name="theme-color" />
+        <meta content="@calypsosuncare" name="twitter:site"></meta>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <script
           async
@@ -98,7 +98,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </Head>
       <AppProvider>
-        <SessionProvider session={pageProps.session} refetchInterval={interval}>
+        <SessionProvider refetchInterval={interval} session={pageProps.session}>
           <Provider store={store}>
             {/* <!-- Google Tag Manager (noscript) --> */}
             <noscript

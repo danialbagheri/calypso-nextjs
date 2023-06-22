@@ -15,8 +15,10 @@ export default function Benefits(props) {
         p: 2,
       }}
     >
-      {props.tags.map(tag => (
+      {props.tags.map((tag, i) => (
         <Box
+          key={i}
+          mt={2}
           sx={{
             display: 'flex',
             justifyContent: 'flex-start',
@@ -26,16 +28,15 @@ export default function Benefits(props) {
             maxWidth: 60,
             gap: 1,
           }}
-          mt={2}
         >
           <Image
-            src={tag.icon}
             alt={tag.name}
-            loading="lazy"
-            width="60"
             height="60"
+            loading="lazy"
+            src={tag.icon}
+            width="60"
           />
-          <Typography textAlign="center" sx={{maxWidth: '100px'}}>
+          <Typography sx={{maxWidth: '100px'}} textAlign="center">
             {tag.name}
           </Typography>
         </Box>

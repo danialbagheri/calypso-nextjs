@@ -28,15 +28,14 @@ function Variants(props) {
         setProduct({...res})
         setLoading(false)
       })
-      .catch(err => {
-        console.log(err)
+      .catch(() => {
         setLoading(false)
       })
   }, [])
 
   return (
     <Box>
-      <Box textAlign={'center'} mt={15}>
+      <Box mt={15} textAlign={'center'}>
         <Typography variant={'h3'}>Your {product.name} Review</Typography>
         {product.variants?.length > 1 ? (
           <Typography variant={'body3'}>
@@ -46,20 +45,21 @@ function Variants(props) {
       </Box>
       <Stack>
         {loading ? (
-          <Stack justifyContent={'center'} direction={'row'} mt={5}>
+          <Stack direction={'row'} justifyContent={'center'} mt={5}>
             <CircularProgress />
           </Stack>
         ) : product?.variants ? (
           <Stack
             direction={'row'}
             justifyContent={'center'}
-            spacing={3}
             mt={5}
+            spacing={3}
             sx={{flexWrap: 'wrap'}}
           >
-            {product.variants.map((variant, i) => (
+            {product.variants.map(variant => (
               <Stack
                 key={variant.id}
+                onClick={e => imageSelectHandler(e, variant.id)}
                 sx={{
                   border: '2px solid',
                   borderColor:
@@ -71,7 +71,6 @@ function Variants(props) {
                   cursor: 'pointer',
                   transition: '300ms',
                 }}
-                onClick={e => imageSelectHandler(e, variant.id)}
               >
                 <Box
                   sx={{

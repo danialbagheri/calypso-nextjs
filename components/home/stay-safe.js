@@ -1,10 +1,8 @@
-import React from 'react'
 // import YouTube from "react-youtube";
 // import MediaQuery from "react-responsive";
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Image from 'next/image'
 import Link from 'next/link'
 import Styles from '../../styles/homepage/staySafewithCalypso.module.css'
 
@@ -69,14 +67,14 @@ export default function StaySafe() {
     ],
   }
 
-  let videoThumbnails = videos.map((video, index) => {
+  const videoThumbnails = videos.map((video, index) => {
     return (
       <div className={Styles.VideoThumbnailContainer} key={index}>
         <Link
-          href={video.link}
-          target="_blank"
-          rel="noopener noreferrer"
           className={Styles.videoThumbnails}
+          href={video.link}
+          rel="noopener noreferrer"
+          target="_blank"
         >
           <div
             className="bg-calypso text-white m-0 slick-slide-title"

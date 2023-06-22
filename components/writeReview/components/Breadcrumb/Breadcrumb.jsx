@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Link from '@mui/material/Link'
 
-function Breadcrumb(props) {
+function Breadcrumb() {
   const [productDetail, setProductDetail] = React.useState({
     slug: '',
     productName: '',
@@ -29,21 +29,21 @@ function Breadcrumb(props) {
   return (
     <Box sx={{marginTop: 5}}>
       <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
+        <Link color="inherit" href="/" underline="hover">
           Home
         </Link>
         <Link
-          underline="hover"
           color="inherit"
           href={`/products/${productDetail.slug}`}
+          underline="hover"
         >
           {productDetail.productName}
         </Link>
         <Link
-          underline="hover"
+          aria-current="page"
           color="text.primary"
           href={`/products/write-review?slug=${productDetail.slug}`}
-          aria-current="page"
+          underline="hover"
         >
           Write review
         </Link>

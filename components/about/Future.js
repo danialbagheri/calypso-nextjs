@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from 'next/image'
 export default function Future() {
   // Declare a new state variable, which we'll call "count"
@@ -19,10 +18,10 @@ export default function Future() {
               family.
             </p>
             <a
-              href="https://lincocare.com"
               className="btn bt-round btn-round-calypso mt-4"
-              target="_blank"
+              href="https://lincocare.com"
               rel="noopener noreferrer"
+              target="_blank"
             >
               OUR COMPANY
             </a>
@@ -31,19 +30,19 @@ export default function Future() {
         <div className="col-6 col-md-6 col-sm-12 col-xs-12 pt-3 mt-2 future-images">
           <div className="col-6 col-md-6 col-sm-6 col-xs-6">
             <Image
-              src="/about-us/future-1.png"
               alt="Calypso 1999 to 2019 products"
-              width={388}
               height={440}
+              src="/about-us/future-1.png"
+              width={388}
               // objectFit="contain"
             />
           </div>
           <div className="col-6 col-md-6 col-sm-6 col-xs-6">
             <Image
-              src="/about-us/future-2.png"
               alt="Calypso 1999 to 2019 products"
-              width={388}
               height={440}
+              src="/about-us/future-2.png"
+              width={388}
             />
           </div>
         </div>

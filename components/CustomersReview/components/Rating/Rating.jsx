@@ -25,7 +25,7 @@ function Rating() {
   }, [])
 
   return (
-    <Grid item xs={12} md={4} pr={6}>
+    <Grid item md={4} pr={6} xs={12}>
       <RatingScore />
       <StartReviewDetail />
       <Divider sx={{marginBottom: 8, marginTop: 8}} />

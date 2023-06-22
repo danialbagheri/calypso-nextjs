@@ -54,17 +54,17 @@ export default function Trending(props) {
 
       {isLoaded ? (
         <Slider {...settings}>
-          {topSeller.map(({item}, i) => 
-              <TrendingItem key={item.id} item={ ...item} />
-          )}
+          {topSeller.map(({item}) => (
+            <TrendingItem item={{...item}} key={item.id} />
+          ))}
         </Slider>
       ) : (
         <Loader
-          type="ball-pulse"
           active={true}
+          className="p-2 general-loader"
           color="orange"
           size="Large"
-          className="p-2 general-loader"
+          type="ball-pulse"
         />
       )}
     </div>

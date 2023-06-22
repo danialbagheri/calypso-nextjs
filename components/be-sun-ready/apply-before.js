@@ -7,17 +7,17 @@ import {Box} from '@mui/material'
 export default function ApplyBefore({blogs}) {
   const blogRow = blogs.map((blog, i) => {
     return (
-      <div key={i} className="col-12 col-md-4 col-sm-4 col-xs-12">
+      <div className="col-12 col-md-4 col-sm-4 col-xs-12" key={i}>
         <Link
-          href={`/advice/${blog.item.slug}`}
           className="disableLink text-centre"
+          href={`/advice/${blog.item.slug}`}
         >
           <div className="blog-card bg-white">
             <Box sx={{position: 'relative', width: '100%', height: '300px'}}>
               <Image
-                src={blog.item.resized || '/advice/placeholder.png'}
                 alt={blog.item.image_alt_text}
                 fill={true}
+                src={blog.item.resized || '/advice/placeholder.png'}
                 style={{objectFit: 'cover'}}
               />
             </Box>
@@ -38,9 +38,9 @@ export default function ApplyBefore({blogs}) {
       <div style={{height: '153px', backgroundColor: '#FC954D'}}></div>
       <div className={Styles.sunReadyIcons}>
         <Image
-          src={ApplyIcon}
           alt="Apply sunscreen before going out icon"
           height="178"
+          src={ApplyIcon}
           width="178"
         />
       </div>

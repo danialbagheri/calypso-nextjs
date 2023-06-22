@@ -13,23 +13,23 @@ export default function TrendingItem(props) {
   return (
     <div className="trending-item-parent">
       <Link
-        href={`/products/${product.slug}`}
         className="trending-box-image"
+        href={`/products/${product.slug}`}
         onMouseEnter={toggleHover}
       >
         <Image
-          src={product.main_image || '/advice/placeholder.png'}
           alt={product.name}
           className={hover ? 'd-none' : 'd-block'}
           fill
           sizes="(max-width: 450px) 150,(max-width: 768px) 262, (max-width: 1200px) 262, 262"
+          src={product.main_image || '/advice/placeholder.png'}
         />
         <Image
-          src={product.secondary_image || '/advice/placeholder.png'}
           alt={product.name}
           className={hover ? 'd-block' : 'd-none'}
           fill
           sizes="(max-width: 450px) 150,(max-width: 768px) 262, (max-width: 1200px) 262, 262"
+          src={product.secondary_image || '/advice/placeholder.png'}
         />
       </Link>
       <div className="trending-box-text">

@@ -39,8 +39,7 @@ function PhotoUpload(props) {
           props.setBase64Img(prev => ({...prev, ...newBase64Data}))
           setLoading(false)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(() => {
           setLoading(false)
         })
     }
@@ -59,14 +58,16 @@ function PhotoUpload(props) {
   return (
     <Stack mt={{xs: 12, md: 8}}>
       <Stack
-        direction={{xs: 'column', md: 'row'}}
         alignItems={{xs: 'flex-start', md: 'center'}}
+        direction={{xs: 'column', md: 'row'}}
         justifyContent={'space-between'}
       >
         <Typography variant={'body3'}>
           Do you have any photo you would like to upload?
         </Typography>
         <Button
+          component={'label'}
+          startIcon={<PhotoCamera />}
           sx={{
             borderRadius: 13,
             padding: '12px 20px',
@@ -76,28 +77,27 @@ function PhotoUpload(props) {
             },
           }}
           variant="outlined"
-          startIcon={<PhotoCamera />}
-          component={'label'}
         >
           <Typography variant={'body4'}>UPLOAD A PHOTO</Typography>
           <input
             accept="image/*"
-            type="file"
             hidden
             multiple
             onChange={imageSelectHandler}
             style={{display: 'none'}}
+            type="file"
           />
         </Button>
       </Stack>
       <Stack
-        sx={{flexWrap: 'wrap', gap: 4}}
         direction={'row'}
         justifyContent={{xs: 'flex-start', md: 'center'}}
         mt={imagesData.length && 4}
+        sx={{flexWrap: 'wrap', gap: 4}}
       >
-        {imagesData.map(img => (
+        {imagesData.map((img, i) => (
           <Box
+            key={i}
             sx={{
               width: 150,
               height: 150,
@@ -111,6 +111,7 @@ function PhotoUpload(props) {
             }}
           >
             <CloseIcon
+              onClick={() => removeHandler(img.id)}
               sx={{
                 position: 'absolute',
                 right: 3,
@@ -125,7 +126,6 @@ function PhotoUpload(props) {
                   fill: theme.palette.primary.main,
                 },
               }}
-              onClick={() => removeHandler(img.id)}
             />
           </Box>
         ))}

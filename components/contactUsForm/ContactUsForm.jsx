@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import {Formik, Form, useField} from 'formik'
+import {Form, Formik, useField} from 'formik'
 import * as Yup from 'yup'
 import ReCAPTCHA from 'react-google-recaptcha'
 
@@ -17,7 +17,9 @@ const MyTextInput = ({label, ...props}) => {
     <div className="form-group">
       <label htmlFor={props.id || props.name}>{label}</label>
       <input className="text-input" {...field} {...props} />
-      {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
     </div>
   )
 }
@@ -35,21 +37,30 @@ const MyTextAreaInput = ({label, ...props}) => {
         <span className="CalypsoOrangeText">*</span>
       </label>
       <textarea className="form-control" {...field} {...props} rows="6" />
-      {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
     </div>
   )
 }
 
-const MyCheckbox = ({children, ...props}) => {
-  const [field, meta] = useField({...props, type: 'checkbox'})
-  return (
-    <div className="form-check">
-      <input className="form-check-input" type="checkbox" {...field} {...props} />
-      <label className="form-check-label">{children}</label>
-      {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
-    </div>
-  )
-}
+// const MyCheckbox = ({children, ...props}) => {
+//   const [field, meta] = useField({...props, type: 'checkbox'})
+//   return (
+//     <div className="form-check">
+//       <input
+//         className="form-check-input"
+//         type="checkbox"
+//         {...field}
+//         {...props}
+//       />
+//       <label className="form-check-label">{children}</label>
+//       {meta.touched && meta.error ? (
+//         <div className="error">{meta.error}</div>
+//       ) : null}
+//     </div>
+//   )
+// }
 
 const MySelect = ({label, ...props}) => {
   const [field, meta] = useField(props)
@@ -57,7 +68,9 @@ const MySelect = ({label, ...props}) => {
     <div className="form-group">
       <label htmlFor={props.id || props.name}>{label}</label>
       <select {...field} {...props} />
-      {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
     </div>
   )
 }
@@ -70,9 +83,8 @@ function submitContactForm(values, {setSubmitting, setFieldError, setStatus}) {
       if (r.status != 201) {
         setStatus('There was a problem')
         return r
-      } else {
-        return setStatus('successfully submitted')
       }
+      return setStatus('successfully submitted')
     })
     .then(result => {
       setFieldError(result)
@@ -87,7 +99,7 @@ function submitContactForm(values, {setSubmitting, setFieldError, setStatus}) {
 
 // And now we can use these
 const ContactUsForm = () => {
-  const [response, setResponse] = React.useState('')
+  const [response] = React.useState('')
 
   return (
     <>
@@ -101,10 +113,19 @@ const ContactUsForm = () => {
           message: '',
           recaptcha: '',
         }}
+        onSubmit={(values, {setSubmitting, setFieldError, setStatus}) =>
+          submitContactForm(values, {setSubmitting, setFieldError, setStatus})
+        }
         validationSchema={Yup.object({
-          name: Yup.string().max(35, 'Must be 35 characters or less').required('Required'),
-          address: Yup.string().min(5, 'Must be 5 characters or More').required('Required'),
-          email: Yup.string().email('Invalid email address').required('Required'),
+          name: Yup.string()
+            .max(35, 'Must be 35 characters or less')
+            .required('Required'),
+          address: Yup.string()
+            .min(5, 'Must be 5 characters or More')
+            .required('Required'),
+          email: Yup.string()
+            .email('Invalid email address')
+            .required('Required'),
           // mailChimp: Yup.boolean(),
           reason: Yup.string()
             .oneOf(
@@ -119,39 +140,56 @@ const ContactUsForm = () => {
               'Invalid Reason Type',
             )
             .required('Required'),
-          message: Yup.string().min(5, 'Must be 5 characters or More').required('Required'),
+          message: Yup.string()
+            .min(5, 'Must be 5 characters or More')
+            .required('Required'),
           recaptcha: Yup.string().required(),
         })}
-        onSubmit={(values, {setSubmitting, setFieldError, setStatus}) =>
-          submitContactForm(values, {setSubmitting, setFieldError, setStatus})
-        }
       >
-        {({isSubmitting, status, setFieldValue}) => (
+        {({status, setFieldValue}) => (
           <Form>
-            <MyTextInput className="form-control" label="Your full name" name="name" type="text" placeholder="Jane" />
+            <MyTextInput
+              className="form-control"
+              label="Your full name"
+              name="name"
+              placeholder="Jane"
+              type="text"
+            />
 
             <MyTextInput
               className="form-control"
               label="Address (city,country)"
               name="address"
-              type="text"
               placeholder="Manchester, United Kingdom"
+              type="text"
             />
 
             <MyTextInput
               className="form-control"
               label="Email Address"
               name="email"
-              type="email"
               placeholder="jane@email.com"
+              type="email"
             />
 
-            <MySelect label="Reason for contact" name="reason" className="form-control">
+            <MySelect
+              className="form-control"
+              label="Reason for contact"
+              name="reason"
+            >
               <option value="Product Question">Product Question</option>
-              <option value="Urgent: Change Order detail or Address">Urgent: Change Order detail or Address</option>
-              <option value="Wholesale, Discount, promo code query">Wholesale, Discount, promo code query</option>
-              <option value="Question about order or Delivery">Question about order or Delivery</option>
-              <option value="Press Contact & Media">Press Contact & Media</option>
+              <option value="Urgent: Change Order detail or Address">
+                Urgent: Change Order detail or Address
+              </option>
+              <option value="Wholesale, Discount, promo code query">
+                Wholesale, Discount, promo code query
+              </option>
+              <option value="Question about order or Delivery">
+                Question about order or Delivery
+              </option>
+              <option value="Press Contact & Media">
+                Press Contact & Media
+              </option>
 
               <option value="Other">Other</option>
             </MySelect>
@@ -159,26 +197,26 @@ const ContactUsForm = () => {
               className="form-control"
               label="Your message"
               name="message"
-              type="text"
               placeholder="Dear Calypso team..."
+              type="text"
             />
 
             {/* <MyCheckbox name="mailChimp" className="form-check-input">
                 I would like to sign up to Calypso (Linco Care) newsletter.
               </MyCheckbox> */}
             <ReCAPTCHA
-              ref={reCaptchaRef}
-              sitekey="6LfjPaEUAAAAAPGfkx7Nxp3glAdPGbLZE3lwY5c9"
-              onChange={value => {
+              onChange={() => {
                 // setFieldValue("recaptcha", value);
                 setFieldValue('recaptcha', reCaptchaRef.current.getValue())
               }}
+              ref={reCaptchaRef}
+              sitekey="6LfjPaEUAAAAAPGfkx7Nxp3glAdPGbLZE3lwY5c9"
             />
             <div className="form-group mt-2">
               <p className="text-danger">{status}</p>
               <button
-                type="submit"
                 className="btn btn-wide"
+                type="submit"
                 // disabled={isSubmitting}
               >
                 Submit mamad

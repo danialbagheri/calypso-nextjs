@@ -2,30 +2,30 @@ import * as React from 'react'
 
 import {Box, Typography} from '@mui/material'
 import {getBlogs} from 'services'
-import Image from 'next/image'
+
 import Slider from 'react-slick'
 
 import {BlogImage} from './blogImage'
 
 function BlogSlider() {
   const BLOG = 'staff-picked'
-  const [loading, setLoading] = React.useState(true)
+  const [, setLoading] = React.useState(true)
   const [slidesNo, setSlidesNo] = React.useState(1)
   const [blogItems, setBlogItems] = React.useState([])
-  const [error, setError] = React.useState('')
+  const [, setError] = React.useState('')
   const sliderContainer = React.useRef()
 
-  const settings = {
-    arrows: true,
-    dots: true,
-    infinite: false,
-    speed: 500,
+  // const settings = {
+  //   arrows: true,
+  //   dots: true,
+  //   infinite: false,
+  //   speed: 500,
 
-    slidesToScroll: 1,
-    centerMode: false,
-    swipeToSlide: true,
-    centerPadding: 20,
-  }
+  //   slidesToScroll: 1,
+  //   centerMode: false,
+  //   swipeToSlide: true,
+  //   centerPadding: 20,
+  // }
 
   React.useEffect(() => {
     const containerWidth = sliderContainer.current.clientWidth
@@ -34,7 +34,9 @@ function BlogSlider() {
       setSlidesNo(1)
     } else if (containerWidth < 1330) {
       setSlidesNo(2)
-    } else setSlidesNo(3)
+    } else {
+      setSlidesNo(3)
+    }
 
     getBlogs(BLOG)
       .then(response => {
@@ -52,7 +54,8 @@ function BlogSlider() {
 
   return (
     <Box mt={{xs: 10, sm: 20}}>
-      <Typography variant="h2" textAlign={'center'}>
+      <Typography textAlign={'center'} variant="h2">
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
         EDITOR'S PICKS
       </Typography>
 
@@ -64,9 +67,9 @@ function BlogSlider() {
           {blogItems.length
             ? blogItems.map((blogItem, i) => (
                 <BlogImage
-                  key={blogItem.item.id}
-                  item={blogItem.item}
                   index={i}
+                  item={blogItem.item}
+                  key={blogItem.item.id}
                 />
               ))
             : null}

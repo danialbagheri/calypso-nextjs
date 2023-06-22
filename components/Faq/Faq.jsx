@@ -1,4 +1,3 @@
-import * as React from 'react'
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
 import Box from '@mui/material/Box'
 import Accordion from '@mui/material/Accordion'
@@ -18,18 +17,18 @@ function Faq(props) {
           },
         }}
       >
-        <Typography align={'center'} variant={'h3'} mb={7}>
+        <Typography align={'center'} mb={7} variant={'h3'}>
           Your Questions Answered
         </Typography>
 
         {Object.values(props).map(faqDetail => (
-          <Accordion key={faqDetail.id} disableGutters>
+          <Accordion disableGutters key={faqDetail.id}>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon color={'secondary'} />}
               aria-controls="panel1a-content"
+              expandIcon={<ExpandMoreIcon color={'secondary'} />}
               id="panel1a-header"
             >
-              <Typography variant={'h6'} color={'secondary'}>
+              <Typography color={'secondary'} variant={'h6'}>
                 {faqDetail.question}
               </Typography>
             </AccordionSummary>

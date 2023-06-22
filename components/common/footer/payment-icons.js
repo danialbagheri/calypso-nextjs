@@ -1,20 +1,20 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
-  faCcVisa,
-  faCcMastercard,
   faApplePay,
-  faGooglePay,
+  faCcMastercard,
   faCcPaypal,
-} from "@fortawesome/free-brands-svg-icons";
+  faCcVisa,
+  faGooglePay,
+} from '@fortawesome/free-brands-svg-icons'
 
 export default function PaymentIcons() {
   return (
     <div>
-      <FontAwesomeIcon icon={faCcVisa} className="payment-icon" />
-      <FontAwesomeIcon icon={faCcMastercard} className="payment-icon" />
-      <FontAwesomeIcon icon={faCcPaypal} className="payment-icon" />
-      <FontAwesomeIcon icon={faGooglePay} className="payment-icon" />
-      <FontAwesomeIcon icon={faApplePay} className="payment-icon" />
+      <FontAwesomeIcon className="payment-icon" icon={faCcVisa} />
+      <FontAwesomeIcon className="payment-icon" icon={faCcMastercard} />
+      <FontAwesomeIcon className="payment-icon" icon={faCcPaypal} />
+      <FontAwesomeIcon className="payment-icon" icon={faGooglePay} />
+      <FontAwesomeIcon className="payment-icon" icon={faApplePay} />
     </div>
-  );
+  )
 }

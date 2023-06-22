@@ -36,8 +36,8 @@ function Products(props) {
           Tanning and Health care
         </title>
         <meta
-          name="description"
           content="From scalp protection to insect repellent, we have everything you need to stay protected in the sun both at home and abroad. Our products are available to buy from some of the biggest UK grocery chains as well as some independent pharmacies, and online on Amazon."
+          name="description"
         />
       </Head>
       <div className="product-page-banner-image">
@@ -51,25 +51,25 @@ function Products(props) {
           <FilterProducts
             limit={limit}
             products={ordered_products}
-            setProducts={setProducts}
             setLimit={setLimit}
             setMaxLimit={setMaxLimit}
+            setProducts={setProducts}
           />
         </div>
         <div>
           <ProductRange
-            type="sun%20protection"
-            products={products}
             limit={limit}
+            products={products}
+            type="sun%20protection"
           />
           {maxLimit ? (
             <span id="loading"></span>
           ) : (
             <div className="text-centre m-3">
               <button
-                onClick={LoadMore}
                 className="btn btn-calypso"
                 id="loading"
+                onClick={LoadMore}
               >
                 Load More
               </button>
@@ -82,23 +82,23 @@ function Products(props) {
 }
 async function getAllPages(pageCount, url) {
   let pageNumber = 1
-  let productResult = []
+  const productResult = []
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    let paginatedUrl = url + `?page=${pageNumber}`
+    const paginatedUrl = url + `?page=${pageNumber}`
     const res = await fetch(paginatedUrl)
     const product = await res.json()
     productResult.push(product.results)
   }
   return productResult
 }
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const baseUrl = process.env.API_URL
-  const endpoint = `products/product/`
+  const endpoint = 'products/product/'
   const finalUrl = baseUrl + endpoint
   const res = await fetch(finalUrl)
-  let products = await res.json()
+  const products = await res.json()
   const pageCount = Math.ceil(products.count / 10)
-  let productResult = await getAllPages(pageCount, finalUrl)
+  const productResult = await getAllPages(pageCount, finalUrl)
   // Now we will get the staff picked articles
 
   if (!productResult) {

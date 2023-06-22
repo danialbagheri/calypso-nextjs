@@ -6,12 +6,6 @@ import Head from 'next/head'
 import {Box} from '@mui/system'
 
 function Article({blog}) {
-  let blogColor = blog.backround_color_hex
-    ? blog.backround_color_hex
-    : '#ffb900'
-  const customColor = {
-    backgroundImage: `linear-gradient(to left,rgba(255, 0, 0, 0) 2%,${blogColor} 40%)`,
-  }
   const content = (
     <article
       className="jumbotron top20"
@@ -19,13 +13,13 @@ function Article({blog}) {
       itemScope
       itemType="http://schema.org/BlogPosting"
     >
-      <meta name="Keywords" content={blog.focus_keyword} />
-      <meta property="og:title" content={blog.title} />
-      <meta property="og:url" content="https://calypsosun.com/blog/" />
-      <meta property="og:image" content={blog.resized} />
+      <meta content={blog.focus_keyword} name="Keywords" />
+      <meta content={blog.title} property="og:title" />
+      <meta content="https://calypsosun.com/blog/" property="og:url" />
+      <meta content={blog.resized} property="og:image" />
       <Head>
         <title>{blog.title} by Calypso Sun</title>
-        <meta name="description" content={blog.excerpt} />
+        <meta content={blog.excerpt} name="description" />
       </Head>
       <div className="container">
         <div className="row">
@@ -55,19 +49,19 @@ function Article({blog}) {
                 }}
               >
                 <Image
+                  alt={blog.alt_text}
+                  className="blog-post-image"
+                  fill={true}
                   itemProp="url contentUrl"
                   src={blog.image || '/advice/placeholder.png'}
-                  className="blog-post-image"
-                  alt={blog.alt_text}
-                  fill={true}
                   style={{objectFit: 'cover'}}
                   // height={blog.image_height}
                   // width={blog.image_width}
                 />
               </Box>
 
-              <meta itemProp="width" content="640" />
-              <meta itemProp="height" content="320" />
+              <meta content="640" itemProp="width" />
+              <meta content="320" itemProp="height" />
             </figure>
             <time
               className="date-blog-added"
@@ -78,8 +72,8 @@ function Article({blog}) {
             </time>
 
             <div
-              itemProp="articleBody"
               dangerouslySetInnerHTML={{__html: blog.body}}
+              itemProp="articleBody"
             />
             {/* <RelatedProducts products={blog.related_products} /> */}
           </div>
@@ -111,9 +105,9 @@ export async function getStaticProps(context) {
 
 async function getAllPages(pageCount, url) {
   let pageNumber = 1
-  let blogsResult = []
+  const blogsResult = []
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    let paginatedUrl = url + `?page=${pageNumber}`
+    const paginatedUrl = url + `?page=${pageNumber}`
     const res = await fetch(paginatedUrl)
     const blogs = await res.json()
     blogsResult.push(blogs.results)
@@ -124,14 +118,14 @@ async function getAllPages(pageCount, url) {
 export async function getStaticPaths() {
   // const baseUrl = data.apiUrl;
   const baseUrl = 'https://service.calypsosun.com/api/'
-  const url = baseUrl + `blogs/all/`
+  const url = baseUrl + 'blogs/all/'
   const res = await fetch(url)
   const blogs = await res.json()
   const pageCount = Math.ceil(blogs.count / 10)
-  let blogsResult = await getAllPages(pageCount, url)
-  let slugPaths = []
+  const blogsResult = await getAllPages(pageCount, url)
+  const slugPaths = []
   for (let i = 0; i < blogsResult.length; i++) {
-    let slugs = blogsResult[i].map(item => {
+    const slugs = blogsResult[i].map(item => {
       return {
         params: {
           slug: item.slug,
