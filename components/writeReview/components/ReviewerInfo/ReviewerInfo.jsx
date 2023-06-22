@@ -9,8 +9,8 @@ import {validateEmail} from 'utils'
 
 function ReviewerInfo(props) {
   //constants
-  const USERNAME = 'username'
-  const EMAIL = 'email'
+  const USERNAME = 'customer_name'
+  const EMAIL = 'customer_email'
   const LOCATION = 'location'
 
   const [userData, setUserData] = React.useState({

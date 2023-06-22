@@ -1,4 +1,4 @@
-import {get, post, patch, nextPost} from 'utils'
+import {get, nextPost, patch, post} from 'utils'
 
 /* ------------------------------ POST Requests ----------------------------- */
 
@@ -7,7 +7,7 @@ const postContactUsSubmit = data => {
 }
 
 const postProductReview = (data, slug) => {
-  return post({endpoint: `reviews/prod/${slug}/add/`, data})
+  return post({endpoint: `reviews/product/${slug}/add/`, data})
 }
 
 const postReviewImage = image_base64 => {

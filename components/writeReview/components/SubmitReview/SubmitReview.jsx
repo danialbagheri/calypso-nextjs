@@ -20,8 +20,8 @@ function SubmitReview(props) {
 
   const fieldsConductHandler = data => {
     const fieldsError = {}
-    if (!data.username) {
-      fieldsError.username = {
+    if (!data.customer_name) {
+      fieldsError.customer_name = {
         state: true,
         message: 'Please enter your name.',
       }
@@ -32,13 +32,13 @@ function SubmitReview(props) {
         message: 'Please select a star rating between 1 and 5.',
       }
     }
-    if (!data.email) {
-      fieldsError.email = {
+    if (!data.customer_email) {
+      fieldsError.customer_email = {
         state: true,
         message: 'Please enter your email address.',
       }
-    } else if (!validateEmail(data.email)) {
-      fieldsError.email = {
+    } else if (!validateEmail(data.customer_email)) {
+      fieldsError.customer_email = {
         state: true,
         message: 'Please enter a valid email address.',
       }
@@ -52,8 +52,8 @@ function SubmitReview(props) {
         severity: 'error',
         message: (
           <>
-            {Object.values(fieldsError).map(error => (
-              <Typography>{error.message}</Typography>
+            {Object.values(fieldsError).map((error, i) => (
+              <Typography key={i}>{error.message}</Typography>
             ))}
           </>
         ),
@@ -69,6 +69,8 @@ function SubmitReview(props) {
 
     //Finding out if there is a field empty or have errors.
     const errorState = fieldsConductHandler(props.data)
+
+    console.log('porps.data::', props.data)
     if (!errorState) {
       const promisesList = []
       Object.values(props.base64Img).forEach(base64_img =>
@@ -83,7 +85,9 @@ function SubmitReview(props) {
         .then(idArr => {
           props.changeHandler('image_ids', idArr)
         })
-        .then(() => postProductReview(props.data, slug.current))
+        .then(() => {
+          postProductReview(props.data, slug.current)
+        })
         .then(() => {
           setLoading(false)
           setSnackBarState({
@@ -120,7 +124,6 @@ function SubmitReview(props) {
         Ready to share your experience?
       </Typography>
       <Button
-        disabled={!props.data.username || !props.data.email}
         loading={loading}
         onClick={e => submitHandler(e)}
         sx={{

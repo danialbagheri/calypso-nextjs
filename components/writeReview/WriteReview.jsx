@@ -21,8 +21,8 @@ function WriteReview() {
   })
   //This object is the same as the body for api request
   const reviewData = React.useRef({
-    username: '',
-    email: '',
+    customer_name: '',
+    customer_email: '',
     location: '',
     title: '',
     comment: '',
