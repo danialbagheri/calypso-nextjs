@@ -2,44 +2,43 @@ import Image from 'next/image'
 
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import {Stack} from '@mui/material'
 
 export default function Benefits(props) {
   return (
     <Box
       sx={{
-        display: 'flex',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         flexWrap: 'wrap',
-        gap: 12,
         p: 2,
       }}
     >
       {props.tags.map((tag, i) => (
-        <Box
+        <Stack
+          alignItems={'center'}
+          direction={'row'}
+          gap={3}
+          justifyContent={'flex-start'}
           key={i}
           mt={2}
           sx={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: 60,
-            maxWidth: 60,
-            gap: 1,
+            width: '100%',
           }}
         >
           <Image
             alt={tag.name}
             height="60"
             loading="lazy"
-            src={tag.icon}
+            src={tag.svg_icon}
             width="60"
           />
-          <Typography sx={{maxWidth: '100px'}} textAlign="center">
+          <Typography sx={{maxWidth: '100px', width: '100%'}}>
             {tag.name}
           </Typography>
-        </Box>
+        </Stack>
       ))}
     </Box>
   )
