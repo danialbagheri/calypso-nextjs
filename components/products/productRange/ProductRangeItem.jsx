@@ -48,7 +48,7 @@ export default function ProductRangeItem(props) {
         <Box
           sx={{
             background:
-              'linear-gradient(180deg, rgba(245,245,247,1) 84%, rgba(255,255,255,1) 85%)',
+              'linear-gradient(180deg, rgba(245,245,247,1) 100%, rgba(255,255,255,1) 100%)',
             width: '100%',
             height: '300px',
             margin: '0 auto',
@@ -57,7 +57,7 @@ export default function ProductRangeItem(props) {
             borderRadius: 1,
             '&:hover': {
               background:
-                'linear-gradient(180deg, rgba(252,245,236,1) 84%, rgba(255,255,255,1) 85%)',
+                'linear-gradient(180deg, rgba(252,245,236,1) 100%, rgba(255,255,255,1) 100%)',
             },
           }}
         >
@@ -71,7 +71,7 @@ export default function ProductRangeItem(props) {
                 position: 'absolute',
                 top: 10,
                 right: 10,
-                color: 'white',
+                color: 'black',
                 backgroundColor: '#fff',
                 padding: '3px 10px',
               }}
