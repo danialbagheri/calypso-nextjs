@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography'
 import {Stack} from '@mui/material'
 
 export default function Benefits(props) {
+  console.log('Props::::', props)
   return (
     <Box
       sx={{
@@ -32,7 +33,7 @@ export default function Benefits(props) {
             alt={tag.name}
             height="60"
             loading="lazy"
-            src={tag.svg_icon}
+            src={tag.svg_icon || tag.icon || ''}
             width="60"
           />
           <Typography sx={{maxWidth: '100px', width: '100%'}}>
