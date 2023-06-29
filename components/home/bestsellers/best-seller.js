@@ -39,7 +39,7 @@ export default function BestSeller(props) {
               width: '100%',
 
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
               gridTemplateRows: 'auto',
               rowGap: 4,
               columnGap: 2,

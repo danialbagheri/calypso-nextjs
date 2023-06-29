@@ -179,6 +179,7 @@ export default function MailjetSignUp() {
         <div className={Styles.Content}>
           <div className={Styles.ImageContainer}>
             <Image
+              alt={'subscription'}
               fill
               src={'/home-page/calypso-newsletter-subscription.jpg'}
               style={{objectFit: 'cover'}}
@@ -193,7 +194,7 @@ export default function MailjetSignUp() {
             display: 'flex',
             flexDirection: 'column',
             gap: 3,
-            backgroundColor: 'rgba(252, 245, 236, 0.7)',
+            backgroundColor: '#fdf8f1c7',
           }}
         >
           <Typography textAlign={'center'} variant="h5">
