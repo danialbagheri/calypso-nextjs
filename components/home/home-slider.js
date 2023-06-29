@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 // import Image from "next/image";
 import Link from 'next/link'
+import {Box} from '@mui/material'
 export default function HomeSlider({slides}) {
   const settings = {
     arrows: true,
@@ -27,7 +28,7 @@ export default function HomeSlider({slides}) {
       )
     }
     return (
-      <div className="banner" index={slide.id} key={slide.id}>
+      <Box className="banner" index={slide.id} key={slide.id}>
         <Link href={slide.slide.link ? slide.slide.link : '/about'}>
           <picture>
             <source
@@ -66,13 +67,19 @@ export default function HomeSlider({slides}) {
             />
           </picture>
         </Link>
-      </div>
+      </Box>
     )
   })
 
   return (
-    <div>
+    <Box
+      sx={{
+        '& button.slick-arrow': {
+          display: 'none !important',
+        },
+      }}
+    >
       <Slider {...settings}>{slider}</Slider>
-    </div>
+    </Box>
   )
 }

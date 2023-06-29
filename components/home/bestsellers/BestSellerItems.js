@@ -45,7 +45,7 @@ export default function BestSellerItems(props) {
             alt={i.name}
             fill={true}
             src={showButton ? i.secondary_image_resized : i.main_image_resized}
-            style={{objectFit: 'cover'}}
+            style={{objectFit: 'scale-down'}}
           />
         </Box>
 
