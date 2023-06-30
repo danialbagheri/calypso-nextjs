@@ -52,10 +52,7 @@ function AddButton(props) {
       <Button
         fullWidth
         onClick={() => {
-          addToBasket(
-            selectedVariant.shopify_storefront_variant_id,
-            selectedQuantity,
-          )
+          addToBasket(selectedVariant.graphql_id, selectedQuantity)
         }}
         size="large"
         sx={{
