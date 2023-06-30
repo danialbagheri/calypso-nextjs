@@ -64,7 +64,7 @@ export default function AddToBasketWithDropDown(props) {
         disabled={!inStock()}
         fullWidth
         onClick={() => {
-          addToBasket(activeVariant.shopify_storefront_variant_id, 1)
+          addToBasket(activeVariant.graphql_id, 1)
         }}
         sx={{
           fontWeight: 700,
