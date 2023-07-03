@@ -35,7 +35,7 @@ export default function BestSellerItems(props) {
           sx={{
             background: 'rgba(245,245,247,1)',
             width: '100%',
-            height: '300px',
+            height: '400px',
             margin: '0 auto',
             position: 'relative',
             cursor: 'pointer',
@@ -45,7 +45,7 @@ export default function BestSellerItems(props) {
             alt={i.name}
             fill={true}
             src={showButton ? i.secondary_image_resized : i.main_image_resized}
-            style={{objectFit: 'scale-down'}}
+            style={{objectFit: showButton ? 'cover' : 'contain'}}
           />
         </Box>
 

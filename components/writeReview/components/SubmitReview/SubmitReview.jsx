@@ -73,7 +73,7 @@ function SubmitReview(props) {
     const errorState = fieldsConductHandler(props.data)
 
     if (!errorState) {
-      setBtnDisable(true)
+      // setBtnDisable(true)
       const promisesList = []
       Object.values(props.base64Img).forEach(base64_img =>
         promisesList.push(postReviewImage(base64_img)),
@@ -90,15 +90,18 @@ function SubmitReview(props) {
         .then(() => {
           postProductReview(props.data, slug.current)
         })
-        .then(() => {
+        .then(res => {
           setLoading(false)
-          setAlertState({
-            state: true,
-            severity: 'success',
-            message: 'Your review has been send successfully!',
-          })
+          console.log('RES::::', res)
+
+          // setAlertState({
+          //   state: true,
+          //   severity: 'success',
+          //   message: 'Your review has been send successfully!',
+          // })
         })
         .catch(err => {
+          console.log('ERR:::', err)
           setBtnDisable(false)
           setAlertState({
             state: true,

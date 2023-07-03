@@ -5,8 +5,10 @@ import Radio from '@mui/material/Radio'
 import {styled} from '@mui/material/styles'
 import Box from '@mui/material/Box'
 
-function Recommendation() {
+function Recommendation(props) {
   const [selectedValue, setSelectedValue] = React.useState('yes')
+
+  console.log('PRPOS::::', props)
 
   const BpIcon = styled('span')(({theme}) => ({
     borderRadius: '50%',
@@ -19,15 +21,15 @@ function Recommendation() {
   const BpCheckedIcon = styled(BpIcon)(({theme}) => ({
     '&:before': {
       display: 'block',
-      width: 31,
-      height: 31,
+      width: 28,
+      height: 28,
       backgroundColor: theme.palette.primary.main,
       content: '""',
       borderRadius: '50%',
 
       position: 'absolute',
-      top: 2,
-      left: 2,
+      top: 4,
+      left: 4,
     },
   }))
 
@@ -42,6 +44,8 @@ function Recommendation() {
   })
 
   const handleChange = event => {
+    props.data.answers[0].answer = event.target.value
+
     setSelectedValue(event.target.value)
   }
   return (

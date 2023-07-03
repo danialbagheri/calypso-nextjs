@@ -6,9 +6,13 @@ import Rating from '@mui/material/Rating'
 import StarIcon from '@mui/icons-material/Star'
 import {useTheme} from '@mui/material'
 import Stack from '@mui/material/Stack'
+// import ThumbUpIcon from '@mui/icons-material/ThumbUp'
+// import ThumbDownIcon from '@mui/icons-material/ThumbDown'
 
 function ReviewDetail(props) {
   const theme = useTheme()
+
+  // const reviewRateHandler = () => {}
 
   return (
     <Box mb={6}>
@@ -46,31 +50,31 @@ function ReviewDetail(props) {
       </Box>
 
       {/*TO DO ::: implement like and dislike functionality*/}
-      {/*<Stack*/}
-      {/*  direction={'row'}*/}
-      {/*  alignItems={'center'}*/}
-      {/*  justifyContent={'flex-end'}*/}
-      {/*>*/}
-      {/*  <Typography variant={'body2'} color={'primary'}>*/}
-      {/*    Did you find it useful?*/}
-      {/*  </Typography>*/}
-      {/*  <Stack ml={6} direction={'row'} alignItems={'center'}>*/}
-      {/*    <IconButton onClick={() => reviewRateHandler('like')} color="primary">*/}
-      {/*      <ThumbUpIcon />*/}
-      {/*    </IconButton>*/}
-      {/*    <Typography variant={'h5'} color={'primary'}>*/}
-      {/*      {props.like}*/}
-      {/*    </Typography>*/}
-      {/*  </Stack>*/}
-      {/*  <Stack ml={6} direction={'row'} alignItems={'center'}>*/}
-      {/*    <IconButton color="primary">*/}
-      {/*      <ThumbDownAltIcon />*/}
-      {/*    </IconButton>*/}
-      {/*    <Typography variant={'h5'} color={'primary'}>*/}
-      {/*      {props.dislike}*/}
-      {/*    </Typography>*/}
-      {/*  </Stack>*/}
-      {/*</Stack>*/}
+      {/* <Stack
+        alignItems={'center'}
+        direction={'row'}
+        justifyContent={'flex-end'}
+      >
+        <Typography color={'primary'} variant={'body2'}>
+          Did you find it useful?
+        </Typography>
+        <Stack alignItems={'center'} direction={'row'} ml={6}>
+          <IconButton color="primary" onClick={() => reviewRateHandler('like')}>
+            <ThumbUpIcon />
+          </IconButton>
+          <Typography color={'primary'} variant={'h5'}>
+            {props.like}
+          </Typography>
+        </Stack>
+        <Stack alignItems={'center'} direction={'row'} ml={6}>
+          <IconButton color="primary">
+            <ThumbDownIcon />
+          </IconButton>
+          <Typography color={'primary'} variant={'h5'}>
+            {props.dislike}
+          </Typography>
+        </Stack>
+      </Stack> */}
     </Box>
   )
 }
