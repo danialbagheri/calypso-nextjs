@@ -3,7 +3,7 @@ import * as React from 'react'
 import {
   Breadcrumb,
   PhotoUpload,
-  Recommendation,
+  // Recommendation,
   ReviewBody,
   ReviewerInfo,
   ReviewRate,
@@ -30,10 +30,10 @@ function WriteReview() {
     score: 0,
     variant: '',
     answers: [
-      {
-        question_id: 1,
-        answer: 'yes',
-      },
+      // {
+      //   question_id: 1,
+      //   answer: 'yes',
+      // },
     ],
     image_ids: [],
   })
@@ -82,7 +82,7 @@ function WriteReview() {
           <Variants {...value} />
           <ReviewRate {...value} />
           <ReviewBody {...value} />
-          <Recommendation {...value} />
+          {/* <Recommendation {...value} /> */}
           <PhotoUpload {...value} />
           <SubmitReview {...value} />
         </Box>
