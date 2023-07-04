@@ -99,6 +99,7 @@ export async function getStaticProps() {
   const products = await res.json()
   const pageCount = Math.ceil(products.count / 10)
   const productResult = await getAllPages(pageCount, finalUrl)
+
   // Now we will get the staff picked articles
 
   if (!productResult) {
@@ -109,7 +110,10 @@ export async function getStaticProps() {
   }
 
   return {
-    props: {products: productResult.flat(), isLoaded: true},
+    props: {
+      products: productResult.flat(),
+      isLoaded: true,
+    },
     revalidate: 120, // will be passed to the page component as props
   }
 }

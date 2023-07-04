@@ -8,8 +8,6 @@ import Box from '@mui/material/Box'
 function Recommendation(props) {
   const [selectedValue, setSelectedValue] = React.useState('yes')
 
-  console.log('PRPOS::::', props)
-
   const BpIcon = styled('span')(({theme}) => ({
     borderRadius: '50%',
     width: 37,

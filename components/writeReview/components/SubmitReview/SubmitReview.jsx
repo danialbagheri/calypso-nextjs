@@ -90,9 +90,8 @@ function SubmitReview(props) {
         .then(() => {
           postProductReview(props.data, slug.current)
         })
-        .then(res => {
+        .then(() => {
           setLoading(false)
-          console.log('RES::::', res)
 
           // setAlertState({
           //   state: true,

@@ -155,6 +155,7 @@ async function getAllPages(pageCount, url) {
     const products = await res.json()
     productResult.push(products.results)
   }
+
   return productResult
 }
 
