@@ -6,16 +6,18 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
-import {Alert, Snackbar} from '@mui/material'
+import {Alert} from '@mui/material'
 import {validateEmail} from 'utils'
 
 function SubmitReview(props) {
   const [loading, setLoading] = React.useState(false)
-  const [snackBarState, setSnackBarState] = React.useState({
+  const [alertState, setAlertState] = React.useState({
     state: false,
     severity: 'success',
     message: 'Your review has been send successfully!',
   })
+  const [btnDisable, setBtnDisable] = React.useState(false)
+
   const slug = React.useRef('')
 
   const fieldsConductHandler = data => {
@@ -47,7 +49,7 @@ function SubmitReview(props) {
     props.setError({...fieldsError})
 
     if (Object.keys(fieldsError).length) {
-      setSnackBarState({
+      setAlertState({
         state: true,
         severity: 'error',
         message: (
@@ -71,6 +73,7 @@ function SubmitReview(props) {
     const errorState = fieldsConductHandler(props.data)
 
     if (!errorState) {
+      // setBtnDisable(true)
       const promisesList = []
       Object.values(props.base64Img).forEach(base64_img =>
         promisesList.push(postReviewImage(base64_img)),
@@ -89,14 +92,17 @@ function SubmitReview(props) {
         })
         .then(() => {
           setLoading(false)
-          setSnackBarState({
-            state: true,
-            severity: 'success',
-            message: 'Your review has been send successfully!',
-          })
+
+          // setAlertState({
+          //   state: true,
+          //   severity: 'success',
+          //   message: 'Your review has been send successfully!',
+          // })
         })
         .catch(err => {
-          setSnackBarState({
+          console.log('ERR:::', err)
+          setBtnDisable(false)
+          setAlertState({
             state: true,
             severity: 'error',
             message: err || 'Something went wrong! please try later.',
@@ -123,11 +129,12 @@ function SubmitReview(props) {
         Ready to share your experience?
       </Typography>
       <Button
+        disabled={btnDisable}
         loading={loading}
         onClick={e => submitHandler(e)}
         sx={{
           minWidth: 310,
-          padding: '16px 80px',
+          padding: '16px',
           borderRadius: 15,
           color: 'white',
 
@@ -148,22 +155,15 @@ function SubmitReview(props) {
           <Typography variant={'body4'}>SUBMIT THE REVIEW</Typography>
         )}
       </Button>
-
-      <Snackbar
-        anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-        autoHideDuration={5000}
-        key={'bottom' + 'center'}
-        onClose={() => setSnackBarState(prev => ({...prev, state: false}))}
-        open={snackBarState.state}
-      >
+      {alertState.state ? (
         <Alert
-          onClose={() => setSnackBarState(prev => ({...prev, state: false}))}
-          severity={snackBarState.severity}
+          onClose={() => setAlertState(prev => ({...prev, state: false}))}
+          severity={alertState.severity}
           sx={{width: '100%'}}
         >
-          {snackBarState.message}
+          {alertState.message}
         </Alert>
-      </Snackbar>
+      ) : null}
     </Stack>
   )
 }

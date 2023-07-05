@@ -21,9 +21,17 @@ export default function ProductRange(props) {
         </Box>
       ) : (
         <>
-          {props.products.slice(0, props.limit).map(product => (
-            <ProductRangeItem key={product.id} product={product} />
-          ))}
+          {props.products
+            .slice(0, props.limit)
+            .sort(function (a) {
+              if (a.collection_names[0] === 'New') {
+                return -1
+              }
+              return 0
+            })
+            .map(product => (
+              <ProductRangeItem key={product.id} product={product} />
+            ))}
         </>
       )}
     </Box>

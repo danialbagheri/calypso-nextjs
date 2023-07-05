@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography'
 import {Stack} from '@mui/material'
 
 export default function Benefits(props) {
-  console.log('Props::::', props)
   return (
     <Box
       sx={{

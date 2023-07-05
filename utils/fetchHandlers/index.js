@@ -1,6 +1,7 @@
 import {BASE_URL} from '../../constants/servicesConstants/index'
 
 const errorHandler = response => {
+  console.log('ERROR RESPONSE::::', response)
   if (response) {
     return Promise.reject(`${response.statusText}`)
   }
@@ -18,10 +19,9 @@ const get = async ({endpoint, baseURL = BASE_URL}) => {
   if (+response.status < 400) {
     clearTimeout(id)
     return Promise.resolve(await response.json())
-  } else {
-    clearTimeout(id)
-    return errorHandler(response)
   }
+  clearTimeout(id)
+  return errorHandler(response)
 }
 
 const post = async ({endpoint, data}) => {
@@ -38,13 +38,13 @@ const post = async ({endpoint, data}) => {
     },
     body: JSON.stringify(data),
   })
+
   if (response.ok) {
     clearTimeout(id)
     return Promise.resolve(await response.json())
-  } else {
-    clearTimeout(id)
-    return errorHandler(response)
   }
+  clearTimeout(id)
+  return errorHandler(response)
 }
 
 const patch = async ({endpoint, data}) => {
@@ -64,10 +64,9 @@ const patch = async ({endpoint, data}) => {
   if (response.ok) {
     clearTimeout(id)
     return Promise.resolve(await response.json())
-  } else {
-    clearTimeout(id)
-    return errorHandler(response)
   }
+  clearTimeout(id)
+  return errorHandler(response)
 }
 
 const nextPost = ({endpoint, data}) => {

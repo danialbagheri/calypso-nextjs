@@ -39,23 +39,32 @@ function MyApp({Component, pageProps}) {
           content="width=device-width, initial-scale=1, user-scalable=1"
           name="viewport"
         />
+        <link href="/favicon64.ico" rel="apple-touch-icon" sizes="64x64" />
         <link
-          href="/apple-touch-icon.png"
-          rel="apple-touch-icon"
-          sizes="180x180"
-        />
-        <link
-          href="/favicon-32x32.png"
-          rel="icon"
-          sizes="32x32"
-          type="image/png"
-        />
-        <link
-          href="/favicon-16x16.png"
-          rel="icon"
+          href="/favicon16.ico"
+          rel="shortcut icon"
           sizes="16x16"
-          type="image/png"
+          type="image/x-icon"
         />
+        <link
+          href="/favicon24.ico"
+          rel="shortcut icon"
+          sizes="24x24"
+          type="image/x-icon"
+        />
+        <link
+          href="/favicon32.ico"
+          rel="shortcut icon"
+          sizes="32x32"
+          type="image/x-icon"
+        />
+        <link
+          href="/favicon48.ico"
+          rel="shortcut icon"
+          sizes="48x48"
+          type="image/x-icon"
+        />
+
         <link href="/site.webmanifest" rel="manifest" />
         <link color="#da532c" href="/safari-pinned-tab.svg" rel="mask-icon" />
         <link href="https://use.typekit.net/kls3ash.css" rel="stylesheet" />
