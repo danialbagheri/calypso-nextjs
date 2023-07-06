@@ -1,7 +1,14 @@
 import * as React from 'react'
 import Image from 'next/image'
 import Styles from './MailChimp.module.css'
-import {Alert, Box, Snackbar, TextField, Typography} from '@mui/material'
+import {
+  Alert,
+  Box,
+  Snackbar,
+  TextField,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import {registerContact} from 'services'
@@ -25,6 +32,8 @@ export default function MailjetSignUp() {
     message: '',
   })
   const [snackBarOpen, setSnackBarOpen] = React.useState(false)
+
+  const theme = useTheme()
 
   const subPanelOpenState = localStorage.getItem(SUB_PANEL_OPEN)
 
@@ -150,9 +159,10 @@ export default function MailjetSignUp() {
           left: 0,
           bottom: 0,
           right: 0,
-          background: 'rgba(0,0,0,0.5)',
+          background: theme.palette.sand.main,
           zIndex: 50,
           transition: 'all 1s',
+          opacity: 0.6,
         }}
       />
 

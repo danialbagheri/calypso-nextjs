@@ -26,7 +26,10 @@ export default function BestSellerItems(props) {
       }}
     >
       <Box
-        onClick={() => router.push(`/products/${i.slug}`)}
+        onClick={e => {
+          e.preventDefault()
+          router.push(`/products/${i.slug}`)
+        }}
         onMouseEnter={showBox}
         onMouseLeave={showBox}
         sx={{display: 'flex', flexDirection: 'column', gap: 2}}

@@ -35,7 +35,8 @@ export default function ProductRangeItem(props) {
       }}
     >
       <Box
-        onClick={() => {
+        onClick={e => {
+          e.preventDefault()
           router.push(`/products/${product.slug}`)
         }}
         sx={{

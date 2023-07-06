@@ -40,6 +40,7 @@ function WriteReview() {
           boxShadow: 'none',
           '&:hover': {
             backgroundColor: theme.palette.primary.main,
+            boxShadow: 'unset',
           },
           '& svg path:hover': {
             fill: theme.palette.grey.main,
