@@ -17,7 +17,7 @@ function StartReviewDetail() {
   const [reviewState] = React.useContext(ReviewContext)
   const theme = useTheme()
   const scoreChart = reviewState.reviewData.score_chart
-  const totalRateCount = reviewState.reviewData.total_review_count
+  const totalRateCount = reviewState.reviewData.total_review_count || 1
 
   const BorderLinearProgress = styled(LinearProgress)(({theme}) => ({
     height: 10,
