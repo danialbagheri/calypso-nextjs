@@ -36,13 +36,15 @@ function SearchResultElements({product}) {
           sx={{
             position: 'relative',
             height: 250,
-            background: theme.palette.grey.main,
+            background: product.main_image
+              ? theme.palette.grey.main
+              : theme.palette.sand.main,
           }}
         >
           <Image
             alt={'image'}
             fill
-            src={product.main_image}
+            src={product.main_image || '/placeholder.png'}
             style={{objectFit: 'contain'}}
           />
         </Box>
