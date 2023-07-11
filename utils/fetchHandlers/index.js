@@ -1,7 +1,6 @@
 import {BASE_URL} from '../../constants/servicesConstants/index'
 
 const errorHandler = response => {
-  console.log('ERROR RESPONSE::::', response)
   if (response) {
     return Promise.reject(`${response.statusText}`)
   }

@@ -3,7 +3,7 @@ import * as React from 'react'
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
 
 import {ReviewProvider} from './ReviewProvider'
-import {Descriptions, Rating} from './components'
+import {Descriptions, Rating, ReviewPagination} from './components'
 import {AppContext} from 'components/appProvider'
 //Styles
 import Box from '@mui/material/Box'
@@ -37,6 +37,7 @@ function CustomersReview(props) {
             <Rating />
             <Descriptions />
           </Grid>
+          {props.reviewData.count > 10 ? <ReviewPagination /> : null}
         </Box>
       </ReviewProvider>
     </ScopedCssBaseline>

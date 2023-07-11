@@ -1,4 +1,4 @@
-import {get, nextPost, post} from 'utils'
+import {get, nextPost, patch, post} from 'utils'
 
 /* ------------------------------ POST Requests ----------------------------- */
 
@@ -40,13 +40,19 @@ const getProductData = slug => {
   return get({endpoint: `products/single/${slug}/?resize_w=700`})
 }
 
-const getProductReviews = slug => {
-  return get({endpoint: `reviews/product/?product_slug=${slug}`})
+const getProductReviews = (slug, page = 1) => {
+  return get({endpoint: `reviews/product/?product_slug=${slug}&page=${page}`})
 }
 
 const getBlogs = blog => {
   return get({endpoint: `blogs/collections/${blog}`})
 }
+
+/* ----------------------------- Patch requests ----------------------------- */
+const singleReviewPatch = (id, data) => {
+  return patch({endpoint: `reviews/rate/${id}/`, data})
+}
+/* -------------------------------------------------------------------------- */
 
 /* ------------------------------ Next requests ----------------------------- */
 const registerContact = data => {
@@ -69,4 +75,5 @@ export {
   registerContact,
   postOutOfStockEmail,
   getProductData,
+  singleReviewPatch,
 }
