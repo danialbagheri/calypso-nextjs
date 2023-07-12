@@ -6,17 +6,37 @@ import Slider from 'react-slick'
 
 function ProductImageSlider(props) {
   const {selectedVariant} = props
-  const [styles, setStyles] = React.useState({})
 
   const onZoom = e => {
-    const x = e.clientX - e.target.offsetLeft
-    const y = e.clientY - e.target.offsetTop
+    const element = e.target
+    const rect = e.target.getBoundingClientRect()
+    const offsetX = e.clientX - rect.left
+    const offsetY = e.clientY - rect.top
+    const quarterWidth = rect.width / 4
+    const quarterHeight = rect.height / 4
 
-    setStyles({transformOrigin: `${x}px ${y}px`, transform: 'scale(2)'})
+    // // activate the zoom effect only when the mouse is in the quarter width section of the image
+    if (
+      offsetX >= quarterWidth &&
+      offsetY >= quarterHeight &&
+      element.matches('img')
+    ) {
+      const x = e.clientX - rect.left - quarterWidth
+      const y = e.clientY - rect.top - quarterHeight
+      element.style.transformOrigin = `${x}px ${y}px`
+    } else if (element.matches('img')) {
+      element.style.transform = 'scale(2)'
+    }
   }
 
-  const offZoom = () => {
-    setStyles({transformOrigin: 'center center', transform: 'scale(1)'})
+  const offZoom = e => {
+    // setStyles({transformOrigin: 'center center', transform: 'scale(1)'})
+    // only apply css to the element if the mouse is over the image
+    const element = e.target
+    if (element.matches('img')) {
+      element.style.transformOrigin = 'center center'
+      element.style.transform = 'scale(1)'
+    }
   }
 
   // let pos = {top: 0, left: 0, x: 0, y: 0}
@@ -121,7 +141,6 @@ function ProductImageSlider(props) {
               onMouseLeave={offZoom}
               onMouseMove={onZoom}
               onMouseOver={onZoom}
-              style={styles}
               sx={{
                 width: '100%',
                 height: '500px',
