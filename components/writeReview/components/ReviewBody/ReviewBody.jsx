@@ -49,6 +49,8 @@ function ReviewBody(props) {
             {field.label}
           </Typography>
           <TextField
+            error={props.error[field.type]?.state}
+            helperText={props.error[field.type]?.message}
             minRows={field.lines}
             multiline={Boolean(field.lines)}
             onChange={e => onChange(e, field.type)}
