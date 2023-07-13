@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import {Box} from '@mui/material'
 import Image from 'next/image'
 import Slider from 'react-slick'
@@ -8,71 +6,21 @@ function ProductImageSlider(props) {
   const {selectedVariant} = props
 
   const onZoom = e => {
-    const element = e.target
-    const rect = e.target.getBoundingClientRect()
-    const offsetX = e.clientX - rect.left
-    const offsetY = e.clientY - rect.top
-    const quarterWidth = rect.width / 4
-    const quarterHeight = rect.height / 4
+    const parentNode = e.target.parentNode.parentNode.parentNode.parentNode
 
-    // // activate the zoom effect only when the mouse is in the quarter width section of the image
-    if (
-      offsetX >= quarterWidth &&
-      offsetY >= quarterHeight &&
-      element.matches('img')
-    ) {
-      const x = e.clientX - rect.left - quarterWidth
-      const y = e.clientY - rect.top - quarterHeight
-      element.style.transformOrigin = `${x}px ${y}px`
-    } else if (element.matches('img')) {
-      element.style.transform = 'scale(2)'
-    }
+    const x = 0.7 * e.clientX - e.target.offsetLeft
+    const y = 0.7 * e.clientY - e.target.offsetTop
+
+    parentNode.style.transformOrigin = `${x}px ${y}px`
+    parentNode.style.transform = 'scale(2)'
   }
 
   const offZoom = e => {
-    // setStyles({transformOrigin: 'center center', transform: 'scale(1)'})
-    // only apply css to the element if the mouse is over the image
-    const element = e.target
-    if (element.matches('img')) {
-      element.style.transformOrigin = 'center center'
-      element.style.transform = 'scale(1)'
-    }
+    const parentNode = e.target.parentNode.parentNode.parentNode.parentNode
+
+    parentNode.style.transform = 'scale(1)'
+    parentNode.style.transformOrigin = 'center center'
   }
-
-  // let pos = {top: 0, left: 0, x: 0, y: 0}
-
-  // const mouseMoveHandler = function (e) {
-  //   // How far the mouse has been moved
-  //   const dx = e.clientX - pos.x
-  //   const dy = e.clientY - pos.y
-
-  //   // Scroll the element
-  //   imageRef.current.scrollTop = pos.top - dy
-  //   imageRef.current.scrollLeft = pos.left - dx
-  // }
-
-  // const mouseUpHandler = function () {
-  //   document.removeEventListener('mousemove', mouseMoveHandler)
-  //   document.removeEventListener('mouseup', mouseUpHandler)
-
-  //   imageRef.current.style.cursor = 'grab'
-  //   imageRef.current.style.removeProperty('user-select')
-  // }
-
-  // const mouseDownHandler = function (e) {
-  //   pos = {
-  //     // The current scroll
-  //     left: imageRef.current.scrollLeft,
-  //     top: imageRef.current.scrollTop,
-  //     // Get the current mouse position
-  //     x: e.clientX,
-  //     y: e.clientY,
-  //   }
-  //   console.log('pos:::', pos)
-
-  //   document.addEventListener('mousemove', mouseMoveHandler)
-  //   document.addEventListener('mouseup', mouseUpHandler)
-  // }
 
   const settings = {
     customPaging: function (i) {
@@ -134,13 +82,10 @@ function ProductImageSlider(props) {
         },
       }}
     >
-      <Slider {...settings}>
+      <Slider {...settings} id={'mamad'}>
         {selectedVariant.image_list.map((img, i) => (
           <Box key={i}>
             <Box
-              onMouseLeave={offZoom}
-              onMouseMove={onZoom}
-              onMouseOver={onZoom}
               sx={{
                 width: '100%',
                 height: '500px',
@@ -150,8 +95,13 @@ function ProductImageSlider(props) {
               <Image
                 alt={img.alternate_text}
                 fill={true}
+                onMouseLeave={offZoom}
+                onMouseMove={onZoom}
+                onMouseOver={onZoom}
                 src={img.image}
-                style={{objectFit: 'contain'}}
+                style={{
+                  objectFit: 'contain',
+                }}
               />
             </Box>
           </Box>
