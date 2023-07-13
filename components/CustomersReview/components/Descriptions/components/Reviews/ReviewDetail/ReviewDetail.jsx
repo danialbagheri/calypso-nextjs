@@ -1,18 +1,45 @@
+import * as React from 'react'
+
 import {dateFormat} from 'utils'
 
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Rating from '@mui/material/Rating'
 import StarIcon from '@mui/icons-material/Star'
-import {useTheme} from '@mui/material'
+import {IconButton, useTheme} from '@mui/material'
 import Stack from '@mui/material/Stack'
-// import ThumbUpIcon from '@mui/icons-material/ThumbUp'
-// import ThumbDownIcon from '@mui/icons-material/ThumbDown'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp'
+import ThumbDownIcon from '@mui/icons-material/ThumbDown'
+import {singleReviewPatch} from 'services'
+import {BouncyLoading} from 'sharedComponents'
 
 function ReviewDetail(props) {
   const theme = useTheme()
 
-  // const reviewRateHandler = () => {}
+  const [rateState, setRateState] = React.useState({
+    like: {amount: props.like, loading: false},
+    dislike: {amount: props.dislike, loading: false},
+  })
+
+  const reviewRateHandler = (id, rate_type) => {
+    setRateState(prev => ({
+      ...prev,
+      [rate_type]: {...prev[rate_type], loading: true},
+    }))
+    singleReviewPatch(id, {rate_type})
+      .then(res => {
+        setRateState(prev => ({
+          ...prev,
+          [rate_type]: {amount: res[rate_type], loading: false},
+        }))
+      })
+      .catch(() =>
+        setRateState(prev => ({
+          ...prev,
+          [rate_type]: {...prev[rate_type], loading: false},
+        })),
+      )
+  }
 
   return (
     <Box mb={6}>
@@ -35,7 +62,7 @@ function ReviewDetail(props) {
         <Typography variant={'h6'}>{props.title}</Typography>
         <Typography color={'primary'} variant={'subtitle1'}>
           {/*TO DO::: After implementing Verified purchase in back should be used*/}
-          {/*{props.approved ? 'Verified purchase' : ''}*/}
+          {/* {props.approved ? 'Verified purchase' : ''} */}
         </Typography>
       </Stack>
       <Box mt={2}>
@@ -49,8 +76,7 @@ function ReviewDetail(props) {
         </Typography>
       </Box>
 
-      {/*TO DO ::: implement like and dislike functionality*/}
-      {/* <Stack
+      <Stack
         alignItems={'center'}
         direction={'row'}
         justifyContent={'flex-end'}
@@ -59,22 +85,40 @@ function ReviewDetail(props) {
           Did you find it useful?
         </Typography>
         <Stack alignItems={'center'} direction={'row'} ml={6}>
-          <IconButton color="primary" onClick={() => reviewRateHandler('like')}>
-            <ThumbUpIcon />
-          </IconButton>
-          <Typography color={'primary'} variant={'h5'}>
-            {props.like}
-          </Typography>
+          {rateState.like.loading ? (
+            <BouncyLoading sx={{mt: '-36px', ml: 7}} />
+          ) : (
+            <>
+              <IconButton
+                color="primary"
+                onClick={() => reviewRateHandler(props.id, 'like')}
+              >
+                <ThumbUpIcon />
+              </IconButton>
+              <Typography color={'primary'} variant={'h5'}>
+                {rateState.like.amount}
+              </Typography>
+            </>
+          )}
         </Stack>
         <Stack alignItems={'center'} direction={'row'} ml={6}>
-          <IconButton color="primary">
-            <ThumbDownIcon />
-          </IconButton>
-          <Typography color={'primary'} variant={'h5'}>
-            {props.dislike}
-          </Typography>
+          {rateState.dislike.loading ? (
+            <BouncyLoading sx={{mt: '-36px', ml: 7}} />
+          ) : (
+            <>
+              <IconButton
+                color="primary"
+                onClick={() => reviewRateHandler(props.id, 'dislike')}
+              >
+                <ThumbDownIcon />
+              </IconButton>
+              <Typography color={'primary'} variant={'h5'}>
+                {rateState.dislike.amount}
+              </Typography>
+            </>
+          )}
         </Stack>
-      </Stack> */}
+      </Stack>
     </Box>
   )
 }

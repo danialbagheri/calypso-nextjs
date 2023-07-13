@@ -5,8 +5,10 @@ import Stack from '@mui/material/Stack'
 import CircularProgress from '@mui/material/CircularProgress'
 import {useTheme} from '@mui/material'
 import {getSingleProduct} from 'services'
+import {useRouter} from 'next/router'
 
 function Variants(props) {
+  const router = useRouter()
   const [product, setProduct] = React.useState({})
   const [loading, setLoading] = React.useState(true)
   const [selectedVariant, setSelectedVariant] = React.useState(0)
@@ -20,18 +22,20 @@ function Variants(props) {
   }
 
   React.useEffect(() => {
-    const slug = window.location.search.split('slug=')[1]
-    getSingleProduct(slug)
-      .then(res => {
-        props.changeHandler('variant', res.variants[0].id)
-        setSelectedVariant(res.variants[0].id)
-        setProduct({...res})
-        setLoading(false)
-      })
-      .catch(() => {
-        setLoading(false)
-      })
-  }, [])
+    const slug = router.query.slug
+    if (slug) {
+      getSingleProduct(slug)
+        .then(res => {
+          props.changeHandler('variant', res.variants[0].id)
+          setSelectedVariant(res.variants[0].id)
+          setProduct({...res})
+          setLoading(false)
+        })
+        .catch(() => {
+          setLoading(false)
+        })
+    }
+  }, [router.query])
 
   return (
     <Box>

@@ -22,18 +22,24 @@ function SubmitReview(props) {
 
   const fieldsConductHandler = data => {
     const fieldsError = {}
+
+    //Check Customer name field
     if (!data.customer_name) {
       fieldsError.customer_name = {
         state: true,
         message: 'Please enter your name.',
       }
     }
+
+    //Check Score field
     if (!data.score) {
       fieldsError.score = {
         state: true,
         message: 'Please select a star rating between 1 and 5.',
       }
     }
+
+    //Check Email field
     if (!data.customer_email) {
       fieldsError.customer_email = {
         state: true,
@@ -43,6 +49,14 @@ function SubmitReview(props) {
       fieldsError.customer_email = {
         state: true,
         message: 'Please enter a valid email address.',
+      }
+    }
+
+    //Check Title field
+    if (!data.title) {
+      fieldsError.title = {
+        state: true,
+        message: 'Please write a headline for your review.',
       }
     }
 
@@ -67,7 +81,7 @@ function SubmitReview(props) {
 
   const submitHandler = e => {
     e.preventDefault()
-    setLoading(true)
+    // setLoading(true)
 
     //Finding out if there is a field empty or have errors.
     const errorState = fieldsConductHandler(props.data)

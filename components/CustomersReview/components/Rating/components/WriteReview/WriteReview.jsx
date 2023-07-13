@@ -52,7 +52,10 @@ function WriteReview() {
         variant="contained"
       >
         <Link
-          href={`./write-review?slug=${reviewState.slug}`}
+          href={{
+            pathname: './write-review',
+            query: {slug: reviewState.slug},
+          }}
           variant={'body4'}
         >
           WRITE A REVIEW
