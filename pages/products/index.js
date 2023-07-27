@@ -91,11 +91,13 @@ async function getAllPages(pageCount, url) {
   }
   return productResult
 }
+
 export async function getStaticProps() {
   const baseUrl = process.env.API_URL
   const endpoint = 'products/product/'
   const finalUrl = baseUrl + endpoint
   const res = await fetch(finalUrl)
+
   const products = await res.json()
   const pageCount = Math.ceil(products.count / 10)
   const productResult = await getAllPages(pageCount, finalUrl)

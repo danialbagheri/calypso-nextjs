@@ -28,7 +28,7 @@ function ProductImageSlider(props) {
         <Image
           alt={selectedVariant.image_list[i]?.alternate_text}
           fill={true}
-          src={selectedVariant.image_list[i]?.resized}
+          src={selectedVariant.image_list[i]?.image}
           style={{objectFit: 'cover'}}
         />
       )
@@ -82,30 +82,33 @@ function ProductImageSlider(props) {
         },
       }}
     >
-      <Slider {...settings} id={'mamad'}>
-        {selectedVariant.image_list.map((img, i) => (
-          <Box key={i}>
-            <Box
-              sx={{
-                width: '100%',
-                height: '500px',
-                position: 'relative',
-              }}
-            >
-              <Image
-                alt={img.alternate_text}
-                fill={true}
-                onMouseLeave={offZoom}
-                onMouseMove={onZoom}
-                onMouseOver={onZoom}
-                src={img.image}
-                style={{
-                  objectFit: 'contain',
+      <Slider {...settings}>
+        {selectedVariant.image_list.map((img, i) => {
+          const isGif = img.image.includes('.gif')
+          return (
+            <Box key={i}>
+              <Box
+                sx={{
+                  width: '100%',
+                  height: '500px',
+                  position: 'relative',
                 }}
-              />
+              >
+                <Image
+                  alt={img.alternate_text}
+                  fill={true}
+                  onMouseLeave={isGif ? null : offZoom}
+                  onMouseMove={isGif ? null : onZoom}
+                  onMouseOver={isGif ? null : onZoom}
+                  src={img.image}
+                  style={{
+                    objectFit: isGif ? 'cover' : 'contain',
+                  }}
+                />
+              </Box>
             </Box>
-          </Box>
-        ))}
+          )
+        })}
       </Slider>
     </Box>
   )
