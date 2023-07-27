@@ -5,7 +5,7 @@ const withImages = require('next-images')
 module.exports = withImages({
   // exclude: path.resolve(__dirname, "public/svg"),
   images: {
-    domains: ['service.calypsosun.com'],
+    domains: ['service.calypsosun.com', 'calypso-static.s3.amazonaws.com'],
   },
   redirects: async () => {
     return [
@@ -35,7 +35,7 @@ module.exports = withImages({
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  webpack(config, options) {
+  webpack(config) {
     return config
   },
   output: 'standalone', // This will build the project as a standalone app inside the Docker image.
