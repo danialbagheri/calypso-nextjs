@@ -1,9 +1,11 @@
 import {useEffect, useState} from 'react'
 import _ from 'lodash'
 import DealItem from './deal-item'
+import LinearProgress from '@mui/material/LinearProgress'
 
 export default function DealOffer(props) {
   const [offerDeal, setOfferDeal] = useState(false)
+  const [remainingAmount, setRemainingAmount] = useState(0)
   const [remindFreeDelivery, setRemindFreeDelivery] = useState(false)
   const [offerLipBalm] = useState(false)
   const totalPrice = props.checkoutState.totalPrice
@@ -27,12 +29,10 @@ export default function DealOffer(props) {
 
   const checkFreeDeliveryEligibility = () => {
     const lineItems = checkoutState.lineItems
-    function lineItemQuantity(n) {
-      return n.quantity
-    }
-    const itemsInBasket = _.map(lineItems, lineItemQuantity)
-    const sum = itemsInBasket.reduce((partialSum, a) => partialSum + a, 0)
-    if (lineItems && sum == 1) {
+
+    if (checkoutState.totalPrice && checkoutState.totalPrice.amount < 25) {
+      const remainingAmount = 25 - checkoutState.totalPrice.amount
+      setRemainingAmount(remainingAmount)
       setRemindFreeDelivery(true)
     } else {
       setRemindFreeDelivery(false)
@@ -57,10 +57,26 @@ export default function DealOffer(props) {
     <>
       {remindFreeDelivery ? (
         <div className="Cart-info clearfix calypso-orange">
-          Add one more item to your basket to be eligible for{' '}
-          <strong>FREE delivery</strong>
+          <LinearProgress
+            color="primary"
+            variant="determinate"
+            sx={{mb: 3}}
+            value={100 - remainingAmount * 4}
+          />
+          Spend £{remainingAmount} more to be eligible for{' '}
+          <strong>FREE shipping</strong>
         </div>
-      ) : null}
+      ) : (
+        <div className="Cart-info clearfix calypso-orange">
+          <LinearProgress
+            color="primary"
+            variant="determinate"
+            sx={{mb: 3}}
+            value={100}
+          />
+          You have got free shipping! 🧡 🎉
+        </div>
+      )}
       <div className="deal-container">
         {offerDeal || offerLipBalm ? (
           <div className="Cart-info clearfix">

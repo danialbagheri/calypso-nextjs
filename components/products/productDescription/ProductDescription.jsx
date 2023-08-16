@@ -4,9 +4,6 @@ import {Stack} from '@mui/material'
 
 import {ShowPrice, VariantSelector} from 'sharedComponents'
 import ShareButton from 'components/common/shareButton'
-
-import DispatchTime from '../detail/dispatch-time'
-
 import StarRating from '../StarRating/StarRating'
 import {AddButton} from './addButton'
 import {OutOfStock} from './outOfStock'
@@ -45,8 +42,9 @@ const ProductDescription = props => {
 
       {selectedVariant.inventory_quantity > 0 ? (
         <Box mt={10}>
-          <span style={{marginRight: '10px'}}>🟢</span> In stock -{' '}
-          <DispatchTime />
+          <Typography>
+            FREE 1 - 2 day shipping on all orders above £25
+          </Typography>
         </Box>
       ) : null}
 
