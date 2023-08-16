@@ -31,8 +31,8 @@ export default function DealOffer(props) {
     const lineItems = checkoutState.lineItems
 
     if (checkoutState.totalPrice && checkoutState.totalPrice.amount < 25) {
-      const remainingAmount = 25 - checkoutState.totalPrice.amount
-      setRemainingAmount(remainingAmount)
+      const remainingAmount = 25 - parseFloat(checkoutState.totalPrice.amount)
+      setRemainingAmount(remainingAmount.toFixed(2))
       setRemindFreeDelivery(true)
     } else {
       setRemindFreeDelivery(false)
