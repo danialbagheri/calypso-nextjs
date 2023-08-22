@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Box from '@mui/material/Box'
 export default class WhereToBuy extends React.Component {
   render() {
     const {stores, childProducts} = this.props
@@ -7,13 +7,21 @@ export default class WhereToBuy extends React.Component {
     let thisProductStore
     if (stores.length >= 1) {
       thisProductStore = stores.map((store, index) => {
-        return (
-          <li key={index}>
-            <a href={store.url} rel="noopener noreferrer" target="_blank">
-              <img alt={store.stockist.name} src={store.stockist.logo} />
-            </a>
-          </li>
-        )
+        if (store.stockist.name === 'Amazon') {
+          return null
+        } else {
+          return (
+            <Box key={index}>
+              <a href={store.url} rel="noopener noreferrer" target="_blank">
+                <img
+                  alt={store.stockist.name}
+                  src={store.stockist.logo}
+                  width={'100px'}
+                />
+              </a>
+            </Box>
+          )
+        }
       })
     } else {
       thisProductStore = <li>All good pharmacies.</li>
@@ -24,9 +32,9 @@ export default class WhereToBuy extends React.Component {
     return (
       <div>
         <div>{products}</div>
-        <ul className="stores" style={{marginTop: -5}}>
+        <Box sx={{display: 'flex', my: 5, gap: 2, flexWrap: 'wrap'}}>
           {thisProductStore}
-        </ul>
+        </Box>
       </div>
     )
   }

@@ -2,42 +2,49 @@ import * as React from 'react'
 
 import {Box, Typography} from '@mui/material'
 import {getBlogs} from 'services'
-
 import Slider from 'react-slick'
-
-import {BlogImage} from './blogImage'
-
+import BlogCard from './BlogCard'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 function BlogSlider() {
   const BLOG = 'staff-picked'
   const [, setLoading] = React.useState(true)
-  const [slidesNo, setSlidesNo] = React.useState(1)
   const [blogItems, setBlogItems] = React.useState([])
   const [, setError] = React.useState('')
   const sliderContainer = React.useRef()
 
-  // const settings = {
-  //   arrows: true,
-  //   dots: true,
-  //   infinite: false,
-  //   speed: 500,
-
-  //   slidesToScroll: 1,
-  //   centerMode: false,
-  //   swipeToSlide: true,
-  //   centerPadding: 20,
-  // }
+  const settings = {
+    className: 'center',
+    arrows: false,
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToScroll: 1,
+    slidesToShow: 3,
+    centerMode: false,
+    swipeToSlide: true,
+    centerPadding: 20,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          centerMode: false,
+          centerPadding: 0,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          centerMode: false,
+          centerPadding: 0,
+        },
+      },
+    ],
+  }
 
   React.useEffect(() => {
-    const containerWidth = sliderContainer.current.clientWidth
-
-    if (containerWidth < 540) {
-      setSlidesNo(1)
-    } else if (containerWidth < 1330) {
-      setSlidesNo(2)
-    } else {
-      setSlidesNo(3)
-    }
-
     getBlogs(BLOG)
       .then(response => {
         setBlogItems(response.items)
@@ -53,22 +60,21 @@ function BlogSlider() {
   }, [])
 
   return (
-    <Box mt={{xs: 10, sm: 20}}>
+    <Box mt={{xs: 10, sm: 20, my: 7}}>
       <Typography textAlign={'center'} variant="h2">
-        {/* eslint-disable-next-line react/no-unescaped-entities */}
-        EDITOR'S PICKS
+        Editor's picks
       </Typography>
 
       <Box
         ref={sliderContainer}
         sx={{width: {xs: '90%', sm: '85%', md: '70%'}, margin: '50px auto'}}
       >
-        <Slider slidesToShow={slidesNo}>
+        <Slider {...settings}>
           {blogItems.length
             ? blogItems.map((blogItem, i) => (
-                <BlogImage
+                <BlogCard
                   index={i}
-                  item={blogItem.item}
+                  blog={blogItem.item}
                   key={blogItem.item.id}
                 />
               ))
