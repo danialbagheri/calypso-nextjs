@@ -1,5 +1,5 @@
 import {BlogSlider} from 'components'
-import ShareButton from '../../components/common/shareButton'
+import ShareButton from 'components/common/shareButton/ShareButton'
 import Image from 'next/image'
 import data from '../../data.json'
 import Head from 'next/head'

@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import {Stack} from '@mui/material'
 
 import {ShowPrice, VariantSelector} from 'sharedComponents'
-import ShareButton from 'components/common/shareButton'
+import ShareButton from 'components/common/shareButton/ShareButton'
 import StarRating from '../StarRating/StarRating'
 import {AddButton} from './addButton'
 import {OutOfStock} from './outOfStock'
@@ -13,7 +13,6 @@ import {ProductDropDown} from './productDropDown'
 
 const ProductDescription = props => {
   const {product, selectedVariant, setSelectedVariant} = props
-
   return (
     <Stack gap={4}>
       <Typography color={'#ff6b00'} variant={'h2'}>
@@ -66,10 +65,8 @@ const ProductDescription = props => {
         <OutOfStock selectedVariant={selectedVariant} />
       )}
 
-      {/* <DeliveryInfo /> */}
-
       <div className="ShareButtonOnProductPage">
-        <ShareButton />
+        <ShareButton text={product.name} media={product.main_image} />
       </div>
 
       <ProductDropDown product={product} selectedVariant={selectedVariant} />

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import ShareButton from '../components/common/shareButton'
+import ShareButton from '../components/common/shareButton/ShareButton'
 import ImageBanner from '../components/be-sun-ready/image-banner'
 import IntroText from '../components/be-sun-ready/intro-text'
 import SunFactor from '../components/be-sun-ready/sunFactor'
