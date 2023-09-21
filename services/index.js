@@ -48,6 +48,10 @@ const getBlogs = blog => {
   return get({endpoint: `blogs/collections/${blog}`})
 }
 
+const getSPFFinderQuestions = () => {
+  return get({endpoint: 'surveys/spf-finder/'})
+}
+
 /* ----------------------------- Patch requests ----------------------------- */
 const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
@@ -76,4 +80,5 @@ export {
   postOutOfStockEmail,
   getProductData,
   singleReviewPatch,
+  getSPFFinderQuestions,
 }
