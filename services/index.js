@@ -1,4 +1,4 @@
-import {get, post, patch} from 'utils'
+import {get, post} from 'utils'
 
 /* ------------------------------ POST Requests ----------------------------- */
 
@@ -39,6 +39,10 @@ const getProductReviews = slug => {
 const getBlogs = blog => {
   return get({endpoint: `blogs/collections/${blog}`})
 }
+
+const getSPFFinderQuestions = () => {
+  return get({endpoint: 'surveys/spf-finder/'})
+}
 /* -------------------------------------------------------------------------- */
 
 export {
@@ -51,4 +55,5 @@ export {
   getSingleProduct,
   getProductReviews,
   getBlogs,
+  getSPFFinderQuestions,
 }

@@ -16,6 +16,12 @@ const theme = createTheme({
     grey: {
       main: '#E2E2E2',
     },
+    sand: {
+      main: '#FFEFD6',
+    },
+    green: {
+      main: '#226F61',
+    },
   },
   spacing: 4,
   typography: {
@@ -85,6 +91,20 @@ const theme = createTheme({
       fontWeight: 500,
       fontSize: '14px',
       lineHeight: '17px',
+    },
+    PFInfo: {
+      fontFamily: 'Helvetica Neue',
+      fontStyle: 'normal',
+      fontWeight: 700,
+      fontSize: '28px',
+      lineHeight: 'normal',
+    },
+    PFQuestion: {
+      fontFamily: 'Helvetica Neue',
+      fontStyle: 'normal',
+      fontWeight: 700,
+      fontSize: '22px',
+      lineHeight: 'normal',
     },
   },
   breakpoints: {

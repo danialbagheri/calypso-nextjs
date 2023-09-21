@@ -4,10 +4,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Styles from '../../styles/adviceIndex.module.css'
-import _ from 'lodash'
 // import BlogFilters from "../../components/blogs/blog-filters";
 
-export default function Advice({posts, count}) {
+export default function Advice({posts}) {
   const [blogs, setBlogs] = useState(posts)
   const [limit, setLimit] = useState(10)
   const [maxLimit, setMaxLimit] = useState(false)
