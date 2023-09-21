@@ -81,7 +81,7 @@ export default function Advice({posts}) {
             <button
               className="text-centre btn btn-outline-calypso mb-3"
               onClick={evt => {
-                loadMore(evt)
+                loadMore()
               }}
             >
               Load More

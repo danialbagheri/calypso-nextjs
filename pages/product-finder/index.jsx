@@ -32,6 +32,7 @@ const Button = props => {
         '&:hover': {
           boxShadow: 'none',
           bgcolor: props.bgcolor,
+          borderColor: sx.borderColor ?? 'unset',
         },
         ...sx,
       }}
@@ -126,6 +127,7 @@ export default function ProductFinder(props) {
       body: [
         <Button
           bgcolor="#000"
+          fontColor="#FFF"
           key="btn_1"
           onClick={() =>
             setSteps(prev => ({...prev, mode: QUESTION, questionsStep: 0}))
@@ -151,7 +153,7 @@ export default function ProductFinder(props) {
   ]
 
   return (
-    <Box bgcolor="#FCF5EC">
+    <Box bgcolor="PFsand.main">
       <Box sx={{position: 'relative'}}>
         <Box sx={{height: {xs: 112, md: 225}, bgcolor: '#ABD7FF'}} />
         <Box
@@ -268,6 +270,7 @@ export default function ProductFinder(props) {
             <Box
               sx={{
                 height: '100%',
+                width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -360,7 +363,7 @@ export default function ProductFinder(props) {
                         bgcolor={renderChoiceBtnColor(choice.text, title)}
                         fontColor={renderFontColor(choice.text, title)}
                         key={choice.id}
-                        onClick={() => choiceClickHandler()}
+                        onClick={() => choiceClickHandler(choice)}
                         sx={{borderColor: '#226F61'}}
                         variant={renderChoiceBtnVariant(choice.text, title)}
                       >
@@ -389,8 +392,7 @@ export async function getStaticProps() {
     const questions = await getSPFFinderQuestions()
     return {props: {data: questions}}
   } catch (err) {
-    // const error = await JSON.parse(err)
-
-    return {props: {error: 'error'}}
+    console.log('\n\nERROR:::::', err)
+    // {props:{error:}}
   }
 }

@@ -32,24 +32,23 @@ const getSearchData = params => {
   return get({endpoint: `web/search/?q=${params}`})
 }
 
-const getSingleProduct = slug => {
-  return get({endpoint: `products/single/${slug}/`})
-}
-
 const getProductData = slug => {
   return get({endpoint: `products/single/${slug}/?resize_w=700`})
 }
 
-const getProductReviews = (slug, page = 1) => {
-  return get({endpoint: `reviews/product/?product_slug=${slug}&page=${page}`})
+const getSingleProduct = slug => {
+  return get({endpoint: `products/single/${slug}/`})
+}
+const getSPFFinderQuestions = () => {
+  return get({endpoint: 'surveys/spf-finder/'})
+}
+
+const getProductReviews = slug => {
+  return get({endpoint: `reviews/product/?product_slug=${slug}`})
 }
 
 const getBlogs = blog => {
   return get({endpoint: `blogs/collections/${blog}`})
-}
-
-const getSPFFinderQuestions = () => {
-  return get({endpoint: 'surveys/spf-finder/'})
 }
 
 /* ----------------------------- Patch requests ----------------------------- */
@@ -64,8 +63,6 @@ const registerContact = data => {
 }
 /* -------------------------------------------------------------------------- */
 
-/* -------------------------------------------------------------------------- */
-
 export {
   postContactUsSubmit,
   postProductReview,
@@ -76,9 +73,9 @@ export {
   getSingleProduct,
   getProductReviews,
   getBlogs,
+  getSPFFinderQuestions,
   registerContact,
   postOutOfStockEmail,
   getProductData,
   singleReviewPatch,
-  getSPFFinderQuestions,
 }
