@@ -5,8 +5,10 @@ import Stack from '@mui/material/Stack'
 import CircularProgress from '@mui/material/CircularProgress'
 import {useTheme} from '@mui/material'
 import {getSingleProduct} from 'services'
+import {useRouter} from 'next/router'
 
 function Variants(props) {
+  const router = useRouter()
   const [product, setProduct] = React.useState({})
   const [loading, setLoading] = React.useState(true)
   const [selectedVariant, setSelectedVariant] = React.useState(0)
@@ -20,23 +22,24 @@ function Variants(props) {
   }
 
   React.useEffect(() => {
-    const slug = window.location.search.split('slug=')[1]
-    getSingleProduct(slug)
-      .then(res => {
-        props.changeHandler('variant', res.variants[0].id)
-        setSelectedVariant(res.variants[0].id)
-        setProduct({...res})
-        setLoading(false)
-      })
-      .catch(err => {
-        console.log(err)
-        setLoading(false)
-      })
-  }, [])
+    const slug = router.query.slug
+    if (slug) {
+      getSingleProduct(slug)
+        .then(res => {
+          props.changeHandler('variant', res.variants[0].id)
+          setSelectedVariant(res.variants[0].id)
+          setProduct({...res})
+          setLoading(false)
+        })
+        .catch(() => {
+          setLoading(false)
+        })
+    }
+  }, [router.query])
 
   return (
     <Box>
-      <Box textAlign={'center'} mt={15}>
+      <Box mt={15} textAlign={'center'}>
         <Typography variant={'h3'}>Your {product.name} Review</Typography>
         {product.variants?.length > 1 ? (
           <Typography variant={'body3'}>
@@ -46,20 +49,21 @@ function Variants(props) {
       </Box>
       <Stack>
         {loading ? (
-          <Stack justifyContent={'center'} direction={'row'} mt={5}>
+          <Stack direction={'row'} justifyContent={'center'} mt={5}>
             <CircularProgress />
           </Stack>
         ) : product?.variants ? (
           <Stack
             direction={'row'}
             justifyContent={'center'}
-            spacing={3}
             mt={5}
+            spacing={3}
             sx={{flexWrap: 'wrap'}}
           >
-            {product.variants.map((variant, i) => (
+            {product.variants.map(variant => (
               <Stack
                 key={variant.id}
+                onClick={e => imageSelectHandler(e, variant.id)}
                 sx={{
                   border: '2px solid',
                   borderColor:
@@ -71,7 +75,6 @@ function Variants(props) {
                   cursor: 'pointer',
                   transition: '300ms',
                 }}
-                onClick={e => imageSelectHandler(e, variant.id)}
               >
                 <Box
                   sx={{

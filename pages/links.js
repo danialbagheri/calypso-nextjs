@@ -4,8 +4,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
   faFacebook,
   faInstagram,
-  faYoutube,
   faTwitter,
+  faYoutube,
 } from '@fortawesome/free-brands-svg-icons'
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons'
 

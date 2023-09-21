@@ -45,14 +45,14 @@ export default function ImageReviewModal({open, setOpen, data}) {
 
   return (
     <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      aria-labelledby="modal-modal-title"
+      onClose={handleClose}
+      open={open}
     >
       <Box sx={{overflow: 'scroll'}}>
         {mainImgSrc ? (
-          <Stack sx={style} direction={{sx: 'column', md: 'row'}} gap={3}>
+          <Stack direction={{sx: 'column', md: 'row'}} gap={3} sx={style}>
             <Box
               sx={{
                 backgroundColor: '#E5E5E5',
@@ -64,6 +64,9 @@ export default function ImageReviewModal({open, setOpen, data}) {
               }}
             >
               <Box
+                onClick={() => {
+                  handleClose()
+                }}
                 sx={{
                   position: 'absolute',
                   right: 3,
@@ -77,32 +80,33 @@ export default function ImageReviewModal({open, setOpen, data}) {
                     color: '#9e9e9e',
                   },
                 }}
-                onClick={() => {
-                  handleClose()
-                }}
               >
                 <span>x</span>
               </Box>
             </Box>
             <Stack
+              direction={'column'}
+              gap={4}
               sx={{
                 width: {sx: '100%'},
                 overflow: {xs: 'unset', md: 'scroll'},
                 minWidth: '50%',
                 minHeight: {xs: 'auto', md: '150px'},
               }}
-              direction={'column'}
-              gap={4}
             >
               <Box>
-                <Image src={mainImgSrc.src} width="100" height="100" />
+                <Image height="100" src={mainImgSrc.src} width="100" />
               </Box>
-              <Typography variant={'h6'} sx={{marginBottom: -2}}>
+              <Typography sx={{marginBottom: -2}} variant={'h6'}>
                 Images in this review
               </Typography>
               <Stack direction={'row'} flexWrap={'wrap'} gap={3}>
                 {data.review.images.map((image, i) => (
                   <Box
+                    key={i}
+                    onClick={() => {
+                      clickHandler(image)
+                    }}
                     sx={{
                       cursor: 'pointer',
                       width: '85px',
@@ -124,10 +128,6 @@ export default function ImageReviewModal({open, setOpen, data}) {
                         borderColor: theme.palette.primary.main,
                       },
                     }}
-                    key={i}
-                    onClick={() => {
-                      clickHandler(image)
-                    }}
                   />
                 ))}
               </Stack>
@@ -138,14 +138,14 @@ export default function ImageReviewModal({open, setOpen, data}) {
               </Typography>
               <Typography variant={'h5'}>{data.review.title}</Typography>
               <Rating
+                defaultValue={data.review.score}
+                emptyIcon={<StarIcon color={'grey'} fontSize="inherit" />}
+                readOnly
                 sx={{
                   '& .MuiRating-icon': {
                     color: theme.palette.golden.main,
                   },
                 }}
-                defaultValue={data.review.score}
-                readOnly
-                emptyIcon={<StarIcon color={'grey'} fontSize="inherit" />}
               />
               <Typography variant={'body3'}>{data.review.comment}</Typography>
             </Stack>

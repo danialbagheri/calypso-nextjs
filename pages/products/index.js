@@ -1,29 +1,30 @@
-import { useState } from "react";
-import ProductRange from "../../components/products/product-range/product-range";
-import "react-tabs/style/react-tabs.css";
-import Head from "next/head";
-import FilterProducts from "../../components/products/filter-products";
-import _ from "lodash";
+import {useState} from 'react'
+
+import 'react-tabs/style/react-tabs.css'
+import Head from 'next/head'
+import FilterProducts from '../../components/products/filter-products'
+import _ from 'lodash'
+import {ProductRange} from 'components'
 
 function Products(props) {
   const ordered_products = _.orderBy(
     // checks if product is in multiple collections meaning it's more popular than others
     props.products,
-    [(item) => item.types[0].id, (item) => item.collection_names.length],
-    ["asc", "desc"]
-  );
-  const [products, setProducts] = useState(ordered_products);
-  const [limit, setLimit] = useState(10);
+    [item => item.types[0].id, item => item.collection_names.length],
+    ['asc', 'desc'],
+  )
+  const [products, setProducts] = useState(ordered_products)
+  const [limit, setLimit] = useState(10)
 
-  const [maxLimit, setMaxLimit] = useState(false);
+  const [maxLimit, setMaxLimit] = useState(false)
 
   function LoadMore() {
-    const newLimit = limit + 10;
+    const newLimit = limit + 10
     if (newLimit >= products.length) {
-      setLimit(products.length);
-      setMaxLimit(true);
+      setLimit(products.length)
+      setMaxLimit(true)
     } else {
-      setLimit(newLimit);
+      setLimit(newLimit)
     }
   }
 
@@ -35,8 +36,8 @@ function Products(props) {
           Tanning and Health care
         </title>
         <meta
-          name="description"
           content="From scalp protection to insect repellent, we have everything you need to stay protected in the sun both at home and abroad. Our products are available to buy from some of the biggest UK grocery chains as well as some independent pharmacies, and online on Amazon."
+          name="description"
         />
       </Head>
       <div className="product-page-banner-image">
@@ -50,25 +51,25 @@ function Products(props) {
           <FilterProducts
             limit={limit}
             products={ordered_products}
-            setProducts={setProducts}
             setLimit={setLimit}
             setMaxLimit={setMaxLimit}
+            setProducts={setProducts}
           />
         </div>
         <div>
           <ProductRange
-            type="sun%20protection"
-            products={products}
             limit={limit}
+            products={products}
+            type="sun%20protection"
           />
           {maxLimit ? (
             <span id="loading"></span>
           ) : (
             <div className="text-centre m-3">
               <button
-                onClick={LoadMore}
                 className="btn btn-calypso"
                 id="loading"
+                onClick={LoadMore}
               >
                 Load More
               </button>
@@ -77,40 +78,46 @@ function Products(props) {
         </div>
       </section>
     </div>
-  );
+  )
 }
 async function getAllPages(pageCount, url) {
-  let pageNumber = 1;
-  let productResult = [];
+  let pageNumber = 1
+  const productResult = []
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    let paginatedUrl = url + `?page=${pageNumber}`;
-    const res = await fetch(paginatedUrl);
-    const product = await res.json();
-    productResult.push(product.results);
+    const paginatedUrl = url + `?page=${pageNumber}`
+    const res = await fetch(paginatedUrl)
+    const product = await res.json()
+    productResult.push(product.results)
   }
-  return productResult;
+  return productResult
 }
-export async function getStaticProps(context) {
-  const baseUrl = process.env.API_URL;
-  const endpoint = `products/product/`;
-  const finalUrl = baseUrl + endpoint;
-  const res = await fetch(finalUrl);
-  let products = await res.json();
-  const pageCount = Math.ceil(products.count / 10);
-  let productResult = await getAllPages(pageCount, finalUrl);
+
+export async function getStaticProps() {
+  const baseUrl = process.env.API_URL
+  const endpoint = 'products/product/'
+  const finalUrl = baseUrl + endpoint
+  const res = await fetch(finalUrl)
+
+  const products = await res.json()
+  const pageCount = Math.ceil(products.count / 10)
+  const productResult = await getAllPages(pageCount, finalUrl)
+
   // Now we will get the staff picked articles
 
   if (!productResult) {
     return {
       notFound: true,
       isLoaded: false,
-    };
+    }
   }
 
   return {
-    props: { products: productResult.flat(), isLoaded: true },
+    props: {
+      products: productResult.flat(),
+      isLoaded: true,
+    },
     revalidate: 120, // will be passed to the page component as props
-  };
+  }
 }
 
-export default Products;
+export default Products

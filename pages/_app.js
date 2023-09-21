@@ -3,7 +3,6 @@ import * as React from 'react'
 import {SessionProvider} from 'next-auth/react'
 import {Provider} from 'react-redux'
 import CookieConsent from 'react-cookie-consent'
-import MailChimpSignUp from '../components/general/MailChimpSignUp'
 
 import RefreshTokenHandler from '../services/refreshTokenHandler'
 import '../styles/globals.css'
@@ -15,28 +14,73 @@ import store from '../redux/store'
 import Footer from '../components/common/footer/footer'
 import InfoBar from '../components/general/InforBar'
 import {AppProvider} from 'components/appProvider'
+import {MailjetSignUp} from 'components'
 
 function MyApp({Component, pageProps}) {
+  const SUBSCRIPTION_STATE = 'subscriptionState'
+  const SIGNED_UP = 'signedUp'
+
   const [interval, setInterval] = React.useState(0)
+  const [showSubscription, setShowSubscription] = React.useState(false)
+
+  React.useEffect(() => {
+    const subscriptionState = localStorage.getItem(SUBSCRIPTION_STATE)
+
+    if (!subscriptionState || subscriptionState !== SIGNED_UP) {
+      setShowSubscription(true)
+    }
+  }, [])
 
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#da532c" />
-        <link rel="stylesheet" href="https://use.typekit.net/kls3ash.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="twitter:site" content="@calypsosuncare"></meta>
+        <meta
+          content="width=device-width, initial-scale=1, user-scalable=1"
+          name="viewport"
+        />
+        <link href="/favicon64.ico" rel="apple-touch-icon" sizes="64x64" />
+        <link
+          href="/favicon16.ico"
+          rel="shortcut icon"
+          sizes="16x16"
+          type="image/x-icon"
+        />
+        <link
+          href="/favicon24.ico"
+          rel="shortcut icon"
+          sizes="24x24"
+          type="image/x-icon"
+        />
+        <link
+          href="/favicon32.ico"
+          rel="shortcut icon"
+          sizes="32x32"
+          type="image/x-icon"
+        />
+        <link
+          href="/favicon48.ico"
+          rel="shortcut icon"
+          sizes="48x48"
+          type="image/x-icon"
+        />
+
+        <link href="/site.webmanifest" rel="manifest" />
+        <link color="#da532c" href="/safari-pinned-tab.svg" rel="mask-icon" />
+        <link href="https://use.typekit.net/kls3ash.css" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
+        <meta content="#da532c" name="msapplication-TileColor" />
+        <meta content="#ffffff" name="theme-color" />
+        <meta content="#000000" name="theme-color" />
+        <meta content="@calypsosuncare" name="twitter:site"></meta>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        />
         {/* <!-- Google Tag Manager --> */}
         <script
           dangerouslySetInnerHTML={{
@@ -63,7 +107,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </Head>
       <AppProvider>
-        <SessionProvider session={pageProps.session} refetchInterval={interval}>
+        <SessionProvider refetchInterval={interval} session={pageProps.session}>
           <Provider store={store}>
             {/* <!-- Google Tag Manager (noscript) --> */}
             <noscript
@@ -78,7 +122,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               }}
             />
             <Header />
-            <MailChimpSignUp />
+            {showSubscription ? <MailjetSignUp /> : null}
+
             <InfoBar />
             <Component {...pageProps} />
             <CookieConsent
@@ -91,10 +136,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               // }}
             >
               <div className="cookie-background"> </div>
-              We use cookies to ensure that we give you the best experience on our website.
+              We use cookies to ensure that we give you the best experience on
+              our website.
             </CookieConsent>
 
-            <Footer />
+            <Footer showSubscription={showSubscription} />
             <RefreshTokenHandler setInterval={setInterval} />
           </Provider>
         </SessionProvider>

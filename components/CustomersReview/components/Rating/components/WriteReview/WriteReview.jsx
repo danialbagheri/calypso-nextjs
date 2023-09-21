@@ -14,23 +14,12 @@ function WriteReview() {
   return (
     <Box textAlign={'center'}>
       <Button
-        variant="contained"
-        sx={{
-          padding: '12px 32px',
-          borderRadius: 20,
-          '&:hover': {
-            color: theme.palette.grey.main,
-          },
-          '& svg path:hover': {
-            fill: theme.palette.grey.main,
-          },
-        }}
         startIcon={
           <svg
-            width="18"
+            fill="none"
             height="18"
             viewBox="0 0 18 18"
-            fill="none"
+            width="18"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -43,9 +32,30 @@ function WriteReview() {
             />
           </svg>
         }
+        sx={{
+          padding: '12px 32px',
+          borderRadius: 20,
+          color: 'white',
+          fontWeight: 'bold',
+          boxShadow: 'none',
+          '&:hover': {
+            backgroundColor: theme.palette.primary.main,
+            boxShadow: 'unset',
+          },
+          '& svg path:hover': {
+            fill: theme.palette.grey.main,
+          },
+          '& a': {
+            textDecoration: 'none',
+          },
+        }}
+        variant="contained"
       >
         <Link
-          href={`./write-review?slug=${reviewState.slug}`}
+          href={{
+            pathname: './write-review',
+            query: {slug: reviewState.slug},
+          }}
           variant={'body4'}
         >
           WRITE A REVIEW

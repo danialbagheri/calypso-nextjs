@@ -1,19 +1,19 @@
-import "react-tabs/style/react-tabs.css";
-import Head from "next/head";
+import 'react-tabs/style/react-tabs.css'
+import Head from 'next/head'
 
 function Products(props) {
-  const products = props.products;
+  const products = props.products
 
   const productList = products.map((product, index) => {
-    const variants = product.variants.map((variant) => {
+    const variants = product.variants.map(variant => {
       return (
-        <tr style={styles.TableRow} key={index}>
+        <tr key={index} style={styles.TableRow}>
           <td>{variant.id}</td>
           <td>{product.name}</td>
           <td>{product.sub_title}</td>
           <td>
             {product.types[0]}
-            {product.types[1] && ", " + product.types[1]}
+            {product.types[1] && ', ' + product.types[1]}
           </td>
           <td>{variant.sku}</td>
           <td>{product.review_average_score}</td>
@@ -24,11 +24,11 @@ function Products(props) {
           <td>{variant.inventory_quantity}</td>
           <td>{variant.barcode}</td>
         </tr>
-      );
-    });
+      )
+    })
 
-    return <>{variants}</>;
-  });
+    return <>{variants}</>
+  })
 
   return (
     <div>
@@ -38,8 +38,8 @@ function Products(props) {
           Tanning and Health care
         </title>
         <meta
-          name="description"
           content="From scalp protection to insect repellent, we have everything you need to stay protected in the sun both at home and abroad. Our products are available to buy from some of the biggest UK grocery chains as well as some independent pharmacies, and online on Amazon."
+          name="description"
         />
       </Head>
       <section className="container-fluid top20">
@@ -62,60 +62,60 @@ function Products(props) {
         </table>
       </section>
     </div>
-  );
+  )
 }
 
 const styles = {
   Table: {
-    width: "100%",
-    maxWidth: "100%",
+    width: '100%',
+    maxWidth: '100%',
     // textAlign: "center",
   },
   TableHead: {
-    height: "4rem",
-    backgroundColor: "#FF5E2B",
-    color: "white",
+    height: '4rem',
+    backgroundColor: '#FF5E2B',
+    color: 'white',
   },
 
   TableRow: {
-    height: "4rem",
-    backgroundColor: "white",
-    borderBottom: "1px solid #FF5E1F",
+    height: '4rem',
+    backgroundColor: 'white',
+    borderBottom: '1px solid #FF5E1F',
   },
-};
+}
 
 async function getAllPages(pageCount, url) {
-  let pageNumber = 1;
-  let productResult = [];
+  let pageNumber = 1
+  const productResult = []
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    let paginatedUrl = url + `?page=${pageNumber}`;
-    const res = await fetch(paginatedUrl);
-    const product = await res.json();
-    productResult.push(product.results);
+    const paginatedUrl = url + `?page=${pageNumber}`
+    const res = await fetch(paginatedUrl)
+    const product = await res.json()
+    productResult.push(product.results)
   }
-  return productResult;
+  return productResult
 }
-export async function getStaticProps(context) {
-  const baseUrl = process.env.API_URL;
-  const endpoint = `products/product/`;
-  const finalUrl = baseUrl + endpoint;
-  const res = await fetch(finalUrl);
-  let products = await res.json();
-  const pageCount = Math.ceil(products.count / 10);
-  let productResult = await getAllPages(pageCount, finalUrl);
+export async function getStaticProps() {
+  const baseUrl = process.env.API_URL
+  const endpoint = 'products/product/'
+  const finalUrl = baseUrl + endpoint
+  const res = await fetch(finalUrl)
+  const products = await res.json()
+  const pageCount = Math.ceil(products.count / 10)
+  const productResult = await getAllPages(pageCount, finalUrl)
   // Now we will get the staff picked articles
 
   if (!productResult) {
     return {
       notFound: true,
       isLoaded: false,
-    };
+    }
   }
 
   return {
-    props: { products: productResult.flat(), isLoaded: true },
+    props: {products: productResult.flat(), isLoaded: true},
     revalidate: 120, // will be passed to the page component as props
-  };
+  }
 }
 
-export default Products;
+export default Products

@@ -9,8 +9,8 @@ import {validateEmail} from 'utils'
 
 function ReviewerInfo(props) {
   //constants
-  const USERNAME = 'username'
-  const EMAIL = 'email'
+  const USERNAME = 'customer_name'
+  const EMAIL = 'customer_email'
   const LOCATION = 'location'
 
   const [userData, setUserData] = React.useState({
@@ -27,6 +27,7 @@ function ReviewerInfo(props) {
       placeholder: 'Your Full Name',
       label: 'Full name',
       mode: 'text',
+      required: true,
     },
     {
       id: EMAIL,
@@ -34,6 +35,7 @@ function ReviewerInfo(props) {
       placeholder: 'Your Email Address',
       label: 'Email address',
       mode: 'email',
+      required: true,
     },
     {
       id: LOCATION,
@@ -58,41 +60,89 @@ function ReviewerInfo(props) {
   }
 
   const onBlurHandler = (type, value) => {
-    //Control if the email address is correct or not
-    if (type === EMAIL) {
-      if (!validateEmail(value)) {
-        setUserData(prev => ({
-          ...prev,
-          [type]: {
-            ...prev[type],
-            errorState: true,
-            errorText: 'Please Enter a valid email address',
-          },
-        }))
-      } else if (userData[type].errorState) {
-        setUserData(prev => ({
-          ...prev,
-          [type]: {...prev[type], errorState: false, errorText: ''},
-        }))
-      }
+    switch (type) {
+      case USERNAME:
+        if (!value) {
+          setUserData(prev => ({
+            ...prev,
+            [type]: {
+              ...prev[type],
+              errorState: true,
+              errorText: 'Please enter your name.',
+            },
+          }))
+        } else if (userData[type].errorState) {
+          setUserData(prev => ({
+            ...prev,
+            [type]: {
+              ...prev[type],
+              errorState: false,
+              errorText: '',
+            },
+          }))
+        }
+        break
+      case EMAIL:
+        if (!value) {
+          setUserData(prev => ({
+            ...prev,
+            [type]: {
+              ...prev[type],
+              errorState: true,
+              errorText: 'Please enter your email address.',
+            },
+          }))
+        } else if (!validateEmail(value)) {
+          setUserData(prev => ({
+            ...prev,
+            [type]: {
+              ...prev[type],
+              errorState: true,
+              errorText: 'Please enter a valid email address.',
+            },
+          }))
+        } else if (userData[type].errorState) {
+          setUserData(prev => ({
+            ...prev,
+            [type]: {
+              ...prev[type],
+              errorState: false,
+              errorText: '',
+            },
+          }))
+        }
+        break
     }
   }
 
   return (
     <Stack mt={5} spacing={5}>
-      <Typography variant={'h3'} textAlign={'center'}>
+      <Typography textAlign={'center'} variant={'h3'}>
         Reviewer info
       </Typography>
       {fields.map(field => (
         <Box key={field.id}>
-          <Typography variant={'h6'} mb={2}>
+          <Typography mb={2} variant={'h6'}>
             {field.label}
           </Typography>
           <TextField
             controls={true}
-            onChange={e => inputHandler(e, field.type)}
+            error={
+              userData[field.type].errorState || props.error[field.type]?.state
+            }
+            helperText={
+              userData[field.type].errorText ? (
+                <Typography>{userData[field.type].errorText}</Typography>
+              ) : (
+                props.error[field.type]?.state && (
+                  <Typography>{props.error[field.type]?.message}</Typography>
+                )
+              )
+            }
             inputMode={field.mode}
-            value={userData[field.type].value}
+            onBlur={e => onBlurHandler(field.type, e.target.value)}
+            onChange={e => inputHandler(e, field.type)}
+            placeholder={field.placeholder}
             sx={{
               '&': {
                 '.MuiInputBase-root': {borderRadius: 20},
@@ -104,10 +154,7 @@ function ReviewerInfo(props) {
                 width: '100%',
               },
             }}
-            placeholder={field.placeholder}
-            onBlur={e => onBlurHandler(field.type, e.target.value)}
-            error={userData[field.type].errorState}
-            helperText={userData[field.type].errorText}
+            value={userData[field.type].value}
           />
         </Box>
       ))}

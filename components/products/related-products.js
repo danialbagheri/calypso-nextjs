@@ -1,9 +1,25 @@
-import Styles from '../../styles/relatedProducts.module.css'
+/* -------------------------------- Libraries ------------------------------- */
 import Slider from 'react-slick'
+/* -------------------------------------------------------------------------- */
+
+/* ----------------------------- MUI Components ----------------------------- */
+import {Box} from '@mui/material'
+import {useTheme} from '@emotion/react'
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------- Local Components ---------------------------- */
+import StarRating from './StarRating/StarRating'
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------------- Style --------------------------------- */
+import Styles from '../../styles/relatedProducts.module.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import StarRating from './StarRating/StarRating'
+/* -------------------------------------------------------------------------- */
+
 export default function RelatedProducts({related}) {
+  const theme = useTheme()
+
   const settings = {
     arrows: true,
     dots: true,
@@ -48,21 +64,21 @@ export default function RelatedProducts({related}) {
             <div className={Styles.ProductImage}>
               <picture>
                 <source srcSet={product.webp} type="image/webp" />
-                <source srcSet={product.resized} media="(max-width: 600px)" />
+                <source media="(max-width: 600px)" srcSet={product.resized} />
                 <img
-                  src={product.main_image}
-                  height={product.img_height}
-                  width={product.img_width}
                   alt={product.name}
+                  height={product.img_height}
                   loading="lazy"
+                  src={product.main_image}
+                  width={product.img_width}
                 />
               </picture>
             </div>
 
             <div className={Styles.bottomText}>
               <StarRating
-                score={product.review_average_score}
                 name={product.name}
+                score={product.review_average_score}
               />
               <p>
                 <strong>{product.name}</strong> <br />
@@ -76,9 +92,9 @@ export default function RelatedProducts({related}) {
     )
   })
   return (
-    <div className="bg-secondary p-3">
+    <Box sx={{backgroundColor: theme.palette.sand.main, p: 3}}>
       <h4 className="textCenter">You may also like</h4>
       <Slider {...settings}>{relatedProducts}</Slider>
-    </div>
+    </Box>
   )
 }

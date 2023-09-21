@@ -1,20 +1,24 @@
-import * as React from 'react'
-
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import Stack from '@mui/material/Stack'
-import Button from '@mui/material/Button'
 import {useTheme} from '@mui/material'
 
-function SearchBox(props) {
+function SearchBox() {
   const theme = useTheme()
-  const keywordsArr = ['keyword1', 'keyword2', 'keyword3', 'keyword4']
 
   return (
     <Box>
       <TextField
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon color={'primary'} />
+            </InputAdornment>
+          ),
+        }}
+        placeholder="Search Reviews"
+        size="700"
         sx={{
           width: '100%',
           '&': {
@@ -36,15 +40,6 @@ function SearchBox(props) {
             },
           },
         }}
-        placeholder="Search Reviews"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon color={'primary'} />
-            </InputAdornment>
-          ),
-        }}
-        size="700"
         type="search"
       />
       {/*TO DO::: Should be un commented after implementing filters*/}

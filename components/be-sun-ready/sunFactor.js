@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Styles from '../../styles/sunready.module.css'
 import SpfTable from '../../public/be-sun-ready/spfTable.svg'
 import spfCircle from '../../public/be-sun-ready/svgs/SPF-CALYPSO.svg'
@@ -7,7 +6,7 @@ export default function SunFactor() {
     <div id="sun-factor">
       <div style={{height: '153px', backgroundColor: '#FC954D'}}></div>
       <div className={Styles.sunReadyIcons}>
-        <img src={spfCircle} height={178} width={178} />
+        <img height={178} src={spfCircle} width={178} />
       </div>
       <div className="container">
         <h4 className={Styles.sunReadyTitle}>Choose the right SPF</h4>
@@ -20,9 +19,9 @@ export default function SunFactor() {
         </p>
         <div className="m-5">
           <img
+            className="img-responsive img-center"
             src={SpfTable}
             width="1500px"
-            className="img-responsive img-center"
           />
         </div>
       </div>

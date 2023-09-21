@@ -1,4 +1,3 @@
-import React from 'react'
 import PaymentIcon from './payment-icons'
 // import lincoDropLet from 'public/home-page/Droplets.png'
 import LinkIcon from '@mui/icons-material/Link'
@@ -32,7 +31,7 @@ export default function BottomBar() {
   return (
     <Container>
       <Box {...BottomBarSchema} sx={BottomBarStyle}>
-        <meta itemProp="name" content="Linco Care limited" />
+        <meta content="Linco Care limited" itemProp="name" />
         <Box
           sx={{
             display: 'flex',
@@ -46,11 +45,11 @@ export default function BottomBar() {
         >
           <Box>
             <img
-              width={26}
-              src={'/home-page/Droplets.png'}
               alt="Linco Care logo Icon"
-              loading="lazy"
               height="auto"
+              loading="lazy"
+              src={'/home-page/Droplets.png'}
+              width={26}
             />
           </Box>
           <p>
@@ -61,8 +60,8 @@ export default function BottomBar() {
           <Box sx={{display: 'flex', gap: 2}}>
             <a
               href="https://lincocare.com"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               lincocare.com <LinkIcon />
             </a>

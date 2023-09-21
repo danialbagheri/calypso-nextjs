@@ -1,10 +1,9 @@
-import * as React from 'react'
-
-import BreadCrumb from '../../components/common/breadcrumb'
-import ProductRangeItem from '../../components/products/product-range/ProductRangeItem'
-import HomeSlider from '../../components/home/home-slider'
-//Services
+import {HomeSlider} from 'components'
+import {Box, Container} from '@mui/material'
+import BreadCrumb from 'components/common/breadcrumb'
+import {ProductRange} from 'components'
 import {getCollection} from 'services'
+import _ from 'lodash'
 
 export default function CollectionName(props) {
   const {collection} = props
@@ -12,21 +11,21 @@ export default function CollectionName(props) {
     {name: 'Home', url: '/'},
     {name: 'Collections', url: '/collections/'},
     {name: collection.name, url: `/${collection.slug}/`},
-    ``,
+    '',
   ]
-  const collectionItems = collection.items.map((item, index) => {
-    return <ProductRangeItem product={item.item} key={index} />
-  })
+  const collectionProducts = _.map(collection.items, ({item}) => item)
 
   return (
     <div>
-      {collection.slider && collection.slider.slides > 1 ? <HomeSlider slides={collection.slider.slides} /> : null}
-      <div className="container">
-        <div style={{padding: 10}}>
+      {collection.slider && collection.slider.slides > 1 ? (
+        <HomeSlider slides={collection.slider.slides} />
+      ) : null}
+      <Container>
+        <Box sx={{my: 12}}>
           <BreadCrumb breadcrumbs={breadCrumbPath} />
-          {collectionItems}
-        </div>
-      </div>
+          <ProductRange products={collectionProducts} limit={15} />
+        </Box>
+      </Container>
     </div>
   )
 }
@@ -47,5 +46,6 @@ export async function getStaticProps(context) {
     props: {
       collection: collection.status === 404 ? null : collection,
     }, // will be passed to the page component as props
+    revalidate: 120,
   }
 }

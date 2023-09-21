@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import ShareButton from '../components/common/shareButton'
+import ShareButton from '../components/common/shareButton/ShareButton'
 import ImageBanner from '../components/be-sun-ready/image-banner'
 import IntroText from '../components/be-sun-ready/intro-text'
 import SunFactor from '../components/be-sun-ready/sunFactor'
@@ -15,8 +15,8 @@ export default function BeSunReady({productData, blogs}) {
       <Head>
         <title>Be Sun Ready by Calypso Sun</title>
         <meta
-          name="description"
           content="LEARNING HOW TO PROTECT YOURSELF FROM THE SUN"
+          name="description"
         />
       </Head>
       <ImageBanner />
@@ -25,7 +25,7 @@ export default function BeSunReady({productData, blogs}) {
       <FourSkinTypes />
       <ApplyBefore blogs={blogs} />
       <div className="centre" style={{width: '50px'}}>
-        <ShareButton text="Be Sun Ready by Calypso" media="" />
+        <ShareButton media="" text="Be Sun Ready by Calypso" />
       </div>
       <CoverUp />
       <Shade />
@@ -36,11 +36,11 @@ export default function BeSunReady({productData, blogs}) {
 
 export async function getStaticProps() {
   const baseUrl = process.env.API_URL
-  const url = baseUrl + `products/product/?type=sun%20protection&count=3`
+  const url = baseUrl + 'products/product/?type=sun%20protection&count=3'
   const res = await fetch(url)
   const productData = await res.json()
 
-  const blogEndPoint = baseUrl + `blogs/collections/be-sun-ready/?resize_w=450`
+  const blogEndPoint = baseUrl + 'blogs/collections/be-sun-ready/?resize_w=450'
   const result = await fetch(blogEndPoint)
   const blogs = await result.json()
   return {

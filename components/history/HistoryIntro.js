@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function HistoryIntro() {
   // Declare a new state variable, which we'll call "count"
   return (
@@ -14,5 +12,5 @@ export default function HistoryIntro() {
         countries worldwide.
       </p>
     </section>
-  );
+  )
 }

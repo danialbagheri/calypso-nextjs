@@ -14,17 +14,30 @@ function ReviewRate(props) {
 
   return (
     <Box mt={15}>
-      <Typography variant={'h3'} textAlign={'center'}>
+      <Typography textAlign={'center'} variant={'h3'}>
         Overall rating
       </Typography>
-      <Box textAlign={'center'} mt={3}>
+      <Box mt={3} textAlign={'center'}>
         <Rating
           name="size-large"
-          value={rate}
-          size="large"
           onChange={e => ratingHandler(e)}
+          size="large"
+          sx={{
+            border: '1px solid',
+            p: 2,
+            borderRadius: 2,
+            borderColor: props.error.score?.state ? '#d32f2f' : 'transparent',
+          }}
+          value={rate}
         />
       </Box>
+      {props.error.score?.state ? (
+        <Box sx={{pt: 4, color: '#d32f2f'}}>
+          <Typography textAlign={'center'} variant="h6">
+            {props.error.score?.message}
+          </Typography>
+        </Box>
+      ) : null}
     </Box>
   )
 }

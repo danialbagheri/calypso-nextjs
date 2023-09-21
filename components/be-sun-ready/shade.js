@@ -8,9 +8,9 @@ export default function Shade() {
       <div style={{height: '153px', backgroundColor: '#FC954D'}}></div>
       <div className={Styles.sunReadyIcons}>
         <Image
-          src={shadeIcon}
           alt="shade and water icon"
           height="178"
+          src={shadeIcon}
           width="178"
         />
       </div>

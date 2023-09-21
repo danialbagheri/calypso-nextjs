@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useShopify} from '../hooks'
 import logo from '../../public/logo.svg'
 import SearchBar from '../general/searchbar'
@@ -6,9 +6,9 @@ import Link from 'next/link'
 import ActiveLink from './active-link'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
-  faShoppingCart,
-  faSearch,
   faBars,
+  faSearch,
+  faShoppingCart,
 } from '@fortawesome/free-solid-svg-icons'
 
 import MegaMenu from './megaMenu'
@@ -24,17 +24,19 @@ function Navigation() {
 
   useEffect(() => {
     const navbar = document.getElementsByClassName('navbar-fixed-top')[0]
-    let sticky = navbar.offsetTop
+
     window.onscroll = () => {
-      if (window.pageYOffset >= sticky) {
+      if (window.pageYOffset >= 10) {
         navbar.style.position = 'fixed'
         navbar.style.top = '0'
+        navbar.style.boxShadow = '0 0 4px 2px rgba(0,0,0,0.3)'
       } else {
         navbar.style.position = 'relative'
         navbar.style.marginTop = '0'
+        navbar.style.boxShadow = 'none'
       }
     }
-  })
+  }, [])
 
   useEffect(() => {
     const endPoint =
@@ -51,21 +53,21 @@ function Navigation() {
     setMobileMenu(!mobileMenu)
   }
 
-  function CloseMobileMenu(e) {
+  function CloseMobileMenu() {
     setMobileMenu(false)
   }
 
   return (
     <>
-      <SearchBar visible={search} visibilitySetter={showSearch} />
+      <SearchBar visibilitySetter={showSearch} visible={search} />
       <nav
         className="navbar navbar-fixed-top"
         itemScope
         itemType="https://schema.org/SiteNavigationElement"
       >
         <div className="navbar-content">
-          <Link href="/" className="navbar-brand">
-            <img src={logo} alt="Calypso" width="150" height="47" />
+          <Link className="navbar-brand" href="/">
+            <img alt="Calypso" height="47" src={logo} width="150" />
           </Link>
           <ul
             className={
@@ -74,10 +76,10 @@ function Navigation() {
           >
             <li>
               <ActiveLink
+                className="nav-link"
                 exact="true"
                 href="/"
                 itemProp="url"
-                className="nav-link"
                 onClick={e => CloseMobileMenu(e)}
               >
                 Home
@@ -88,9 +90,9 @@ function Navigation() {
               onMouseLeave={() => toggleMegaMenu(false)}
             >
               <ActiveLink
+                className="nav-link"
                 href="/products"
                 itemProp="url"
-                className="nav-link"
                 onClick={e => CloseMobileMenu(e)}
               >
                 Products
@@ -103,14 +105,14 @@ function Navigation() {
               className="nav-link"
               href="/products/"
             >
-              Mix & Match
-            </ActiveLink>
-          </li> */}
+                   Mix & Match
+                  </ActiveLink>
+             </li> */}
             <li>
               <ActiveLink
+                className="nav-link"
                 href="/be-sun-ready"
                 itemProp="url"
-                className="nav-link"
                 onClick={e => CloseMobileMenu(e)}
               >
                 Be Sun Ready
@@ -118,9 +120,9 @@ function Navigation() {
             </li>
             <li>
               <ActiveLink
+                className="nav-link"
                 href="/advice"
                 itemProp="url"
-                className="nav-link"
                 onClick={e => CloseMobileMenu(e)}
               >
                 Advice
@@ -128,9 +130,9 @@ function Navigation() {
             </li>
             <li>
               <ActiveLink
+                className="nav-link"
                 href="/about"
                 itemProp="url"
-                className="nav-link"
                 onClick={e => CloseMobileMenu(e)}
               >
                 About Us
@@ -139,36 +141,36 @@ function Navigation() {
           </ul>
           <div className="icon-holder">
             <button
+              aria-label="Search"
               className="search-icon"
               onClick={() => setOpenSearchModal(true)}
-              aria-label="Search"
             >
               <FontAwesomeIcon
-                icon={faSearch}
                 className="calypso-orange-text"
+                icon={faSearch}
               />
               {openSearchModal ? (
                 <SearchModal setOpenSearchModal={setOpenSearchModal} />
               ) : null}
             </button>
             <button
+              aria-label="open Cart"
               className="basket-icon"
               onClick={openCart}
-              aria-label="open Cart"
             >
               <FontAwesomeIcon
-                icon={faShoppingCart}
                 className="calypso-orange-text"
+                icon={faShoppingCart}
               />
             </button>
 
             <button
+              aria-label="Menu"
               className="burgerMenu"
               onClick={openResponsiveMenu}
-              aria-label="Menu"
             >
               {/* <i className="fa fa-bars" /> */}
-              <FontAwesomeIcon icon={faBars} className="calypso-orange-text" />
+              <FontAwesomeIcon className="calypso-orange-text" icon={faBars} />
             </button>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import FaqItems from '../components/faqs/faq-item'
 import Image from 'next/image'
 import BreadCrumb from '../components/common/breadcrumb'
@@ -19,8 +19,8 @@ export default function Faq({faqs}) {
   function searchQuestions(e) {
     e.preventDefault()
     // input = document.getElementById("myInput");
-    let filter = e.target.value.toUpperCase()
-    let result = []
+    const filter = e.target.value.toUpperCase()
+    const result = []
     for (let i = 0; i < faqs.length; i++) {
       if (faqs[i].question.toUpperCase().indexOf(filter) > -1) {
         result.push(faqs[i])
@@ -32,20 +32,20 @@ export default function Faq({faqs}) {
     <div itemProp="mainEntity" itemScope itemType="http://schema.org/FAQPage">
       <div className="faq-row">
         <Image
-          src="/faq/faqs.jpg"
           alt="Frequently Asked Questions"
           fill
+          src="/faq/faqs.jpg"
           style={{objectFit: 'cover', objectPosition: '80% 100%'}}
         />
-        <h3 itemProp="name" className="mt-4 faq-page-title text-calypso">
+        <h3 className="mt-4 faq-page-title text-calypso" itemProp="name">
           Frequently Asked Questions
           <br />
           <input
             className="faqSearchInput"
             onChange={e => searchQuestions(e)}
             placeholder="Search"
-            type="text"
             ref={inputElement}
+            type="text"
           />
         </h3>
       </div>
@@ -61,9 +61,9 @@ export default function Faq({faqs}) {
 
 async function getAllPages(pageCount, url) {
   let pageNumber = 1
-  let faqResults = []
+  const faqResults = []
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    let paginatedUrl = url + `?page=${pageNumber}`
+    const paginatedUrl = url + `?page=${pageNumber}`
     const res = await fetch(paginatedUrl)
     const blogs = await res.json()
     faqResults.push(blogs.results)
@@ -71,14 +71,14 @@ async function getAllPages(pageCount, url) {
   return faqResults
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const baseUrl = process.env.API_URL
-  const endpoint = `faq/`
+  const endpoint = 'faq/'
   const finalUrl = baseUrl + endpoint
   const res = await fetch(finalUrl)
   const faqs = await res.json()
   const pageCount = Math.ceil(faqs.count / 10)
-  let faqResults = await getAllPages(pageCount, finalUrl)
+  const faqResults = await getAllPages(pageCount, finalUrl)
   // Now we will get the staff picked articles
 
   if (!faqResults) {

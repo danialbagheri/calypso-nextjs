@@ -1,12 +1,11 @@
-import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../../public/logoWhite.svg'
 import tct from '../../../public/home-page/TCT.svg'
 import BottomBar from './BottomBar'
-import SubscriptonForm from './SubscriptonForm'
+
 import SocialMediaIcons from './SocialMediaIcons'
 import FooterMenu from './FooterMenu'
+import {SubscribeForm} from './subscribeForm'
 
 const FooterMainMenu = [
   {
@@ -53,7 +52,7 @@ const helpMenu = [
   },
 ]
 
-export default function Footer() {
+export default function Footer({showSubscription}) {
   return (
     <footer className="page-footer font-small ">
       <div className="container-fluid calypsoOrange text-md-left calypso-footer">
@@ -61,11 +60,25 @@ export default function Footer() {
           <div className="row height250">
             <div className="col-md-5">
               <div style={{display: 'flex', flexDirection: 'flex-start'}}>
-                <Image src={logo} className="footerLogo" alt="Calypso" width="70" height="67" />
-                <Image src={tct} className="footerLogo" alt="Calypso" width="180" height="67" />
+                <Image
+                  alt="Calypso"
+                  className="footerLogo"
+                  height="67"
+                  src={logo}
+                  width="70"
+                />
+                <Image
+                  alt="Calypso"
+                  className="footerLogo"
+                  height="67"
+                  src={tct}
+                  width="180"
+                />
               </div>
-              <p className="white">Get 10% off when you join our Sun-Safe family.</p>
-              <SubscriptonForm />
+              <p className="white">
+                Get 10% off when you join our Sun-Safe family.
+              </p>
+              {showSubscription ? <SubscribeForm /> : false}
             </div>
 
             <div className="col-md-2 col-xs-6">

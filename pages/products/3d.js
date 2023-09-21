@@ -1,11 +1,11 @@
-import React from 'react'
+import * as React from 'react'
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import * as THREE from 'three'
 
-export default function threeD() {
+export default function ThreeD() {
   const [scene, setScene] = React.useState(null)
-  const [loaded, setLoaded] = React.useState(false)
+  const [setLoaded] = React.useState(false)
   const loader = new GLTFLoader()
   const canva = React.useRef(null)
 
@@ -92,13 +92,7 @@ export default function threeD() {
     // scene.position.x = camera.position.x
     if (scene) {
       // Box3
-      const box = new THREE.Box3()
-      // box3 bounding box
-      const boundingBox = box.setFromObject(scene)
-      console.log(boundingBox)
-      // create a grid helper
-      const size = 10
-      const divisions = 10
+
       // const gridHelper = new THREE.GridHelper(size, divisions)
       // scene.add(gridHelper)
       // // axis helper
@@ -121,9 +115,6 @@ export default function threeD() {
         sizes.directionalLight.position.y,
         sizes.directionalLight.position.z,
       )
-      console.log(camera)
-      console.log(scene)
-      console.log(renderer)
     }
 
     // renderer.setScissor(1, 1, 1, 1)

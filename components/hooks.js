@@ -1,1 +1,1 @@
-export { useShopify } from "../redux/ducks/shopify";
+export {useShopify} from '../redux/ducks/shopify'

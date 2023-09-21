@@ -1,4 +1,4 @@
-import {get, post} from 'utils'
+import {get, nextPost, patch, post} from 'utils'
 
 /* ------------------------------ POST Requests ----------------------------- */
 
@@ -12,6 +12,10 @@ const postProductReview = (data, slug) => {
 
 const postReviewImage = image_base64 => {
   return post({endpoint: 'reviews/images/', data: {image_base64}})
+}
+
+const postOutOfStockEmail = data => {
+  return post({endpoint: 'users/stock-reports/', data})
 }
 /* -------------------------------------------------------------------------- */
 
@@ -28,8 +32,15 @@ const getSearchData = params => {
   return get({endpoint: `web/search/?q=${params}`})
 }
 
+const getProductData = slug => {
+  return get({endpoint: `products/single/${slug}/?resize_w=700`})
+}
+
 const getSingleProduct = slug => {
   return get({endpoint: `products/single/${slug}/`})
+}
+const getSPFFinderQuestions = () => {
+  return get({endpoint: 'surveys/spf-finder/'})
 }
 
 const getProductReviews = slug => {
@@ -40,8 +51,15 @@ const getBlogs = blog => {
   return get({endpoint: `blogs/collections/${blog}`})
 }
 
-const getSPFFinderQuestions = () => {
-  return get({endpoint: 'surveys/spf-finder/'})
+/* ----------------------------- Patch requests ----------------------------- */
+const singleReviewPatch = (id, data) => {
+  return patch({endpoint: `reviews/rate/${id}/`, data})
+}
+/* -------------------------------------------------------------------------- */
+
+/* ------------------------------ Next requests ----------------------------- */
+const registerContact = data => {
+  return nextPost({endpoint: '/api/mailjet', data})
 }
 /* -------------------------------------------------------------------------- */
 
@@ -56,4 +74,8 @@ export {
   getProductReviews,
   getBlogs,
   getSPFFinderQuestions,
+  registerContact,
+  postOutOfStockEmail,
+  getProductData,
+  singleReviewPatch,
 }

@@ -1,13 +1,13 @@
-import Styles from "../../styles/advice.module.css";
+import Styles from '../../styles/advice.module.css'
 
 export default function BlogFilters() {
-  const filters = ["Sun Protection", "Once a Day", "Myths", "How to Apply"];
-  const filterItems = filters.map((filter) => {
+  const filters = ['Sun Protection', 'Once a Day', 'Myths', 'How to Apply']
+  const filterItems = filters.map((filter, i) => {
     return (
-      <div className={Styles.filterItem}>
+      <div className={Styles.filterItem} key={i}>
         <span>{filter}</span>
       </div>
-    );
-  });
-  return <div className={Styles.filters}>{filterItems}</div>;
+    )
+  })
+  return <div className={Styles.filters}>{filterItems}</div>
 }

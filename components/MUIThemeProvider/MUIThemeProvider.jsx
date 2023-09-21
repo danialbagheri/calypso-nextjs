@@ -1,11 +1,9 @@
-import * as React from 'react'
-
 import {createTheme, ThemeProvider} from '@mui/material/styles'
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#FB4C1E',
+      main: '#FF6B00',
     },
     secondary: {
       main: '#226F61',
@@ -16,7 +14,21 @@ const theme = createTheme({
     grey: {
       main: '#E2E2E2',
     },
-    sand: {
+    darkGrey: {
+      main: '#414141',
+    },
+    sun: {main: '#F5AF3F'},
+    palm: {
+      main: '#226F61',
+    },
+    sand: {main: '#FCF5EC'},
+    earth: {
+      main: '#3C1510',
+    },
+    success: {main: '#2ECC71'},
+    warning: {main: '#F1C40F'},
+    failure: {main: '#E74C3C'},
+    PFsand: {
       main: '#FFEFD6',
     },
     green: {
@@ -112,6 +124,7 @@ const theme = createTheme({
       xs: 0,
       ssm: 450,
       sm: 600,
+      smd: 750,
       md: 900,
       lg: 1200,
       xl: 1536,

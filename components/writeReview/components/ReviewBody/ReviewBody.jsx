@@ -45,10 +45,16 @@ function ReviewBody(props) {
     <Stack mt={15} spacing={5}>
       {fields.map(field => (
         <Box key={field.id}>
-          <Typography variant={'h6'} mb={2}>
+          <Typography mb={2} variant={'h6'}>
             {field.label}
           </Typography>
           <TextField
+            error={props.error[field.type]?.state}
+            helperText={props.error[field.type]?.message}
+            minRows={field.lines}
+            multiline={Boolean(field.lines)}
+            onChange={e => onChange(e, field.type)}
+            placeholder={field.placeholder}
             sx={{
               '&': {
                 '.MuiInputBase-root': {borderRadius: 5},
@@ -65,10 +71,6 @@ function ReviewBody(props) {
               },
             }}
             value={fieldData[field.type]}
-            onChange={e => onChange(e, field.type)}
-            placeholder={field.placeholder}
-            multiline={Boolean(field.lines)}
-            minRows={field.lines}
           />
         </Box>
       ))}

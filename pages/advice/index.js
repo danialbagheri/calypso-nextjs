@@ -4,10 +4,11 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Styles from '../../styles/adviceIndex.module.css'
+
 // import BlogFilters from "../../components/blogs/blog-filters";
 
 export default function Advice({posts}) {
-  const [blogs, setBlogs] = useState(posts)
+  const [blogs] = useState(posts)
   const [limit, setLimit] = useState(10)
   const [maxLimit, setMaxLimit] = useState(false)
 
@@ -32,13 +33,13 @@ export default function Advice({posts}) {
     thumbnail = blogs.slice(0, limit).map((blog, index) => {
       return (
         <div className="col-12 col-md-4 col-sm-6 mb-2 " key={index}>
-          <Link href={`/advice/${blog.slug}`} className="disableLink">
+          <Link className="disableLink" href={`/advice/${blog.slug}`}>
             <div className="blog-card bg-white">
               <div className="blog-image">
                 <Image
-                  src={blog.resized || '/advice/placeholder.png'}
                   alt={blog.image_alt_text}
                   fill
+                  src={blog.resized || '/advice/placeholder.png'}
                   style={{objectFit: 'cover'}}
                 />
               </div>
@@ -70,8 +71,8 @@ export default function Advice({posts}) {
         <Head>
           <title>Calypso Advice</title>
           <meta
-            name="description"
             content="Advice about Sun Care, Skin Care, Holiday and every in between."
+            name="description"
           />
         </Head>
         <div className="row">{thumbnail}</div>
@@ -80,7 +81,7 @@ export default function Advice({posts}) {
             <button
               className="text-centre btn btn-outline-calypso mb-3"
               onClick={evt => {
-                loadMore(evt)
+                loadMore()
               }}
             >
               Load More
@@ -93,9 +94,9 @@ export default function Advice({posts}) {
 }
 async function getAllPages(pageCount, url) {
   let pageNumber = 1
-  let blogResult = []
+  const blogResult = []
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    let paginatedUrl = url + `&page=${pageNumber}`
+    const paginatedUrl = url + `&page=${pageNumber}`
     const res = await fetch(paginatedUrl)
     const product = await res.json()
     blogResult.push(product.results)
@@ -110,7 +111,7 @@ export async function getStaticProps() {
   const res = await fetch(finalUrl)
   const articles = await res.json()
   const pageCount = Math.ceil(articles.count / 10)
-  let blogResult = await getAllPages(pageCount, finalUrl)
+  const blogResult = await getAllPages(pageCount, finalUrl)
 
   if (!articles) {
     return {

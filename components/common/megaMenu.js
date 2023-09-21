@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from 'next/image'
 import MegaMenuStyle from 'styles/homepage/megaMenu.module.css'
 import Link from 'next/link'
@@ -8,19 +7,18 @@ function MegaMenuItem(props) {
   const megaMenuItem = items.map(item => {
     return (
       <Link
-        key={item.item.id}
+        className={MegaMenuStyle.MegaMenuItem}
         href={`/products?limit=41&category=${encodeURIComponent(
           item.item.types[0],
         )}`}
-        className={MegaMenuStyle.MegaMenuItem}
+        key={item.item.id}
       >
-        <div style={{position: 'relative', width: '88px', height: '120px'}}>
+        <div style={{position: 'relative', width: '88px', height: '100px'}}>
           <Image
-            src={item.item.main_image_resized}
             alt={item.item.name}
             fill
-            styles={{objectFit: 'contain'}}
-            sizes={'100vw'}
+            src={item.item.main_image_resized}
+            style={{objectFit: 'contain'}}
           />
           {/* <picture>
             <source srcSet={item.item.main_image_webp} type="image/webp" />
@@ -42,6 +40,7 @@ export default function MegaMenu(props) {
         <MegaMenuItem items={products} />
       </div>
       <div className={MegaMenuStyle.MegaMenuShopAll}>
+        {/* eslint-disable-next-line */}
         <a href="/products">Shop All</a>
       </div>
     </div>

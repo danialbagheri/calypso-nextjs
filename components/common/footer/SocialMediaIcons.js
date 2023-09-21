@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function SocialMediaIcons() {
   return (
     <>
@@ -8,8 +6,8 @@ export default function SocialMediaIcons() {
         <div className="floatLeft">
           <a
             href="https://www.facebook.com/calypsosuncare/"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             <img alt="Facebook" src={'/socialMedia/fa.png'} />
           </a>
@@ -17,8 +15,8 @@ export default function SocialMediaIcons() {
         <div>
           <a
             href="https://twitter.com/calypsosuncare"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             <img alt="Twitter" src={'/socialMedia/tw.png'} />
           </a>
@@ -26,8 +24,8 @@ export default function SocialMediaIcons() {
         <div className="floatLeft">
           <a
             href="https://www.instagram.com/calypsosuncare/"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             <img alt="Instagram" src={'/socialMedia/in.png'} />
           </a>
@@ -35,8 +33,8 @@ export default function SocialMediaIcons() {
         <div>
           <a
             href="https://www.youtube.com/channel/UCrZ14JcmZRDobPIVo8ptmrw"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             <img alt="Youtube" src={'/socialMedia/yo.png'} />
           </a>

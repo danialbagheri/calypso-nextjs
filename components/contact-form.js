@@ -1,120 +1,119 @@
-import React from "react";
-import data from "../data.json";
-import ReCAPTCHA from "react-google-recaptcha";
+import React from 'react'
+import data from '../data.json'
+import ReCAPTCHA from 'react-google-recaptcha'
 
-const recaptchaRef = React.createRef();
+const recaptchaRef = React.createRef()
 
 const validEmailRegex = RegExp(
-  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-);
-const validateForm = (errors) => {
-  let valid = true;
-  Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
-  return valid;
-};
+  // eslint-disable-next-line
+  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+)
+const validateForm = errors => {
+  let valid = true
+  Object.values(errors).forEach(val => val.length > 0 && (valid = false))
+  return valid
+}
 export default class Contact extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       fields: {
-        name: "",
-        email: "",
-        message: "",
-        reason: "Calypsosun.com - Product Question",
-        recaptcha: "",
+        name: '',
+        email: '',
+        message: '',
+        reason: 'Calypsosun.com - Product Question',
+        recaptcha: '',
       },
       errors: {
-        name: "",
-        email: "",
-        message: "",
+        name: '',
+        email: '',
+        message: '',
       },
       response: [],
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.openTicket = this.openTicket.bind(this);
-    this.recaptchaChange = this.recaptchaChange.bind(this);
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.openTicket = this.openTicket.bind(this)
+    this.recaptchaChange = this.recaptchaChange.bind(this)
   }
 
   handleChange(e) {
     this.setState({
-      fields: { ...this.state.fields, [e.target.name]: e.target.value },
-    });
-    const { name, value } = e.target;
-    let errors = this.state.errors;
+      fields: {...this.state.fields, [e.target.name]: e.target.value},
+    })
+    const {name, value} = e.target
+    const errors = this.state.errors
 
     switch (name) {
-      case "name":
+      case 'name':
         errors.fullName =
-          value.length < 5 ? "Full Name must be 5 characters long!" : "";
-        break;
-      case "email":
-        errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
-        break;
-      case "message":
+          value.length < 5 ? 'Full Name must be 5 characters long!' : ''
+        break
+      case 'email':
+        errors.email = validEmailRegex.test(value) ? '' : 'Email is not valid!'
+        break
+      case 'message':
         errors.message =
-          value.length < 8 ? "Password must be 8 characters long!" : "";
-        break;
+          value.length < 8 ? 'Password must be 8 characters long!' : ''
+        break
       default:
-        break;
+        break
     }
 
-    this.setState({ errors, [name]: value });
+    this.setState({errors, [name]: value})
   }
   recaptchaChange(value) {
     this.setState({
-      fields: { ...this.state.fields, recaptcha: value },
-    });
+      fields: {...this.state.fields, recaptcha: value},
+    })
   }
 
   openTicket(fields) {
-    const baseUrl = data.apiUrl;
-    const finalUrl = baseUrl + `web/contact-us/`;
-    const myBody = fields;
-    console.log(JSON.stringify(myBody));
+    const baseUrl = data.apiUrl
+    const finalUrl = baseUrl + 'web/contact-us/'
+    const myBody = fields
     fetch(finalUrl, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
 
       body: JSON.stringify(myBody),
     })
-      .then((r) => {
-        return r.json();
+      .then(r => {
+        return r.json()
       })
       .then(
-        (result) => {
-          console.log(result);
+        result => {
           this.setState({
             response: result,
-          });
+          })
           if (result.message) {
             this.setState({
               response: result.message,
-            });
+            })
           }
         },
-        (error) => {
-          console.log(error.code);
-          console.error(error);
+        error => {
+          console.log(error.code)
+          console.error(error)
           this.setState({
             response: error,
-          });
-        }
-      );
+          })
+        },
+      )
   }
 
-  onSubmit = (e) => {
-    e.preventDefault();
+  onSubmit = e => {
+    e.preventDefault()
     if (validateForm(this.state.errors)) {
-      this.openTicket(this.state.fields);
+      this.openTicket(this.state.fields)
     } else {
-      console.error("Invalid Form");
+      console.error('Invalid Form')
     }
-  };
+  }
 
   render() {
-    const { response, errors } = this.state;
+    const {response, errors} = this.state
 
     return (
       <form>
@@ -125,10 +124,10 @@ export default class Contact extends React.Component {
           <input
             className="form-control"
             name="name"
-            placeholder="Full Name"
-            value={this.state.fields.Name}
             onChange={this.handleChange}
+            placeholder="Full Name"
             required
+            value={this.state.fields.Name}
           />
           {errors.name.length > 0 && (
             <span className="error">{errors.name}</span>
@@ -140,12 +139,12 @@ export default class Contact extends React.Component {
           </label>
           <input
             className="form-control"
-            type="email"
             name="email"
-            placeholder="Email"
-            value={this.state.fields.email}
             onChange={this.handleChange}
+            placeholder="Email"
             required
+            type="email"
+            value={this.state.fields.email}
           />
           {errors.email.length > 0 && (
             <span className="error">{errors.email}</span>
@@ -156,17 +155,17 @@ export default class Contact extends React.Component {
           <input
             className="form-control"
             name="address"
+            onChange={this.handleChange}
             placeholder="City, Country"
             value={this.state.fields.address}
-            onChange={this.handleChange}
           />
         </div>
         <div className="form-group">
           <label>REASON FOR CONTACT:</label>
           <select
             className="form-control"
-            name="reason"
             defaultValue={this.state.fields.reason}
+            name="reason"
             onChange={this.handleChange}
           >
             <option value="Product Question">Product Question</option>
@@ -191,33 +190,33 @@ export default class Contact extends React.Component {
           <textarea
             className="form-control"
             name="message"
-            placeholder="Message"
-            value={this.state.fields.description}
             onChange={this.handleChange}
-            rows="6"
+            placeholder="Message"
             required
+            rows="6"
+            value={this.state.fields.description}
           />
           {errors.message.length > 0 && (
             <span className="error">{errors.message}</span>
           )}
         </div>
         <ReCAPTCHA
+          onChange={this.recaptchaChange}
           ref={recaptchaRef}
           sitekey="6LfjPaEUAAAAAPGfkx7Nxp3glAdPGbLZE3lwY5c9"
-          onChange={this.recaptchaChange}
         />
         <p>
           {response.success} {response.message}
         </p>
         <button
           className="btn btn-wide "
+          onClick={e => this.onSubmit(e)}
           type="submit"
-          onClick={(e) => this.onSubmit(e)}
         >
           Submit
         </button>
         <div className="top50" />
       </form>
-    );
+    )
   }
 }

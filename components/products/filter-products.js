@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import _ from 'lodash'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
@@ -46,9 +46,8 @@ export default function FilterProducts(props) {
         return _.find(product.types, function (o) {
           return o == productType
         })
-      } else {
-        return props.products
       }
+      return props.products
     })
     props.setProducts(filteredProducts)
     props.setLimit(filteredProducts.length)
@@ -57,7 +56,7 @@ export default function FilterProducts(props) {
   function filterByProperties(value) {
     setSelectedFilter(value)
     const filteredProducts = props.products.filter(product => {
-      let variants = _.find(product.variants, function (o) {
+      const variants = _.find(product.variants, function (o) {
         if (o.name == value) {
           product.main_image = o.image_list[0].image // replaces the main image with variant image
           return o
@@ -104,9 +103,8 @@ export default function FilterProducts(props) {
         typeof router.query.category == 'string'
       ) {
         return true
-      } else {
-        return false
       }
+      return false
     }
 
     validatedCategory(category, router.query.category)
@@ -121,29 +119,29 @@ export default function FilterProducts(props) {
     <div className={Styles.slideMenu}>
       <div className="">
         <button
-          onClick={() => SetFilterToggle(false)}
           className={Styles.CloseSlider}
+          onClick={() => SetFilterToggle(false)}
         >
           X
         </button>
         <Link href="/search/">
-          <button className={Styles.OptionsTitle} aria-label="Search">
+          <button aria-label="Search" className={Styles.OptionsTitle}>
             Search for products{' '}
-            <FontAwesomeIcon icon={faSearch} className={Styles.SearchIcon} />
+            <FontAwesomeIcon className={Styles.SearchIcon} icon={faSearch} />
           </button>
         </Link>
         <button
-          onClick={() => setDropDownToggle(!dropDownToggle)}
           className={Styles.OptionsTitle}
+          onClick={() => setDropDownToggle(!dropDownToggle)}
         >
           Product Categories
         </button>
         <div
-          style={dropDownToggle ? {display: 'flex'} : {display: 'none'}}
           className={Styles.Options}
+          style={dropDownToggle ? {display: 'flex'} : {display: 'none'}}
         >
           {topProductFilters.map((item, index) => (
-            <button onClick={e => setCategory(item)} key={index}>
+            <button key={index} onClick={() => setCategory(item)}>
               {item}
             </button>
           ))}
@@ -157,8 +155,8 @@ export default function FilterProducts(props) {
           Filter By SPF
         </button>
         <div
-          style={spfDropDownToggle ? {display: 'flex'} : {display: 'none'}}
           className={Styles.SPFOptions}
+          style={spfDropDownToggle ? {display: 'flex'} : {display: 'none'}}
         >
           <button onClick={() => filterByProperties('SPF 10')}>10</button>
           <button onClick={() => filterByProperties('SPF 15')}>15</button>
@@ -169,28 +167,28 @@ export default function FilterProducts(props) {
       </div>
       <div className="">
         <button
+          className={Styles.OptionsTitle}
           onClick={() =>
             setProductsToShowDropDownToggle(!productsToShowDropDownToggle)
           }
-          className={Styles.OptionsTitle}
         >
           Products to Show
         </button>
         <div
+          className={Styles.Options}
           style={
             productsToShowDropDownToggle ? {display: 'flex'} : {display: 'none'}
           }
-          className={Styles.Options}
         >
-          <button onClick={e => props.setLimit(parseInt(10))}>10</button>
-          <button onClick={e => props.setLimit(parseInt(15))}>15</button>
-          <button onClick={e => props.setLimit(parseInt(20))}>20</button>
-          <button onClick={e => props.setLimit(parseInt(40))}>40</button>
+          <button onClick={() => props.setLimit(parseInt(10))}>10</button>
+          <button onClick={() => props.setLimit(parseInt(15))}>15</button>
+          <button onClick={() => props.setLimit(parseInt(20))}>20</button>
+          <button onClick={() => props.setLimit(parseInt(40))}>40</button>
         </div>
       </div>
       <button
-        onClick={() => SetFilterToggle(false)}
         className={Styles.ApplyFilter}
+        onClick={() => SetFilterToggle(false)}
       >
         Apply Filter
       </button>
@@ -203,7 +201,7 @@ export default function FilterProducts(props) {
           {topProductFilters
             .slice(0, topProductFiltersLimit)
             .map((item, index) => (
-              <button key={index} onClick={e => setCategory(item)}>
+              <button key={index} onClick={() => setCategory(item)}>
                 {item}
               </button>
             ))}
@@ -223,8 +221,8 @@ export default function FilterProducts(props) {
       </div>
       <div className={Styles.FilterWrapper}>
         <button
-          onClick={() => SetFilterToggle(!filterToggle)}
           className={Styles.FilterButton}
+          onClick={() => SetFilterToggle(!filterToggle)}
         >
           Filter
         </button>
@@ -233,8 +231,8 @@ export default function FilterProducts(props) {
             Selected filter{' '}
             <div className={Styles.SelectedFilter}>{selectedFilter}</div>
             <button
-              onClick={() => clearAllFilters()}
               className={Styles.ClearButton}
+              onClick={() => clearAllFilters()}
             >
               Clear All X
             </button>
