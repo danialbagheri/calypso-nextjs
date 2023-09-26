@@ -1,12 +1,17 @@
 import {Box, Typography} from '@mui/material'
 import {StarRating} from 'components/products'
 import Image from 'next/image'
+
 import {ShowPrice} from 'sharedComponents'
 
 export function RecommendedItem(props) {
   const {data} = props
+
   return (
     <Box
+      onClick={() => {
+        window.open(`/products/${data.slug}?sku=${data.sku}`)
+      }}
       sx={{
         width: '100%',
         display: 'flex',
@@ -15,6 +20,8 @@ export function RecommendedItem(props) {
         gap: 3,
         height: '100%',
         flexGrow: 1,
+
+        cursor: 'pointer',
       }}
     >
       <Box
@@ -43,7 +50,10 @@ export function RecommendedItem(props) {
       <Typography variant="h5">{data.name}</Typography>
 
       <Box sx={{display: 'flex', flexDirection: 'column', gap: 3}}>
-        <StarRating name={data.name} score={5} />
+        <Box className="centralize" gap={3}>
+          <StarRating name={data.name} score={data.review_average_score} />
+          <Typography>{data.review_average_score}</Typography>
+        </Box>
         <hr className="m-0" />
         <ShowPrice selectedVariant={data} />
       </Box>

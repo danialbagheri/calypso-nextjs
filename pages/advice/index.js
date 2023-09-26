@@ -80,7 +80,7 @@ export default function Advice({posts}) {
           {maxLimit ? null : (
             <button
               className="text-centre btn btn-outline-calypso mb-3"
-              onClick={evt => {
+              onClick={() => {
                 loadMore()
               }}
             >

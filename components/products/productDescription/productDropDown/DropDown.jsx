@@ -12,7 +12,6 @@ import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons'
 export default function DropDown(props) {
   const [expanded, setExpanded] = React.useState(false)
 
-  const {selectedVariant} = props
   return (
     <Box>
       <Accordion
@@ -37,8 +36,8 @@ export default function DropDown(props) {
               icon={expanded ? faMinus : faPlus}
             />
           }
-          sx={{mb: 2}}
           id="panel1a-header"
+          sx={{mb: 2}}
         >
           <Typography variant="h6">{props.title}</Typography>
         </AccordionSummary>

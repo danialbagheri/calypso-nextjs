@@ -270,6 +270,7 @@ export function InfoCards(props) {
           height: 200,
           top: card.imgTop ?? 0,
           left: '50%',
+
           transform: 'translate(-40%,calc(-100% + 6px))',
         }}
       >

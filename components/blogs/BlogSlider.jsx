@@ -5,6 +5,7 @@ import {getBlogs} from 'services'
 import Slider from 'react-slick'
 import BlogCard from './BlogCard'
 import 'slick-carousel/slick/slick.css'
+
 import 'slick-carousel/slick/slick-theme.css'
 function BlogSlider() {
   const BLOG = 'staff-picked'
@@ -62,7 +63,7 @@ function BlogSlider() {
   return (
     <Box mt={{xs: 10, sm: 20, my: 7}}>
       <Typography textAlign={'center'} variant="h2">
-        Editor's picks
+        Editor&#39;s picks
       </Typography>
 
       <Box
@@ -73,8 +74,8 @@ function BlogSlider() {
           {blogItems.length
             ? blogItems.map((blogItem, i) => (
                 <BlogCard
-                  index={i}
                   blog={blogItem.item}
+                  index={i}
                   key={blogItem.item.id}
                 />
               ))

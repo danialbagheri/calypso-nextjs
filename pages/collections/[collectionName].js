@@ -1,7 +1,6 @@
-import {HomeSlider} from 'components'
+import {HomeSlider, ProductRange} from 'components'
 import {Box, Container} from '@mui/material'
 import BreadCrumb from 'components/common/breadcrumb'
-import {ProductRange} from 'components'
 import {getCollection} from 'services'
 import _ from 'lodash'
 
@@ -23,7 +22,7 @@ export default function CollectionName(props) {
       <Container>
         <Box sx={{my: 12}}>
           <BreadCrumb breadcrumbs={breadCrumbPath} />
-          <ProductRange products={collectionProducts} limit={15} />
+          <ProductRange limit={15} products={collectionProducts} />
         </Box>
       </Container>
     </div>
