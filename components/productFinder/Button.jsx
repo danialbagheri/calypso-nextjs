@@ -13,7 +13,9 @@ export function Button(props) {
         bgcolor: props.bgcolor,
         color: props.fontColor,
         textTransform: 'none',
+        transition: '300ms',
         '&:hover': {
+          fontWeight: 700,
           boxShadow: 'none',
           bgcolor: props.bgcolor,
           borderColor: sx.borderColor ?? 'unset',

@@ -8,17 +8,15 @@ export default function ShowPrice(props) {
   const priceGenerator = () => {
     if (currency === 'EUR') {
       return `€${selectedVariant.euro_price}`
-    } else {
-      return `£${selectedVariant.price}`
     }
+    return `£${selectedVariant.price}`
   }
 
   const compareAtPriceGenerator = () => {
     if (currency === 'EUR') {
       return `€${selectedVariant.euro_compare_at_price}`
-    } else {
-      return `£${selectedVariant.compare_at_price}`
     }
+    return `£${selectedVariant.compare_at_price}`
   }
 
   React.useEffect(() => {
@@ -53,11 +51,10 @@ export default function ShowPrice(props) {
         </span>
       </div>
     )
-  } else {
-    return (
-      <div className="product-price">
-        <span className="product-price-new">{priceGenerator()}</span>
-      </div>
-    )
   }
+  return (
+    <div className="product-price">
+      <span className="product-price-new">{priceGenerator()}</span>
+    </div>
+  )
 }

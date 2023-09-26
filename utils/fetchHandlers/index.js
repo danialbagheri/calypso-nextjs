@@ -1,8 +1,10 @@
 import {BASE_URL} from '../../constants/servicesConstants/index'
 
 const errorHandler = response => {
+  const {status, statusText} = response
+
   if (response) {
-    return Promise.reject(`${response.statusText}`)
+    return Promise.reject({status, statusText})
   }
 }
 

@@ -1,10 +1,20 @@
 import {Box, TextField, Typography, useTheme} from '@mui/material'
+import {useState} from 'react'
 import Image from 'next/image'
 import WestIcon from '@mui/icons-material/West'
 import {Button} from '.'
 
 export function InfoCards(props) {
-  const {constants, steps, setSteps, surveyData, questions} = props
+  const {
+    constants,
+    steps,
+    setSteps,
+    surveyData,
+    questions,
+    showResultsHandler,
+  } = props
+  const [email, setEmail] = useState('')
+  const [error, setError] = useState('')
   const questionsCount = questions.length
   const theme = useTheme()
 
@@ -34,6 +44,7 @@ export function InfoCards(props) {
           fontColor="#FFF"
           key="btn_1"
           onClick={startBtnHandler}
+          sx={{mt: 8}}
           variant="contained"
         >
           Start
@@ -72,15 +83,17 @@ export function InfoCards(props) {
               infoStep: 2,
             }))
           }
+          sx={{mt: 8}}
           variant="contained"
         >
           Email me (get 5% off)
         </Button>,
         <Button
+          bgcolor="#FFF"
           fontColor="#000"
           key="btn_2"
           mt="10px"
-          onClick={startBtnHandler}
+          onClick={showResultsHandler}
           sx={{mt: '10px', borderColor: '#226F61', py: '10px'}}
           variant="outlined"
         >
@@ -92,6 +105,7 @@ export function InfoCards(props) {
       imgTop: '5px',
       footer: (
         <Button
+          bgcolor="#FFF"
           fontColor="#000"
           mt="10px"
           onClick={() =>
@@ -140,11 +154,15 @@ export function InfoCards(props) {
       ),
       body: [
         <TextField
+          error={error}
           fullWidth
+          helperText={error}
           id="outlined-basic"
           key="email_field"
           label="Email address"
+          onChange={e => setEmail(e.target.value)}
           sx={{
+            mt: 4,
             '& input': {px: 4, py: 3},
             '& fieldset': {borderRadius: '78px'},
             '& label': {
@@ -156,14 +174,24 @@ export function InfoCards(props) {
               color: '#000',
             },
           }}
+          value={email}
           variant="outlined"
         />,
         <Button
+          bgcolor={theme.palette.golden.main}
           fontColor="#FFF"
           key="btn_2"
           mt="10px"
-          onClick={() => {}}
-          sx={{mt: '10px', bgcolor: theme.palette.golden.main}}
+          onClick={() => {
+            if (email) {
+              surveyData.current.email = email
+              setError('')
+              showResultsHandler()
+            } else {
+              setError('Please enter your email address')
+            }
+          }}
+          sx={{mt: '10px'}}
           variant="contained"
         >
           Send
@@ -174,6 +202,7 @@ export function InfoCards(props) {
       footer: (
         <>
           <Button
+            bgcolor="#FFF"
             fontColor="#000"
             key="btn_3"
             mt="10px"
@@ -216,6 +245,18 @@ export function InfoCards(props) {
         </>
       ),
     },
+    {
+      type: 'howToContinue',
+      mode: constants.INFO,
+      title: (
+        <Typography mb={4} textAlign="center" variant="PFInfo">
+          This is what we recommend for you!
+        </Typography>
+      ),
+      body: [],
+
+      imgSrc: '/productFinder/start.svg',
+    },
   ]
 
   const card = infoCards[steps.infoStep]
@@ -240,7 +281,7 @@ export function InfoCards(props) {
         />
       </Box>
       {card.title}
-      <Box sx={{width: 'min(100% , 271px)', mt: 8}}>
+      <Box sx={{width: 'min(100% , 271px)'}}>
         {card.body.map(_body => _body)}
       </Box>
       {card.footer ?? card.footer}

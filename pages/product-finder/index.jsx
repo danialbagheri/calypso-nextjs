@@ -1,13 +1,24 @@
 import {useEffect, useRef, useState} from 'react'
 
 import {Box} from '@mui/material'
-import {getSPFFinderQuestions} from 'services'
+import {
+  getSPFFinderQuestions,
+  getSpfRecommendations,
+  postSurveys,
+} from 'services'
 
-import {Background, InfoCards, QuestionCards} from 'components/productFinder'
+import {
+  Background,
+  InfoCards,
+  ProductsSkeleton,
+  QuestionCards,
+  RecommendedItem,
+} from 'components/productFinder'
 
 //Constants
 const INFO = 'info'
 const QUESTION = 'question'
+const WIDTH = 'min(343px , 90%)'
 
 export default function ProductFinder(props) {
   const [steps, setSteps] = useState({
@@ -15,6 +26,8 @@ export default function ProductFinder(props) {
     infoStep: 0,
     questionsStep: 0,
   })
+  const [loading, setLoading] = useState(false)
+  const [recommendVariants, setRecommendVariants] = useState([])
   const infoMode = steps.mode === INFO
 
   const surveyData = useRef({
@@ -25,6 +38,26 @@ export default function ProductFinder(props) {
     answers: [],
   })
   const isSurveyInitialized = useRef(false)
+
+  const showResultsHandler = () => {
+    setSteps(prev => ({...prev, mode: INFO, infoStep: 3}))
+    setLoading(true)
+    const date = new Date()
+    surveyData.current.finished_at = date.toISOString()
+
+    postSurveys(surveyData.current)
+      .then(res => res.id)
+      .then(id => getSpfRecommendations(id))
+      .then(res => {
+        if (res.results) {
+          setRecommendVariants(res.results)
+        }
+        setLoading(false)
+      })
+      .catch(() => {
+        setLoading(false)
+      })
+  }
 
   useEffect(() => {
     //Initialize the survey
@@ -46,7 +79,7 @@ export default function ProductFinder(props) {
       <Background infoMode={infoMode} />
       <Box
         minHeight="800px"
-        pb={{xs: '133px', md: '156px'}}
+        pb={steps.infoStep === 3 ? {xs: 0} : {xs: '133px', md: '156px'}}
         pt={{xs: infoMode ? 11 : 4, md: 14}}
         sx={{
           display: 'flex',
@@ -57,7 +90,7 @@ export default function ProductFinder(props) {
       >
         <Box
           sx={{
-            width: 'min(343px , 90%)',
+            width: WIDTH,
             height: infoMode ? 'fit-content' : '100%',
 
             bgcolor: '#FFF',
@@ -71,7 +104,6 @@ export default function ProductFinder(props) {
             justifyContent: 'flex-start',
 
             position: 'relative',
-
             pb: infoMode ? 5 : 11,
             pt: infoMode ? 9 : 5,
             px: 9,
@@ -83,6 +115,7 @@ export default function ProductFinder(props) {
               constants={{INFO, QUESTION}}
               questions={props.data.questions}
               setSteps={setSteps}
+              showResultsHandler={showResultsHandler}
               steps={steps}
               surveyData={surveyData}
             />
@@ -99,6 +132,35 @@ export default function ProductFinder(props) {
             />
           ) : null}
         </Box>
+        {steps.infoStep === 3 ? (
+          <Box
+            sx={{
+              width: '100%',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 220px))',
+              gridTemplateRows: 'auto',
+              rowGap: 10,
+              columnGap: 3,
+              justifyContent: 'center',
+              bgcolor: '#FFF',
+              mt: 8,
+              p: 4,
+            }}
+          >
+            {loading ? (
+              <>
+                <ProductsSkeleton />
+                <ProductsSkeleton />
+              </>
+            ) : (
+              <>
+                {recommendVariants.map(item => (
+                  <RecommendedItem data={item} key={item.id} />
+                ))}
+              </>
+            )}
+          </Box>
+        ) : null}
       </Box>
     </Box>
   )

@@ -17,6 +17,10 @@ const postReviewImage = image_base64 => {
 const postOutOfStockEmail = data => {
   return post({endpoint: 'users/stock-reports/', data})
 }
+
+const postSurveys = data => {
+  return post({endpoint: 'surveys/submit/', data})
+}
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------ GET Requests ------------------------------ */
@@ -51,6 +55,9 @@ const getBlogs = blog => {
   return get({endpoint: `blogs/collections/${blog}`})
 }
 
+const getSpfRecommendations = id => {
+  return get({endpoint: `products/variants/spf-recommendations/${id}`})
+}
 /* ----------------------------- Patch requests ----------------------------- */
 const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
@@ -78,4 +85,6 @@ export {
   postOutOfStockEmail,
   getProductData,
   singleReviewPatch,
+  postSurveys,
+  getSpfRecommendations,
 }
