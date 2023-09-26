@@ -17,6 +17,10 @@ const postReviewImage = image_base64 => {
 const postOutOfStockEmail = data => {
   return post({endpoint: 'users/stock-reports/', data})
 }
+
+const postSurveys = data => {
+  return post({endpoint: 'surveys/submit/', data})
+}
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------ GET Requests ------------------------------ */
@@ -32,22 +36,28 @@ const getSearchData = params => {
   return get({endpoint: `web/search/?q=${params}`})
 }
 
-const getSingleProduct = slug => {
-  return get({endpoint: `products/single/${slug}/`})
-}
-
 const getProductData = slug => {
   return get({endpoint: `products/single/${slug}/?resize_w=700`})
 }
 
-const getProductReviews = (slug, page = 1) => {
-  return get({endpoint: `reviews/product/?product_slug=${slug}&page=${page}`})
+const getSingleProduct = slug => {
+  return get({endpoint: `products/single/${slug}/`})
+}
+const getSPFFinderQuestions = () => {
+  return get({endpoint: 'surveys/spf-finder/'})
+}
+
+const getProductReviews = slug => {
+  return get({endpoint: `reviews/product/?product_slug=${slug}`})
 }
 
 const getBlogs = blog => {
   return get({endpoint: `blogs/collections/${blog}`})
 }
 
+const getSpfRecommendations = id => {
+  return get({endpoint: `products/variants/spf-recommendations/${id}`})
+}
 /* ----------------------------- Patch requests ----------------------------- */
 const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
@@ -60,8 +70,6 @@ const registerContact = data => {
 }
 /* -------------------------------------------------------------------------- */
 
-/* -------------------------------------------------------------------------- */
-
 export {
   postContactUsSubmit,
   postProductReview,
@@ -72,8 +80,11 @@ export {
   getSingleProduct,
   getProductReviews,
   getBlogs,
+  getSPFFinderQuestions,
   registerContact,
   postOutOfStockEmail,
   getProductData,
   singleReviewPatch,
+  postSurveys,
+  getSpfRecommendations,
 }

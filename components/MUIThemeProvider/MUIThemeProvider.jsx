@@ -21,15 +21,19 @@ const theme = createTheme({
     palm: {
       main: '#226F61',
     },
-    sand: {
-      main: '#FCF5EC',
-    },
+    sand: {main: '#FCF5EC'},
     earth: {
       main: '#3C1510',
     },
     success: {main: '#2ECC71'},
     warning: {main: '#F1C40F'},
     failure: {main: '#E74C3C'},
+    PFsand: {
+      main: '#FFEFD6',
+    },
+    green: {
+      main: '#226F61',
+    },
   },
   spacing: 4,
   typography: {
@@ -99,6 +103,20 @@ const theme = createTheme({
       fontWeight: 500,
       fontSize: '14px',
       lineHeight: '17px',
+    },
+    PFInfo: {
+      fontFamily: 'Helvetica Neue',
+      fontStyle: 'normal',
+      fontWeight: 700,
+      fontSize: '28px',
+      lineHeight: 'normal',
+    },
+    PFQuestion: {
+      fontFamily: 'Helvetica Neue',
+      fontStyle: 'normal',
+      fontWeight: 700,
+      fontSize: '22px',
+      lineHeight: 'normal',
     },
   },
   breakpoints: {

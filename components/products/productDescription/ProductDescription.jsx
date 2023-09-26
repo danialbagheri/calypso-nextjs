@@ -66,7 +66,7 @@ const ProductDescription = props => {
       )}
 
       <div className="ShareButtonOnProductPage">
-        <ShareButton text={product.name} media={product.main_image} />
+        <ShareButton media={product.main_image} text={product.name} />
       </div>
 
       <ProductDropDown product={product} selectedVariant={selectedVariant} />

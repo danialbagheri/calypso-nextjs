@@ -9,19 +9,18 @@ export default class WhereToBuy extends React.Component {
       thisProductStore = stores.map((store, index) => {
         if (store.stockist.name === 'Amazon') {
           return null
-        } else {
-          return (
-            <Box key={index}>
-              <a href={store.url} rel="noopener noreferrer" target="_blank">
-                <img
-                  alt={store.stockist.name}
-                  src={store.stockist.logo}
-                  width={'100px'}
-                />
-              </a>
-            </Box>
-          )
         }
+        return (
+          <Box key={index}>
+            <a href={store.url} rel="noopener noreferrer" target="_blank">
+              <img
+                alt={store.stockist.name}
+                src={store.stockist.logo}
+                width={'100px'}
+              />
+            </a>
+          </Box>
+        )
       })
     } else {
       thisProductStore = <li>All good pharmacies.</li>

@@ -9,7 +9,7 @@ import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded
 
 export default function SharingSocialIcons(props) {
   const {showSharingIcons, text, media} = props
-  const [uriMedia, setUriMedia] = React.useState('')
+  const [, setUriMedia] = React.useState('')
   const router = useRouter()
 
   React.useEffect(() => {
@@ -69,7 +69,7 @@ export default function SharingSocialIcons(props) {
           <FacebookRoundedIcon />
         </IconButton>
       </Link>
-      <IconButton onClick={showSharingIcons} color="primary">
+      <IconButton color="primary" onClick={showSharingIcons}>
         <CloseIcon />
       </IconButton>
     </Box>

@@ -1,9 +1,8 @@
-import React from 'react'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import {Button, Link, CardActionArea, CardActions} from '@mui/material'
+import {Button, CardActionArea, CardActions, Link} from '@mui/material'
 
 export default function BlogCard(props) {
   const {blog} = props
@@ -12,22 +11,22 @@ export default function BlogCard(props) {
     <Card sx={{maxWidth: 345, mr: 2}} variant="outlined">
       <CardActionArea>
         <CardMedia
+          alt={blog.image_alt_text}
           component="img"
           height="140"
           image={blog.image}
-          alt={blog.image_alt_text}
         />
         <CardContent sx={{minHeight: '100px', textAlign: 'center'}}>
-          <Link href={blogUrl} underline="none" color="inherit">
-            <Typography gutterBottom variant="h5" component="div">
+          <Link color="inherit" href={blogUrl} underline="none">
+            <Typography component="div" gutterBottom variant="h5">
               {blog.title}
             </Typography>
           </Link>
         </CardContent>
       </CardActionArea>
       <CardActions sx={{justifyContent: 'center'}}>
-        <Link href={blogUrl} underline="none" color="inherit">
-          <Button size="small" color="primary">
+        <Link color="inherit" href={blogUrl} underline="none">
+          <Button color="primary" size="small">
             Read More
           </Button>
         </Link>

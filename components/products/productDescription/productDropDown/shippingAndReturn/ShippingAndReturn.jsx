@@ -1,5 +1,4 @@
-import React from 'react'
-import {Box, Typography, Link} from '@mui/material'
+import {Box, Link, Typography} from '@mui/material'
 export default function ShippingAndReturn() {
   return (
     <Box>

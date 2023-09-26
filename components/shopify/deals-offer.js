@@ -1,5 +1,4 @@
 import {useEffect, useState} from 'react'
-import _ from 'lodash'
 import DealItem from './deal-item'
 import LinearProgress from '@mui/material/LinearProgress'
 
@@ -28,8 +27,6 @@ export default function DealOffer(props) {
   // }
 
   const checkFreeDeliveryEligibility = () => {
-    const lineItems = checkoutState.lineItems
-
     if (checkoutState.totalPrice && checkoutState.totalPrice.amount < 25) {
       const remainingAmount = 25 - parseFloat(checkoutState.totalPrice.amount)
       setRemainingAmount(remainingAmount.toFixed(2))
@@ -59,9 +56,9 @@ export default function DealOffer(props) {
         <div className="Cart-info clearfix calypso-orange">
           <LinearProgress
             color="primary"
-            variant="determinate"
             sx={{mb: 3}}
             value={100 - remainingAmount * 4}
+            variant="determinate"
           />
           Spend £{remainingAmount} more to be eligible for{' '}
           <strong>FREE shipping</strong>
@@ -70,9 +67,9 @@ export default function DealOffer(props) {
         <div className="Cart-info clearfix calypso-orange">
           <LinearProgress
             color="primary"
-            variant="determinate"
             sx={{mb: 3}}
             value={100}
+            variant="determinate"
           />
           You have got free shipping! 🧡 🎉
         </div>

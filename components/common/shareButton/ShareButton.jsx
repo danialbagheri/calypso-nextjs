@@ -15,16 +15,16 @@ export default function ShareButton({text, media}) {
   const icons =
     displayIcon === false ? (
       <Box sx={{display: 'flex', alignItems: 'center'}}>
-        <IconButton onClick={showSharingIcons} color="primary">
+        <IconButton color="primary" onClick={showSharingIcons}>
           <ShareIcon />
         </IconButton>
         <Typography color="primary">Share</Typography>
       </Box>
     ) : (
       <SharingSocialIcons
+        media={media}
         showSharingIcons={showSharingIcons}
         text={text}
-        media={media}
       />
     )
   return <div>{icons}</div>
