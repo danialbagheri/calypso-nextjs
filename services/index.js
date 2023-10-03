@@ -32,6 +32,14 @@ const getCollection = collection => {
   return get({endpoint: `products/collections/${collection}/`})
 }
 
+const getTrendingUrls = () => {
+  return get({endpoint: 'products/collections/trending/?resize_w=580'})
+}
+
+const getBestSellerResults = () => {
+  return get({endpoint: 'products/collections/best_seller/'})
+}
+
 const getSearchData = params => {
   return get({endpoint: `web/search/?q=${params}`})
 }
@@ -87,4 +95,6 @@ export {
   singleReviewPatch,
   postSurveys,
   getSpfRecommendations,
+  getTrendingUrls,
+  getBestSellerResults,
 }

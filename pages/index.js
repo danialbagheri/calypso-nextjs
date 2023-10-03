@@ -10,7 +10,11 @@ import {
   Trending,
 } from 'components'
 
-import {getCollectionBanner} from 'services'
+import {
+  getBestSellerResults,
+  getCollectionBanner,
+  getTrendingUrls,
+} from 'services'
 
 function Home({slides, isLoaded, trending, bestseller, secondarySlides}) {
   return (
@@ -46,12 +50,9 @@ function Home({slides, isLoaded, trending, bestseller, secondarySlides}) {
       <main>
         <section className="top-0">
           <HomeSlider isLoaded={isLoaded} slides={slides} />
-          <div className="container-fluid">
-            <Trending trending={trending} />
-          </div>
-          <div className="mt-5"></div>
+
+          <Trending trending={trending} />
           <HomeSlider isLoaded={isLoaded} slides={secondarySlides} />
-          <div className="mt-5"></div>
           <BestSeller bestseller={bestseller} />
           <StaySafe />
           <AsSeen />
@@ -64,37 +65,41 @@ function Home({slides, isLoaded, trending, bestseller, secondarySlides}) {
 }
 
 export async function getStaticProps() {
-  const baseUrl = process.env.API_URL
-
-  const slides = await getCollectionBanner('homepage')
-  const secondarySlides = await getCollectionBanner('secondary')
-  // Now we will get the staff picked articles
-  // api call for trending products
-
-  const trendingUrl = baseUrl + 'products/collections/trending/?resize_w=580'
-  const trendingResults = await fetch(trendingUrl)
-  const trending = await trendingResults.json()
-  // Best product collections
-  const bestSellerEndPoint = baseUrl + 'products/collections/best_seller/'
-  const bestSellerResults = await fetch(bestSellerEndPoint)
-  const bestSeller = await bestSellerResults.json()
-  if (!slides || !secondarySlides) {
-    return {
-      notFound: true,
-      isLoaded: false,
-    }
-  }
-
-  return {
-    props: {
-      slides: slides.results,
-      secondarySlides: secondarySlides.results,
-      isLoaded: true,
-      trending: trending.items,
-      bestseller: bestSeller,
-    },
-    revalidate: 120, // will be passed to the page component as props
-  }
+  return Promise.all([
+    getCollectionBanner('homepage'),
+    getCollectionBanner('secondary'),
+    getTrendingUrls(),
+    getBestSellerResults(),
+  ])
+    .then(res => {
+      if (!res[0] || !res[1]) {
+        return {
+          notFound: true,
+          isLoaded: false,
+        }
+      }
+      return {
+        props: {
+          slides: res[0].results,
+          secondarySlides: res[1].results,
+          isLoaded: true,
+          trending: res[2].items,
+          bestseller: res[3],
+        },
+        revalidate: 120, // will be passed to the page component as props
+      }
+    })
+    .catch(() => {
+      return {
+        props: {
+          slides: [],
+          secondarySlides: [],
+          isLoaded: false,
+          trending: [],
+          bestseller: {},
+        },
+      }
+    })
 }
 
 export default Home

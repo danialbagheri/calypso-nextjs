@@ -5,6 +5,7 @@ import Loader from 'react-loaders'
 import 'loaders.css/loaders.min.css'
 
 import {TrendingItem} from './trendingItem'
+import {Box} from '@mui/material'
 
 export default function Trending(props) {
   const isLoaded = true
@@ -49,7 +50,7 @@ export default function Trending(props) {
   }
 
   return (
-    <div className="trending-slider">
+    <Box sx={{maxWidth: 'min(1400px , 90%)', margin: '0 auto'}}>
       <h1>Trending</h1>
 
       {isLoaded ? (
@@ -67,6 +68,6 @@ export default function Trending(props) {
           type="ball-pulse"
         />
       )}
-    </div>
+    </Box>
   )
 }

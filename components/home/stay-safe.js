@@ -1,5 +1,3 @@
-// import YouTube from "react-youtube";
-// import MediaQuery from "react-responsive";
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'

@@ -1,73 +1,50 @@
-import {Typography} from '@mui/material'
+import {Box, Typography} from '@mui/material'
+import Image from 'next/image'
+
+const DATA = [
+  {alt: 'Closer Magazine', src: '/asSeenLogo/closerlogo.png'},
+  {alt: 'Best', src: '/asSeenLogo/bestlogo.png'},
+  {alt: 'Daily Record', src: '/asSeenLogo/dailyrecordlogo.png'},
+  {alt: 'Evening Stand', src: '/asSeenLogo/eveningstandardlogo.png'},
+  {alt: 'Metro', src: '/asSeenLogo/metrologo.png'},
+  {alt: 'RealPeople Magazine', src: '/asSeenLogo/realpeoplelogo.png'},
+  {alt: 'Reveal', src: '/asSeenLogo/reveallogo.png'},
+  {alt: 'Woman Magazine', src: '/asSeenLogo/womanlogo.png'},
+]
 
 function AsSeen() {
   return (
-    <div className="row top50 mb-4">
+    <Box className="row" sx={{maxWidth: '100%', mt: '50px', mb: '4rem'}}>
       <Typography textAlign={'center'} variant="h2">
         As seen in
       </Typography>
-      <div className="container top30">
-        <div className="col-lg-3 col-md-3 col-xs-6 top15">
-          <img
-            alt="Closer Magazine"
-            className="asSeenImage"
-            src={'/asSeenLogo/closerlogo.png'}
-          />
-        </div>
-        <div className="col-lg-3 col-md-3 col-xs-6 top15">
-          <img
-            alt="Best"
-            className="asSeenImage"
-            src={'/asSeenLogo/bestlogo.png'}
-          />
-        </div>
-        <div className="col-lg-3 col-md-3 col-xs-6 top15">
-          <img
-            alt="Daily Record"
-            className="asSeenImage"
-            src={'/asSeenLogo/dailyrecordlogo.png'}
-          />
-        </div>
-        <div className="col-lg-3 col-md-3 col-xs-6 top15">
-          <img
-            alt="Evening Stand"
-            className="asSeenImage"
-            src={'/asSeenLogo/eveningstandardlogo.png'}
-          />
-        </div>
-      </div>
-      <div className="container top30">
-        <div className="col-lg-3 col-md-3 col-xs-6 top15">
-          <img
-            alt="Metro"
-            className="asSeenImage"
-            src={'/asSeenLogo/metrologo.png'}
-          />
-        </div>
-        <div className="col-lg-3 col-md-3 col-xs-6 top15">
-          <img
-            alt="RealPeople Magazine"
-            className="asSeenImage"
-            src={'/asSeenLogo/realpeoplelogo.png'}
-          />
-        </div>
-        <div className="col-lg-3 col-md-3 col-xs-6 top15">
-          <img
-            alt="Reveal"
-            className="asSeenImage"
-            src={'/asSeenLogo/reveallogo.png'}
-          />
-        </div>
-        <div className="col-lg-3 col-md-3 col-xs-6 top15">
-          <img
-            alt="Woman Magazine"
-            className="asSeenImage"
-            src={'/asSeenLogo/womanlogo.png'}
-          />
-        </div>
-      </div>
-      <span className="top30" />
-    </div>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 8,
+          flexWrap: 'wrap',
+          maxWidth: 'min(900px , 90%)',
+          mx: 'auto',
+          my: 25,
+        }}
+      >
+        {DATA.map(_data => (
+          <Box
+            key={_data.alt}
+            sx={{width: 150, height: 70, position: 'relative', mx: 'auto'}}
+          >
+            <Image
+              alt={_data.alt}
+              fill
+              src={_data.src}
+              style={{objectFit: 'contain'}}
+            />
+          </Box>
+        ))}
+      </Box>
+    </Box>
   )
 }
 

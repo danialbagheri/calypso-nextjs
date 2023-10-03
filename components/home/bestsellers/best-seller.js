@@ -8,7 +8,7 @@ export default function BestSeller(props) {
   const collection = props.bestseller
 
   return (
-    <Box sx={{maxWidth: '1440px', margin: '0 auto'}}>
+    <Box sx={{maxWidth: '1440px', margin: '0 auto', mt: '5rem'}}>
       <h1 className="textCenter">Top Seller products</h1>
       {collection ? (
         <Box

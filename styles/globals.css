@@ -788,21 +788,6 @@ input.search-field:focus {
   opacity: 0;
 }
 
-/* As Seen section Homa page */
-.asSeenImage {
-  display: block;
-  width: 40%;
-  margin: 0 auto;
-}
-
-@media only screen and (max-width: 480px) {
-  .asSeenImage {
-    width: 70%;
-  }
-}
-
-/* stay safe section Home page */
-
 .yellow-background {
   background-color: #fecb2f;
 }
