@@ -69,7 +69,7 @@ const SliderItem = slide => {
   )
 }
 
-export default function HomeSlider({slides}) {
+export default function HomeSlider({slides, second}) {
   const settings = {
     arrows: true,
     dots: true,
@@ -83,7 +83,7 @@ export default function HomeSlider({slides}) {
   return (
     <Box
       sx={{
-        mt: '5rem',
+        mt: second ? '5rem' : 0,
         '& button.slick-arrow': {
           display: 'none !important',
         },

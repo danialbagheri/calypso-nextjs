@@ -50,7 +50,7 @@ export default function Trending(props) {
   }
 
   return (
-    <Box sx={{maxWidth: 'min(1400px , 90%)', margin: '0 auto'}}>
+    <Box sx={{maxWidth: 'min(1400px , 90%)', margin: '0 auto', mt: '5rem'}}>
       <h1>Trending</h1>
 
       {isLoaded ? (

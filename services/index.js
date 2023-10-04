@@ -66,6 +66,10 @@ const getBlogs = blog => {
 const getSpfRecommendations = id => {
   return get({endpoint: `products/variants/spf-recommendations/${id}`})
 }
+
+const getInstagramPhotos = () => {
+  return get({endpoint: 'web/instagram-feed/'})
+}
 /* ----------------------------- Patch requests ----------------------------- */
 const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
@@ -79,9 +83,6 @@ const registerContact = data => {
 /* -------------------------------------------------------------------------- */
 
 export {
-  postContactUsSubmit,
-  postProductReview,
-  postReviewImage,
   getCollectionBanner,
   getCollection,
   getSearchData,
@@ -89,12 +90,16 @@ export {
   getProductReviews,
   getBlogs,
   getSPFFinderQuestions,
-  registerContact,
-  postOutOfStockEmail,
   getProductData,
-  singleReviewPatch,
-  postSurveys,
   getSpfRecommendations,
   getTrendingUrls,
   getBestSellerResults,
+  getInstagramPhotos,
+  postContactUsSubmit,
+  postProductReview,
+  postReviewImage,
+  postOutOfStockEmail,
+  postSurveys,
+  registerContact,
+  singleReviewPatch,
 }

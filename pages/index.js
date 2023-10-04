@@ -52,7 +52,9 @@ function Home({slides, isLoaded, trending, bestseller, secondarySlides}) {
           <HomeSlider isLoaded={isLoaded} slides={slides} />
 
           <Trending trending={trending} />
-          <HomeSlider isLoaded={isLoaded} slides={secondarySlides} />
+          {secondarySlides ? (
+            <HomeSlider isLoaded={isLoaded} second slides={secondarySlides} />
+          ) : null}
           <BestSeller bestseller={bestseller} />
           <StaySafe />
           <AsSeen />
