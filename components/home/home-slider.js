@@ -90,7 +90,7 @@ export default function HomeSlider({slides, second}) {
       }}
     >
       <Slider {...settings}>
-        {slides[0].slider_slides.map(slide => (
+        {slides[0]?.slider_slides.map(slide => (
           <SliderItem key={slide.id} slide={slide} />
         ))}
       </Slider>

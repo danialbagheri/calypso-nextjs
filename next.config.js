@@ -5,7 +5,11 @@ const withImages = require('next-images')
 module.exports = withImages({
   // exclude: path.resolve(__dirname, "public/svg"),
   images: {
-    domains: ['service.calypsosun.com', 'calypso-static.s3.amazonaws.com'],
+    domains: [
+      'service.calypsosun.com',
+      'calypso-static.s3.amazonaws.com',
+      'linco-cabana.s3.amazonaws.com',
+    ],
   },
   redirects: async () => {
     return [
