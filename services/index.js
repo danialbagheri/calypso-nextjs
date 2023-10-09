@@ -32,6 +32,14 @@ const getCollection = collection => {
   return get({endpoint: `products/collections/${collection}/`})
 }
 
+const getTrendingUrls = () => {
+  return get({endpoint: 'products/collections/trending/?resize_w=580'})
+}
+
+const getBestSellerResults = () => {
+  return get({endpoint: 'products/collections/best_seller/'})
+}
+
 const getSearchData = params => {
   return get({endpoint: `web/search/?q=${params}`})
 }
@@ -58,6 +66,10 @@ const getBlogs = blog => {
 const getSpfRecommendations = id => {
   return get({endpoint: `products/variants/spf-recommendations/${id}`})
 }
+
+const getInstagramPhotos = () => {
+  return get({endpoint: 'web/instagram-feed/'})
+}
 /* ----------------------------- Patch requests ----------------------------- */
 const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
@@ -71,9 +83,6 @@ const registerContact = data => {
 /* -------------------------------------------------------------------------- */
 
 export {
-  postContactUsSubmit,
-  postProductReview,
-  postReviewImage,
   getCollectionBanner,
   getCollection,
   getSearchData,
@@ -81,10 +90,16 @@ export {
   getProductReviews,
   getBlogs,
   getSPFFinderQuestions,
-  registerContact,
-  postOutOfStockEmail,
   getProductData,
-  singleReviewPatch,
-  postSurveys,
   getSpfRecommendations,
+  getTrendingUrls,
+  getBestSellerResults,
+  getInstagramPhotos,
+  postContactUsSubmit,
+  postProductReview,
+  postReviewImage,
+  postOutOfStockEmail,
+  postSurveys,
+  registerContact,
+  singleReviewPatch,
 }

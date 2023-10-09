@@ -2,84 +2,98 @@ import Slider from 'react-slick'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-// import Image from "next/image";
-import Link from 'next/link'
+
 import {Box} from '@mui/material'
-export default function HomeSlider({slides}) {
+import {useEffect, useState} from 'react'
+import Image from 'next/image'
+import {useRouter} from 'next/router'
+
+const SliderItem = slide => {
+  const [imgSrc, setImgSrc] = useState('xl_image')
+  const router = useRouter()
+
+  useEffect(() => {
+    if (window) {
+      const imgSrcHandler = () => {
+        const windowWidth = window.innerWidth
+        if (windowWidth < 600) {
+          setImgSrc('xs_image')
+        } else if (windowWidth < 900) {
+          setImgSrc('sm_image')
+        } else if (windowWidth < 1200) {
+          setImgSrc('md_image')
+        } else if (windowWidth < 1536) {
+          setImgSrc('lg_image')
+        } else {
+          setImgSrc('xl_image')
+        }
+      }
+
+      imgSrcHandler()
+      window.addEventListener('resize', imgSrcHandler)
+    }
+  }, [])
+
+  const clickHandler = () => {
+    router.push(slide.slide.link || '/about')
+  }
+
+  if (slide.slide.custom_slide) {
+    return (
+      <Box onClick={clickHandler}>
+        <div
+          dangerouslySetInnerHTML={{__html: slide.slide.custom_code}}
+          itemProp="articleBody"
+        />
+      </Box>
+    )
+  }
+
+  return (
+    <Box
+      index={slide.id}
+      onClick={clickHandler}
+      sx={{
+        position: 'relative',
+        height: {xs: 400, ssm: 500, sm: 800, md: 500, lg: 600},
+        cursor: 'pointer',
+      }}
+    >
+      <Image
+        alt={slide.slide.image_alt_text}
+        fill
+        src={slide.slide[imgSrc]}
+        style={{objectFit: 'cover'}}
+      />
+    </Box>
+  )
+}
+
+export default function HomeSlider({slides, second}) {
   const settings = {
     arrows: true,
     dots: true,
     infinite: true,
     speed: 500,
     lazyLoad: 'progressive',
-    // slidesToShow: 1,
     slidesToScroll: 1,
     dotsClass: 'dot',
   }
-  const slider = slides[0].slider_slides.map(slide => {
-    if (slide.slide.custom_slide) {
-      return (
-        <div className="banner" index={slide.slide.id} key={slide.slide.id}>
-          <div
-            dangerouslySetInnerHTML={{__html: slide.slide.custom_code}}
-            itemProp="articleBody"
-          />
-        </div>
-      )
-    }
-    return (
-      <Box className="banner" index={slide.id} key={slide.id}>
-        <Link href={slide.slide.link ? slide.slide.link : '/about'}>
-          <picture>
-            <source
-              media="(min-width: 1536px)"
-              srcSet={slide.slide.xl_image}
-              type="image/png"
-            />
-            <source
-              media="(min-width: 1200px)"
-              srcSet={slide.slide.lg_image}
-              type="image/png"
-              width="1536"
-            />
-            <source
-              media="(min-width: 900px)"
-              srcSet={slide.slide.md_image}
-              type="image/png"
-              width="1200"
-            />
-            <source
-              media="(min-width: 600px)"
-              srcSet={slide.slide.sm_image}
-              type="image/png"
-              width="900"
-            />
-            <source
-              media="(min-width: 0px)"
-              srcSet={slide.slide.xs_image}
-              type="image/png"
-              width="600"
-            />
-            <img
-              alt={slide.slide.image_alt_text}
-              className="hero-image"
-              src={slide.slide.md_image}
-            />
-          </picture>
-        </Link>
-      </Box>
-    )
-  })
 
   return (
     <Box
       sx={{
+        mt: second ? '5rem' : 0,
         '& button.slick-arrow': {
           display: 'none !important',
         },
       }}
     >
-      <Slider {...settings}>{slider}</Slider>
+      <Slider {...settings}>
+        {slides[0]?.slider_slides.map(slide => (
+          <SliderItem key={slide.id} slide={slide} />
+        ))}
+      </Slider>
     </Box>
   )
 }

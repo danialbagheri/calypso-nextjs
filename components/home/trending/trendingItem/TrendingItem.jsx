@@ -74,7 +74,7 @@ function TrendingItem({item}) {
           backgroundColor: '#E7EBEE',
         }}
       >
-        <Image alt={name} fill objectFit="cover" src={imageSrc} />
+        <Image alt={name} fill objectFit="cover" src={imageSrc || ''} />
       </Box>
       <Box>
         <Typography variant={'h4'}>{name}</Typography>

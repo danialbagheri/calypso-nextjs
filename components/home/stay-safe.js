@@ -1,10 +1,9 @@
-// import YouTube from "react-youtube";
-// import MediaQuery from "react-responsive";
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import Styles from '../../styles/homepage/staySafewithCalypso.module.css'
+import Image from 'next/image'
 
 export default function StaySafe() {
   const videos = [
@@ -102,11 +101,14 @@ export default function StaySafe() {
       <div className="row">
         <div className="col-2 col-md-2" />
         <div className="col-8 col-md-8">
-          <img
+          <Image
             alt="Stay safe with Calypso"
             className="stay-safe top30"
+            height={200}
             src={'/home-page/Stay-Safe-with-Calypso.png'}
+            width={300}
           />
+
           <p className={Styles.text}>
             Unsure of how best to keep your family protected from the sun this
             summer? Watch our video to get some valuable sun care advice.

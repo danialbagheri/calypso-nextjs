@@ -1,77 +1,82 @@
 import {useEffect, useState} from 'react'
-import data from '../../data.json'
-//import ReactInstagramFeed from "react-instagram-feed";
+
+import {Box, Typography} from '@mui/material'
+import Image from 'next/image'
+import {getInstagramPhotos} from 'services'
 
 export default function Instagram() {
-  const [feed, setFeed] = useState([])
-  const [windowWidth, setWindowWidth] = useState(0)
+  const [feeds, setFeeds] = useState([])
+  const [thumbDetail, setThumbDetail] = useState({width: 186, count: 5})
 
   useEffect(() => {
-    setWindowWidth(window.innerWidth)
-    fetchInstaImages()
+    getInstagramPhotos().then(res => {
+      setFeeds(res)
+    })
   }, [])
 
-  function fetchInstaImages() {
-    const baseUrl = data.apiUrl
-    const endPoint = baseUrl + 'web/instagram-feed/'
-    fetch(endPoint)
-      .then(response => response.json())
-      .then(result => {
-        setFeed(result)
-      })
-  }
-
-  let thumbnailWidth = 186
-  const quantityOfInstagramImages = Math.floor(windowWidth / thumbnailWidth)
-  thumbnailWidth = windowWidth / quantityOfInstagramImages
-  // Loading component
-  const loading = <div className="p-2 general-loader" />
-  // Instagram feed component
-  const instagramPost = feed
-    .slice(0, quantityOfInstagramImages)
-    .map((insta, index) => {
-      if (insta.thumbnail) {
-        return (
-          <a
-            className="instaPost"
-            href={insta.permalink}
-            key={index}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <picture>
-              <source
-                alt={insta.caption}
-                srcSet={insta.webp}
-                type="image/webp"
-              />
-              <source
-                alt={insta.caption}
-                srcSet={insta.thumbnail}
-                type="image/png"
-              />
-              <img
-                alt={insta.caption}
-                height={thumbnailWidth + 'px'}
-                loading="lazy"
-                src={insta.thumbnail}
-                width={thumbnailWidth + 'px'}
-              />
-            </picture>
-            <div className="insta-caption">{insta.caption}</div>
-          </a>
-        )
+  useEffect(() => {
+    if (window) {
+      const thumbnailWidthCalc = () => {
+        const INITIAL_THUMB_WIDTH = 186
+        const windowWidth = window.innerWidth
+        const count = Math.floor(windowWidth / INITIAL_THUMB_WIDTH)
+        const width = windowWidth / count
+        setThumbDetail({width, count})
       }
-    })
-  const instagramFeed = <div className="instagramFeed">{instagramPost}</div>
+      window.addEventListener('resize', thumbnailWidthCalc)
+      thumbnailWidthCalc()
+    }
+  }, [])
+
   return (
-    <div className="top50 insta">
-      <h1 className="CalypsoOrangeText text-centre"> #FindTheFeeling</h1>
-      <h2 className="text-centre">
+    <Box mt={30}>
+      <Typography color="primary.main" textAlign="center" variant="h2">
+        #FindTheFeeling
+      </Typography>
+      <Typography mt={8} textAlign="center" variant="h3">
         Share your summer moments with us on Instagram.
-      </h2>
-      {feed ? instagramFeed : loading}
-      <div className="clearfix" />
-    </div>
+      </Typography>
+      <Box sx={{display: 'flex', mt: 5}}>
+        {feeds.slice(0, thumbDetail.count).map(feed => (
+          <Box
+            bgcolor="primary.main"
+            key={feed.id}
+            onClick={() => window.open(feed.permalink, '_blank')}
+            sx={{
+              width: thumbDetail.width,
+              height: thumbDetail.width,
+              position: 'relative',
+              transition: '500ms all',
+              cursor: 'pointer',
+              p: 5,
+              overflow: 'hidden',
+              '&:hover': {
+                '&>img': {
+                  display: 'none',
+                },
+              },
+            }}
+          >
+            <Typography
+              sx={{
+                color: '#FFF',
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 6,
+                overflow: 'hidden',
+              }}
+            >
+              {feed.caption}
+            </Typography>
+            <Image
+              alt={feed.caption}
+              fill
+              src={feed.thumbnail}
+              style={{objectFit: 'cover'}}
+            />
+          </Box>
+        ))}
+      </Box>
+    </Box>
   )
 }

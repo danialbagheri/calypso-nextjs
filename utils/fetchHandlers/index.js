@@ -1,5 +1,7 @@
 import {BASE_URL} from '../../constants/servicesConstants/index'
 
+// const BASE_URL = 'https://api.cabanasun.co.uk/api/'
+
 const errorHandler = response => {
   const {status, statusText} = response
 
