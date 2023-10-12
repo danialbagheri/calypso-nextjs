@@ -1,6 +1,0 @@
-export * from './InfoCards'
-export * from './Background'
-export * from './Button'
-export * from './QuestionCards'
-export * from './ProductsSkeleton'
-export * from './RecommendedItem'
