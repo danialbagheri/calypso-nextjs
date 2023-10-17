@@ -2,9 +2,9 @@ import {useState} from 'react'
 
 import 'react-tabs/style/react-tabs.css'
 import Head from 'next/head'
-import FilterProducts from '../../components/products/filter-products'
 import _ from 'lodash'
-import {ProductRange} from 'components'
+import {FilterProducts, ProductRange} from 'components'
+import {getProducts, getProductsWithPagination} from 'services'
 
 function Products(props) {
   const ordered_products = _.orderBy(
@@ -80,13 +80,11 @@ function Products(props) {
     </div>
   )
 }
-async function getAllPages(pageCount, url) {
+async function getAllPages(pageCount) {
   let pageNumber = 1
   const productResult = []
   for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    const paginatedUrl = url + `?page=${pageNumber}`
-    const res = await fetch(paginatedUrl)
-    const product = await res.json()
+    const product = await getProductsWithPagination(pageNumber)
     productResult.push(product.results)
   }
   return productResult
@@ -96,9 +94,8 @@ export async function getStaticProps() {
   const baseUrl = process.env.API_URL
   const endpoint = 'products/product/'
   const finalUrl = baseUrl + endpoint
-  const res = await fetch(finalUrl)
 
-  const products = await res.json()
+  const products = await getProducts()
   const pageCount = Math.ceil(products.count / 10)
   const productResult = await getAllPages(pageCount, finalUrl)
 
