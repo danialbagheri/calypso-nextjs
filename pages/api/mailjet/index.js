@@ -2,6 +2,7 @@ export default function mailjetFunctions(req, res) {
   const CALYPSO_LIST_ID = '86980'
   const {firstName, lastName, email} = req.body
 
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const mailjet = require('node-mailjet').apiConnect(
     process.env.MJ_APIKEY_PUBLIC,
     process.env.MJ_APIKEY_PRIVATE,
