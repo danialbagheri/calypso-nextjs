@@ -87,6 +87,7 @@ module.exports = {
     // but the config lives in the `config/` directory. Passing the config here
     // to get around this.
     'prettier/prettier': ['error', prettierConfig],
+    '@typescript-eslint/no-explicit-any': 'error',
   },
   settings: {
     react: {

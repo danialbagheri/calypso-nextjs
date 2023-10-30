@@ -1,5 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
 // const withCSS = require("@zeit/next-css");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withImages = require('next-images')
 
 module.exports = withImages({

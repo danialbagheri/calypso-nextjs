@@ -10,9 +10,9 @@ import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 /* -------------------------------------------------------------------------- */
 
-import data from '../../data.json'
-import RelatedProduct from '../../components/products/related-products'
-import ProductSchema from '../../components/seo/product-schema'
+import data from '../../../data.json'
+import RelatedProduct from '../../../components/products/related-products'
+import ProductSchema from '../../../components/seo/product-schema'
 
 import {
   CustomersReview,
@@ -178,8 +178,8 @@ export async function getStaticPaths() {
   const productResult = await getAllPages(pageCount, url)
   const slugPaths = []
 
-  for (let i = 0; i < productResult.length; i++) {
-    const slugs = productResult[i].map(item => {
+  for (const element of productResult) {
+    const slugs = element.map(item => {
       return {
         params: {
           slug: item.slug,
