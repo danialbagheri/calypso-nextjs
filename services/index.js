@@ -78,6 +78,12 @@ export const getProducts = () => {
 export const getProductsWithPagination = page => {
   return get({endpoint: `products/product/?page=${page}`})
 }
+
+export const getMegaMenuProducts = () => {
+  return get({
+    endpoint: 'products/collections/products-mega-menu/?resize_w=280',
+  })
+}
 /* ----------------------------- Patch requests ----------------------------- */
 export const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})

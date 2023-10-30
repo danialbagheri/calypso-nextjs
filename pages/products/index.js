@@ -40,6 +40,7 @@ function Products(props) {
           name="description"
         />
       </Head>
+
       <div className="product-page-banner-image">
         <h1>
           Have you got your <br />
@@ -91,16 +92,11 @@ async function getAllPages(pageCount) {
 }
 
 export async function getStaticProps() {
-  const baseUrl = process.env.API_URL
-  const endpoint = 'products/product/'
-  const finalUrl = baseUrl + endpoint
-
   const products = await getProducts()
   const pageCount = Math.ceil(products.count / 10)
-  const productResult = await getAllPages(pageCount, finalUrl)
+  const productResult = await getAllPages(pageCount)
 
   // Now we will get the staff picked articles
-
   if (!productResult) {
     return {
       notFound: true,
