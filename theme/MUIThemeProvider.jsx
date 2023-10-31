@@ -39,6 +39,7 @@ const theme = createTheme({
   typography: {
     htmlFontSize: 10,
     fontWeightMedium: '500',
+    fontFamily: ["'proxima-nova'", 'sans-serif'].join(','),
     h2: {
       fontFamily: 'proxima-nova, sans',
       fontStyle: 'normal',
