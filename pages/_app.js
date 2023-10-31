@@ -72,7 +72,6 @@ function MyApp({Component, pageProps}) {
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
         />
-        <link href="https://use.typekit.net/kls3ash.css" rel="stylesheet" />
         <meta content="#da532c" name="msapplication-TileColor" />
         <meta content="#ffffff" name="theme-color" />
         <meta content="#000000" name="theme-color" />
