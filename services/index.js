@@ -84,6 +84,10 @@ export const getMegaMenuProducts = () => {
     endpoint: 'products/collections/products-mega-menu/?resize_w=280',
   })
 }
+
+export const getIcons = slug => {
+  return get({endpoint: `web/icon-groups/${slug}`})
+}
 /* ----------------------------- Patch requests ----------------------------- */
 export const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
