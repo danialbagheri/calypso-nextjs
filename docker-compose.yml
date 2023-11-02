@@ -1,0 +1,16 @@
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      default:
+        ipv4_address: 172.18.2.2
+networks:
+  default:
+    name: front_network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.2.0/24
