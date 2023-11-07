@@ -27,7 +27,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     // Possible errors
-    'no-console': 'warn',
+    'no-console': ['warn', {allow: ['warn', 'error']}],
     // Best practices
     'dot-notation': 'error',
     'no-else-return': 'error',

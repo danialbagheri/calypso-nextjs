@@ -88,6 +88,12 @@ export const getMegaMenuProducts = () => {
 export const getIcons = slug => {
   return get({endpoint: `web/icon-groups/${slug}`})
 }
+
+export const getTopBarStatus = () => {
+  return get({endpoint: 'web/configuration/top_bar/'})
+}
+/* -------------------------------------------------------------------------- */
+
 /* ----------------------------- Patch requests ----------------------------- */
 export const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
