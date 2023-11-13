@@ -67,41 +67,44 @@ function Home({slides, isLoaded, trending, bestseller, secondarySlides}) {
 }
 
 export async function getStaticProps() {
-  return Promise.all([
+  const props = {
+    slides: [],
+    secondarySlides: [],
+    isLoaded: false,
+    trending: [],
+    bestseller: {},
+  }
+  const promises = [
     getCollectionBanner('homepage'),
     getCollectionBanner('secondary'),
     getTrendingUrls(),
     getBestSellerResults(),
-  ])
-    .then(res => {
-      if (!res[0] || !res[1]) {
-        return {
-          notFound: true,
-          isLoaded: false,
-        }
+  ]
+  const results = await Promise.allSettled(promises)
+
+  results.forEach((res, i) => {
+    if (res.status === 'fulfilled') {
+      switch (i) {
+        case 0:
+          props.slides = res.value.results
+          break
+        case 1:
+          props.secondarySlides = res.value.results
+          break
+        case 2:
+          props.trending = res.value.items
+          break
+        case 3:
+          props.bestseller = res.value
+          break
       }
-      return {
-        props: {
-          slides: res[0].results,
-          secondarySlides: res[1].results,
-          isLoaded: true,
-          trending: res[2].items,
-          bestseller: res[3],
-        },
-        revalidate: 120, // will be passed to the page component as props
-      }
-    })
-    .catch(() => {
-      return {
-        props: {
-          slides: [],
-          secondarySlides: [],
-          isLoaded: false,
-          trending: [],
-          bestseller: {},
-        },
-      }
-    })
+    }
+  })
+
+  return {
+    props: {...props, isLoaded: true},
+    revalidate: 120, // will be passed to the page component as props
+  }
 }
 
 export default Home

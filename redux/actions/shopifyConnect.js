@@ -34,7 +34,6 @@ export const createCheckout = () => dispatch => {
   // });
   if (ShopifyConnect === null || ShopifyConnect === '') {
     client.checkout.create().then(res => {
-      console.log(res)
       var expirationInMin = 360
       var expires = new Date(new Date().getTime() + 60000 * expirationInMin)
       var sessionObject = {

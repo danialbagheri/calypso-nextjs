@@ -89,6 +89,10 @@ export const getIcons = slug => {
   return get({endpoint: `web/icon-groups/${slug}`})
 }
 
+export const getInfoBarStatus = () => {
+  return get({endpoint: 'web/top-bars/'})
+}
+
 export const getTopBarStatus = () => {
   return get({endpoint: 'web/configuration/top_bar/'})
 }
