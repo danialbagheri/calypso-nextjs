@@ -92,6 +92,10 @@ export const getIcons = slug => {
 export const getInfoBarStatus = () => {
   return get({endpoint: 'web/top-bars/'})
 }
+
+export const getTopBarStatus = () => {
+  return get({endpoint: 'web/configuration/top_bar/'})
+}
 /* ----------------------------- Patch requests ----------------------------- */
 export const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})

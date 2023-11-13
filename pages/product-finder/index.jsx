@@ -74,8 +74,6 @@ export default function ProductFinder(props) {
     }
   }, [])
 
-  console.log('recommendVariants:::', recommendVariants)
-
   return (
     <Box bgcolor="PFsand.main">
       <Background infoMode={infoMode} />

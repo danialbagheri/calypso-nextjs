@@ -12,7 +12,7 @@ import '../styles/bootstrap/css/bootstrap.min.css'
 import Head from 'next/head'
 import store from '../redux/store'
 import Footer from '../components/common/footer/footer'
-import InfoBar from '../components/general/InforBar'
+import InfoBar from '../components/general/InfoBar'
 import {AppProvider} from 'components/appProvider'
 import {MailjetSignUp} from 'components'
 
@@ -39,33 +39,49 @@ function MyApp({Component, pageProps}) {
           content="width=device-width, initial-scale=1, user-scalable=1"
           name="viewport"
         />
-        <link href="/favicon64.ico" rel="apple-touch-icon" sizes="64x64" />
         <link
-          href="/favicon16.ico"
-          rel="shortcut icon"
+          href="/favicon/android-chrome-192x192.png"
+          rel="icon"
+          sizes="192x192"
+          target="_blank"
+          type="image/png"
+        />
+        <link
+          href="/favicon/android-chrome-384x384.png"
+          rel="icon"
+          sizes="384x384"
+          target="_blank"
+          type="image/png"
+        />
+        <link
+          href="/favicon/apple-touch-icon.png"
+          rel="apple-touch-icon"
+          sizes="180x180"
+          target="_blank"
+        />
+        <link
+          href="/favicon/favicon-16x16.png"
+          rel="icon"
           sizes="16x16"
-          type="image/x-icon"
+          target="_blank"
+          type="image/png"
         />
         <link
-          href="/favicon24.ico"
-          rel="shortcut icon"
-          sizes="24x24"
-          type="image/x-icon"
-        />
-        <link
-          href="/favicon32.ico"
-          rel="shortcut icon"
+          href="/favicon/favicon-32x32.png"
+          rel="icon"
           sizes="32x32"
-          type="image/x-icon"
+          target="_blank"
+          type="image/png"
         />
         <link
-          href="/favicon48.ico"
-          rel="shortcut icon"
-          sizes="48x48"
+          href="/favicon/favicon.ico"
+          rel="icon"
+          sizes="16x16 32x32"
+          target="_blank"
           type="image/x-icon"
         />
 
-        <link href="/site.webmanifest" rel="manifest" />
+        <link href="/favicon/site.webmanifest" rel="manifest" />
         <link color="#da532c" href="/safari-pinned-tab.svg" rel="mask-icon" />
         <link href="https://use.typekit.net/kls3ash.css" rel="stylesheet" />
         <link
