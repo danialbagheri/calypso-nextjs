@@ -4,6 +4,7 @@ import {useSearchParams} from 'next/navigation'
 
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import {useTheme} from '@mui/material'
 
 function VariantSelector({
   variants,
@@ -12,10 +13,13 @@ function VariantSelector({
   ...props
 }) {
   const searchParams = useSearchParams()
+  const theme = useTheme()
+
+  // console.log('variants::::', variants)
 
   const urlSku = searchParams.get('sku')
 
-  const isAllVarSPF = variants.every(variant => variant.name.startsWith('SPF'))
+  const isAllVarSPF = variants.every(variant => variant.name?.startsWith('SPF'))
   const isSingleVariant = variants.length === 1
 
   const handleChange = e => {
@@ -33,26 +37,28 @@ function VariantSelector({
 
     return (
       <Box
+        className={'SPF_variants'}
+        onClick={() => {
+          setSelectedVariant(variant)
+        }}
         sx={{
           width: 44,
           height: 44,
           color: '#fff',
-          backgroundColor: isInStock ? '#FF6B00' : '#cdcdcd',
+          backgroundColor: isInStock ? theme.palette.primary.main : '#cdcdcd',
           padding: 2,
           borderRadius: '50%',
           border: '1px solid white',
-          boxShadow: isSelected ? ' 0 0 0 2px #ff6b00' : 'none',
+          boxShadow: isSelected
+            ? `0 0 0 2px ${theme.palette.primary.main}`
+            : 'none',
           fontWeight: 700,
           cursor: 'pointer',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        onClick={() => {
-          setSelectedVariant(variant)
-        }}
         textAlign={'center'}
-        className={'SPF_variants'}
       >
         {variantName}
       </Box>
@@ -104,9 +110,9 @@ function VariantSelector({
             >
               {variants.map(variant => (
                 <option
-                  value={variant.sku}
                   key={variant.id}
                   selected={selectedVariant.sku === variant.sku}
+                  value={variant.sku}
                 >
                   {variant.name}
                   {'    '}
