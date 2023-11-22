@@ -96,6 +96,10 @@ export const getInfoBarStatus = () => {
 export const getTopBarStatus = () => {
   return get({endpoint: 'web/configuration/top_bar/'})
 }
+
+export const getRetrieveMenu = () => {
+  return get({endpoint: 'web/menus/main'})
+}
 /* ----------------------------- Patch requests ----------------------------- */
 export const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
