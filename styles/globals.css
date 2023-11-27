@@ -51,7 +51,7 @@ header {
   min-height: 100px;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 900px) {
   header {
     min-height: 140px;
   }
@@ -823,7 +823,7 @@ input.search-field:focus {
   border-left: 1px solid #e5e5e5;
   transform: translateX(100%);
   transition: transform 0.15s ease-in-out;
-  z-index: 100;
+  z-index: 1300;
   overflow: scroll;
 }
 
