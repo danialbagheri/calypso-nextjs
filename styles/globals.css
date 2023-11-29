@@ -3073,9 +3073,10 @@ ul.stores img {
     padding-right: 0px;
   }
 
-  main {
-    padding: 10px;
-  }
+  /* main {
+    padding-left: 10px;
+    padding-right: 10px;
+  } */
 
   .answer {
     margin-bottom: 30px;
