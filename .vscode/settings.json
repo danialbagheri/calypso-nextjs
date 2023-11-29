@@ -21,5 +21,8 @@
     "commandCenter.border": "#15202b99"
   },
   "peacock.color": "#26b5ce",
-  "eslint.enable": true
+  "eslint.enable": true,
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontSize": 14,
+  "editor.fontLigatures": true
 }

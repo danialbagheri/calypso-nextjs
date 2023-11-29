@@ -15,8 +15,6 @@ function VariantSelector({
   const searchParams = useSearchParams()
   const theme = useTheme()
 
-  // console.log('variants::::', variants)
-
   const urlSku = searchParams.get('sku')
 
   const isAllVarSPF = variants.every(variant => variant.name?.startsWith('SPF'))
