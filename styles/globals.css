@@ -53,7 +53,7 @@ header {
 
 @media only screen and (min-width: 900px) {
   header {
-    min-height: 140px;
+    min-height: 135px;
   }
 }
 
