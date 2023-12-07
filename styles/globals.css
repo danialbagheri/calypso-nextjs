@@ -48,7 +48,7 @@ body {
 }
 
 header {
-  min-height: 100px;
+  min-height: 80px;
 }
 
 @media only screen and (min-width: 900px) {
