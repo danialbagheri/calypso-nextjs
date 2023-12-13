@@ -37,6 +37,9 @@ export default function Login() {
           justifyContent: 'center',
           flexDirection: {xs: 'column-reverse', md: 'column'},
           px: '78px',
+          '&>img': {
+            display: {xs: 'block', md: 'none'},
+          },
         }}
       >
         <Typography
