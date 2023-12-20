@@ -28,14 +28,9 @@ const get = async ({endpoint, baseURL = BASE_URL}) => {
 }
 
 const post = async ({endpoint, data}) => {
-  const timeout = 8000
-  const controller = new AbortController()
-  const id = setTimeout(() => controller.abort(), timeout)
-
   const response = await window.fetch(`${BASE_URL}${endpoint}`, {
     method: 'POST',
     timeout: 8000,
-    signal: controller.signal,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -43,10 +38,9 @@ const post = async ({endpoint, data}) => {
   })
 
   if (response.ok) {
-    clearTimeout(id)
     return Promise.resolve(await response.json())
   }
-  clearTimeout(id)
+
   return errorHandler(response)
 }
 

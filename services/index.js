@@ -21,6 +21,10 @@ export const postOutOfStockEmail = data => {
 export const postSurveys = data => {
   return post({endpoint: 'surveys/submit/', data})
 }
+
+export const postCreateUser = data => {
+  return post({endpoint: 'users', data})
+}
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------ GET Requests ------------------------------ */

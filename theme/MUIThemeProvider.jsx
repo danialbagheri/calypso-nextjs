@@ -33,9 +33,6 @@ const theme = createTheme({
     PFsand: {
       main: '#FFEFD6',
     },
-    green: {
-      main: '#226F61',
-    },
   },
   spacing: 4,
   typography: {

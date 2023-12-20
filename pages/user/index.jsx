@@ -1,9 +1,18 @@
+import * as React from 'react'
 import {Box, useTheme} from '@mui/material'
-import {NewMember} from '../../components/user'
-import {AlreadyMember} from '../../components/user/AlreadyMember'
+import {NewMember} from 'components/user'
+import {AlreadyMember} from 'components/user/AlreadyMember'
+import {getIcons} from 'services'
+import {AppContext} from 'components/appProvider'
 
-export default function Login() {
+export default function Login(data) {
   const theme = useTheme()
+  const [appState, setAppState] = React.useContext(AppContext)
+
+  React.useEffect(() => {
+    console.log('app state::::', appState)
+  }, [])
+
   return (
     <Box
       sx={{
@@ -33,4 +42,14 @@ export default function Login() {
       <AlreadyMember />
     </Box>
   )
+}
+
+export async function getStaticProps() {
+  const promises = [getIcons('user-account-top-icons')]
+  const results = await Promise.allSettled(promises)
+
+  return {
+    props: {data: {icons: results ? results[0].value : null}},
+    revalidate: 120, // will be passed to the page component as props
+  }
 }
