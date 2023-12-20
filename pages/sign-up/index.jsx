@@ -7,7 +7,7 @@ import {AccountCreated, UserDetails} from '../../components/user/signUp'
 export default function SignUp(props) {
   const {data} = props
 
-  const [steps, setSteps] = React.useState(1)
+  const [steps, setSteps] = React.useState(0)
 
   const componentsQueue = [
     <UserDetails data={data} key="users_details" setSteps={setSteps} />,
