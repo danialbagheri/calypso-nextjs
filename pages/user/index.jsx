@@ -3,15 +3,9 @@ import {Box, useTheme} from '@mui/material'
 import {NewMember} from 'components/user'
 import {AlreadyMember} from 'components/user/AlreadyMember'
 import {getIcons} from 'services'
-import {AppContext} from 'components/appProvider'
 
-export default function Login(data) {
+export default function Login() {
   const theme = useTheme()
-  const [appState, setAppState] = React.useContext(AppContext)
-
-  React.useEffect(() => {
-    console.log('app state::::', appState)
-  }, [])
 
   return (
     <Box
