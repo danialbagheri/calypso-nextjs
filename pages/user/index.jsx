@@ -1,10 +1,17 @@
 import * as React from 'react'
+/* ----------------------------- MUI Components ----------------------------- */
 import {Box, useTheme} from '@mui/material'
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------- Local Components ---------------------------- */
 import {NewMember} from 'components/user'
 import {AlreadyMember} from 'components/user/AlreadyMember'
-import {getIcons} from 'services'
 
-export default function Login() {
+import {getIcons, getTopBar} from 'services'
+/* -------------------------------------------------------------------------- */
+
+export default function User(props) {
+  const {data} = props
   const theme = useTheme()
 
   return (
@@ -12,7 +19,7 @@ export default function Login() {
       sx={{
         maxWidth: '880px',
         margin: '0 auto',
-        pt: {xs: '50px', md: '100px'},
+        pt: {xs: 0, md: '86px'},
         pb: {xs: '55px', md: '193px'},
         display: 'flex',
         justifyContent: 'center',
@@ -21,7 +28,7 @@ export default function Login() {
         height: '100%',
       }}
     >
-      <NewMember />
+      <NewMember userAssets={data} />
 
       <Box
         sx={{
@@ -30,20 +37,34 @@ export default function Login() {
           bgcolor: theme.palette.sand.main,
           borderRadius: '5px',
           mt: {xs: '36px', md: 0},
+          display: {xs: 'none', md: 'block'},
         }}
       />
 
-      <AlreadyMember />
+      <AlreadyMember sx={{display: {xs: 'none', md: 'flex'}}} />
     </Box>
   )
 }
 
 export async function getStaticProps() {
-  const promises = [getIcons('user-account-top-icons')]
+  const promises = [
+    getIcons('user-account-top-icons'),
+    getIcons('check-icon'),
+    getTopBar('creating-account-benefits'),
+  ]
+
   const results = await Promise.allSettled(promises)
 
   return {
-    props: {data: {icons: results ? results[0].value : null}},
+    props: {
+      data: {
+        userAccountTopIcons:
+          results[0].status === 'fulfilled' ? results[0].value : null,
+        checkIcon: results[1].status === 'fulfilled' ? results[1].value : null,
+        creatingAccountBenefits:
+          results[2].status === 'fulfilled' ? results[2].value : null,
+      },
+    },
     revalidate: 120, // will be passed to the page component as props
   }
 }
