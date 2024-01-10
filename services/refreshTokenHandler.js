@@ -6,7 +6,7 @@ const RefreshTokenHandler = props => {
   const {data: session} = useSession()
 
   useEffect(() => {
-    if (!!session) {
+    if (session) {
       // We did set the token to be ready to refresh after 23 hours, here we set interval of 23 hours 30 minutes.
       const expiryDate = jwt_decode(session.accessToken).exp
       const timeRemaining = Math.round(

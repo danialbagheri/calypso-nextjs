@@ -4,14 +4,14 @@ import {Box, useTheme} from '@mui/material'
 /* -------------------------------------------------------------------------- */
 
 /* ---------------------------- Local Components ---------------------------- */
-import {NewMember} from 'components/user'
-import {AlreadyMember} from 'components/user/AlreadyMember'
+import {AlreadyMember, NewMember} from 'components/user'
 
-import {getIcons, getTopBar} from 'services'
+import {assetsEndPoints, getAssets} from '../../utils'
+
 /* -------------------------------------------------------------------------- */
 
 export default function User(props) {
-  const {data} = props
+  const {assets} = props
   const theme = useTheme()
 
   return (
@@ -28,7 +28,7 @@ export default function User(props) {
         height: '100%',
       }}
     >
-      <NewMember userAssets={data} />
+      <NewMember assets={assets} />
 
       <Box
         sx={{
@@ -47,23 +47,18 @@ export default function User(props) {
 }
 
 export async function getStaticProps() {
-  const promises = [
-    getIcons('user-account-top-icons'),
-    getIcons('check-icon'),
-    getTopBar('creating-account-benefits'),
-  ]
+  const {checkIcon, creatingAccountBenefits, userAccountTopIcons} =
+    assetsEndPoints
 
-  const results = await Promise.allSettled(promises)
+  const assets = await getAssets([
+    checkIcon,
+    creatingAccountBenefits,
+    userAccountTopIcons,
+  ])
 
   return {
     props: {
-      data: {
-        userAccountTopIcons:
-          results[0].status === 'fulfilled' ? results[0].value : null,
-        checkIcon: results[1].status === 'fulfilled' ? results[1].value : null,
-        creatingAccountBenefits:
-          results[2].status === 'fulfilled' ? results[2].value : null,
-      },
+      assets,
     },
     revalidate: 120, // will be passed to the page component as props
   }

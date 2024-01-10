@@ -2,20 +2,26 @@ import {BASE_URL} from '../../constants/servicesConstants/index'
 
 // const BASE_URL = 'https://api.cabanasun.co.uk/api/'
 
-const errorHandler = response => {
+const errorHandler = async response => {
   const {status, statusText} = response
+  const res = await response.json()
 
   if (response) {
-    return Promise.reject({status, statusText})
+    return Promise.reject({status, statusText, res})
   }
 }
 
-const get = async ({endpoint, baseURL = BASE_URL}) => {
+const get = async ({endpoint, baseURL = BASE_URL, token = null}) => {
   const timeout = 80000
   const controller = new AbortController()
   const id = setTimeout(() => controller.abort(), timeout)
 
   const response = await fetch(`${baseURL}${endpoint}`, {
+    method: 'GET',
+    headers: {
+      ...(token ? {Authorization: `Bearer ${token}`} : {}),
+      'Content-Type': 'application/json', // Adjust the content type if needed
+    },
     timeout: 8000,
     signal: controller.signal,
   })
@@ -60,7 +66,7 @@ const patch = async ({endpoint, data}) => {
   })
   if (response.ok) {
     clearTimeout(id)
-    return Promise.resolve(await response.json())
+    return Promise.resolve(response)
   }
   clearTimeout(id)
   return errorHandler(response)

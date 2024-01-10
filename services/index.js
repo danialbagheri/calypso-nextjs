@@ -22,8 +22,18 @@ export const postSurveys = data => {
   return post({endpoint: 'surveys/submit/', data})
 }
 
+//USER
+
 export const postCreateUser = data => {
-  return post({endpoint: 'users', data})
+  return post({endpoint: 'users/', data})
+}
+
+export const postUserSignIn = data => {
+  return post({endpoint: 'users/token/?keep_logged_in=False', data})
+}
+
+export const postRefreshToken = data => {
+  return post({endpoint: 'users/token/refresh/', data})
 }
 /* -------------------------------------------------------------------------- */
 
@@ -108,6 +118,21 @@ export const getTopBarStatus = () => {
 export const getRetrieveMenu = () => {
   return get({endpoint: 'web/menus/main'})
 }
+
+//USER
+export const getUserAddresses = token => {
+  return get({endpoint: 'users/addresses/', token})
+}
+
+export const getUserInfo = token => {
+  return get({endpoint: 'users/me/', token})
+}
+
+export const getUserOrders = token => {
+  return get({endpoint: 'users/orders/', token})
+}
+//END USER
+
 /* ----------------------------- Patch requests ----------------------------- */
 export const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
