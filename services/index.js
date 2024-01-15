@@ -28,12 +28,19 @@ export const postCreateUser = data => {
   return post({endpoint: 'users/', data})
 }
 
-export const postUserSignIn = data => {
-  return post({endpoint: 'users/token/?keep_logged_in=False', data})
+export const postUserSignIn = ({data, keepSignedIn = false}) => {
+  return post({
+    endpoint: `users/token/?keep_logged_in=${keepSignedIn ? 'True' : 'False'}`,
+    data,
+  })
 }
 
 export const postRefreshToken = data => {
   return post({endpoint: 'users/token/refresh/', data})
+}
+
+export const postVerificationCookie = () => {
+  return post({endpoint: 'users/cookie/verify/'})
 }
 /* -------------------------------------------------------------------------- */
 
@@ -131,11 +138,18 @@ export const getUserInfo = token => {
 export const getUserOrders = token => {
   return get({endpoint: 'users/orders/', token})
 }
+
 //END USER
 
 /* ----------------------------- Patch requests ----------------------------- */
 export const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
+}
+
+//User
+
+export const patchUserInfo = (data, token) => {
+  return patch({endpoint: 'users/me/', data, token})
 }
 /* -------------------------------------------------------------------------- */
 

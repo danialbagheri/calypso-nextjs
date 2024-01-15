@@ -4,14 +4,25 @@ import {BASE_URL} from '../../constants/servicesConstants/index'
 
 const errorHandler = async response => {
   const {status, statusText} = response
-  const res = await response.json()
+  let res = null
+  try {
+    res = await response.json()
+  } catch (e) {
+    console.error(e)
+    res = null
+  }
 
   if (response) {
     return Promise.reject({status, statusText, res})
   }
 }
 
-const get = async ({endpoint, baseURL = BASE_URL, token = null}) => {
+const get = async ({
+  endpoint,
+  baseURL = BASE_URL,
+  token = null,
+  ...headers
+}) => {
   const timeout = 80000
   const controller = new AbortController()
   const id = setTimeout(() => controller.abort(), timeout)
@@ -21,6 +32,8 @@ const get = async ({endpoint, baseURL = BASE_URL, token = null}) => {
     headers: {
       ...(token ? {Authorization: `Bearer ${token}`} : {}),
       'Content-Type': 'application/json', // Adjust the content type if needed
+      // credentials: 'include',
+      ...headers,
     },
     timeout: 8000,
     signal: controller.signal,
@@ -33,12 +46,13 @@ const get = async ({endpoint, baseURL = BASE_URL, token = null}) => {
   return errorHandler(response)
 }
 
-const post = async ({endpoint, data}) => {
-  const response = await window.fetch(`${BASE_URL}${endpoint}`, {
+const post = async ({endpoint, data, ...headers}) => {
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
     method: 'POST',
     timeout: 8000,
     headers: {
       'Content-Type': 'application/json',
+      ...headers,
     },
     body: JSON.stringify(data),
   })
@@ -50,7 +64,7 @@ const post = async ({endpoint, data}) => {
   return errorHandler(response)
 }
 
-const patch = async ({endpoint, data}) => {
+const patch = async ({endpoint, data, token = null}) => {
   const timeout = 8000
   const controller = new AbortController()
   const id = setTimeout(() => controller.abort(), timeout)
@@ -60,6 +74,7 @@ const patch = async ({endpoint, data}) => {
     timeout: 8000,
     signal: controller.signal,
     headers: {
+      ...(token ? {Authorization: `Bearer ${token}`} : {}),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
