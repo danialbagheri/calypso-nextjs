@@ -46,19 +46,25 @@ const get = async ({
   return errorHandler(response)
 }
 
-const post = async ({endpoint, data, ...headers}) => {
+const post = async ({endpoint, data, token = null, ...headers}) => {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     method: 'POST',
     timeout: 8000,
     headers: {
       'Content-Type': 'application/json',
+      ...(token ? {Authorization: `Bearer ${token}`} : {}),
       ...headers,
     },
     body: JSON.stringify(data),
   })
 
   if (response.ok) {
-    return Promise.resolve(await response.json())
+    const text = await response.text()
+    if (text) {
+      return Promise.resolve(JSON.parse(text))
+    }
+
+    return Promise.resolve(null)
   }
 
   return errorHandler(response)

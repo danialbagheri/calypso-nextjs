@@ -42,6 +42,14 @@ export const postRefreshToken = data => {
 export const postVerificationCookie = () => {
   return post({endpoint: 'users/cookie/verify/'})
 }
+
+export const postSetPassword = ({data, token}) => {
+  return post({endpoint: 'users/set_password/', data, token})
+}
+
+export const postUserActivation = data => {
+  return post({endpoint: 'users/activation/', data})
+}
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------ GET Requests ------------------------------ */

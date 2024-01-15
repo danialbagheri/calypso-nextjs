@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {useRouter} from 'next/router'
-import {parseCookies, setCookie} from 'nookies'
+import {destroyCookie, parseCookies, setCookie} from 'nookies'
 import {getUserInfo, getUserOrders, postRefreshToken} from '../../../services'
 import {assetsEndPoints, getAssets} from '../../../utils'
 import {Box, CircularProgress} from '@mui/material'
@@ -605,6 +605,8 @@ export default function Dashboard(props) {
           setLoading(false)
         } catch (err) {
           if (err.status === 401) {
+            destroyCookie(null, 'calacc', {path: '/'})
+            destroyCookie(null, 'calref', {path: '/'})
             console.error(err)
             setLoading(false)
             router.push('/user')
