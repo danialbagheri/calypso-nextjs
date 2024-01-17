@@ -4,9 +4,14 @@ import Image from 'next/image'
 
 import {Box, Typography} from '@mui/material'
 
-import {assetsEndPoints, getAssets} from '../../../../utils'
+import {
+  assetsEndPoints,
+  getAssets,
+  validateMobileNumber,
+  validateName,
+} from '../../../../utils'
 import UserDetailsFields from '../../../../components/user/UserDetailsFields'
-import {CustomButton} from '../../../../components/user/localShared'
+import {Banner, CustomButton} from '../../../../components/user/localShared'
 import {
   getUserInfo,
   patchUserInfo,
@@ -28,9 +33,14 @@ export default function AccountDetails(props) {
     [EMAIL]: '',
     [MOBILE_NUMBER]: '',
   })
-
+  const [error, setError] = React.useState({
+    [FIRST_NAME]: null,
+    [LAST_NAME]: null,
+    [EMAIL]: null,
+    [MOBILE_NUMBER]: null,
+  })
   const [loading, setLoading] = React.useState(false)
-
+  const [success, setSuccess] = React.useState(false)
   const router = useRouter()
 
   const {checkIcon, userAccountTopIcons} = assetsEndPoints
@@ -44,33 +54,71 @@ export default function AccountDetails(props) {
       item.name.toLowerCase().trim() === CHECK_ICON_ORANGE.toLowerCase().trim(),
   )
 
+  const errorHandler = () => {
+    let errorState = false
+    setError({
+      [FIRST_NAME]: false,
+      [LAST_NAME]: false,
+      [EMAIL]: false,
+      [MOBILE_NUMBER]: false,
+    })
+
+    if (!validateName(fieldData[FIRST_NAME])) {
+      errorState = true
+      setError(prev => ({...prev, [FIRST_NAME]: 'Please enter a valid name'}))
+    }
+    if (!validateName(fieldData[LAST_NAME])) {
+      errorState = true
+      setError(prev => ({...prev, [LAST_NAME]: 'Please enter a valid name'}))
+    }
+    if (!validateMobileNumber(fieldData[MOBILE_NUMBER])) {
+      errorState = true
+      setError(prev => ({
+        ...prev,
+        [MOBILE_NUMBER]: 'Please enter a valid mobile number',
+      }))
+    }
+
+    return errorState
+  }
+
   const saveHandler = async () => {
     const {calacc, calref} = parseCookies()
-    setLoading(true)
-    try {
-      await patchUserInfo(fieldData, calacc)
-    } catch (err) {
-      if (err.status === 401) {
-        try {
-          const {access} = await postRefreshToken({refresh: calref})
-          setCookie(null, 'calacc', access, {
-            maxAge: 30 * 60 * 1000,
-            path: '/',
-          })
-          await patchUserInfo(fieldData, access)
-        } catch {
-          if (err.status === 401) {
-            console.error(err)
-            router.push('/user')
-          } else {
-            console.error(err)
+    const errorState = errorHandler()
+    setSuccess(false)
+
+    if (!errorState) {
+      setLoading(true)
+      try {
+        await patchUserInfo(fieldData, calacc)
+        setSuccess(true)
+      } catch (err) {
+        if (err.status === 401) {
+          try {
+            const {access} = await postRefreshToken({refresh: calref})
+            setCookie(null, 'calacc', access, {
+              maxAge: 30 * 60 * 1000,
+              path: '/',
+            })
+            await patchUserInfo(fieldData, access)
+            setSuccess(true)
+          } catch {
+            if (err.status === 401) {
+              console.error(err)
+              router.push('/user')
+              setSuccess(false)
+            } else {
+              console.error(err)
+              setSuccess(false)
+            }
           }
+        } else {
+          console.error(err)
+          setSuccess(false)
         }
-      } else {
-        console.error(err)
+      } finally {
+        setLoading(false)
       }
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -115,6 +163,7 @@ export default function AccountDetails(props) {
         width: {xs: '100%', md: 640},
         m: '0 auto',
         py: {xs: 6, md: 21},
+        gap: 5,
 
         display: 'flex',
         justifyContent: 'space-between',
@@ -134,9 +183,14 @@ export default function AccountDetails(props) {
         <Typography color="secondary.main" mt={3} textAlign="center">
           Please make sure you complete all the boxes
         </Typography>
+        {success ? (
+          <Banner>Your account detail changed successfully</Banner>
+        ) : null}
         <UserDetailsFields
           checkIcon={orangeCheckIcon}
+          error={error}
           fieldData={fieldData}
+          setError={setError}
           setFieldData={setFieldData}
         />
         <CustomButton

@@ -58,7 +58,7 @@ export default function Activation() {
   return (
     <Box
       className="centralize"
-      sx={{height: 400, width: {xs: '100%', md: 640}, px: 6}}
+      sx={{height: 400, width: {xs: '100%', md: 640}, px: 6, m: '0 auto'}}
     >
       {loading ? (
         <CircularProgress />

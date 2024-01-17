@@ -50,6 +50,18 @@ export const postSetPassword = ({data, token}) => {
 export const postUserActivation = data => {
   return post({endpoint: 'users/activation/', data})
 }
+
+export const postResendActivation = data => {
+  return post({endpoint: 'users/resend_activation/', data})
+}
+
+export const postResetPasswordEmail = data => {
+  return post({endpoint: 'users/reset_password/', data})
+}
+
+export const confirmResetPassword = data => {
+  return post({endpoint: 'users/reset_password_confirm/', data})
+}
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------------ GET Requests ------------------------------ */
