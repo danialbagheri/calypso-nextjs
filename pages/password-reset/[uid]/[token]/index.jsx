@@ -26,9 +26,14 @@ const errorInitialState = {
   [NON_FIELD_ERRORS]: '',
 }
 
-export default function ResetPassword(props) {
-  const {assets} = props
-  const router = useRouter()
+const {userAccountTopIcons, popUpPassword, checkIcon} = assetsEndPoints
+
+export default function ResetPassword() {
+  const [assets, setAssets] = React.useState({
+    [userAccountTopIcons]: null,
+    [popUpPassword]: null,
+    [checkIcon]: null,
+  })
 
   const [data, setData] = React.useState({
     [NEW_PASSWORD]: '',
@@ -37,8 +42,7 @@ export default function ResetPassword(props) {
   const [error, setError] = React.useState({...errorInitialState})
   const [loading, setLoading] = React.useState(false)
   const [changePassState, setChangePassState] = React.useState(false)
-
-  const {userAccountTopIcons, popUpPassword, checkIcon} = assetsEndPoints
+  const router = useRouter()
 
   const girlIcon = assets?.[userAccountTopIcons]?.items.find(
     item =>
@@ -76,6 +80,26 @@ export default function ResetPassword(props) {
       setLoading(false)
     }
   }
+
+  const getAssetsHandler = async () => {
+    try {
+      const {userAccountTopIcons, popUpPassword, checkIcon} = assetsEndPoints
+
+      const assets = await getAssets([
+        userAccountTopIcons,
+        popUpPassword,
+        checkIcon,
+      ])
+
+      setAssets(assets)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  React.useEffect(async () => {
+    await getAssetsHandler()
+  }, [])
 
   return (
     <Box
@@ -170,45 +194,4 @@ export default function ResetPassword(props) {
       />
     </Box>
   )
-}
-
-export const getStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: {
-          uid: '',
-          token: '',
-        },
-      }, // See the "paths" section below
-    ],
-    fallback: true, // false or "blocking"
-  }
-}
-
-export async function getStaticProps() {
-  try {
-    const {userAccountTopIcons, popUpPassword, checkIcon} = assetsEndPoints
-
-    const assets = await getAssets([
-      userAccountTopIcons,
-      popUpPassword,
-      checkIcon,
-    ])
-
-    return {
-      props: {
-        assets,
-      },
-      revalidate: 120, // will be passed to the page component as props
-    }
-  } catch (err) {
-    console.error(err)
-    return {
-      props: {
-        assets: {},
-      },
-      revalidate: 120, // will be passed to the page component as props
-    }
-  }
 }
