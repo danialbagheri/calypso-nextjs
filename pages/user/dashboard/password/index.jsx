@@ -71,7 +71,9 @@ export default function Password(props) {
     } catch (err) {
       if (err.status === 401) {
         try {
-          const {access} = await postRefreshToken({refresh: calref})
+          const {access} = await postRefreshToken({
+            refresh: calref || 'refresh',
+          })
           setCookie(null, 'calacc', access, {
             path: '/',
           })
