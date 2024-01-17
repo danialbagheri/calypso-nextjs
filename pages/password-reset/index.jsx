@@ -167,7 +167,7 @@ export default function Password(props) {
                 loading={loading}
                 onClick={sendEmailHandler}
                 sx={{
-                  width: 280,
+                  width: 260,
                   mx: 'auto',
                   display: 'flex',
                   mt: 9,
