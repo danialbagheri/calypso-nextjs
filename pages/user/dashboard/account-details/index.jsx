@@ -96,7 +96,7 @@ export default function AccountDetails(props) {
         if (err.status === 401) {
           try {
             const {access} = await postRefreshToken({
-              refresh: calref || 'refresh',
+              refresh: calref || 'null_token',
             })
             setCookie(null, 'calacc', access, {
               maxAge: 30 * 60 * 1000,
@@ -133,7 +133,7 @@ export default function AccountDetails(props) {
       if (err.status === 401) {
         try {
           const {access} = await postRefreshToken({
-            refresh: calref || 'refresh',
+            refresh: calref || 'null_token',
           })
 
           setCookie(null, 'calacc', access, {
