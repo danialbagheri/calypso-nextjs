@@ -174,7 +174,7 @@ export default function Password(props) {
               <Typography color="#FFF" sx={{fontSize: 20, fontWeight: 600}}>
                 {resendState
                   ? 'You just resent the link'
-                  : 'Your retrieve link has been sent to your email'}
+                  : 'A password reset link is on its way to your email'}
               </Typography>
             </Box>
             <Typography color="secondary.main" mt={8} textAlign="center">
