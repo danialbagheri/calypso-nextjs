@@ -3,17 +3,14 @@ import * as React from 'react'
 import Image from 'next/image'
 
 import {Alert, AlertTitle, Box, Typography} from '@mui/material'
-import {assetsEndPoints, getAssets} from '../../../../utils'
+
 import {confirmResetPassword} from '../../../../services'
 import {
-  Banner,
   CustomButton,
   CustomOutlinedInput,
 } from '../../../../components/user/localShared'
 import {useRouter} from 'next/router'
 
-const PASSWORD_GIRL_ICON = 'password'
-const CHECK_ICON_GREEN = 'Check-icon-green'
 const UID = 'uid'
 const TOKEN = 'token'
 const NEW_PASSWORD = 'new_password'
@@ -26,34 +23,21 @@ const errorInitialState = {
   [NON_FIELD_ERRORS]: '',
 }
 
-const {userAccountTopIcons, popUpPassword, checkIcon} = assetsEndPoints
-
 export default function ResetPassword() {
-  const [assets, setAssets] = React.useState({
-    [userAccountTopIcons]: null,
-    [popUpPassword]: null,
-    [checkIcon]: null,
-  })
-
   const [data, setData] = React.useState({
     [NEW_PASSWORD]: '',
     [RE_NEW_PASSWORD]: '',
   })
   const [error, setError] = React.useState({...errorInitialState})
   const [loading, setLoading] = React.useState(false)
-  const [changePassState, setChangePassState] = React.useState(false)
   const router = useRouter()
 
-  const girlIcon = assets?.[userAccountTopIcons]?.items.find(
-    item =>
-      item.name.toLowerCase().trim() ===
-      PASSWORD_GIRL_ICON.toLowerCase().trim(),
-  )
-  const passwordSpecifications = assets?.[popUpPassword]?.items
-  const greenCheckIcon = assets?.[checkIcon]?.items.find(
-    item =>
-      item.name.toLowerCase().trim() === CHECK_ICON_GREEN.toLowerCase().trim(),
-  )
+  const passwordSpecifications = [
+    '8-16 characters',
+    'lower case characters',
+    'upper case characters',
+    'digits (0-9)',
+  ]
 
   const onChangeHandler = (value, field) => {
     setData(prev => ({...prev, [field]: value}))
@@ -72,7 +56,7 @@ export default function ResetPassword() {
 
     try {
       await confirmResetPassword(apiData)
-      setChangePassState(true)
+      router.push('/user/sign-in/?password_changed=true')
     } catch (err) {
       console.error(err)
       setError(err?.res || errorInitialState)
@@ -80,26 +64,6 @@ export default function ResetPassword() {
       setLoading(false)
     }
   }
-
-  const getAssetsHandler = async () => {
-    try {
-      const {userAccountTopIcons, popUpPassword, checkIcon} = assetsEndPoints
-
-      const assets = await getAssets([
-        userAccountTopIcons,
-        popUpPassword,
-        checkIcon,
-      ])
-
-      setAssets(assets)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  React.useEffect(async () => {
-    await getAssetsHandler()
-  }, [])
 
   return (
     <Box
@@ -132,11 +96,6 @@ export default function ResetPassword() {
             <Typography key={item.id}>{item.text}</Typography>
           ))}
         </Box>
-        {changePassState ? (
-          <Banner icon={greenCheckIcon} sx={{p: 3, gap: 4}}>
-            Your account password is changed successfully
-          </Banner>
-        ) : null}
         {error[NON_FIELD_ERRORS] ? (
           <Alert severity="error" sx={{mt: 5, width: {xs: '100%', md: 260}}}>
             <AlertTitle>Error</AlertTitle>
@@ -172,22 +131,12 @@ export default function ResetPassword() {
         >
           Save new password
         </CustomButton>
-        {changePassState ? (
-          <CustomButton
-            onClick={() => router.push('/user/sign-in')}
-            sx={{width: 260, mx: 'auto', display: 'flex', mt: 3, height: 46}}
-            variant="outlined"
-          >
-            Sing in
-          </CustomButton>
-        ) : null}
       </Box>
       <Image
-        alt={girlIcon?.name || ''}
+        alt={'Calypso girl'}
         height={290}
         id="user_details_girl_icon"
         src={
-          girlIcon?.svg_icon ||
           'https://calypso-static.s3.amazonaws.com/media/svg-icon-groups/User-account-12.svg'
         }
         width={290}
