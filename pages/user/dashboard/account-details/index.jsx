@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-import Image from 'next/image'
-
 import {Box, Typography} from '@mui/material'
 
 import {
@@ -20,6 +18,7 @@ import {
 import {parseCookies, setCookie} from 'nookies'
 import {EMAIL, FIRST_NAME, LAST_NAME, MOBILE_NUMBER} from '..'
 import {useRouter} from 'next/router'
+import SideBar from '../../../../components/user/dashboard/SideBar'
 
 const ACCOUNT_DETAILS = 'account details'
 
@@ -218,6 +217,8 @@ export default function AccountDetails(props) {
         },
       }}
     >
+      <SideBar girlIcon={girlIcon} route="account-details" />
+
       <Box width={{xs: '100%', md: 318}}>
         <Typography sx={{fontSize: 24, fontWeight: 700}} textAlign="center">
           Account details
@@ -236,22 +237,13 @@ export default function AccountDetails(props) {
         />
 
         {!isEdit ? (
-          <>
-            <CustomButton
-              onClick={() => setIsEdit(true)}
-              sx={{width: 220, mx: 'auto', display: 'flex', mt: 12, height: 52}}
-              variant="contained"
-            >
-              Edit details
-            </CustomButton>
-            <CustomButton
-              onClick={() => router.push('/user/dashboard')}
-              sx={{width: 220, mx: 'auto', display: 'flex', mt: 3, height: 52}}
-              variant="outlined"
-            >
-              {success ? 'Back' : 'Cancel'}
-            </CustomButton>
-          </>
+          <CustomButton
+            onClick={() => setIsEdit(true)}
+            sx={{width: 220, mx: 'auto', display: 'flex', mt: 12, height: 52}}
+            variant="contained"
+          >
+            Edit details
+          </CustomButton>
         ) : null}
 
         {isEdit ? (
@@ -274,13 +266,6 @@ export default function AccountDetails(props) {
           </>
         ) : null}
       </Box>
-      <Image
-        alt={girlIcon.name}
-        height={290}
-        id="user_details_girl_icon"
-        src={girlIcon.svg_icon}
-        width={290}
-      />
     </Box>
   )
 }

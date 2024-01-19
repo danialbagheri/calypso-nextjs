@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-import Image from 'next/image'
-
 import {Alert, AlertTitle, Box, Typography} from '@mui/material'
 
 import {assetsEndPoints, getAssets} from '../../../../utils'
@@ -14,6 +12,7 @@ import {
 import {useRouter} from 'next/router'
 import {destroyCookie, parseCookies, setCookie} from 'nookies'
 import {postRefreshToken, postSetPassword} from '../../../../services'
+import SideBar from '../../../../components/user/dashboard/SideBar'
 
 const PASSWORD_GIRL_ICON = 'password'
 
@@ -111,7 +110,7 @@ export default function Password(props) {
   return (
     <Box
       sx={{
-        width: {xs: 270, md: 640},
+        width: {xs: 270, md: 740},
         m: '0 auto',
         py: {xs: 6, md: 21},
 
@@ -127,7 +126,9 @@ export default function Password(props) {
         },
       }}
     >
-      <Box width="100%">
+      <SideBar girlIcon={girlIcon} route="password" />
+
+      <Box width={{xs: '100%', md: 318}}>
         <Typography sx={{fontSize: 24, fontWeight: 700}} textAlign="center">
           Password
         </Typography>
@@ -191,22 +192,7 @@ export default function Password(props) {
         >
           Save details
         </CustomButton>
-        <CustomButton
-          onClick={() => {
-            router.push('/user/dashboard')
-          }}
-          sx={{width: 216, mx: 'auto', display: 'flex', mt: 3, height: 46}}
-        >
-          Cancel
-        </CustomButton>
       </Box>
-      <Image
-        alt={girlIcon.name}
-        height={290}
-        id="user_details_girl_icon"
-        src={girlIcon.svg_icon}
-        width={290}
-      />
     </Box>
   )
 }
