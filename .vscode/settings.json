@@ -24,5 +24,7 @@
   "eslint.enable": true,
   "editor.fontFamily": "JetBrains Mono",
   "editor.fontSize": 14,
-  "editor.fontLigatures": true
+  "editor.fontLigatures": true,
+  "cSpell.words": ["calacc", "calref"],
+  "gitlens.keymap": "chorded"
 }

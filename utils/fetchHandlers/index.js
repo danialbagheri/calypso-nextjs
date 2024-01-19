@@ -2,20 +2,39 @@ import {BASE_URL} from '../../constants/servicesConstants/index'
 
 // const BASE_URL = 'https://api.cabanasun.co.uk/api/'
 
-const errorHandler = response => {
+const errorHandler = async response => {
   const {status, statusText} = response
+  let res = null
+  try {
+    res = await response.json()
+  } catch (e) {
+    console.error(e)
+    res = null
+  }
 
   if (response) {
-    return Promise.reject({status, statusText})
+    return Promise.reject({status, statusText, res})
   }
 }
 
-const get = async ({endpoint, baseURL = BASE_URL}) => {
+const get = async ({
+  endpoint,
+  baseURL = BASE_URL,
+  token = null,
+  ...headers
+}) => {
   const timeout = 80000
   const controller = new AbortController()
   const id = setTimeout(() => controller.abort(), timeout)
 
   const response = await fetch(`${baseURL}${endpoint}`, {
+    method: 'GET',
+    headers: {
+      ...(token ? {Authorization: `Bearer ${token}`} : {}),
+      'Content-Type': 'application/json', // Adjust the content type if needed
+      // credentials: 'include',
+      ...headers,
+    },
     timeout: 8000,
     signal: controller.signal,
   })
@@ -27,24 +46,31 @@ const get = async ({endpoint, baseURL = BASE_URL}) => {
   return errorHandler(response)
 }
 
-const post = async ({endpoint, data}) => {
-  const response = await window.fetch(`${BASE_URL}${endpoint}`, {
+const post = async ({endpoint, data, token = null, ...headers}) => {
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
     method: 'POST',
     timeout: 8000,
     headers: {
       'Content-Type': 'application/json',
+      ...(token ? {Authorization: `Bearer ${token}`} : {}),
+      ...headers,
     },
     body: JSON.stringify(data),
   })
 
   if (response.ok) {
-    return Promise.resolve(await response.json())
+    const text = await response.text()
+    if (text) {
+      return Promise.resolve(JSON.parse(text))
+    }
+
+    return Promise.resolve(null)
   }
 
   return errorHandler(response)
 }
 
-const patch = async ({endpoint, data}) => {
+const patch = async ({endpoint, data, token = null}) => {
   const timeout = 8000
   const controller = new AbortController()
   const id = setTimeout(() => controller.abort(), timeout)
@@ -54,13 +80,14 @@ const patch = async ({endpoint, data}) => {
     timeout: 8000,
     signal: controller.signal,
     headers: {
+      ...(token ? {Authorization: `Bearer ${token}`} : {}),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   })
   if (response.ok) {
     clearTimeout(id)
-    return Promise.resolve(await response.json())
+    return Promise.resolve(response)
   }
   clearTimeout(id)
   return errorHandler(response)
