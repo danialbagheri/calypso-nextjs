@@ -11,7 +11,7 @@ import {
 } from '../../components/user/localShared'
 import {postResetPasswordEmail} from '../../services'
 
-const ACCOUNT_GIRL_ICON = 'account details'
+const GIRL_ICON = 'password'
 const CHECK_ICON_ORANGE = 'Check-icon-orange'
 const CHECK_ICON_GREEN = 'Check-icon-green'
 
@@ -22,13 +22,13 @@ export default function Password(props) {
   const [email, setEmail] = React.useState('')
   const [error, setError] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
+  const [resendState, setResendState] = React.useState(false)
   const theme = useTheme()
 
   const {userAccountTopIcons, checkIcon} = assetsEndPoints
 
   const girlIcon = assets[userAccountTopIcons]?.items.find(
-    item =>
-      item.name.toLowerCase().trim() === ACCOUNT_GIRL_ICON.toLowerCase().trim(),
+    item => item.name.toLowerCase().trim() === GIRL_ICON.toLowerCase().trim(),
   )
   const checkIconOrange = assets[checkIcon]?.items.find(
     item =>
@@ -73,10 +73,25 @@ export default function Password(props) {
     }
   }
 
+  const resendEmailHandler = async () => {
+    if (!error) {
+      setLoading(true)
+      try {
+        await postResetPasswordEmail({email})
+        setResendState(true)
+      } catch (err) {
+        setError(err?.res?.email)
+        console.error(err)
+      } finally {
+        setLoading(false)
+      }
+    }
+  }
+
   return (
     <Box
       sx={{
-        width: {xs: 290, md: 740},
+        width: {xs: 297, md: 740},
         m: '0 auto',
         py: {xs: 6, md: 21},
 
@@ -96,12 +111,11 @@ export default function Password(props) {
         <Typography sx={{fontSize: 24, fontWeight: 700}} textAlign="center">
           Retrieve password
         </Typography>
-        <Typography color="secondary.main" mt={3} textAlign="center">
-          Please make sure you complete all the boxes
-        </Typography>
-
         {step === 1 ? (
           <>
+            <Typography color="secondary.main" mt={3} textAlign="center">
+              Please enter the email you used to create your account
+            </Typography>
             <Box className="centralize" gap={3} mt={4}>
               <CustomOutlinedInput
                 error={error}
@@ -158,16 +172,23 @@ export default function Password(props) {
                 />
               </Box>
               <Typography color="#FFF" sx={{fontSize: 20, fontWeight: 600}}>
-                Your retrieve link has been sent to your email
+                {resendState
+                  ? 'You just resent the link'
+                  : 'A password reset link is on its way to your email'}
               </Typography>
             </Box>
+            <Typography color="secondary.main" mt={8} textAlign="center">
+              {resendState
+                ? 'if you still not received the email within 10 minutes please check your spam folder or try re-enter your email address'
+                : 'if you have not received the email within 5 minutes please continue with the below options'}
+            </Typography>
             <Box>
               <CustomButton
                 disabled={error !== null || email === ''}
                 loading={loading}
-                onClick={sendEmailHandler}
+                onClick={resendEmailHandler}
                 sx={{
-                  width: 280,
+                  width: 260,
                   mx: 'auto',
                   display: 'flex',
                   mt: 9,

@@ -68,16 +68,22 @@ export default function Password(props) {
     setLoading(true)
     try {
       await postSetPassword({data: fieldData, token: calacc})
+      destroyCookie(null, 'calacc', {path: '/'})
+      destroyCookie(null, 'calref', {path: '/'})
+      router.push('/user/sign-in/?password_changed=true')
     } catch (err) {
       if (err.status === 401) {
         try {
           const {access} = await postRefreshToken({
-            refresh: calref || 'refresh',
+            refresh: calref || 'null_token',
           })
           setCookie(null, 'calacc', access, {
             path: '/',
           })
           await postSetPassword({data: fieldData, token: access})
+          destroyCookie(null, 'calacc', {path: '/'})
+          destroyCookie(null, 'calref', {path: '/'})
+          router.push('/user/sign-in/?password_changed=true')
         } catch {
           if (err.status === 401) {
             destroyCookie(null, 'calacc', {path: '/'})

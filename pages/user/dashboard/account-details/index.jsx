@@ -11,7 +11,7 @@ import {
   validateName,
 } from '../../../../utils'
 import UserDetailsFields from '../../../../components/user/UserDetailsFields'
-import {Banner, CustomButton} from '../../../../components/user/localShared'
+import {CustomButton} from '../../../../components/user/localShared'
 import {
   getUserInfo,
   patchUserInfo,
@@ -22,7 +22,6 @@ import {EMAIL, FIRST_NAME, LAST_NAME, MOBILE_NUMBER} from '..'
 import {useRouter} from 'next/router'
 
 const ACCOUNT_DETAILS = 'account details'
-const CHECK_ICON_ORANGE = 'check-icon-orange'
 
 export default function AccountDetails(props) {
   const {assets} = props
@@ -41,18 +40,31 @@ export default function AccountDetails(props) {
   })
   const [loading, setLoading] = React.useState(false)
   const [success, setSuccess] = React.useState(false)
+  const [isEdit, setIsEdit] = React.useState(false)
   const router = useRouter()
+  const initialFieldData = React.useRef({
+    id: '',
+    [FIRST_NAME]: '',
+    [LAST_NAME]: '',
+    [EMAIL]: '',
+    [MOBILE_NUMBER]: '',
+  })
 
-  const {checkIcon, userAccountTopIcons} = assetsEndPoints
+  const {userAccountTopIcons} = assetsEndPoints
 
   const girlIcon = assets[userAccountTopIcons]?.items.find(
     item =>
       item.name.toLowerCase().trim() === ACCOUNT_DETAILS.toLowerCase().trim(),
   )
-  const orangeCheckIcon = assets[checkIcon]?.items.find(
-    item =>
-      item.name.toLowerCase().trim() === CHECK_ICON_ORANGE.toLowerCase().trim(),
-  )
+
+  const renderSubtitle = () => {
+    if (isEdit) {
+      return 'Make sure your details are up to date'
+    } else if (success) {
+      return 'Your account details has been successfully updated'
+    }
+    return 'You can view or change your personal details'
+  }
 
   const errorHandler = () => {
     let errorState = false
@@ -63,15 +75,18 @@ export default function AccountDetails(props) {
       [MOBILE_NUMBER]: false,
     })
 
-    if (!validateName(fieldData[FIRST_NAME])) {
+    if (fieldData[FIRST_NAME] && !validateName(fieldData[FIRST_NAME])) {
       errorState = true
       setError(prev => ({...prev, [FIRST_NAME]: 'Please enter a valid name'}))
     }
-    if (!validateName(fieldData[LAST_NAME])) {
+    if (fieldData[LAST_NAME] && !validateName(fieldData[LAST_NAME])) {
       errorState = true
       setError(prev => ({...prev, [LAST_NAME]: 'Please enter a valid name'}))
     }
-    if (!validateMobileNumber(fieldData[MOBILE_NUMBER])) {
+    if (
+      fieldData[MOBILE_NUMBER] &&
+      !validateMobileNumber(fieldData[MOBILE_NUMBER])
+    ) {
       errorState = true
       setError(prev => ({
         ...prev,
@@ -90,20 +105,29 @@ export default function AccountDetails(props) {
     if (!errorState) {
       setLoading(true)
       try {
-        await patchUserInfo(fieldData, calacc)
+        const res = await patchUserInfo(fieldData, calacc)
+        const response = await res.json()
+        setFieldData({...response})
+        initialFieldData.current = {...response}
+
         setSuccess(true)
+        setIsEdit(false)
       } catch (err) {
         if (err.status === 401) {
           try {
             const {access} = await postRefreshToken({
-              refresh: calref || 'refresh',
+              refresh: calref || 'null_token',
             })
             setCookie(null, 'calacc', access, {
               maxAge: 30 * 60 * 1000,
               path: '/',
             })
-            await patchUserInfo(fieldData, access)
+            const res = await patchUserInfo(fieldData, access)
+            const response = await res.json()
+            setFieldData({...response})
+            initialFieldData.current = {...response}
             setSuccess(true)
+            setIsEdit(false)
           } catch {
             if (err.status === 401) {
               console.error(err)
@@ -124,16 +148,28 @@ export default function AccountDetails(props) {
     }
   }
 
+  const discardHandler = () => {
+    setFieldData({...initialFieldData.current})
+    setError({
+      [FIRST_NAME]: false,
+      [LAST_NAME]: false,
+      [EMAIL]: false,
+      [MOBILE_NUMBER]: false,
+    })
+    setIsEdit(false)
+  }
+
   const handleGetUserInfo = async () => {
     const {calacc, calref} = parseCookies()
     try {
       const data = await getUserInfo(calacc)
+      initialFieldData.current = {...data}
       setFieldData({...data})
     } catch (err) {
       if (err.status === 401) {
         try {
           const {access} = await postRefreshToken({
-            refresh: calref || 'refresh',
+            refresh: calref || 'null_token',
           })
 
           setCookie(null, 'calacc', access, {
@@ -142,6 +178,7 @@ export default function AccountDetails(props) {
           })
 
           const data = await getUserInfo(access)
+          initialFieldData.current = {...data}
           setFieldData({...data})
         } catch (err) {
           if (err.status === 401) {
@@ -164,9 +201,10 @@ export default function AccountDetails(props) {
   return (
     <Box
       sx={{
-        width: {xs: '100%', md: 640},
+        width: {xs: '100%', sm: 480, md: 740},
         m: '0 auto',
         py: {xs: 6, md: 21},
+        px: {xs: 10, sm: 20, md: 0},
         gap: 5,
 
         display: 'flex',
@@ -180,31 +218,61 @@ export default function AccountDetails(props) {
         },
       }}
     >
-      <Box>
+      <Box width={{xs: '100%', md: 318}}>
         <Typography sx={{fontSize: 24, fontWeight: 700}} textAlign="center">
           Account details
         </Typography>
+
         <Typography color="secondary.main" mt={3} textAlign="center">
-          Please make sure you complete all the boxes
+          {renderSubtitle()}
         </Typography>
-        {success ? (
-          <Banner>Your account detail changed successfully</Banner>
-        ) : null}
+
         <UserDetailsFields
-          checkIcon={orangeCheckIcon}
           error={error}
           fieldData={fieldData}
+          isEdit={isEdit}
           setError={setError}
           setFieldData={setFieldData}
         />
-        <CustomButton
-          loading={loading}
-          onClick={saveHandler}
-          sx={{width: 162, mx: 'auto', display: 'flex', mt: 12, height: 52}}
-          variant="contained"
-        >
-          Save details
-        </CustomButton>
+
+        {!isEdit ? (
+          <>
+            <CustomButton
+              onClick={() => setIsEdit(true)}
+              sx={{width: 220, mx: 'auto', display: 'flex', mt: 12, height: 52}}
+              variant="contained"
+            >
+              Edit details
+            </CustomButton>
+            <CustomButton
+              onClick={() => router.push('/user/dashboard')}
+              sx={{width: 220, mx: 'auto', display: 'flex', mt: 3, height: 52}}
+              variant="outlined"
+            >
+              {success ? 'Back' : 'Cancel'}
+            </CustomButton>
+          </>
+        ) : null}
+
+        {isEdit ? (
+          <>
+            <CustomButton
+              loading={loading}
+              onClick={saveHandler}
+              sx={{width: 220, mx: 'auto', display: 'flex', mt: 12, height: 52}}
+              variant="contained"
+            >
+              Save changes
+            </CustomButton>
+            <CustomButton
+              onClick={discardHandler}
+              sx={{width: 220, mx: 'auto', display: 'flex', mt: 3, height: 52}}
+              variant="outlined"
+            >
+              Discard changes
+            </CustomButton>
+          </>
+        ) : null}
       </Box>
       <Image
         alt={girlIcon.name}
@@ -219,9 +287,9 @@ export default function AccountDetails(props) {
 
 export async function getStaticProps() {
   try {
-    const {checkIcon, userAccountTopIcons} = assetsEndPoints
+    const {userAccountTopIcons} = assetsEndPoints
 
-    const assets = await getAssets([checkIcon, userAccountTopIcons])
+    const assets = await getAssets([userAccountTopIcons])
 
     return {
       props: {
