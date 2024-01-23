@@ -3,7 +3,7 @@ import {useState} from 'react'
 import 'react-tabs/style/react-tabs.css'
 import Head from 'next/head'
 import _ from 'lodash'
-import {FilterProducts, ProductRange} from 'components'
+import {ProductRange} from 'components'
 import {getProducts, getProductsWithPagination} from 'services'
 
 function Products(props) {
@@ -13,7 +13,7 @@ function Products(props) {
     [item => item.types[0].id, item => item.collection_names.length],
     ['asc', 'desc'],
   )
-  const [products, setProducts] = useState(ordered_products)
+  const [products] = useState(ordered_products)
   const [limit, setLimit] = useState(10)
 
   const [maxLimit, setMaxLimit] = useState(false)
@@ -48,7 +48,7 @@ function Products(props) {
         </h1>
       </div>
       <section className="container">
-        <div className="product-page-filter row">
+        {/* <div className="product-page-filter row">
           <FilterProducts
             limit={limit}
             products={ordered_products}
@@ -56,7 +56,7 @@ function Products(props) {
             setMaxLimit={setMaxLimit}
             setProducts={setProducts}
           />
-        </div>
+        </div> */}
         <div>
           <ProductRange
             limit={limit}
