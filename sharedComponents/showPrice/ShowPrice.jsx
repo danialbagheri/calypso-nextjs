@@ -22,17 +22,6 @@ export default function ShowPrice(props) {
   React.useEffect(() => {
     if (localStorage.getItem('currency')) {
       setCurrency(localStorage.getItem('currency'))
-    } else {
-      // TODO::: BACKEND api needs updating
-      // fetch('https://service.calypsosun.com/api/users/ips/92.239.204.4/locations/')
-      //   .then(res => res.json())
-      //   .then(response => {
-      //     localStorage.setItem('currency', response.currency)
-      //     setCurrency(response.currency)
-      //   })
-      //   .catch(() => {
-      //     console.error('IP-API Request failed')
-      //   })
     }
   }, [])
 
