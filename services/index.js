@@ -135,7 +135,7 @@ export const getTopBar = slug => {
 }
 
 export const getInfoBarStatus = () => {
-  return get({endpoint: 'web/top-bars/'})
+  return get({endpoint: 'web/top-bars/main/'})
 }
 
 export const getTopBarStatus = () => {
