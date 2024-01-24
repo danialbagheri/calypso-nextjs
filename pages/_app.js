@@ -85,6 +85,10 @@ function MyApp({Component, pageProps}) {
         <link color="#da532c" href="/safari-pinned-tab.svg" rel="mask-icon" />
         <link href="https://use.typekit.net/kls3ash.css" rel="stylesheet" />
         <link
+          href="https://use.typekit.net/kls3ash.css"
+          rel="stylesheet"
+        ></link>
+        <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
         />
@@ -121,6 +125,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           `,
           }}
         />
+        {/* eslint-disable-next-line */}
+        <style>@import url("https://use.typekit.net/kls3ash.css");</style>
       </Head>
       <AppProvider>
         <SessionProvider refetchInterval={interval} session={pageProps.session}>
