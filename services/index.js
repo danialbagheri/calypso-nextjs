@@ -161,6 +161,10 @@ export const getUserOrders = token => {
 
 //END USER
 
+export const getFavoriteProducts = token => {
+  return get({endpoint: 'products/favorites/', token})
+}
+
 /* ----------------------------- Patch requests ----------------------------- */
 export const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
@@ -170,6 +174,12 @@ export const singleReviewPatch = (id, data) => {
 
 export const patchUserInfo = (data, token) => {
   return patch({endpoint: 'users/me/', data, token})
+}
+
+//END USER
+
+export const addProductToFavorite = (slug, token) => {
+  return patch({endpoint: `products/favorites/${slug}/`, token})
 }
 /* -------------------------------------------------------------------------- */
 

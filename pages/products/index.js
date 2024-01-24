@@ -1,10 +1,12 @@
-import {useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 
 import 'react-tabs/style/react-tabs.css'
 import Head from 'next/head'
 import _ from 'lodash'
 import {ProductRange} from 'components'
 import {getProducts, getProductsWithPagination} from 'services'
+import {AppContext} from '../../components/appProvider/AppProvider'
+import {getFavoriteProductsHandler} from '..'
 
 function Products(props) {
   const ordered_products = _.orderBy(
@@ -15,8 +17,8 @@ function Products(props) {
   )
   const [products] = useState(ordered_products)
   const [limit, setLimit] = useState(10)
-
   const [maxLimit, setMaxLimit] = useState(false)
+  const [appState, setAppState] = useContext(AppContext)
 
   function LoadMore() {
     const newLimit = limit + 10
@@ -27,6 +29,12 @@ function Products(props) {
       setLimit(newLimit)
     }
   }
+
+  useEffect(() => {
+    if (!appState.favoriteProducts) {
+      getFavoriteProductsHandler(setAppState)
+    }
+  }, [])
 
   return (
     <div>
