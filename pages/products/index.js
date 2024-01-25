@@ -7,24 +7,44 @@ import {ProductRange} from 'components'
 import {getProducts, getProductsWithPagination} from 'services'
 import {AppContext} from '../../components/appProvider/AppProvider'
 import {getFavoriteProductsHandler} from '..'
+import {useRouter} from 'next/router'
+import {Box, Button, Typography} from '@mui/material'
+
+const PRODUCTS_PER_PAGE = 10
 
 function Products(props) {
+  const [limit, setLimit] = useState(PRODUCTS_PER_PAGE)
+  const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(true)
+  const [appState, setAppState] = useContext(AppContext)
+  const router = useRouter()
+
   const ordered_products = _.orderBy(
     // checks if product is in multiple collections meaning it's more popular than others
     props.products,
     [item => item.types[0].id, item => item.collection_names.length],
     ['asc', 'desc'],
   )
-  const [products] = useState(ordered_products)
-  const [limit, setLimit] = useState(10)
-  const [maxLimit, setMaxLimit] = useState(false)
-  const [appState, setAppState] = useContext(AppContext)
 
-  function LoadMore() {
+  const findProductsByCategory = ({products, category}) => {
+    if (category === 'All' || !category) {
+      return products
+    }
+    return products.filter(product => {
+      return product.types.find(type => type === category)
+    })
+  }
+
+  const category = router.query.category
+  const products = findProductsByCategory({
+    products: ordered_products,
+    category,
+  })
+
+  function loadMore() {
     const newLimit = limit + 10
     if (newLimit >= products.length) {
       setLimit(products.length)
-      setMaxLimit(true)
+      setShowLoadMoreBtn(false)
     } else {
       setLimit(newLimit)
     }
@@ -35,6 +55,18 @@ function Products(props) {
       getFavoriteProductsHandler(setAppState)
     }
   }, [])
+
+  useEffect(() => {
+    if (products.length <= limit) {
+      setShowLoadMoreBtn(false)
+    } else {
+      setShowLoadMoreBtn(true)
+    }
+  }, [router.query.category, limit])
+
+  useEffect(() => {
+    setLimit(PRODUCTS_PER_PAGE)
+  }, [router.query.category])
 
   return (
     <div>
@@ -66,29 +98,59 @@ function Products(props) {
           />
         </div> */}
         <div>
-          <ProductRange
-            limit={limit}
-            products={products}
-            type="sun%20protection"
-          />
-          {maxLimit ? (
-            <span id="loading"></span>
+          {products.length ? (
+            <ProductRange
+              limit={limit}
+              products={products}
+              type="sun%20protection"
+            />
           ) : (
-            <div className="text-centre m-3">
-              <button
-                className="btn btn-calypso"
-                id="loading"
-                onClick={LoadMore}
-              >
-                Load More
-              </button>
-            </div>
+            <Box className="centralize" sx={{width: '100%', my: 20}}>
+              <Typography fontSize={22} fontWeight={600}>
+                No products have found in this category
+              </Typography>
+            </Box>
           )}
+          <Box className="centralize">
+            {showLoadMoreBtn ? (
+              <Button
+                onClick={loadMore}
+                sx={{
+                  position: 'relative',
+
+                  textAlign: 'center',
+                  fontSize: '18px',
+                  fontStyle: 'normal',
+                  fontWeight: 600,
+                  lineHeight: 'normal',
+                  textTransform: 'none',
+
+                  p: '3px 80px',
+
+                  borderRadius: '10px',
+
+                  boxShadow: 'none',
+
+                  whiteSpace: 'nowrap',
+
+                  '&:hover': {
+                    bgcolor: '#FFF !important',
+                    boxShadow: 'none !important',
+                  },
+                  mb: 25,
+                }}
+                variant="outlined"
+              >
+                Load more
+              </Button>
+            ) : null}
+          </Box>
         </div>
       </section>
     </div>
   )
 }
+
 async function getAllPages(pageCount) {
   let pageNumber = 1
   const productResult = []
@@ -101,6 +163,7 @@ async function getAllPages(pageCount) {
 
 export async function getStaticProps() {
   const products = await getProducts()
+
   const pageCount = Math.ceil(products.count / 10)
   const productResult = await getAllPages(pageCount)
 

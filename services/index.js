@@ -178,8 +178,8 @@ export const patchUserInfo = (data, token) => {
 
 //END USER
 
-export const addProductToFavorite = (slug, token) => {
-  return patch({endpoint: `products/favorites/${slug}/`, token})
+export const addProductToFavorite = (slug, token, action) => {
+  return patch({endpoint: `products/favorites/${slug}/`, token, data: {action}})
 }
 /* -------------------------------------------------------------------------- */
 
