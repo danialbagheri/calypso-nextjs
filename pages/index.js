@@ -23,6 +23,7 @@ import {AppContext} from '../components/appProvider/AppProvider'
 
 export const getFavoriteProductsHandler = async setAppState => {
   const {calacc, calref} = parseCookies()
+
   try {
     const favoriteProducts = await getFavoriteProducts(calacc)
     setAppState(prevState => ({
@@ -40,6 +41,7 @@ export const getFavoriteProductsHandler = async setAppState => {
         })
 
         const favoriteProducts = await getFavoriteProducts(access)
+
         setAppState(prevState => ({
           ...prevState,
           favoriteProducts: favoriteProducts.results,

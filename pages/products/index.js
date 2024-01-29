@@ -50,6 +50,24 @@ function Products(props) {
     }
   }
 
+  const queryChangeHandler = async () => {
+    const limitCheckHandler = () => {
+      if (products.length <= limit) {
+        setShowLoadMoreBtn(false)
+      } else {
+        setShowLoadMoreBtn(true)
+      }
+    }
+
+    try {
+      await getFavoriteProductsHandler(setAppState)
+      limitCheckHandler()
+    } catch (err) {
+      console.error(err)
+      limitCheckHandler()
+    }
+  }
+
   useEffect(() => {
     if (!appState.favoriteProducts) {
       getFavoriteProductsHandler(setAppState)
@@ -57,11 +75,7 @@ function Products(props) {
   }, [])
 
   useEffect(() => {
-    if (products.length <= limit) {
-      setShowLoadMoreBtn(false)
-    } else {
-      setShowLoadMoreBtn(true)
-    }
+    queryChangeHandler()
   }, [router.query.category, limit])
 
   useEffect(() => {
