@@ -26,10 +26,16 @@ function MyApp({Component, pageProps}) {
   const [icons, setIcons] = React.useState({})
 
   const handleGetAssets = async () => {
-    const response = await getAssets([assetsEndPoints.userAccount])
-    setIcons({
-      [assetsEndPoints.userAccount]: response[assetsEndPoints.userAccount],
-    })
+    const response = await getAssets([
+      assetsEndPoints.userAccount,
+      assetsEndPoints.infoBar,
+    ])
+
+    if (response && typeof response === 'object') {
+      setIcons({
+        ...response,
+      })
+    }
   }
 
   React.useEffect(() => {
@@ -106,6 +112,7 @@ function MyApp({Component, pageProps}) {
         <meta content="#da532c" name="msapplication-TileColor" />
         <meta content="#ffffff" name="theme-color" />
         <meta content="#000000" name="theme-color" />
+        <meta content="#FF6B00" name="theme-color" />
         <meta content="@calypsosuncare" name="twitter:site"></meta>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <script

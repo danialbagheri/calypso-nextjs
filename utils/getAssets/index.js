@@ -1,5 +1,6 @@
 import {getIcons, getTopBar} from 'services'
 
+/* --------------------------- USER ACCOUNT ICONS --------------------------- */
 export const WISH_LIST_FILL_ICON_ID = 22
 export const WISH_LIST_OUTLINED_ICON_ID = 23
 export const LOG_OUT_ICON_ID = 24
@@ -8,6 +9,13 @@ export const USER_LOGGED_OUT_ICON_ID = 26
 export const CART_ICON_ID = 27
 export const SEARCH_ICON_ID = 30
 export const BURGER_ICON_ID = 31
+/* -------------------------------------------------------------------------- */
+
+/* ----------------------------- INFO BAR ICONS ----------------------------- */
+export const MADE_IN_UK_ICON_ID = 19
+export const FREE_DELIVERY_ICON_ID = 20
+export const STAR_RATE_ICON_ID = 21
+/* -------------------------------------------------------------------------- */
 
 export const assetsEndPoints = {
   checkIcon: 'check-icon',
@@ -17,6 +25,7 @@ export const assetsEndPoints = {
   popUpReferrals: 'pop-up-referrals',
   userAccountTopIcons: 'user-account-top-icons',
   userAccount: 'user-account',
+  infoBar: 'info-bar',
 }
 
 /**
@@ -44,6 +53,9 @@ export async function getAssets(props = []) {
         promises.push(getIcons(prop))
         break
       case assetsEndPoints.userAccount:
+        promises.push(getIcons(prop))
+        break
+      case assetsEndPoints.infoBar:
         promises.push(getIcons(prop))
         break
       /* -------------------------------------------------------------------------- */
