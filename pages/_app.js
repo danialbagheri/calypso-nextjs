@@ -15,6 +15,7 @@ import Footer from '../components/common/footer/footer'
 import InfoBar from '../components/general/InfoBar'
 import {AppProvider} from 'components/appProvider'
 import {MailjetSignUp} from 'components'
+import {assetsEndPoints, getAssets} from '../utils'
 
 function MyApp({Component, pageProps}) {
   const SUBSCRIPTION_STATE = 'subscriptionState'
@@ -22,6 +23,14 @@ function MyApp({Component, pageProps}) {
 
   const [interval, setInterval] = React.useState(0)
   const [showSubscription, setShowSubscription] = React.useState(false)
+  const [icons, setIcons] = React.useState({})
+
+  const handleGetAssets = async () => {
+    const response = await getAssets([assetsEndPoints.userAccount])
+    setIcons({
+      [assetsEndPoints.userAccount]: response[assetsEndPoints.userAccount],
+    })
+  }
 
   React.useEffect(() => {
     const subscriptionState = localStorage.getItem(SUBSCRIPTION_STATE)
@@ -29,6 +38,8 @@ function MyApp({Component, pageProps}) {
     if (!subscriptionState || subscriptionState !== SIGNED_UP) {
       setShowSubscription(true)
     }
+
+    handleGetAssets()
   }, [])
 
   return (
@@ -128,7 +139,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* eslint-disable-next-line */}
         <style>@import url("https://use.typekit.net/kls3ash.css");</style>
       </Head>
-      <AppProvider>
+      <AppProvider icons={icons}>
         <SessionProvider refetchInterval={interval} session={pageProps.session}>
           <Provider store={store}>
             {/* <!-- Google Tag Manager (noscript) --> */}

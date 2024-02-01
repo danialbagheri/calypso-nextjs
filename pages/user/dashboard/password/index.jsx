@@ -13,6 +13,7 @@ import {useRouter} from 'next/router'
 import {destroyCookie, parseCookies, setCookie} from 'nookies'
 import {postRefreshToken, postSetPassword} from '../../../../services'
 import SideBar from '../../../../components/user/dashboard/SideBar'
+import {AppContext} from '../../../../components/appProvider'
 
 const PASSWORD_GIRL_ICON = 'password'
 
@@ -36,8 +37,8 @@ export default function Password(props) {
   const [error, setError] = React.useState({
     ...initialState,
   })
-
   const [loading, setLoading] = React.useState(false)
+  const [, setAppState] = React.useContext(AppContext)
 
   const router = useRouter()
 
@@ -69,6 +70,7 @@ export default function Password(props) {
       await postSetPassword({data: fieldData, token: calacc})
       destroyCookie(null, 'calacc', {path: '/'})
       destroyCookie(null, 'calref', {path: '/'})
+      setAppState(perv => ({...perv, isAuthenticate: false}))
       router.push('/user/sign-in/?password_changed=true')
     } catch (err) {
       if (err.status === 401) {
@@ -82,11 +84,13 @@ export default function Password(props) {
           await postSetPassword({data: fieldData, token: access})
           destroyCookie(null, 'calacc', {path: '/'})
           destroyCookie(null, 'calref', {path: '/'})
+          setAppState(perv => ({...perv, isAuthenticate: false}))
           router.push('/user/sign-in/?password_changed=true')
         } catch {
           if (err.status === 401) {
             destroyCookie(null, 'calacc', {path: '/'})
             destroyCookie(null, 'calref', {path: '/'})
+            setAppState(perv => ({...perv, isAuthenticate: false}))
             console.error(err)
             router.push('/user')
           } else {

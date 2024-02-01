@@ -15,10 +15,11 @@ import {
   patchUserInfo,
   postRefreshToken,
 } from '../../../../services'
-import {parseCookies, setCookie} from 'nookies'
+import {destroyCookie, parseCookies, setCookie} from 'nookies'
 import {EMAIL, FIRST_NAME, LAST_NAME, MOBILE_NUMBER} from '..'
 import {useRouter} from 'next/router'
 import SideBar from '../../../../components/user/dashboard/SideBar'
+import {AppContext} from '../../../../components/appProvider'
 
 const ACCOUNT_DETAILS = 'account details'
 
@@ -40,6 +41,7 @@ export default function AccountDetails(props) {
   const [loading, setLoading] = React.useState(false)
   const [success, setSuccess] = React.useState(false)
   const [isEdit, setIsEdit] = React.useState(false)
+  const [, setAppState] = React.useContext(AppContext)
   const router = useRouter()
   const initialFieldData = React.useRef({
     id: '',
@@ -108,6 +110,7 @@ export default function AccountDetails(props) {
         const response = await res.json()
         setFieldData({...response})
         initialFieldData.current = {...response}
+        setAppState(perv => ({...perv, isAuthenticate: true}))
 
         setSuccess(true)
         setIsEdit(false)
@@ -121,6 +124,7 @@ export default function AccountDetails(props) {
               maxAge: 30 * 60 * 1000,
               path: '/',
             })
+            setAppState(perv => ({...perv, isAuthenticate: true}))
             const res = await patchUserInfo(fieldData, access)
             const response = await res.json()
             setFieldData({...response})
@@ -131,6 +135,9 @@ export default function AccountDetails(props) {
             if (err.status === 401) {
               console.error(err)
               router.push('/user')
+              destroyCookie(null, 'calacc', {path: '/'})
+              destroyCookie(null, 'calref', {path: '/'})
+              setAppState(perv => ({...perv, isAuthenticate: false}))
               setSuccess(false)
             } else {
               console.error(err)
@@ -164,6 +171,7 @@ export default function AccountDetails(props) {
       const data = await getUserInfo(calacc)
       initialFieldData.current = {...data}
       setFieldData({...data})
+      setAppState(perv => ({...perv, isAuthenticate: true}))
     } catch (err) {
       if (err.status === 401) {
         try {
@@ -175,6 +183,7 @@ export default function AccountDetails(props) {
             maxAge: 30 * 60 * 1000,
             path: '/',
           })
+          setAppState(perv => ({...perv, isAuthenticate: true}))
 
           const data = await getUserInfo(access)
           initialFieldData.current = {...data}
@@ -182,6 +191,9 @@ export default function AccountDetails(props) {
         } catch (err) {
           if (err.status === 401) {
             console.error(err)
+            destroyCookie(null, 'calacc', {path: '/'})
+            destroyCookie(null, 'calref', {path: '/'})
+            setAppState(perv => ({...perv, isAuthenticate: false}))
             router.push('/user')
           } else {
             console.error(err)

@@ -6,6 +6,7 @@ import {getUserInfo, getUserOrders, postRefreshToken} from '../../../services'
 import {assetsEndPoints, getAssets} from '../../../utils'
 import {Box, CircularProgress} from '@mui/material'
 import {Body, Header} from '../../../components/user/dashboard'
+import {AppContext} from '../../../components/appProvider'
 
 const {userAccountTopIcons} = assetsEndPoints
 
@@ -31,6 +32,7 @@ export default function Dashboard(props) {
     },
     orders: [],
   })
+  const [, setAppState] = React.useContext(AppContext)
   /* -------------------------------------------------------------------------- */
   const router = useRouter()
   const cookies = parseCookies()
@@ -45,12 +47,14 @@ export default function Dashboard(props) {
       const orders = await getUserOrders(calacc)
 
       setUserData(prevState => ({...prevState, info: {...data}, orders}))
+      setAppState(perv => ({...perv, isAuthenticate: true}))
 
       setLoading(false)
     } catch (err) {
       if (err.status === 401) {
         try {
           const {access} = await postRefreshToken({refresh: cookies.calref})
+          setAppState(perv => ({...perv, isAuthenticate: true}))
 
           setCookie(null, 'calacc', access, {
             maxAge: 30 * 60 * 1000,
@@ -66,6 +70,7 @@ export default function Dashboard(props) {
           if (err.status === 401) {
             destroyCookie(null, 'calacc', {path: '/'})
             destroyCookie(null, 'calref', {path: '/'})
+            setAppState(perv => ({...perv, isAuthenticate: false}))
             console.error(err)
             setLoading(false)
             router.push('/user')

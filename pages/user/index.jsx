@@ -12,19 +12,23 @@ import {Box, useTheme} from '@mui/material'
 import {AlreadyMember, NewMember} from 'components/user'
 import {assetsEndPoints, getAssets} from '../../utils'
 import {parseCookies} from 'nookies'
+import {AppContext} from '../../components/appProvider'
 /* -------------------------------------------------------------------------- */
 
 export default function User(props) {
   const {assets} = props
   const [refCookieState, setRefCookieState] = React.useState(false)
+  const [, setAppState] = React.useContext(AppContext)
   const theme = useTheme()
   const router = useRouter()
 
   const checkUserSignedIn = async () => {
     const {calref} = parseCookies()
 
+    console.log('in user page')
     if (calref) {
       router.push('/user/dashboard')
+      setAppState(perv => ({...perv, isAuthenticate: true}))
     } else {
       setRefCookieState(true)
     }
