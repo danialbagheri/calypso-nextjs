@@ -19,6 +19,7 @@ const MOBILE_IMAGE = 'mobile_webp'
 function Products(props) {
   const [limit, setLimit] = useState(PRODUCTS_PER_PAGE)
   const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(true)
+
   const [appState, setAppState] = useContext(AppContext)
   const router = useRouter()
 
@@ -105,12 +106,12 @@ function Products(props) {
         />
       </Head>
 
-      <div className="product-page-banner-image">
+      {/* <div className="product-page-banner-image">
         <h1>
           Have you got your <br />
           <span>summer essentials</span> ready?
         </h1>
-      </div>
+      </div> */}
       <section className="container">
         {/* <div className="product-page-filter row">
           <FilterProducts
@@ -120,7 +121,9 @@ function Products(props) {
             setMaxLimit={setMaxLimit}
             setProducts={setProducts}
           />
+
         </div> */}
+
         <div>
           {products.length ? (
             <ProductRange
