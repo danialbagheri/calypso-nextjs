@@ -9,14 +9,24 @@ import {AppContext} from '../../components/appProvider/AppProvider'
 import {getFavoriteProductsHandler} from '..'
 import {useRouter} from 'next/router'
 import {Box, Button, Typography} from '@mui/material'
+import {getCollectionBanner} from '../../services'
 
 const PRODUCTS_PER_PAGE = 10
+const LG_IMAGE = 'lg_image'
+const MD_IMAGE = 'md_image'
+const MOBILE_IMAGE = 'mobile_webp'
 
 function Products(props) {
   const [limit, setLimit] = useState(PRODUCTS_PER_PAGE)
   const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(true)
   const [appState, setAppState] = useContext(AppContext)
   const router = useRouter()
+
+  const productFinderBannerSrc = {
+    lg: props.banner[0]?.[LG_IMAGE],
+    md: props.banner[0]?.[MD_IMAGE],
+    mobile: props.banner[0]?.[MOBILE_IMAGE],
+  }
 
   const ordered_products = _.orderBy(
     // checks if product is in multiple collections meaning it's more popular than others
@@ -114,9 +124,9 @@ function Products(props) {
         <div>
           {products.length ? (
             <ProductRange
+              banner={productFinderBannerSrc}
               limit={limit}
               products={products}
-              type="sun%20protection"
             />
           ) : (
             <Box className="centralize" sx={{width: '100%', my: 20}}>
@@ -181,18 +191,13 @@ export async function getStaticProps() {
   const pageCount = Math.ceil(products.count / 10)
   const productResult = await getAllPages(pageCount)
 
-  // Now we will get the staff picked articles
-  if (!productResult) {
-    return {
-      notFound: true,
-      isLoaded: false,
-    }
-  }
+  const sliderResponse = await getCollectionBanner('product-finder')
+  const banner = sliderResponse?.results[0]?.slider_slides ?? []
 
   return {
     props: {
-      products: productResult.flat(),
-      isLoaded: true,
+      products: productResult?.flat() ?? [],
+      banner,
     },
     revalidate: 120, // will be passed to the page component as props
   }
