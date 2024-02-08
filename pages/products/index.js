@@ -21,9 +21,9 @@ function Products(props) {
   const router = useRouter()
 
   const productFinderBannerSrc = {
-    lg: props.banner[0]?.[LG_IMAGE],
-    md: props.banner[0]?.[MD_IMAGE],
-    mobile: props.banner[0]?.[MOBILE_IMAGE],
+    lg: props.productFinderBanner[0]?.[LG_IMAGE],
+    md: props.productFinderBanner[0]?.[MD_IMAGE],
+    mobile: props.productFinderBanner[0]?.[MOBILE_IMAGE],
   }
 
   const ordered_products = _.orderBy(
@@ -99,7 +99,11 @@ function Products(props) {
 
         <div>
           {products.length ? (
-            <ProductRange banner={productFinderBannerSrc} products={products} />
+            <ProductRange
+              banner={productFinderBannerSrc}
+              products={products}
+              videoBanner={props.videoBanner}
+            />
           ) : (
             <Box className="centralize" sx={{width: '100%', my: 20}}>
               <Typography fontSize={22} fontWeight={600}>
@@ -129,13 +133,17 @@ export async function getStaticProps() {
   const pageCount = Math.ceil(products.count / 10)
   const productResult = await getAllPages(pageCount)
 
-  const sliderResponse = await getCollectionBanner('product-finder')
-  const banner = sliderResponse?.results[0]?.slider_slides ?? []
+  const productFinderBannerResult = await getCollectionBanner('product-finder')
+  const videoBanner = await getCollectionBanner('product-page-banner')
+
+  const productFinderBanner =
+    productFinderBannerResult?.results[0]?.slides ?? []
 
   return {
     props: {
       products: productResult?.flat() ?? [],
-      banner,
+      productFinderBanner,
+      videoBanner: videoBanner?.results ?? [],
     },
     revalidate: 120, // will be passed to the page component as props
   }
