@@ -68,6 +68,8 @@ export default function reducers(state = initialState, action) {
   }
 }
 
+// client.product.fetchAll().then(products => )
+
 // Gets all the products from Shopify
 function getProducts() {
   return dispatch => {
@@ -91,6 +93,7 @@ function getProduct(id) {
     return resp
   }
 }
+
 function getProductByQuery(query) {
   return async dispatch => {
     const resp = await client.product.fetchQuery(query)
@@ -172,6 +175,7 @@ function checkout() {
     })
   }
 }
+
 // Gets Shopify store information
 function shopInfo() {
   return dispatch => {

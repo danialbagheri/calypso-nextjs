@@ -116,8 +116,16 @@ export const getProducts = () => {
   return get({endpoint: 'products/product/'})
 }
 
+export const getProductsByCategory = category => {
+  return get({endpoint: `products/product/?type=${category}`})
+}
+
 export const getProductsWithPagination = page => {
   return get({endpoint: `products/product/?page=${page}`})
+}
+
+export const getListOfProductsType = () => {
+  return get({endpoint: 'products/types/'})
 }
 
 export const getMegaMenuProducts = () => {

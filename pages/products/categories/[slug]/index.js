@@ -3,18 +3,22 @@ import {useContext, useEffect} from 'react'
 import 'react-tabs/style/react-tabs.css'
 import Head from 'next/head'
 import {ProductRange} from 'components'
-import {getProducts, getProductsWithPagination} from 'services'
-import {AppContext} from '../../components/appProvider/AppProvider'
-import {getFavoriteProductsHandler} from '..'
+
 import {useRouter} from 'next/router'
 import {Box, Typography} from '@mui/material'
-import {getCollectionBanner} from '../../services'
+import {AppContext} from '../../../../components/appProvider'
+import {
+  getCollectionBanner,
+  getListOfProductsType,
+  getProductsByCategory,
+} from '../../../../services'
+import {getFavoriteProductsHandler} from '../../..'
 
 const LG_IMAGE = 'lg_image'
 const MD_IMAGE = 'md_image'
 const MOBILE_IMAGE = 'mobile_webp'
 
-function Products(props) {
+function Category(props) {
   const [appState, setAppState] = useContext(AppContext)
   const router = useRouter()
 
@@ -57,6 +61,7 @@ function Products(props) {
           {props.products.length ? (
             <ProductRange
               banner={productFinderBannerSrc}
+              category={props.category}
               products={props.products}
               videoBanner={props.videoBanner}
             />
@@ -73,36 +78,49 @@ function Products(props) {
   )
 }
 
-async function getAllPages(pageCount) {
-  let pageNumber = 1
-  const productResult = []
-  for (pageNumber; pageNumber <= pageCount; pageNumber++) {
-    const product = await getProductsWithPagination(pageNumber)
-    productResult.push(product.results)
+export const getStaticPaths = async () => {
+  try {
+    const types = await getListOfProductsType()
+    const paths = []
+
+    types.forEach(type => {
+      if (type?.slug) {
+        paths.push({params: {slug: type.slug}})
+      }
+    })
+
+    return {
+      paths, //indicates that no page needs be created at build time
+      fallback: 'blocking', //indicates the type of fallback
+    }
+  } catch (err) {
+    console.error(err)
+    return {
+      paths: [], //indicates that no page needs be created at build time
+      fallback: 'blocking', //indicates the type of fallback
+    }
   }
-  return productResult
 }
 
-export async function getStaticProps() {
-  const products = await getProducts()
-
-  const pageCount = Math.ceil(products.count / 10)
-  const productResult = await getAllPages(pageCount)
+export async function getStaticProps(context) {
+  const category = context.params.slug
+  const products = await getProductsByCategory(category)
 
   const productFinderBannerResult = await getCollectionBanner('product-finder')
-  const videoBanner = await getCollectionBanner('product-page-banner')
+  const videoBanner = await getCollectionBanner(category)
 
   const productFinderBanner =
     productFinderBannerResult?.results[0]?.slides ?? []
 
   return {
     props: {
-      products: productResult?.flat() ?? [],
+      products: products?.results.flat() ?? [],
       productFinderBanner,
       videoBanner: videoBanner?.results ?? [],
+      category,
     },
     revalidate: 120, // will be passed to the page component as props
   }
 }
 
-export default Products
+export default Category
