@@ -102,9 +102,22 @@ export const getStaticPaths = async () => {
   }
 }
 
+async function getAllPages({pageCount, category}) {
+  let pageNumber = 1
+  const productResult = []
+  for (pageNumber; pageNumber <= pageCount; pageNumber++) {
+    const product = await getProductsByCategory({category, page: pageNumber})
+    productResult.push(product.results)
+  }
+  return productResult
+}
+
 export async function getStaticProps(context) {
   const category = context.params.slug
-  const products = await getProductsByCategory(category)
+  const products = await getProductsByCategory({category})
+  const pageCount = Math.ceil(products.count / 10)
+
+  const productResult = await getAllPages({pageCount, category})
 
   const productFinderBannerResult = await getCollectionBanner('product-finder')
   const videoBanner = await getCollectionBanner(category)
@@ -114,7 +127,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      products: products?.results.flat() ?? [],
+      products: productResult?.flat() ?? [],
       productFinderBanner,
       videoBanner: videoBanner?.results ?? [],
       category,

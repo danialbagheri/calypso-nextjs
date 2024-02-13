@@ -116,8 +116,8 @@ export const getProducts = () => {
   return get({endpoint: 'products/product/'})
 }
 
-export const getProductsByCategory = category => {
-  return get({endpoint: `products/product/?type=${category}`})
+export const getProductsByCategory = ({category, page = 1}) => {
+  return get({endpoint: `products/product/?type=${category}&page=${page}`})
 }
 
 export const getProductsWithPagination = page => {
