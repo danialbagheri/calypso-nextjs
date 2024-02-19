@@ -1,21 +1,39 @@
 import {useContext, useEffect} from 'react'
 
-import 'react-tabs/style/react-tabs.css'
+/* ---------------------------- NextJs Components --------------------------- */
 import Head from 'next/head'
-import {ProductRange} from 'components'
-import {getProducts, getProductsWithPagination} from 'services'
-import {AppContext} from '../../components/appProvider/AppProvider'
-import {getFavoriteProductsHandler} from '..'
 import {useRouter} from 'next/router'
-import {Box, Typography} from '@mui/material'
-import {getCollectionBanner} from '../../services'
+/* -------------------------------------------------------------------------- */
 
+/* ----------------------------- MUI Components ----------------------------- */
+import {Box, Typography} from '@mui/material'
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------- Local Components ---------------------------- */
+import {AppContext, ProductRange} from 'components'
+import {
+  getCollectionBanner,
+  getProducts,
+  getProductsWithPagination,
+} from 'services'
+
+import {useAuthFetch} from 'components/customHooks'
+import {getFavoriteProductsHandler} from 'utils'
+/* -------------------------------------------------------------------------- */
+
+/* --------------------------------- Styles --------------------------------- */
+import 'react-tabs/style/react-tabs.css'
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------- Constants ------------------------------- */
 const LG_IMAGE = 'lg_image'
 const MD_IMAGE = 'md_image'
 const MOBILE_IMAGE = 'mobile_webp'
+/* -------------------------------------------------------------------------- */
 
 function Products(props) {
   const [appState, setAppState] = useContext(AppContext)
+  const authFetchHandler = useAuthFetch()
   const router = useRouter()
 
   const productFinderBannerSrc = {
@@ -26,7 +44,7 @@ function Products(props) {
 
   const queryChangeHandler = async () => {
     try {
-      await getFavoriteProductsHandler(setAppState)
+      await getFavoriteProductsHandler({setAppState, authFetchHandler})
     } catch (err) {
       console.error(err)
     }
@@ -34,7 +52,7 @@ function Products(props) {
 
   useEffect(() => {
     if (!appState.favoriteProducts) {
-      getFavoriteProductsHandler(setAppState)
+      getFavoriteProductsHandler({setAppState, authFetchHandler})
     }
   }, [])
 

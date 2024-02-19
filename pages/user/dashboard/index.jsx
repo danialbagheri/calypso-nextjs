@@ -1,12 +1,23 @@
 import * as React from 'react'
 
+/* ---------------------------- NextJs Component ---------------------------- */
 import {useRouter} from 'next/router'
-import {destroyCookie, parseCookies, setCookie} from 'nookies'
-import {getUserInfo, getUserOrders, postRefreshToken} from '../../../services'
-import {assetsEndPoints, getAssets} from '../../../utils'
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------- Libraries ------------------------------- */
+import {parseCookies} from 'nookies'
+/* -------------------------------------------------------------------------- */
+
+/* ------------------------------ MUI Component ----------------------------- */
 import {Box, CircularProgress} from '@mui/material'
-import {Body, Header} from '../../../components/user/dashboard'
-import {AppContext} from '../../../components/appProvider'
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------- Local Components ---------------------------- */
+import {assetsEndPoints, getAssets} from 'utils'
+import {useAuthFetch} from 'components/customHooks'
+import {getUserInfo, getUserOrders} from 'services'
+import {Body, Header} from 'components/user/dashboard'
+/* -------------------------------------------------------------------------- */
 
 const {userAccountTopIcons} = assetsEndPoints
 
@@ -32,58 +43,37 @@ export default function Dashboard(props) {
     },
     orders: [],
   })
-  const [, setAppState] = React.useContext(AppContext)
+  const authFunctions = useAuthFetch()
+
   /* -------------------------------------------------------------------------- */
   const router = useRouter()
   const cookies = parseCookies()
 
-  //We need to get the user info and the user orders here
-  //because nextjs does not have access to the cookies on the server side
   const handleGetUserInfo = async () => {
-    setLoading(true)
-    try {
-      const {calacc} = cookies
-      const data = await getUserInfo(calacc)
-      const orders = await getUserOrders(calacc)
-
+    /**
+     *
+     * @param {string} token Is access token which is passed from useAuthFetch hook
+     * @returns void
+     * Functions which should be done when user is authenticated
+     */
+    const onAuthenticatedAction = async token => {
+      const data = await getUserInfo(token)
+      const orders = await getUserOrders(token)
       setUserData(prevState => ({...prevState, info: {...data}, orders}))
-      setAppState(perv => ({...perv, isAuthenticate: true}))
-
-      setLoading(false)
-    } catch (err) {
-      if (err.status === 401) {
-        try {
-          const {access} = await postRefreshToken({refresh: cookies.calref})
-          setAppState(perv => ({...perv, isAuthenticate: true}))
-
-          setCookie(null, 'calacc', access, {
-            maxAge: 30 * 60 * 1000,
-            path: '/',
-          })
-
-          const data = await getUserInfo(access)
-          const orders = await getUserOrders(access)
-
-          setUserData(prevState => ({...prevState, info: {...data}, orders}))
-          setLoading(false)
-        } catch (err) {
-          if (err.status === 401) {
-            destroyCookie(null, 'calacc', {path: '/'})
-            destroyCookie(null, 'calref', {path: '/'})
-            setAppState(perv => ({...perv, isAuthenticate: false}))
-            console.error(err)
-            setLoading(false)
-            router.push('/user')
-          } else {
-            console.error(err)
-            setLoading(false)
-          }
-        }
-      } else {
-        console.error(err)
-        setLoading(false)
-      }
     }
+
+    /**
+     * Functions which should be done when user is not authenticated
+     */
+    const onNotAuthenticatedAction = () => {
+      router.push('/user')
+    }
+
+    await authFunctions({
+      setLoading,
+      onAuthenticatedAction,
+      onNotAuthenticatedAction,
+    })
   }
 
   React.useEffect(() => {

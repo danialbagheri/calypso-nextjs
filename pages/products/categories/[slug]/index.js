@@ -2,17 +2,18 @@ import {useContext, useEffect} from 'react'
 
 import 'react-tabs/style/react-tabs.css'
 import Head from 'next/head'
-import {ProductRange} from 'components'
+import {AppContext, ProductRange} from 'components'
 
 import {useRouter} from 'next/router'
 import {Box, Typography} from '@mui/material'
-import {AppContext} from '../../../../components/appProvider'
+
 import {
   getCollectionBanner,
   getListOfProductsType,
   getProductsByCategory,
-} from '../../../../services'
-import {getFavoriteProductsHandler} from '../../..'
+} from 'services'
+import {useAuthFetch} from 'components/customHooks'
+import {getFavoriteProductsHandler} from 'utils'
 
 const LG_IMAGE = 'lg_image'
 const MD_IMAGE = 'md_image'
@@ -20,6 +21,7 @@ const MOBILE_IMAGE = 'mobile_webp'
 
 function Category(props) {
   const [appState, setAppState] = useContext(AppContext)
+  const authFetchHandler = useAuthFetch()
   const router = useRouter()
 
   const productFinderBannerSrc = {
@@ -30,7 +32,7 @@ function Category(props) {
 
   const queryChangeHandler = async () => {
     try {
-      await getFavoriteProductsHandler(setAppState)
+      await getFavoriteProductsHandler({setAppState, authFetchHandler})
     } catch (err) {
       console.error(err)
     }
@@ -38,7 +40,7 @@ function Category(props) {
 
   useEffect(() => {
     if (!appState.favoriteProducts) {
-      getFavoriteProductsHandler(setAppState)
+      getFavoriteProductsHandler({setAppState, authFetchHandler})
     }
   }, [])
 

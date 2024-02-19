@@ -1,20 +1,27 @@
 import * as React from 'react'
 
-import {Alert, AlertTitle, Box, Typography} from '@mui/material'
-
-import {assetsEndPoints, getAssets} from '../../../../utils'
-
-import {
-  CustomButton,
-  CustomOutlinedInput,
-} from '../../../../components/user/localShared'
-// import {parseCookies, setCookie} from 'nookies'
+/* ---------------------------- NextJs Components --------------------------- */
 import {useRouter} from 'next/router'
-import {destroyCookie, parseCookies, setCookie} from 'nookies'
-import {postRefreshToken, postSetPassword} from '../../../../services'
-import SideBar from '../../../../components/user/dashboard/SideBar'
-import {AppContext} from '../../../../components/appProvider'
+/* -------------------------------------------------------------------------- */
 
+/* ----------------------------- MUI Components ----------------------------- */
+import {Alert, AlertTitle, Box, Typography} from '@mui/material'
+/* -------------------------------------------------------------------------- */
+
+/* ------------------------------- Libraries ------------------------------- */
+import {destroyCookie} from 'nookies'
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------- Local Components ---------------------------- */
+import {postSetPassword} from 'services'
+import {assetsEndPoints, getAssets} from 'utils'
+import {AppContext} from 'components/appProvider'
+import {useAuthFetch} from 'components/customHooks'
+import {Container} from 'components/user/dashboard'
+import {CustomButton, CustomOutlinedInput} from 'components/user/localShared'
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------- Constants ------------------------------- */
 const PASSWORD_GIRL_ICON = 'password'
 
 const NEW_PASSWORD = 'new_password'
@@ -27,10 +34,12 @@ const initialState = {
   [CURRENT_PASSWORD]: '',
   [RE_NEW_PASSWORD]: '',
 }
+/* -------------------------------------------------------------------------- */
 
 export default function Password(props) {
   const {assets} = props
 
+  /* ---------------------------------- Hooks --------------------------------- */
   const [fieldData, setFieldData] = React.useState({
     ...initialState,
   })
@@ -39,17 +48,11 @@ export default function Password(props) {
   })
   const [loading, setLoading] = React.useState(false)
   const [, setAppState] = React.useContext(AppContext)
-
   const router = useRouter()
+  const authFunctions = useAuthFetch()
+  /* -------------------------------------------------------------------------- */
 
-  const {userAccountTopIcons, popUpPassword} = assetsEndPoints
-
-  const girlIcon = assets[userAccountTopIcons]?.items.find(
-    item =>
-      item.name.toLowerCase().trim() ===
-      PASSWORD_GIRL_ICON.toLowerCase().trim(),
-  )
-
+  const {popUpPassword} = assetsEndPoints
   const passwordSpecifications = assets[popUpPassword]?.items
 
   const handleError = state => {
@@ -61,50 +64,26 @@ export default function Password(props) {
   }
 
   const saveHandler = async () => {
-    const {calacc, calref} = parseCookies()
-
     setError({...initialState})
 
-    setLoading(true)
-    try {
-      await postSetPassword({data: fieldData, token: calacc})
+    const onAuthenticatedAction = async token => {
+      await postSetPassword({data: fieldData, token})
       destroyCookie(null, 'calacc', {path: '/'})
       destroyCookie(null, 'calref', {path: '/'})
       setAppState(perv => ({...perv, isAuthenticate: false}))
       router.push('/user/sign-in/?password_changed=true')
-    } catch (err) {
-      if (err.status === 401) {
-        try {
-          const {access} = await postRefreshToken({
-            refresh: calref || 'null_token',
-          })
-          setCookie(null, 'calacc', access, {
-            path: '/',
-          })
-          await postSetPassword({data: fieldData, token: access})
-          destroyCookie(null, 'calacc', {path: '/'})
-          destroyCookie(null, 'calref', {path: '/'})
-          setAppState(perv => ({...perv, isAuthenticate: false}))
-          router.push('/user/sign-in/?password_changed=true')
-        } catch {
-          if (err.status === 401) {
-            destroyCookie(null, 'calacc', {path: '/'})
-            destroyCookie(null, 'calref', {path: '/'})
-            setAppState(perv => ({...perv, isAuthenticate: false}))
-            console.error(err)
-            router.push('/user')
-          } else {
-            console.error(err)
-            handleError(err.res)
-          }
-        }
-      } else {
-        console.error(err)
-        handleError(err.res)
-      }
-    } finally {
-      setLoading(false)
     }
+
+    const onNotAuthenticatedAction = () => {
+      router.push('/user')
+    }
+
+    await authFunctions({
+      setLoading,
+      onAuthenticatedAction,
+      onNotAuthenticatedAction,
+      handleError,
+    })
   }
 
   const changeHandler = (value, field) => {
@@ -112,26 +91,7 @@ export default function Password(props) {
   }
 
   return (
-    <Box
-      sx={{
-        width: {xs: 270, md: 740},
-        m: '0 auto',
-        py: {xs: 6, md: 21},
-
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: {xs: 'center', md: 'flex-start'},
-        flexDirection: {xs: 'column-reverse', md: 'row'},
-        gap: {xs: 3, md: 20},
-
-        '&>#user_details_girl_icon': {
-          width: {xs: 145, md: 290},
-          height: {xs: 145, md: 290},
-        },
-      }}
-    >
-      <SideBar girlIcon={girlIcon} route="password" />
-
+    <Container assets={assets} iconName={PASSWORD_GIRL_ICON} route="password">
       <Box width={{xs: '100%', md: 318}}>
         <Typography sx={{fontSize: 24, fontWeight: 700}} textAlign="center">
           Password
@@ -197,7 +157,7 @@ export default function Password(props) {
           Save details
         </CustomButton>
       </Box>
-    </Box>
+    </Container>
   )
 }
 

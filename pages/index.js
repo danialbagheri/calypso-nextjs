@@ -17,70 +17,19 @@ import {
   getCollectionBanner,
   getTrendingUrls,
 } from 'services'
-import {destroyCookie, parseCookies, setCookie} from 'nookies'
-import {getFavoriteProducts, postRefreshToken} from '../services'
+
 import {AppContext} from '../components/appProvider/AppProvider'
-import {assetsEndPoints, getAssets} from '../utils'
 
-export const getFavoriteProductsHandler = async setAppState => {
-  const {calacc, calref} = parseCookies()
-
-  try {
-    const favoriteProducts = await getFavoriteProducts(calacc)
-    setAppState(prevState => ({
-      ...prevState,
-      favoriteProducts: favoriteProducts.results,
-      isAuthenticate: true,
-    }))
-  } catch (err) {
-    if (err.status === 401) {
-      try {
-        const {access} = await postRefreshToken({refresh: calref || 'no-token'})
-
-        setCookie(null, 'calacc', access, {
-          path: '/',
-        })
-
-        const favoriteProducts = await getFavoriteProducts(access)
-
-        setAppState(prevState => ({
-          ...prevState,
-          favoriteProducts: favoriteProducts.results,
-          isAuthenticate: true,
-        }))
-      } catch (err) {
-        if (err.status === 401) {
-          destroyCookie(null, 'calacc', {path: '/'})
-          destroyCookie(null, 'calref', {path: '/'})
-          console.error('user is not logged in')
-          setAppState(prevState => ({
-            ...prevState,
-            favoriteProducts: undefined,
-            isAuthenticate: false,
-          }))
-        } else {
-          console.error(err)
-          setAppState(prevState => ({
-            ...prevState,
-            favoriteProducts: undefined,
-            isAuthenticate: false,
-          }))
-        }
-      }
-    } else {
-      console.error(err)
-      setAppState(prevState => ({
-        ...prevState,
-        favoriteProducts: undefined,
-        isAuthenticate: false,
-      }))
-    }
-  }
-}
+import {useAuthFetch} from 'components/customHooks'
+import {assetsEndPoints, getAssets, getFavoriteProductsHandler} from 'utils'
 
 function Home(props) {
   const {slides, isLoaded, trending, bestseller, secondarySlides, icons} = props
+
+  /* ---------------------------------- Hooks --------------------------------- */
   const [, setAppState] = React.useContext(AppContext)
+  const authFetchHandler = useAuthFetch()
+  /* -------------------------------------------------------------------------- */
 
   React.useEffect(() => {
     //Get user account icon
@@ -95,7 +44,7 @@ function Home(props) {
     }
 
     //Get user favorite products
-    getFavoriteProductsHandler(setAppState)
+    getFavoriteProductsHandler({setAppState, authFetchHandler})
   }, [])
 
   return (

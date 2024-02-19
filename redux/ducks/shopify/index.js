@@ -195,6 +195,7 @@ function addVariantToCart(checkoutId, lineItemsToAdd) {
       checkoutId,
       lineItemsToAdd,
     )
+
     dispatch({
       type: ADD_VARIANT_TO_CART,
       payload: response,

@@ -1,30 +1,34 @@
 import * as React from 'react'
 
+/* ----------------------------- MUI Components ----------------------------- */
 import {Box, Typography} from '@mui/material'
+/* -------------------------------------------------------------------------- */
 
+import {useRouter} from 'next/router'
+
+/* ---------------------------- Local Components ---------------------------- */
+import {EMAIL, FIRST_NAME, LAST_NAME, MOBILE_NUMBER} from '..'
+import {useAuthFetch} from 'components/customHooks'
 import {
   assetsEndPoints,
   getAssets,
   validateMobileNumber,
   validateName,
-} from '../../../../utils'
-import UserDetailsFields from '../../../../components/user/UserDetailsFields'
-import {CustomButton} from '../../../../components/user/localShared'
-import {
-  getUserInfo,
-  patchUserInfo,
-  postRefreshToken,
-} from '../../../../services'
-import {destroyCookie, parseCookies, setCookie} from 'nookies'
-import {EMAIL, FIRST_NAME, LAST_NAME, MOBILE_NUMBER} from '..'
-import {useRouter} from 'next/router'
-import SideBar from '../../../../components/user/dashboard/SideBar'
-import {AppContext} from '../../../../components/appProvider'
+} from 'utils'
+import {getUserInfo, patchUserInfo} from 'services'
+import {Container} from 'components/user/dashboard'
+import UserDetailsFields from 'components/user/UserDetailsFields'
+import {CustomButton} from 'components/user/localShared'
+import {AppContext} from 'components'
+/* -------------------------------------------------------------------------- */
 
-const ACCOUNT_DETAILS = 'account details'
+/* -------------------------------- Constants ------------------------------- */
+export const ACCOUNT_DETAILS = 'account details'
+/* -------------------------------------------------------------------------- */
 
 export default function AccountDetails(props) {
   const {assets} = props
+  /* ---------------------------------- Hooks --------------------------------- */
   const [fieldData, setFieldData] = React.useState({
     id: '',
     [FIRST_NAME]: '',
@@ -41,7 +45,6 @@ export default function AccountDetails(props) {
   const [loading, setLoading] = React.useState(false)
   const [success, setSuccess] = React.useState(false)
   const [isEdit, setIsEdit] = React.useState(false)
-  const [, setAppState] = React.useContext(AppContext)
   const router = useRouter()
   const initialFieldData = React.useRef({
     id: '',
@@ -50,13 +53,12 @@ export default function AccountDetails(props) {
     [EMAIL]: '',
     [MOBILE_NUMBER]: '',
   })
+  const authFunctions = useAuthFetch()
+  const [appState] = React.useContext(AppContext)
 
-  const {userAccountTopIcons} = assetsEndPoints
+  console.log('🚀 🙂  appState:::', appState)
 
-  const girlIcon = assets[userAccountTopIcons]?.items.find(
-    item =>
-      item.name.toLowerCase().trim() === ACCOUNT_DETAILS.toLowerCase().trim(),
-  )
+  /* -------------------------------------------------------------------------- */
 
   const renderSubtitle = () => {
     if (isEdit) {
@@ -98,62 +100,6 @@ export default function AccountDetails(props) {
     return errorState
   }
 
-  const saveHandler = async () => {
-    const {calacc, calref} = parseCookies()
-    const errorState = errorHandler()
-    setSuccess(false)
-
-    if (!errorState) {
-      setLoading(true)
-      try {
-        const res = await patchUserInfo(fieldData, calacc)
-        const response = await res.json()
-        setFieldData({...response})
-        initialFieldData.current = {...response}
-        setAppState(perv => ({...perv, isAuthenticate: true}))
-
-        setSuccess(true)
-        setIsEdit(false)
-      } catch (err) {
-        if (err.status === 401) {
-          try {
-            const {access} = await postRefreshToken({
-              refresh: calref || 'null_token',
-            })
-            setCookie(null, 'calacc', access, {
-              maxAge: 30 * 60 * 1000,
-              path: '/',
-            })
-            setAppState(perv => ({...perv, isAuthenticate: true}))
-            const res = await patchUserInfo(fieldData, access)
-            const response = await res.json()
-            setFieldData({...response})
-            initialFieldData.current = {...response}
-            setSuccess(true)
-            setIsEdit(false)
-          } catch {
-            if (err.status === 401) {
-              console.error(err)
-              router.push('/user')
-              destroyCookie(null, 'calacc', {path: '/'})
-              destroyCookie(null, 'calref', {path: '/'})
-              setAppState(perv => ({...perv, isAuthenticate: false}))
-              setSuccess(false)
-            } else {
-              console.error(err)
-              setSuccess(false)
-            }
-          }
-        } else {
-          console.error(err)
-          setSuccess(false)
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
-  }
-
   const discardHandler = () => {
     setFieldData({...initialFieldData.current})
     setError({
@@ -165,44 +111,53 @@ export default function AccountDetails(props) {
     setIsEdit(false)
   }
 
+  const saveHandler = async () => {
+    const errorState = errorHandler()
+    setSuccess(false)
+
+    if (!errorState) {
+      const onAuthenticatedAction = async token => {
+        const res = await patchUserInfo(fieldData, token)
+        const response = await res.json()
+        setFieldData({...response})
+        initialFieldData.current = {...response}
+        setSuccess(true)
+        setIsEdit(false)
+      }
+
+      const onNotAuthenticatedAction = () => {
+        setSuccess(false)
+        router.push('/user')
+      }
+
+      const handleError = () => {
+        setSuccess(false)
+      }
+
+      await authFunctions({
+        setLoading,
+        onAuthenticatedAction,
+        onNotAuthenticatedAction,
+        handleError,
+      })
+    }
+  }
+
   const handleGetUserInfo = async () => {
-    const {calacc, calref} = parseCookies()
-    try {
-      const data = await getUserInfo(calacc)
+    const onAuthenticatedAction = async token => {
+      const data = await getUserInfo(token)
       initialFieldData.current = {...data}
       setFieldData({...data})
-      setAppState(perv => ({...perv, isAuthenticate: true}))
-    } catch (err) {
-      if (err.status === 401) {
-        try {
-          const {access} = await postRefreshToken({
-            refresh: calref || 'null_token',
-          })
-
-          setCookie(null, 'calacc', access, {
-            maxAge: 30 * 60 * 1000,
-            path: '/',
-          })
-          setAppState(perv => ({...perv, isAuthenticate: true}))
-
-          const data = await getUserInfo(access)
-          initialFieldData.current = {...data}
-          setFieldData({...data})
-        } catch (err) {
-          if (err.status === 401) {
-            console.error(err)
-            destroyCookie(null, 'calacc', {path: '/'})
-            destroyCookie(null, 'calref', {path: '/'})
-            setAppState(perv => ({...perv, isAuthenticate: false}))
-            router.push('/user')
-          } else {
-            console.error(err)
-          }
-        }
-      } else {
-        console.error(err)
-      }
     }
+
+    const onNotAuthenticatedAction = () => {
+      router.push('/user')
+    }
+
+    await authFunctions({
+      onAuthenticatedAction,
+      onNotAuthenticatedAction,
+    })
   }
 
   React.useEffect(() => {
@@ -210,27 +165,11 @@ export default function AccountDetails(props) {
   }, [])
 
   return (
-    <Box
-      sx={{
-        width: {xs: '100%', sm: 480, md: 740},
-        m: '0 auto',
-        py: {xs: 6, md: 21},
-        px: {xs: 10, sm: 20, md: 0},
-        gap: 5,
-
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: {xs: 'center', md: 'flex-start'},
-        flexDirection: {xs: 'column-reverse', md: 'row'},
-
-        '&>#user_details_girl_icon': {
-          width: {xs: 145, md: 290},
-          height: {xs: 145, md: 290},
-        },
-      }}
+    <Container
+      assets={assets}
+      iconName={ACCOUNT_DETAILS}
+      route="account-details"
     >
-      <SideBar girlIcon={girlIcon} route="account-details" />
-
       <Box width={{xs: '100%', md: 318}}>
         <Typography sx={{fontSize: 24, fontWeight: 700}} textAlign="center">
           Account details
@@ -263,14 +202,26 @@ export default function AccountDetails(props) {
             <CustomButton
               loading={loading}
               onClick={saveHandler}
-              sx={{width: 220, mx: 'auto', display: 'flex', mt: 12, height: 52}}
+              sx={{
+                width: 220,
+                mx: 'auto',
+                display: 'flex',
+                mt: 12,
+                height: 52,
+              }}
               variant="contained"
             >
               Save changes
             </CustomButton>
             <CustomButton
               onClick={discardHandler}
-              sx={{width: 220, mx: 'auto', display: 'flex', mt: 3, height: 52}}
+              sx={{
+                width: 220,
+                mx: 'auto',
+                display: 'flex',
+                mt: 3,
+                height: 52,
+              }}
               variant="outlined"
             >
               Discard changes
@@ -278,7 +229,7 @@ export default function AccountDetails(props) {
           </>
         ) : null}
       </Box>
-    </Box>
+    </Container>
   )
 }
 
@@ -292,7 +243,7 @@ export async function getStaticProps() {
       props: {
         assets,
       },
-      revalidate: 120, // will be passed to the page component as props
+      revalidate: 120,
     }
   } catch (err) {
     console.error(err)
@@ -300,7 +251,7 @@ export async function getStaticProps() {
       props: {
         assets: {},
       },
-      revalidate: 120, // will be passed to the page component as props
+      revalidate: 120,
     }
   }
 }
