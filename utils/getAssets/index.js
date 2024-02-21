@@ -7,6 +7,7 @@ export const LOG_OUT_ICON_ID = 24
 export const USER_LOGGED_IN_ICON_ID = 25
 export const USER_LOGGED_OUT_ICON_ID = 26
 export const CART_ICON_ID = 27
+export const REMOVE_ICON_ID = 28
 export const SEARCH_ICON_ID = 30
 export const BURGER_ICON_ID = 31
 /* -------------------------------------------------------------------------- */
