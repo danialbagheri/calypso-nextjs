@@ -9,10 +9,10 @@ module.exports = withImages({
   images: {
     domains: [
       'service.calypsosun.com',
-      'calypso-static.s3.amazonaws.com',
       'linco-cabana.s3.amazonaws.com',
       'cdn.shopify.com',
     ],
+    remotePatterns: [{hostname: 'calypso-static.s3.amazonaws.com'}],
   },
   redirects: async () => {
     return [
