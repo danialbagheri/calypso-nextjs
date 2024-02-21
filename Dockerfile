@@ -1,4 +1,4 @@
-FROM node:20 AS base
+FROM node:19 AS base
 WORKDIR /app
 
 # Install dependencies based on package manager
@@ -17,7 +17,10 @@ WORKDIR /app
 COPY --from=base --chown=nginx:nginx /app/public ./public
 COPY --from=base --chown=nginx:nginx /app/.next ./next
 
-# Set security permissions (adjust as needed)
+# Modify NGINX configuration to listen on port 3000
+RUN sed -i -e 's/80/3000/g' /etc/nginx/nginx.conf
+# Modify NGINX configuration to allow large file uploads
+RUN sed -i -e 's/client_max_body_size 1m;/client_max_body_size 100m;/' /etc/nginx/nginx.conf
 
 # Expose port and start server
 EXPOSE 3000
