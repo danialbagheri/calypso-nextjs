@@ -11,8 +11,8 @@ module.exports = withImages({
       'service.calypsosun.com',
       'linco-cabana.s3.amazonaws.com',
       'cdn.shopify.com',
+      'calypso-static.s3.amazonaws.com',
     ],
-    remotePatterns: [{hostname: 'calypso-static.s3.amazonaws.com'}],
   },
   redirects: async () => {
     return [
