@@ -16,10 +16,13 @@ import InfoBar from '../components/general/InfoBar'
 import {AppProvider} from 'components/appProvider'
 import {MailjetSignUp} from 'components'
 import {assetsEndPoints, getAssets} from '../utils'
+import {getRetrieveMenu} from '../services'
+import App from 'next/app'
 
 function MyApp({Component, pageProps}) {
   const SUBSCRIPTION_STATE = 'subscriptionState'
   const SIGNED_UP = 'signedUp'
+  const navItems = pageProps?.navItems
 
   const [interval, setInterval] = React.useState(0)
   const [showSubscription, setShowSubscription] = React.useState(false)
@@ -161,7 +164,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           ></iframe>`,
               }}
             />
-            <Header />
+            <Header navItems={navItems} />
             {showSubscription ? <MailjetSignUp /> : null}
 
             <InfoBar />
@@ -190,3 +193,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 export default MyApp
+
+MyApp.getInitialProps = async appContext => {
+  const appProps = await App.getInitialProps(appContext)
+
+  try {
+    getRetrieveMenu()
+      .then(res => {
+        appProps.pageProps.navItems = res.sub_menus
+      })
+      .catch(err => console.error(err))
+  } catch (err) {
+    console.error(err)
+  }
+
+  return {...appProps}
+}

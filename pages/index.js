@@ -20,7 +20,6 @@ import {
 import {destroyCookie, parseCookies, setCookie} from 'nookies'
 import {getFavoriteProducts, postRefreshToken} from '../services'
 import {AppContext} from '../components/appProvider/AppProvider'
-import {assetsEndPoints, getAssets} from '../utils'
 
 export const getFavoriteProductsHandler = async setAppState => {
   const {calacc, calref} = parseCookies()
@@ -79,21 +78,10 @@ export const getFavoriteProductsHandler = async setAppState => {
 }
 
 function Home(props) {
-  const {slides, isLoaded, trending, bestseller, secondarySlides, icons} = props
+  const {slides, isLoaded, trending, bestseller, secondarySlides} = props
   const [, setAppState] = React.useContext(AppContext)
 
   React.useEffect(() => {
-    //Get user account icon
-    if (icons[assetsEndPoints.userAccount]) {
-      setAppState(prevState => ({
-        ...prevState,
-        icons: {
-          ...prevState.icons,
-          [assetsEndPoints.userAccount]: icons[assetsEndPoints.userAccount],
-        },
-      }))
-    }
-
     //Get user favorite products
     getFavoriteProductsHandler(setAppState)
   }, [])
@@ -162,7 +150,6 @@ export async function getStaticProps() {
     getBestSellerResults(),
   ]
   const results = await Promise.allSettled(promises)
-  const icons = await getAssets([assetsEndPoints.userAccount])
 
   results.forEach((res, i) => {
     if (res.status === 'fulfilled') {
@@ -184,7 +171,7 @@ export async function getStaticProps() {
   })
 
   return {
-    props: {...props, isLoaded: true, icons},
+    props: {...props, isLoaded: true},
     revalidate: 120, // will be passed to the page component as props
   }
 }
