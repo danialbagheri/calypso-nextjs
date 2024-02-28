@@ -19,7 +19,6 @@ import {getUserInfo, patchUserInfo} from 'services'
 import {Container} from 'components/user/dashboard'
 import UserDetailsFields from 'components/user/UserDetailsFields'
 import {CustomButton} from 'components/user/localShared'
-import {AppContext} from 'components'
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------- Constants ------------------------------- */
@@ -54,9 +53,6 @@ export default function AccountDetails(props) {
     [MOBILE_NUMBER]: '',
   })
   const authFunctions = useAuthFetch()
-  const [appState] = React.useContext(AppContext)
-
-  console.log('🚀 🙂  appState:::', appState)
 
   /* -------------------------------------------------------------------------- */
 
