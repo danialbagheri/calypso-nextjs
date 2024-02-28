@@ -22,6 +22,10 @@ export const postSurveys = data => {
   return post({endpoint: 'surveys/submit/', data})
 }
 
+export const userSubscription = data => {
+  return post({endpoint: 'users/subscribe/mailjet/', data})
+}
+
 //USER
 
 export const postCreateUser = data => {
