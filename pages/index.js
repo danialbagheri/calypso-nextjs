@@ -15,6 +15,7 @@ import {
   getCollectionBanner,
   getTrendingUrls,
 } from 'services'
+import {Skeleton} from '@mui/material'
 import {destroyCookie, parseCookies, setCookie} from 'nookies'
 import {getFavoriteProducts, postRefreshToken} from '../services'
 import {AppContext} from '../components/appProvider/AppProvider'
@@ -116,7 +117,11 @@ function Home(props) {
 
       <main>
         <section className="top-0">
-          <HomeSlider isLoaded={isLoaded} slides={slides} />
+          {slides ? (
+            <HomeSlider isLoaded={isLoaded} slides={slides} />
+          ) : (
+            <Skeleton height={400} variant="rectangular" width={'100%'} />
+          )}
 
           <Trending trending={trending} />
           {secondarySlides ? (
