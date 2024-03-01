@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import BreadCrumb from '../../components/common/breadcrumb'
+import {Container} from '@mui/material'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -59,7 +60,7 @@ export default function Advice({posts}) {
     })
   }
   return (
-    <div className="container-fluid bg-secondary mt-0">
+    <Container>
       <div className="CalypsoOrange">
         <h1 className="text-centre mt-4">Advice</h1>
         <div className="blogBreadCrumbs">
@@ -89,7 +90,7 @@ export default function Advice({posts}) {
           )}
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 async function getAllPages(pageCount, url) {

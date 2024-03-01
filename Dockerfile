@@ -31,10 +31,6 @@ RUN adduser --system --uid 1001 nextjs
 
 USER root
 
-# RUN chown -R nextjs:nodejs /app/
-# RUN chown nextjs:nodejs /app/.next/standalone
-# RUN chown nextjs:nodejs /app/.next/static
-# RUN mkdir -p ./deploy/public
 COPY --chown=nextjs:nodejs ./public/ .next/standalone/public/
 RUN cp -r .next/static .next/standalone/.next/static && chown -R nextjs:nodejs .next/standalone/.next/static
 

@@ -3,12 +3,10 @@ import * as React from 'react'
 import Head from 'next/head'
 
 import {
-  AsSeen,
   BestSeller,
   BlogSlider,
   HomeSlider,
   Instagram,
-  StaySafe,
   Trending,
 } from 'components'
 
@@ -125,8 +123,6 @@ function Home(props) {
             <HomeSlider isLoaded={isLoaded} second slides={secondarySlides} />
           ) : null}
           <BestSeller bestseller={bestseller} />
-          <StaySafe />
-          <AsSeen />
           <BlogSlider />
           <Instagram />
         </section>
