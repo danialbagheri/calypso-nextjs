@@ -13,8 +13,10 @@ import {
 import {AppContext} from '../components/appProvider/AppProvider'
 import {useAuthFetch} from 'components/customHooks'
 import {getFavoriteProductsHandler} from 'utils'
+import {getCollectionBanner, getTrendingUrls} from 'services'
 
-function Home() {
+function Home(props) {
+  const {trendingItems, homepageBanner} = props
   const authFetchHandler = useAuthFetch()
   const [, setAppState] = React.useContext(AppContext)
 
@@ -55,9 +57,9 @@ function Home() {
 
       <main>
         <section className="top-0">
+          <HomeSlider banner={homepageBanner} />
+          <Trending items={trendingItems} />
           <HomeSlider />
-          <Trending />
-          <HomeSlider isSecondBanner />
           <BestSeller />
           <BlogSlider />
           <Instagram />
@@ -68,3 +70,18 @@ function Home() {
 }
 
 export default Home
+
+export async function getStaticProps() {
+  const promises = [getTrendingUrls(), getCollectionBanner('homepage')]
+  const results = await Promise.allSettled(promises)
+  const initialProps = {
+    trendingItems:
+      results[0]?.status === 'fulfilled' ? results[0].value.items : [],
+    homepageBanner:
+      results[1]?.status === 'fulfilled' ? results[1].value.results : [],
+  }
+
+  return {
+    props: {...initialProps},
+  }
+}
