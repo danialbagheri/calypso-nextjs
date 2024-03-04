@@ -3,14 +3,13 @@ import * as React from 'react'
 import Head from 'next/head'
 
 import {
-  AsSeen,
   BestSeller,
   BlogSlider,
   HomeSlider,
   Instagram,
-  StaySafe,
   Trending,
 } from 'components'
+
 import {AppContext} from '../components/appProvider/AppProvider'
 import {useAuthFetch} from 'components/customHooks'
 import {getFavoriteProductsHandler} from 'utils'
@@ -60,8 +59,6 @@ function Home() {
           <Trending />
           <HomeSlider isSecondBanner />
           <BestSeller />
-          <StaySafe />
-          <AsSeen />
           <BlogSlider />
           <Instagram />
         </section>
