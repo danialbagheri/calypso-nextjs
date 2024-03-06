@@ -177,6 +177,10 @@ export const getFavoriteProducts = token => {
   return get({endpoint: 'products/favorites/', token})
 }
 
+export const getFavoriteVariants = token => {
+  return get({endpoint: 'products/variants/favorites/', token})
+}
+
 /* ----------------------------- Patch requests ----------------------------- */
 export const singleReviewPatch = (id, data) => {
   return patch({endpoint: `reviews/rate/${id}/`, data})
@@ -192,6 +196,14 @@ export const patchUserInfo = (data, token) => {
 
 export const addProductToFavorite = (slug, token, action) => {
   return patch({endpoint: `products/favorites/${slug}/`, token, data: {action}})
+}
+
+export const favoriteVariantHandler = (sku, token, action) => {
+  return patch({
+    endpoint: `products/variants/favorites/${sku}/`,
+    token,
+    data: {action},
+  })
 }
 /* -------------------------------------------------------------------------- */
 

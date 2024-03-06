@@ -13,7 +13,7 @@ import {
   getProductsByCategory,
 } from 'services'
 import {useAuthFetch} from 'components/customHooks'
-import {getFavoriteProductsHandler} from 'utils'
+import {getFavoriteVariantsHandler} from 'utils'
 
 const LG_IMAGE = 'lg_image'
 const MD_IMAGE = 'md_image'
@@ -32,7 +32,7 @@ function Category(props) {
 
   const queryChangeHandler = async () => {
     try {
-      await getFavoriteProductsHandler({setAppState, authFetchHandler})
+      await getFavoriteVariantsHandler({setAppState, authFetchHandler})
     } catch (err) {
       console.error(err)
     }
@@ -40,7 +40,7 @@ function Category(props) {
 
   useEffect(() => {
     if (!appState.favoriteProducts) {
-      getFavoriteProductsHandler({setAppState, authFetchHandler})
+      getFavoriteVariantsHandler({setAppState, authFetchHandler})
     }
   }, [])
 

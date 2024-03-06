@@ -18,7 +18,7 @@ import {
 } from 'services'
 
 import {useAuthFetch} from 'components/customHooks'
-import {getFavoriteProductsHandler} from 'utils'
+import {getFavoriteVariantsHandler} from 'utils'
 /* -------------------------------------------------------------------------- */
 
 /* --------------------------------- Styles --------------------------------- */
@@ -44,7 +44,7 @@ function Products(props) {
 
   const queryChangeHandler = async () => {
     try {
-      await getFavoriteProductsHandler({setAppState, authFetchHandler})
+      await getFavoriteVariantsHandler({setAppState, authFetchHandler})
     } catch (err) {
       console.error(err)
     }
@@ -52,7 +52,7 @@ function Products(props) {
 
   useEffect(() => {
     if (!appState.favoriteProducts) {
-      getFavoriteProductsHandler({setAppState, authFetchHandler})
+      getFavoriteVariantsHandler({setAppState, authFetchHandler})
     }
   }, [])
 

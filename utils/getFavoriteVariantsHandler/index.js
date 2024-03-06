@@ -1,21 +1,23 @@
-import {getFavoriteProducts} from 'services'
+import {getFavoriteVariants} from 'services'
 
-export async function getFavoriteProductsHandler({
+export async function getFavoriteVariantsHandler({
   setAppState,
   authFetchHandler,
 }) {
   const onAuthenticatedAction = async token => {
-    const favoriteProducts = await getFavoriteProducts(token)
+    const favoriteProducts = await getFavoriteVariants(token)
+
     setAppState(prevState => ({
       ...prevState,
-      favoriteProducts: favoriteProducts.results,
+      favoriteVariants: favoriteProducts.results,
+      isAuthenticate: true,
     }))
   }
 
   const onNotAuthenticatedAction = () => {
     setAppState(prevState => ({
       ...prevState,
-      favoriteProducts: undefined,
+      favoriteVariants: undefined,
       isAuthenticate: false,
     }))
   }

@@ -12,7 +12,7 @@ import {
 
 import {AppContext} from '../components/appProvider/AppProvider'
 import {useAuthFetch} from 'components/customHooks'
-import {getFavoriteProductsHandler} from 'utils'
+import {getFavoriteVariantsHandler} from 'utils'
 import {getCollectionBanner, getTrendingUrls} from 'services'
 
 function Home(props) {
@@ -23,7 +23,7 @@ function Home(props) {
 
   React.useEffect(() => {
     //Get user favorite products
-    getFavoriteProductsHandler({setAppState, authFetchHandler})
+    getFavoriteVariantsHandler({setAppState, authFetchHandler})
   }, [])
 
   return (
