@@ -26,16 +26,18 @@ import {useSearchParams} from 'next/navigation'
 
 function Product(props) {
   const {productData, reviewData, slug, error} = props
+
   const searchParams = useSearchParams()
   const variants = productData.variants
-
   const sku = searchParams.get('sku')
+
   let properVariant = variants[0]
   if (sku && variants.length > 1) {
     properVariant = variants.find(vr => vr.sku === sku)
   }
 
   const [selectedVariant, setSelectedVariant] = React.useState(properVariant)
+
   const [snackBarDetails, setSnackBarDetails] = React.useState({
     open: false,
     message: '',

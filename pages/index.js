@@ -17,6 +17,7 @@ import {getCollectionBanner, getTrendingUrls} from 'services'
 
 function Home(props) {
   const {trendingItems, homepageBanner} = props
+
   const authFetchHandler = useAuthFetch()
   const [, setAppState] = React.useContext(AppContext)
 
@@ -83,5 +84,6 @@ export async function getStaticProps() {
 
   return {
     props: {...initialProps},
+    revalidate: 120,
   }
 }
