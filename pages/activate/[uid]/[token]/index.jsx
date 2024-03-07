@@ -1,8 +1,11 @@
 import * as React from 'react'
+
 import {useRouter} from 'next/router'
-import {postUserActivation} from '../../../../services'
+
 import {Box, CircularProgress, Typography} from '@mui/material'
-import {CustomButton} from '../../../../components/user/localShared'
+
+import {postUserActivation} from 'services'
+import {CustomButton} from 'components/shared'
 
 const ERROR = 'error'
 const SUCCESS = 'success'

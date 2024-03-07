@@ -70,6 +70,14 @@ const theme = createTheme({
       fontSize: '16px !important',
       lineHeight: '20px',
     },
+    h7: {
+      fontFamily: 'proxima-nova, sans',
+      fontStyle: 'normal',
+      fontWeight: 500,
+      fontSize: '18px',
+      lineHeight: 'normal',
+    },
+
     subtitle1: {
       fontFamily: 'proxima-nova',
       fontStyle: 'normal',
