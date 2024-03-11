@@ -5,11 +5,8 @@ import Image from 'next/image'
 import {Box, Typography, useTheme} from '@mui/material'
 
 import {assetsEndPoints, getAssets, validateEmail} from '../../utils'
-import {
-  CustomButton,
-  CustomOutlinedInput,
-} from '../../components/user/localShared'
-import {postResetPasswordEmail} from '../../services'
+import {postResetPasswordEmail} from 'services'
+import {CustomButton, CustomOutlinedInput} from 'components/shared'
 
 const GIRL_ICON = 'password'
 const CHECK_ICON_ORANGE = 'Check-icon-orange'

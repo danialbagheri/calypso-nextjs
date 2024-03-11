@@ -18,7 +18,8 @@ import {
 import {getUserInfo, patchUserInfo} from 'services'
 import {Container} from 'components/user/dashboard'
 import UserDetailsFields from 'components/user/UserDetailsFields'
-import {CustomButton} from 'components/user/localShared'
+import {CustomButton} from 'components/shared'
+
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------- Constants ------------------------------- */

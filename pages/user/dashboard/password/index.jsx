@@ -18,7 +18,7 @@ import {assetsEndPoints, getAssets} from 'utils'
 import {AppContext} from 'components/appProvider'
 import {useAuthFetch} from 'components/customHooks'
 import {Container} from 'components/user/dashboard'
-import {CustomButton, CustomOutlinedInput} from 'components/user/localShared'
+import {CustomButton, CustomOutlinedInput} from 'components/shared'
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------- Constants ------------------------------- */

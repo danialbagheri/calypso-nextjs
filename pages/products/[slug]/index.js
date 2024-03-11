@@ -176,6 +176,7 @@ export async function getStaticPaths() {
   const url = baseUrl + 'products/product/'
   const res = await fetch(url)
   const products = await res.json()
+
   const pageCount = Math.ceil(products.count / 10)
   const productResult = await getAllPages(pageCount, url)
   const slugPaths = []

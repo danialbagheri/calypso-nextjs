@@ -4,12 +4,10 @@ import Image from 'next/image'
 
 import {Alert, AlertTitle, Box, Typography} from '@mui/material'
 
-import {confirmResetPassword} from '../../../../services'
-import {
-  CustomButton,
-  CustomOutlinedInput,
-} from '../../../../components/user/localShared'
+import {confirmResetPassword} from 'services'
+
 import {useRouter} from 'next/router'
+import {CustomButton, CustomOutlinedInput} from 'components/shared'
 
 const UID = 'uid'
 const TOKEN = 'token'
