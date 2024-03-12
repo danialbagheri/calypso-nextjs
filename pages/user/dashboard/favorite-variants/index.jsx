@@ -20,7 +20,7 @@ export default function FavoriteVariants(props) {
     <Container
       assets={assets}
       iconName={ACCOUNT_DETAILS}
-      sx={{gap: {md: '100px'}}}
+      sx={{gap: {md: '20px', lg: '70px'}}}
     >
       <Box
         className="centralize"
