@@ -85,7 +85,7 @@ export default function Dashboard(props) {
   }, [])
 
   return (
-    <Box sx={{width: {xs: '100%', md: '713px'}, margin: '0 auto'}}>
+    <Box sx={{width: '100%', maxWidth: 1178, margin: '0 auto', px: 10}}>
       {loading ? (
         <Box
           className="centralize"

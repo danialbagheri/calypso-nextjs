@@ -14,11 +14,14 @@ export default function FavoriteVariants(props) {
   const {assets} = props
   /* ---------------------------------- Hooks --------------------------------- */
   const theme = useTheme()
-
   /* -------------------------------------------------------------------------- */
 
   return (
-    <Container assets={assets} iconName={ACCOUNT_DETAILS}>
+    <Container
+      assets={assets}
+      iconName={ACCOUNT_DETAILS}
+      sx={{gap: {md: '100px'}}}
+    >
       <Box
         className="centralize"
         sx={{
