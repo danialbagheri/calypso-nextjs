@@ -23,9 +23,9 @@ export default function User(props) {
   const router = useRouter()
 
   const checkUserSignedIn = async () => {
-    const {calref} = parseCookies()
+    const {calacc} = parseCookies()
 
-    if (calref) {
+    if (calacc) {
       router.push('/user/dashboard')
       setAppState(perv => ({...perv, isAuthenticate: true}))
     } else {
