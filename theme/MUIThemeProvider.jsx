@@ -7,6 +7,10 @@ const theme = createTheme({
       main: '#FF6B00',
     },
 
+    calypsoBeige: {
+      main: '#FBF3EA',
+    },
+
     secondary: {
       main: '#226F61',
     },
@@ -138,7 +142,10 @@ const theme = createTheme({
       smd: 750,
       md: 900,
 
+      slg: 1000,
+      mlg: 1100,
       lg: 1200,
+
       xl: 1536,
       xxl: 1900,
     },

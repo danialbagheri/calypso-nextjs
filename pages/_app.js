@@ -11,13 +11,14 @@ import '../styles/bootstrap/css/bootstrap-theme.min.css'
 import '../styles/bootstrap/css/bootstrap.min.css'
 import Head from 'next/head'
 import store from '../redux/store'
-import Footer from '../components/common/footer/footer'
+
 import InfoBar from '../components/general/InfoBar'
 import {AppProvider} from 'components/appProvider'
 import {MailjetSignUp} from 'components'
 import {assetsEndPoints, getAssets} from '../utils'
 import {getRetrieveMenu} from '../services'
 import App from 'next/app'
+import {Footer} from 'components/common/footer'
 
 function MyApp({Component, pageProps}) {
   const SUBSCRIPTION_STATE = 'subscriptionState'
