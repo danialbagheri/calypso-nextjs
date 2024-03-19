@@ -21,12 +21,9 @@ import App from 'next/app'
 import {Footer} from 'components/common/footer'
 
 function MyApp({Component, pageProps}) {
-  const SUBSCRIPTION_STATE = 'subscriptionState'
-  const SIGNED_UP = 'signedUp'
   const navItems = pageProps?.navItems
 
   const [interval, setInterval] = React.useState(0)
-  const [showSubscription, setShowSubscription] = React.useState(false)
   const [icons, setIcons] = React.useState({})
 
   const handleGetAssets = async () => {
@@ -43,12 +40,6 @@ function MyApp({Component, pageProps}) {
   }
 
   React.useEffect(() => {
-    const subscriptionState = localStorage.getItem(SUBSCRIPTION_STATE)
-
-    if (!subscriptionState || subscriptionState !== SIGNED_UP) {
-      setShowSubscription(true)
-    }
-
     handleGetAssets()
   }, [])
 
@@ -166,8 +157,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               }}
             />
             <Header navItems={navItems} />
-            {showSubscription ? <MailjetSignUp /> : null}
-
+            <MailjetSignUp />
             <InfoBar />
             <Component {...pageProps} />
             <CookieConsent
@@ -184,7 +174,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               our website.
             </CookieConsent>
 
-            <Footer showSubscription={showSubscription} />
+            <Footer />
             <RefreshTokenHandler setInterval={setInterval} />
           </Provider>
         </SessionProvider>
