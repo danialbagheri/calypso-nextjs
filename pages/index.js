@@ -7,6 +7,7 @@ import {
   BlogSlider,
   HomeSlider,
   Instagram,
+  TeenageCancer,
   Trending,
 } from 'components'
 
@@ -63,6 +64,7 @@ function Home(props) {
           <HomeSlider />
           <BestSeller />
           <BlogSlider />
+          <TeenageCancer />
           <Instagram />
         </section>
       </main>
