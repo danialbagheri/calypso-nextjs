@@ -7,7 +7,7 @@ const theme = createTheme({
       main: '#FF6B00',
     },
 
-    calypsoBeige: {
+    beige: {
       main: '#FBF3EA',
     },
 

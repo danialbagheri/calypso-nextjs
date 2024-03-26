@@ -27,10 +27,7 @@ function MyApp({Component, pageProps}) {
   const [icons, setIcons] = React.useState({})
 
   const handleGetAssets = async () => {
-    const response = await getAssets([
-      assetsEndPoints.userAccount,
-      assetsEndPoints.infoBar,
-    ])
+    const response = await getAssets([assetsEndPoints.infoBar])
 
     if (response && typeof response === 'object') {
       setIcons({
@@ -189,11 +186,8 @@ MyApp.getInitialProps = async appContext => {
   const appProps = await App.getInitialProps(appContext)
 
   try {
-    getRetrieveMenu()
-      .then(res => {
-        appProps.pageProps.navItems = res.sub_menus
-      })
-      .catch(err => console.error(err))
+    const menu = await getRetrieveMenu()
+    appProps.pageProps.navItems = menu.sub_menus
   } catch (err) {
     console.error(err)
   }
