@@ -1,4 +1,7 @@
-import BreadCrumb from '../components/common/breadcrumb'
+import {Box} from '@mui/material'
+
+import BreadCrumb from 'components/common/breadcrumb'
+import {getReturnPolicy} from 'services'
 
 function TermsConditions({page, isLoaded}) {
   const breadCrumbPath = [
@@ -19,18 +22,16 @@ function TermsConditions({page, isLoaded}) {
           </div>
         </div>
       ) : (
-        <p>Nothing found</p>
+        <Box sx={{maxWidth: 1200, p: 10}}>
+          <p>Nothing found</p>
+        </Box>
       )}
     </>
   )
 }
 
 export async function getStaticProps() {
-  const baseUrl = process.env.API_URL
-  const endpoint = 'page/returns-policy/'
-  const finalUrl = baseUrl + endpoint
-  const res = await fetch(finalUrl)
-  const page = await res.json()
+  const page = await getReturnPolicy()
 
   // Now we will get the staff picked articles
 

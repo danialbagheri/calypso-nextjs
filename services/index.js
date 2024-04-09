@@ -162,6 +162,14 @@ export const getFaqs = (page = 1) => {
   return get({endpoint: `faq/?page=${page}`})
 }
 
+export const getPrivacyPolicy = () => {
+  return get({endpoint: 'page/privacy-policy/'})
+}
+
+export const getReturnPolicy = () => {
+  return get({endpoint: 'page/returns-policy/'})
+}
+
 //USER
 export const getUserAddresses = token => {
   return get({endpoint: 'users/addresses/', token})
