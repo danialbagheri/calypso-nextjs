@@ -1,4 +1,7 @@
-import BreadCrumb from '../components/common/breadcrumb'
+import {Box} from '@mui/material'
+
+import BreadCrumb from 'components/common/breadcrumb'
+import {getTermsAndConditions} from 'services'
 
 function TermsConditions({page, isLoaded}) {
   const breadCrumbPath = [
@@ -17,20 +20,16 @@ function TermsConditions({page, isLoaded}) {
           <div dangerouslySetInnerHTML={{__html: page.html}} />
         </div>
       ) : (
-        <p>Nothing found</p>
+        <Box sx={{maxWidth: 1200, p: 10}}>
+          <p>Nothing found</p>
+        </Box>
       )}
     </>
   )
 }
 
 export async function getStaticProps() {
-  const baseUrl = process.env.API_URL
-  const endpoint = 'page/terms-conditions/'
-  const finalUrl = baseUrl + endpoint
-  const res = await fetch(finalUrl)
-  const page = await res.json()
-
-  // Now we will get the staff picked articles
+  const page = await getTermsAndConditions()
 
   if (!page) {
     return {
@@ -40,7 +39,7 @@ export async function getStaticProps() {
   }
 
   return {
-    props: {page: page, isLoaded: true}, // will be passed to the page component as props
+    props: {page: page, isLoaded: true},
   }
 }
 
