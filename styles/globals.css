@@ -3014,17 +3014,6 @@ ul.stores img {
   color: #ffff;
 }
 
-.faqSearchInput {
-  color: gray !important;
-  border: none;
-  padding: 0 4px;
-}
-
-.faqSearchInput:focus {
-  border: 3px solid var(--calypso-color);
-  outline: none;
-}
-
 .answer {
   font-size: 19px;
   line-height: 31px;

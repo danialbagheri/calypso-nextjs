@@ -24,7 +24,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: ['react', '@typescript-eslint'],
   rules: {
     // Possible errors
     'no-console': ['warn', {allow: ['warn', 'error']}],
@@ -51,6 +51,21 @@ module.exports = {
     // ES6
     'array-callback-return': 'off',
     'prefer-const': 'error',
+    // TypeScript rules
+    '@typescript-eslint/array-type': [
+      'warn',
+      {
+        default: 'array',
+      },
+    ],
+    '@typescript-eslint/consistent-type-assertions': [
+      'warn',
+      {
+        assertionStyle: 'as',
+        objectLiteralTypeAssertions: 'never',
+      },
+    ],
+    '@typescript-eslint/no-explicit-any': ['error'],
     // Imports
     'import/prefer-default-export': 'off',
     'sort-imports': [
@@ -87,7 +102,6 @@ module.exports = {
     // but the config lives in the `config/` directory. Passing the config here
     // to get around this.
     'prettier/prettier': ['error', prettierConfig],
-    '@typescript-eslint/no-explicit-any': 'error',
   },
   settings: {
     react: {

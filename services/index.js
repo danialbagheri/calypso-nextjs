@@ -158,6 +158,10 @@ export const getRetrieveMenu = () => {
   return get({endpoint: 'web/menus/main'})
 }
 
+export const getFaqs = (page = 1) => {
+  return get({endpoint: `faq/?page=${page}`})
+}
+
 //USER
 export const getUserAddresses = token => {
   return get({endpoint: 'users/addresses/', token})
