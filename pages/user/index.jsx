@@ -10,13 +10,11 @@ import {Box, useTheme} from '@mui/material'
 
 /* ---------------------------- Local Components ---------------------------- */
 import {AlreadyMember, NewMember} from 'components/user'
-import {assetsEndPoints, getAssets} from '../../utils'
 import {parseCookies} from 'nookies'
 import {AppContext} from '../../components/appProvider'
 /* -------------------------------------------------------------------------- */
 
-export default function User(props) {
-  const {assets} = props
+export default function User() {
   const [refCookieState, setRefCookieState] = React.useState(false)
   const [, setAppState] = React.useContext(AppContext)
   const theme = useTheme()
@@ -52,7 +50,7 @@ export default function User(props) {
           height: '100%',
         }}
       >
-        <NewMember assets={assets} />
+        <NewMember />
 
         <Box
           sx={{
@@ -70,32 +68,4 @@ export default function User(props) {
     )
   }
   return <Box height={200} />
-}
-
-export async function getStaticProps() {
-  try {
-    const {checkIcon, creatingAccountBenefits, userAccountTopIcons} =
-      assetsEndPoints
-
-    const assets = await getAssets([
-      checkIcon,
-      creatingAccountBenefits,
-      userAccountTopIcons,
-    ])
-
-    return {
-      props: {
-        assets,
-      },
-      revalidate: 120, // will be passed to the page component as props
-    }
-  } catch (err) {
-    console.error(err)
-    return {
-      props: {
-        assets: {},
-      },
-      revalidate: 120, // will be passed to the page component as props
-    }
-  }
 }

@@ -5,8 +5,10 @@
     "skipLibCheck": true,
     "strict": false,
     "noEmit": true,
+    "noImplicitAny": false,
     "incremental": true,
     "esModuleInterop": true,
+    "strictFunctionTypes": false,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -15,5 +17,5 @@
     "baseUrl": "."
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

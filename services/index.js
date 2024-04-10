@@ -158,6 +158,22 @@ export const getRetrieveMenu = () => {
   return get({endpoint: 'web/menus/main'})
 }
 
+export const getFaqs = (page = 1) => {
+  return get({endpoint: `faq/?page=${page}`})
+}
+
+export const getPrivacyPolicy = () => {
+  return get({endpoint: 'page/privacy-policy/'})
+}
+
+export const getReturnPolicy = () => {
+  return get({endpoint: 'page/returns-policy/'})
+}
+
+export const getTermsAndConditions = () => {
+  return get({endpoint: 'page/terms-conditions/'})
+}
+
 //USER
 export const getUserAddresses = token => {
   return get({endpoint: 'users/addresses/', token})
