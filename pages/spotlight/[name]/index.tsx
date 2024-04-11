@@ -23,7 +23,7 @@ export default function Spotlight(props: PropsType) {
       <Box
         sx={{
           maxWidth: '1200px',
-          px: {xs: 0, lg: '30px'},
+          px: {xs: 0, md: '30px'},
           m: '0 auto',
         }}
       >

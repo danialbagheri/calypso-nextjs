@@ -129,7 +129,7 @@ export const spotlight = {
           },
         ],
         position: Column.COLUMN_2,
-        order: 2,
+        order: 5,
       },
       {
         id: 'paragraph_3',
@@ -157,7 +157,7 @@ export const spotlight = {
           },
         ],
         position: Column.COLUMN_2,
-        order: 1,
+        order: 3,
       },
       {
         id: 'image_4',
@@ -170,7 +170,7 @@ export const spotlight = {
           },
         ],
         position: Column.COLUMN_2,
-        order: 1,
+        order: 2,
       },
       {
         id: 'quote_2',
@@ -183,7 +183,7 @@ export const spotlight = {
           },
         ],
         position: Column.COLUMN_2,
-        order: 1,
+        order: 7,
       },
       {
         id: 'paragraph_4',
@@ -211,7 +211,7 @@ export const spotlight = {
           },
         ],
         position: Column.COLUMN_2,
-        order: 1,
+        order: 6,
       },
     ],
   },
