@@ -1,12 +1,19 @@
 export const PARAGRAPH = 'paragraph'
 export const QUOTE = 'quote'
 export const IMAGE = 'image'
+export const PRODUCT_IMAGE = 'product_image'
 export const SOURCE = 'source'
 export const TEXT = 'text'
 export const TITLE = 'title'
 export const BUTTON = 'button'
+
 export const COLUMN_1 = 'column_1'
 export const COLUMN_2 = 'column_2'
+
+export enum Column {
+  COLUMN_1 = 'column_1',
+  COLUMN_2 = 'column_2',
+}
 
 export const spotlightNames = {
   ADELE_SHARMAN: 'adele-sharman',
@@ -16,13 +23,13 @@ export const spotlight = {
   [spotlightNames.ADELE_SHARMAN]: {
     header: {
       id: 'header',
-      imageSrc: 'adele-sharman/header.png',
+      imageSrc: '/spotlight/adele-sharman/header.png',
       alt: 'Adele Sharman',
       title: "Look after your skin. It's travelling with you",
     },
     specifications: {
       id: 'specifications',
-      photo: '/adele-sharman/avatar.png',
+      photo: '/spotlight/adele-sharman/avatar.png',
       alt: 'adele-sharman',
       name: 'Adele Sharman',
       social_id: '@sharmanshores',
@@ -39,7 +46,7 @@ export const spotlight = {
             data: 'I’m Adele Sharman, a 48-year-old Travel addict. I have two daughters who I am incredibly proud of and a golf-loving husband who shares my passion for travel. I love learning about travel; it broadens your mind and is a great conversation starter. I am a social butterfly; I love making new friends and connecting with likeminded people. ',
           },
         ],
-        position: COLUMN_1,
+        position: Column.COLUMN_1,
         order: 1,
       },
       {
@@ -52,7 +59,7 @@ export const spotlight = {
             data: "You can't swap your skin, so why wouldn't you protect it? It has to last you a lifetime.",
           },
         ],
-        position: COLUMN_1,
+        position: Column.COLUMN_1,
         order: 3,
       },
       {
@@ -62,10 +69,10 @@ export const spotlight = {
           {
             id: 'image_1_content_1',
             type: SOURCE,
-            data: '/adele-sharman/image_1.png',
+            data: '/spotlight/adele-sharman/image_1.png',
           },
         ],
-        position: COLUMN_1,
+        position: Column.COLUMN_1,
         order: 8,
       },
       {
@@ -83,7 +90,7 @@ export const spotlight = {
             data: "I also love the Clear Protect SPF15 Calypso Clear Protection Continuous spray. It's non-greasy, and it reaches them hard-to-reach places like your back. A spay is excellent for someone like me who sunbathes on her own when her husband golfs.",
           },
         ],
-        position: COLUMN_1,
+        position: Column.COLUMN_1,
         order: 9,
       },
       {
@@ -93,20 +100,21 @@ export const spotlight = {
           {
             id: 'image_2_content_1',
             type: SOURCE,
-            data: '/adele-sharman/image_2.png',
+            data: '/spotlight/adele-sharman/image_2.png',
           },
         ],
-        position: COLUMN_1,
+        position: Column.COLUMN_1,
         order: 10,
       },
       {
         id: 'image_3',
         type: IMAGE,
+        typeDetail: PRODUCT_IMAGE,
         content: [
           {
             id: 'image_3_content_1',
             type: SOURCE,
-            data: '/adele-sharman/image_3.png',
+            data: '/spotlight/adele-sharman/image_3.png',
           },
           {
             id: 'image_3_content_2',
@@ -120,20 +128,8 @@ export const spotlight = {
             url: '',
           },
         ],
-        position: COLUMN_2,
+        position: Column.COLUMN_2,
         order: 2,
-      },
-      {
-        id: 'image_4',
-        type: IMAGE,
-        content: [
-          {
-            id: 'image_4_content_1',
-            type: SOURCE,
-            data: '/adele-sharman/image_4.png',
-          },
-        ],
-        position: COLUMN_2,
       },
       {
         id: 'paragraph_3',
@@ -160,7 +156,21 @@ export const spotlight = {
             data: "If I know I am going to be active and not just sitting on a beach, I still try to remember to put an SPF on my face or other parts of my body that are exposed. It's just like putting a moisturiser on.",
           },
         ],
-        position: COLUMN_2,
+        position: Column.COLUMN_2,
+        order: 1,
+      },
+      {
+        id: 'image_4',
+        type: IMAGE,
+        content: [
+          {
+            id: 'image_4_content_1',
+            type: SOURCE,
+            data: '/spotlight/adele-sharman/image_4.png',
+          },
+        ],
+        position: Column.COLUMN_2,
+        order: 1,
       },
       {
         id: 'quote_2',
@@ -172,7 +182,8 @@ export const spotlight = {
             data: 'Protecting your skin now will help later on in life',
           },
         ],
-        position: COLUMN_2,
+        position: Column.COLUMN_2,
+        order: 1,
       },
       {
         id: 'paragraph_4',
@@ -199,7 +210,8 @@ export const spotlight = {
             data: 'If you are not applying an SPF before you sit out in the sun and damage your skin, think twice. You have a lifetime in your skin; look after and protect it.',
           },
         ],
-        position: COLUMN_2,
+        position: Column.COLUMN_2,
+        order: 1,
       },
     ],
   },

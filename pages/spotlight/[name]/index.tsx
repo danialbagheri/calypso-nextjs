@@ -3,7 +3,7 @@ import type {GetStaticPropsContext} from 'next'
 import {Box} from '@mui/material'
 
 import {spotlight} from 'constants/spotlight'
-import {Header} from 'components/spotlight'
+import {Header, SpotlightBody} from 'components/spotlight'
 
 interface PropsType {
   name: string
@@ -14,16 +14,21 @@ export default function Spotlight(props: PropsType) {
 
   const spotlightData = spotlight[name]
   const headerData = spotlightData.header
+  const personData = spotlightData.specifications
+  const bodyData = spotlightData.items
 
   return (
-    <Box pb="112px">
+    <Box>
       <Header data={headerData} />
       <Box
         sx={{
           maxWidth: '1200px',
-          px: '31px',
+          px: {xs: 0, lg: '30px'},
+          m: '0 auto',
         }}
-      ></Box>
+      >
+        <SpotlightBody data={bodyData} personData={personData} />
+      </Box>
     </Box>
   )
 }

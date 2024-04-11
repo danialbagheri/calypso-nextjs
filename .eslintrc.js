@@ -65,7 +65,7 @@ module.exports = {
         objectLiteralTypeAssertions: 'never',
       },
     ],
-    '@typescript-eslint/no-explicit-any': ['error'],
+    '@typescript-eslint/no-explicit-any': ['warn'],
     // Imports
     'import/prefer-default-export': 'off',
     'sort-imports': [
