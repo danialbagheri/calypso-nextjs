@@ -22,7 +22,7 @@ export default function Spotlight(props: PropsType) {
       <Header data={headerData} />
       <Box
         sx={{
-          maxWidth: '1200px',
+          maxWidth: '824px',
           px: {xs: 0, md: '30px'},
           m: '0 auto',
         }}
