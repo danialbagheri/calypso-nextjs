@@ -328,7 +328,7 @@ export const spotlight = {
             id: 'image_3_content_3',
             type: BUTTON,
             data: 'Know more',
-            url: '',
+            url: '/products/deep-tanning-monoi-tahiti?sku=CALT15MON',
           },
         ],
         position: Column.COLUMN_2,
