@@ -1,40 +1,21 @@
 import * as React from 'react'
 
-import Image from 'next/image'
-
 import {Box, Typography, useTheme} from '@mui/material'
 
-import {assetsEndPoints, getAssets, validateEmail} from '../../utils'
 import {postResetPasswordEmail} from 'services'
 import {CustomButton, CustomOutlinedInput} from 'components/shared'
+import {CalypsoGirlPassword, GreenCheck} from 'components/icons'
+import {validateEmail} from 'utils'
 
-const GIRL_ICON = 'password'
-const CHECK_ICON_ORANGE = 'Check-icon-orange'
-const CHECK_ICON_GREEN = 'Check-icon-green'
-
-export default function Password(props) {
-  const {assets} = props
-
+export default function Password() {
   const [step, setStep] = React.useState(1)
   const [email, setEmail] = React.useState('')
+
   const [error, setError] = React.useState(null)
+
   const [loading, setLoading] = React.useState(false)
   const [resendState, setResendState] = React.useState(false)
   const theme = useTheme()
-
-  const {userAccountTopIcons, checkIcon} = assetsEndPoints
-
-  const girlIcon = assets[userAccountTopIcons]?.items.find(
-    item => item.name.toLowerCase().trim() === GIRL_ICON.toLowerCase().trim(),
-  )
-  const checkIconOrange = assets[checkIcon]?.items.find(
-    item =>
-      item.name.toLowerCase().trim() === CHECK_ICON_ORANGE.toLowerCase().trim(),
-  )
-  const greenCheckIcon = assets[checkIcon]?.items.find(
-    item =>
-      item.name.toLowerCase().trim() === CHECK_ICON_GREEN.toLowerCase().trim(),
-  )
 
   const reEnterEnterEmailHandler = () => {
     setStep(1)
@@ -113,7 +94,7 @@ export default function Password(props) {
             <Typography color="secondary.main" mt={3} textAlign="center">
               Please enter the email you used to create your account
             </Typography>
-            <Box className="centralize" gap={3} mt={4}>
+            <Box className="centralize" sx={{gap: 3, mt: 4, ml: '30px'}}>
               <CustomOutlinedInput
                 error={error}
                 id={'change_password_email_address'}
@@ -124,20 +105,19 @@ export default function Password(props) {
                 type="email"
                 value={email}
               />
-              <Image
-                alt={checkIconOrange.name || ''}
-                height={20}
-                src={checkIconOrange.svg_icon || ''}
-                style={{
-                  marginTop: 20,
-                  display: !error && error !== null ? 'block' : 'none',
-                }}
-                width={20}
-              />
+              <Box className="centralize" sx={{width: 30, minWidth: 30}}>
+                <GreenCheck
+                  sx={{
+                    width: 20,
+                    height: 20,
+                    mt: 4,
+                    display: !error && error !== null ? 'block' : 'none',
+                  }}
+                />
+              </Box>
             </Box>
-
             <CustomButton
-              disabled={error !== null || email === ''}
+              disabled={error || !email}
               loading={loading}
               onClick={sendEmailHandler}
               sx={{width: 260, mx: 'auto', display: 'flex', mt: 12, height: 46}}
@@ -160,13 +140,11 @@ export default function Password(props) {
                 mt: 8,
               }}
             >
-              <Box sx={{border: '2px solid #FFF', borderRadius: '50%'}}>
-                <Image
-                  alt={greenCheckIcon?.name || ''}
-                  height={30}
-                  src={greenCheckIcon?.svg_icon || ''}
-                  width={30}
-                />
+              <Box
+                className="centralize"
+                sx={{border: '2px solid #FFF', borderRadius: '50%'}}
+              >
+                <GreenCheck sx={{width: 30, height: 30}} />
               </Box>
               <Typography color="#FFF" sx={{fontSize: 20, fontWeight: 600}}>
                 {resendState
@@ -181,7 +159,6 @@ export default function Password(props) {
             </Typography>
             <Box>
               <CustomButton
-                disabled={error !== null || email === ''}
                 loading={loading}
                 onClick={resendEmailHandler}
                 sx={{
@@ -196,7 +173,6 @@ export default function Password(props) {
                 Resend
               </CustomButton>
               <CustomButton
-                disabled={error !== null || email === ''}
                 onClick={reEnterEnterEmailHandler}
                 sx={{
                   width: 260,
@@ -213,36 +189,7 @@ export default function Password(props) {
           </>
         ) : null}
       </Box>
-      <Image
-        alt={girlIcon?.name || 'Calypso girl'}
-        height={290}
-        id="user_details_girl_icon"
-        src={girlIcon?.svg_icon || ''}
-        width={290}
-      />
+      <CalypsoGirlPassword sx={{width: 290, height: 290}} />
     </Box>
   )
-}
-
-export async function getStaticProps() {
-  try {
-    const {userAccountTopIcons, checkIcon} = assetsEndPoints
-
-    const assets = await getAssets([userAccountTopIcons, checkIcon])
-
-    return {
-      props: {
-        assets,
-      },
-      revalidate: 120, // will be passed to the page component as props
-    }
-  } catch (err) {
-    console.error(err)
-    return {
-      props: {
-        assets: {},
-      },
-      revalidate: 120, // will be passed to the page component as props
-    }
-  }
 }

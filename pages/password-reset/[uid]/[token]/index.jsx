@@ -1,13 +1,12 @@
 import * as React from 'react'
 
-import Image from 'next/image'
-
 import {Alert, AlertTitle, Box, Typography} from '@mui/material'
 
 import {confirmResetPassword} from 'services'
 
 import {useRouter} from 'next/router'
 import {CustomButton, CustomOutlinedInput} from 'components/shared'
+import {CalypsoGirlPassword} from 'components/icons'
 
 const UID = 'uid'
 const TOKEN = 'token'
@@ -130,15 +129,7 @@ export default function ResetPassword() {
           Save new password
         </CustomButton>
       </Box>
-      <Image
-        alt={'Calypso girl'}
-        height={290}
-        id="user_details_girl_icon"
-        src={
-          'https://calypso-static.s3.amazonaws.com/media/svg-icon-groups/User-account-12.svg'
-        }
-        width={290}
-      />
+      <CalypsoGirlPassword sx={{width: 290, height: 290}} />
     </Box>
   )
 }
