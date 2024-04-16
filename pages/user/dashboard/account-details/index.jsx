@@ -9,12 +9,7 @@ import {useRouter} from 'next/router'
 /* ---------------------------- Local Components ---------------------------- */
 import {EMAIL, FIRST_NAME, LAST_NAME, MOBILE_NUMBER} from '..'
 import {useAuthFetch} from 'components/customHooks'
-import {
-  assetsEndPoints,
-  getAssets,
-  validateMobileNumber,
-  validateName,
-} from 'utils'
+import {validateMobileNumber, validateName} from 'utils'
 import {getUserInfo, patchUserInfo} from 'services'
 import {Container} from 'components/user/dashboard'
 import UserDetailsFields from 'components/user/UserDetailsFields'
@@ -22,12 +17,7 @@ import {CustomButton} from 'components/shared'
 
 /* -------------------------------------------------------------------------- */
 
-/* -------------------------------- Constants ------------------------------- */
-export const ACCOUNT_DETAILS = 'account details'
-/* -------------------------------------------------------------------------- */
-
-export default function AccountDetails(props) {
-  const {assets} = props
+export default function AccountDetails() {
   /* ---------------------------------- Hooks --------------------------------- */
   const [fieldData, setFieldData] = React.useState({
     id: '',
@@ -162,11 +152,7 @@ export default function AccountDetails(props) {
   }, [])
 
   return (
-    <Container
-      assets={assets}
-      iconName={ACCOUNT_DETAILS}
-      route="account-details"
-    >
+    <Container route="account-details">
       <Box width={{xs: '100%', md: 318}}>
         <Typography sx={{fontSize: 24, fontWeight: 700}} textAlign="center">
           Account details
@@ -228,27 +214,4 @@ export default function AccountDetails(props) {
       </Box>
     </Container>
   )
-}
-
-export async function getStaticProps() {
-  try {
-    const {userAccountTopIcons} = assetsEndPoints
-
-    const assets = await getAssets([userAccountTopIcons])
-
-    return {
-      props: {
-        assets,
-      },
-      revalidate: 120,
-    }
-  } catch (err) {
-    console.error(err)
-    return {
-      props: {
-        assets: {},
-      },
-      revalidate: 120,
-    }
-  }
 }

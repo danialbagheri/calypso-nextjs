@@ -13,24 +13,17 @@ import {Box, CircularProgress} from '@mui/material'
 /* -------------------------------------------------------------------------- */
 
 /* ---------------------------- Local Components ---------------------------- */
-import {assetsEndPoints, getAssets} from 'utils'
 import {useAuthFetch} from 'components/customHooks'
 import {getUserInfo, getUserOrders} from 'services'
 import {Body, Header} from 'components/user/dashboard'
 /* -------------------------------------------------------------------------- */
-
-const {userAccountTopIcons} = assetsEndPoints
 
 export const FIRST_NAME = 'first_name'
 export const LAST_NAME = 'last_name'
 export const EMAIL = 'email'
 export const MOBILE_NUMBER = 'mobile_number'
 
-export default function Dashboard(props) {
-  const {assets} = props
-  const headerImage = assets[userAccountTopIcons].items.find(
-    item => item.name === 'Dashboard',
-  )
+export default function Dashboard() {
   /* --------------------------------- States --------------------------------- */
   const [loading, setLoading] = React.useState(true)
   const [userData, setUserData] = React.useState({
@@ -97,21 +90,10 @@ export default function Dashboard(props) {
         </Box>
       ) : (
         <>
-          <Header image={headerImage} name={userData.info.first_name} />
+          <Header name={userData.info.first_name} />
           <Body orders={userData.orders} />
         </>
       )}
     </Box>
   )
-}
-
-/* ---------------------------- GET STATIC PROPS ---------------------------- */
-
-export async function getStaticProps() {
-  const assets = await getAssets([userAccountTopIcons])
-
-  return {
-    props: {assets},
-    revalidate: 120, // will be passed to the page component as props
-  }
 }

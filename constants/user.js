@@ -21,3 +21,29 @@ export const createAccountBenefits = [
     position: 1,
   },
 ]
+
+export const passwordDetails = [
+  {
+    id: 1,
+    text: '8-16 characters',
+  },
+  {
+    id: 2,
+    text: 'lower case characters',
+  },
+  {
+    id: 3,
+    text: 'upper case characters',
+  },
+  {
+    id: 4,
+    text: 'digits (0-9)',
+  },
+]
+
+export const routes = {
+  PASSWORD: 'password',
+  DASHBOARD: 'dashboard',
+  ACCOUNT_DETAILS: 'account-details',
+  FAVORITE_VARIANTS: 'favorite-variants',
+}

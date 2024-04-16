@@ -14,15 +14,12 @@ import {destroyCookie} from 'nookies'
 
 /* ---------------------------- Local Components ---------------------------- */
 import {postSetPassword} from 'services'
-import {assetsEndPoints, getAssets} from 'utils'
 import {AppContext} from 'components/appProvider'
 import {useAuthFetch} from 'components/customHooks'
 import {Container} from 'components/user/dashboard'
 import {CustomButton, CustomOutlinedInput} from 'components/shared'
+import {passwordDetails, routes} from 'constants/user'
 /* -------------------------------------------------------------------------- */
-
-/* -------------------------------- Constants ------------------------------- */
-const PASSWORD_GIRL_ICON = 'password'
 
 const NEW_PASSWORD = 'new_password'
 const CURRENT_PASSWORD = 'current_password'
@@ -36,9 +33,7 @@ const initialState = {
 }
 /* -------------------------------------------------------------------------- */
 
-export default function Password(props) {
-  const {assets} = props
-
+export default function Password() {
   /* ---------------------------------- Hooks --------------------------------- */
   const [fieldData, setFieldData] = React.useState({
     ...initialState,
@@ -51,9 +46,6 @@ export default function Password(props) {
   const router = useRouter()
   const authFunctions = useAuthFetch()
   /* -------------------------------------------------------------------------- */
-
-  const {popUpPassword} = assetsEndPoints
-  const passwordSpecifications = assets[popUpPassword]?.items
 
   const handleError = state => {
     if (state && typeof state === 'object') {
@@ -91,7 +83,7 @@ export default function Password(props) {
   }
 
   return (
-    <Container assets={assets} iconName={PASSWORD_GIRL_ICON} route="password">
+    <Container route={routes.PASSWORD}>
       <Box width={{xs: '100%', md: 318}}>
         <Typography sx={{fontSize: 24, fontWeight: 700}} textAlign="center">
           Password
@@ -100,7 +92,7 @@ export default function Password(props) {
           Please provide the following details
         </Typography>
         <Box mt={1}>
-          {passwordSpecifications?.map(item => (
+          {passwordDetails?.map(item => (
             <Typography key={item.id}>{item.text}</Typography>
           ))}
         </Box>
@@ -159,27 +151,4 @@ export default function Password(props) {
       </Box>
     </Container>
   )
-}
-
-export async function getStaticProps() {
-  try {
-    const {userAccountTopIcons, popUpPassword} = assetsEndPoints
-
-    const assets = await getAssets([userAccountTopIcons, popUpPassword])
-
-    return {
-      props: {
-        assets,
-      },
-      revalidate: 120, // will be passed to the page component as props
-    }
-  } catch (err) {
-    console.error(err)
-    return {
-      props: {
-        assets: {},
-      },
-      revalidate: 120, // will be passed to the page component as props
-    }
-  }
 }

@@ -9,9 +9,9 @@ import {Box, useTheme} from '@mui/material'
 /* -------------------------------------------------------------------------- */
 
 /* ---------------------------- Local Components ---------------------------- */
-import {AlreadyMember, NewMember} from 'components/user'
 import {parseCookies} from 'nookies'
 import {AppContext} from '../../components/appProvider'
+import {AlreadyMember, NewMember} from 'components/user'
 /* -------------------------------------------------------------------------- */
 
 export default function User() {
