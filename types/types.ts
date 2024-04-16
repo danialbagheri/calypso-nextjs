@@ -196,7 +196,6 @@ export type ProductsTypes = {
   collection_names: string[]
   description: string
   direction_of_use: string
-
   faq_list: FaqType[]
   graphql_id: string
   id: number
@@ -221,4 +220,18 @@ export type ProductsTypes = {
   types: string[]
   updated: string
   variants: VariantType[]
+}
+
+export type CollectionType = {
+  background_image_alt: string
+  counts: number
+  description: string
+  id: number
+  image: string
+  items: {item: ProductsTypes}[]
+  name: string
+  public: boolean
+  slider: SliderType
+  slug: string
+  webp: string
 }

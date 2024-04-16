@@ -3,7 +3,8 @@ import * as React from 'react'
 import Head from 'next/head'
 
 import {
-  BestSeller,
+  // BestSeller,
+  BestSellerSlider,
   BlogSlider,
   HomeSlider,
   Instagram,
@@ -62,7 +63,7 @@ function Home(props) {
           <HomeSlider banner={homepageBanner} />
           <Trending items={trendingItems} />
           <HomeSlider />
-          <BestSeller />
+          <BestSellerSlider />
           <BlogSlider />
           <TeenageCancer />
           <Instagram />
