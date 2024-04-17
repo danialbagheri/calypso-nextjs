@@ -141,17 +141,17 @@ export type ScoreChartTypes = {
 export type SlideType = {
   id: number
   name: string
-  xl_image: string
-  lg_image: string
-  md_image: string
-  sm_image: string
-  xs_image: string
+  xl_image: string | null
+  lg_image: string | null
+  md_image: string | null
+  sm_image: string | null
+  xs_image: string | null
   video: null | string
   image_alt_text: string
   active: boolean
   custom_slide: boolean
   custom_code: string
-  link: string
+  link: string | null
 }
 
 export type SlidesType = {
@@ -234,4 +234,21 @@ export type CollectionType = {
   slider: SliderType
   slug: string
   webp: string
+}
+
+export type ProductFinderBanner = {
+  id: number
+  xl_image: null | string
+  lg_image: null | string
+  md_image: null | string
+  sm_image: null | string
+  xs_image: null | string
+  desktop_resized: null | string
+  desktop_webp: null | string
+  mobile_webp: null | string
+  image_png: null | string
+  image_webp: null | string
+  order: number
+  slider: Omit<SliderType, 'slider_slides'>
+  slide: SlideType
 }

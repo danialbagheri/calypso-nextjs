@@ -15,20 +15,10 @@ import {
 import {useAuthFetch} from 'components/customHooks'
 import {getFavoriteVariantsHandler} from 'utils'
 
-const LG_IMAGE = 'lg_image'
-const MD_IMAGE = 'md_image'
-const MOBILE_IMAGE = 'mobile_webp'
-
 function Category(props) {
   const [appState, setAppState] = useContext(AppContext)
   const authFetchHandler = useAuthFetch()
   const router = useRouter()
-
-  const productFinderBannerSrc = {
-    lg: props.productFinderBanner[0]?.[LG_IMAGE],
-    md: props.productFinderBanner[0]?.[MD_IMAGE],
-    mobile: props.productFinderBanner[0]?.[MOBILE_IMAGE],
-  }
 
   const queryChangeHandler = async () => {
     try {
@@ -62,7 +52,7 @@ function Category(props) {
         <div>
           {props.products.length ? (
             <ProductRange
-              banner={productFinderBannerSrc}
+              banner={props.productFinderBanner}
               category={props.category}
               products={props.products}
               videoBanner={props.videoBanner}
