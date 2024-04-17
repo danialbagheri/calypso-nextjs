@@ -3,9 +3,17 @@ import {Box, Container} from '@mui/material'
 import BreadCrumb from 'components/common/breadcrumb'
 import {getCollection, getCollectionBanner} from 'services'
 import _ from 'lodash'
+import type {GetStaticPropsContext} from 'next'
+import type {CollectionType, ProductFinderBanner} from 'types'
 
-export default function CollectionName(props) {
-  const {collection} = props
+interface PropsType {
+  collection: CollectionType
+  productFinderBanner: ProductFinderBanner[]
+}
+
+export default function CollectionName(props: PropsType) {
+  const {collection, productFinderBanner} = props
+
   const breadCrumbPath = [
     {name: 'Home', url: '/'},
     {name: 'Collections', url: '/collections/'},
@@ -16,14 +24,14 @@ export default function CollectionName(props) {
 
   return (
     <div>
-      {collection.slider && collection.slider.slides > 1 ? (
-        <HomeSlider slides={collection.slider.slides} />
+      {collection?.slider && collection?.slider?.slides.length > 0 ? (
+        <HomeSlider banner={collection.slider.slides} />
       ) : null}
       <Container>
         <Box sx={{my: 12}}>
           <BreadCrumb breadcrumbs={breadCrumbPath} />
           <ProductRange
-            banner={props.productFinderBanner}
+            banner={productFinderBanner}
             limit={15}
             products={collectionProducts}
           />
@@ -40,7 +48,7 @@ export const getStaticPaths = async () => {
   }
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: GetStaticPropsContext) {
   const {collectionName} = context.params
 
   const collection = await getCollection(collectionName)

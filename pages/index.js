@@ -60,7 +60,7 @@ function Home(props) {
 
       <main>
         <section className="top-0">
-          <HomeSlider banner={homepageBanner} />
+          <HomeSlider banner={homepageBanner[0].slides} />
           <Trending items={trendingItems} />
           <HomeSlider />
           <BestSellerSlider />
