@@ -222,8 +222,7 @@ export const spotlight = {
       id: 'header',
       imageSrc: '/spotlight/ayla/header.png',
       alt: SpotlightNames.AYLA,
-      title:
-        'Embrace your natural beauty and your skin will thank you when you are older!',
+      title: 'Embrace your natural beauty and your skin will thank you!',
     },
     specifications: {
       id: 'specifications',
@@ -408,8 +407,7 @@ export const spotlight = {
       id: 'header',
       imageSrc: '/spotlight/aaliyah/header.png',
       alt: SpotlightNames.AALIYAH,
-      title:
-        'I’ve learned to love my skin as much as I love the sun and prioritise skin protection.',
+      title: 'I’ve learned to love my skin as much as I love the sun.',
     },
     specifications: {
       id: 'specifications',
