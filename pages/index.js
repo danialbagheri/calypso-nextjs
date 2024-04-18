@@ -16,6 +16,7 @@ import {AppContext} from '../components/appProvider/AppProvider'
 import {useAuthFetch} from 'components/customHooks'
 import {getFavoriteVariantsHandler} from 'utils'
 import {getCollectionBanner, getTrendingUrls} from 'services'
+import {SpotlightHomePageBanner} from 'components/spotlight'
 
 function Home(props) {
   const {trendingItems, homepageBanner} = props
@@ -64,6 +65,7 @@ function Home(props) {
           <Trending items={trendingItems} />
           <HomeSlider />
           <BestSellerSlider />
+          <SpotlightHomePageBanner />
           <BlogSlider />
           <TeenageCancer />
           <Instagram />
