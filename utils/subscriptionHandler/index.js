@@ -2,6 +2,7 @@ import {userSubscription} from 'services'
 
 export const SUBSCRIPTION_STATE = 'subscriptionState'
 export const SUBSCRIBED = 'subscribed'
+export const NOT_SUBSCRIBED = 'not_subscribed'
 
 export const subscriptionHandler = async ({
   email,

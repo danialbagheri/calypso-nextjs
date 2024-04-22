@@ -52,6 +52,7 @@ export default function Dashboard() {
     const onAuthenticatedAction = async token => {
       const data = await getUserInfo(token)
       const orders = await getUserOrders(token)
+
       setUserData(prevState => ({...prevState, info: {...data}, orders}))
     }
 

@@ -66,9 +66,14 @@ export const postResetPasswordEmail = data => {
 export const confirmResetPassword = data => {
   return post({endpoint: 'users/reset_password_confirm/', data})
 }
+
+export const postUserSubscriptionInfo = ({data, token}) => {
+  return post({endpoint: 'users/validate/mailjet/', data, token})
+}
+
 /* -------------------------------------------------------------------------- */
 
-/* ------------------------------ GET Requests ------------------------------ */
+/* ------------------------------ Get Requests ------------------------------ */
 export const getCollectionBanner = slug => {
   return get({endpoint: `web/slider/?slug=${slug}`})
 }
