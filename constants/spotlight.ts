@@ -15,18 +15,18 @@ export enum Column {
   COLUMN_2 = 'column_2',
 }
 
-export const spotlightNames = {
-  ADELE_SHARMAN: 'adele-sharman',
-  AYLA: 'ayla',
-  AALIYAH: 'aaliyah',
+export enum SpotlightNames {
+  ADELE_SHARMAN = 'adele-sharman',
+  AYLA = 'ayla',
+  AALIYAH = 'aaliyah',
 }
 
 export const spotlight = {
-  [spotlightNames.ADELE_SHARMAN]: {
+  [SpotlightNames.ADELE_SHARMAN]: {
     header: {
       id: 'header',
       imageSrc: '/spotlight/adele-sharman/header.png',
-      alt: 'Adele Sharman',
+      alt: SpotlightNames.ADELE_SHARMAN,
       title: "Look after your skin. It's travelling with you",
     },
     specifications: {
@@ -217,18 +217,17 @@ export const spotlight = {
       },
     ],
   },
-  [spotlightNames.AYLA]: {
+  [SpotlightNames.AYLA]: {
     header: {
       id: 'header',
       imageSrc: '/spotlight/ayla/header.png',
-      alt: spotlightNames.AYLA,
-      title:
-        'Embrace your natural beauty and your skin will thank you when you are older!',
+      alt: SpotlightNames.AYLA,
+      title: 'Embrace your natural beauty and your skin will thank you!',
     },
     specifications: {
       id: 'specifications',
       photo: '/spotlight/ayla/avatar.png',
-      alt: spotlightNames.AYLA,
+      alt: SpotlightNames.AYLA,
       name: 'Ayla',
       social_id: 'ayla_in_dubai',
       profession: 'Travel Specialist and Beauty Blogger',
@@ -403,13 +402,12 @@ export const spotlight = {
       },
     ],
   },
-  [spotlightNames.AALIYAH]: {
+  [SpotlightNames.AALIYAH]: {
     header: {
       id: 'header',
       imageSrc: '/spotlight/aaliyah/header.png',
-      alt: spotlightNames.AALIYAH,
-      title:
-        'I’ve learned to love my skin as much as I love the sun and prioritise skin protection.',
+      alt: SpotlightNames.AALIYAH,
+      title: 'I’ve learned to love my skin as much as I love the sun.',
     },
     specifications: {
       id: 'specifications',

@@ -8,6 +8,8 @@ import {
   BlogSlider,
   HomeSlider,
   Instagram,
+  ProductFinderBanner,
+  SpotlightHomePageBanner,
   TeenageCancer,
   Trending,
 } from 'components'
@@ -18,7 +20,7 @@ import {getFavoriteVariantsHandler} from 'utils'
 import {getCollectionBanner, getTrendingUrls} from 'services'
 
 function Home(props) {
-  const {trendingItems, homepageBanner} = props
+  const {trendingItems, homepageBanner, productFinderBanner} = props
 
   const authFetchHandler = useAuthFetch()
   const [, setAppState] = React.useContext(AppContext)
@@ -64,7 +66,9 @@ function Home(props) {
           <Trending items={trendingItems} />
           <HomeSlider />
           <BestSellerSlider />
+          <SpotlightHomePageBanner />
           <BlogSlider />
+          <ProductFinderBanner banner={productFinderBanner?.[0]} />
           <TeenageCancer />
           <Instagram />
         </section>
@@ -76,13 +80,21 @@ function Home(props) {
 export default Home
 
 export async function getStaticProps() {
-  const promises = [getTrendingUrls(), getCollectionBanner('homepage')]
+  const promises = [
+    getTrendingUrls(),
+    getCollectionBanner('homepage'),
+    getCollectionBanner('product-finder'),
+  ]
   const results = await Promise.allSettled(promises)
   const initialProps = {
     trendingItems:
       results[0]?.status === 'fulfilled' ? results[0].value.items : [],
     homepageBanner:
       results[1]?.status === 'fulfilled' ? results[1].value.results : [],
+    productFinderBanner:
+      results[2]?.status === 'fulfilled'
+        ? results[2].value.results[0]?.slides ?? []
+        : [],
   }
 
   return {
