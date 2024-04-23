@@ -105,8 +105,8 @@ export const getSPFFinderQuestions = () => {
   return get({endpoint: 'surveys/spf-finder/'})
 }
 
-export const getProductReviews = slug => {
-  return get({endpoint: `reviews/product/?product_slug=${slug}`})
+export const getProductReviews = (slug, page = 1) => {
+  return get({endpoint: `reviews/product/?product_slug=${slug}&page=${page}`})
 }
 
 export const getBlogs = blog => {
