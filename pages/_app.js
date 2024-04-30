@@ -16,13 +16,10 @@ import InfoBar from '../components/general/InfoBar'
 import {AppProvider} from 'components/appProvider'
 import {MailjetSignUp} from 'components'
 import {assetsEndPoints, getAssets} from '../utils'
-import {getRetrieveMenu} from '../services'
 import App from 'next/app'
 import {Footer} from 'components/common/footer'
 
 function MyApp({Component, pageProps}) {
-  const navItems = pageProps?.navItems
-
   const [interval, setInterval] = React.useState(0)
   const [icons, setIcons] = React.useState({})
 
@@ -153,7 +150,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           ></iframe>`,
               }}
             />
-            <Header navItems={navItems} />
+            <Header />
             <MailjetSignUp />
             <InfoBar />
             <Component {...pageProps} />
@@ -185,12 +182,12 @@ export default MyApp
 MyApp.getInitialProps = async appContext => {
   const appProps = await App.getInitialProps(appContext)
 
-  try {
-    const menu = await getRetrieveMenu()
-    appProps.pageProps.navItems = menu.sub_menus
-  } catch (err) {
-    console.error(err)
-  }
+  // try {
+  //   const menu = await getRetrieveMenu()
+  //   appProps.pageProps.navItems = menu.sub_menus
+  // } catch (err) {
+  //   console.error(err)
+  // }
 
   return {...appProps}
 }
