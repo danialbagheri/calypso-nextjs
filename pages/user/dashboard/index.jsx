@@ -61,7 +61,12 @@ export default function Dashboard() {
       )
       localStorage.setItem(USER_DATA, JSON.stringify(data))
 
-      setUserData(prevState => ({...prevState, info: {...data}, orders}))
+      setUserData(prevState => ({
+        ...prevState,
+        orders,
+        favoriteProducts: favoriteProducts.results,
+        userData: {...data},
+      }))
     }
 
     /**
