@@ -1,8 +1,5 @@
-import {useContext, useEffect} from 'react'
-
 /* ---------------------------- NextJs Components --------------------------- */
 import Head from 'next/head'
-import {useRouter} from 'next/router'
 /* -------------------------------------------------------------------------- */
 
 /* ----------------------------- MUI Components ----------------------------- */
@@ -10,15 +7,13 @@ import {Box, Typography} from '@mui/material'
 /* -------------------------------------------------------------------------- */
 
 /* ---------------------------- Local Components ---------------------------- */
-import {AppContext, ProductRange} from 'components'
+import {ProductRange} from 'components'
 import {
   getCollectionBanner,
   getProducts,
   getProductsWithPagination,
 } from 'services'
 
-import {useAuthFetch} from 'components/customHooks'
-import {getFavoriteVariantsHandler} from 'utils'
 /* -------------------------------------------------------------------------- */
 
 /* --------------------------------- Styles --------------------------------- */
@@ -26,28 +21,6 @@ import 'react-tabs/style/react-tabs.css'
 /* -------------------------------------------------------------------------- */
 
 function Products(props) {
-  const [appState, setAppState] = useContext(AppContext)
-  const authFetchHandler = useAuthFetch()
-  const router = useRouter()
-
-  const queryChangeHandler = async () => {
-    try {
-      await getFavoriteVariantsHandler({setAppState, authFetchHandler})
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  useEffect(() => {
-    if (!appState.favoriteProducts) {
-      getFavoriteVariantsHandler({setAppState, authFetchHandler})
-    }
-  }, [])
-
-  useEffect(() => {
-    queryChangeHandler()
-  }, [router.query.category])
-
   return (
     <div>
       <Head>

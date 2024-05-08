@@ -13,22 +13,10 @@ import {
   TeenageCancer,
   Trending,
 } from 'components'
-
-import {AppContext} from '../components/appProvider/AppProvider'
-import {useAuthFetch} from 'components/customHooks'
-import {getFavoriteVariantsHandler} from 'utils'
 import {getCollectionBanner, getTrendingUrls} from 'services'
 
 function Home(props) {
   const {trendingItems, homepageBanner, productFinderBanner} = props
-
-  const authFetchHandler = useAuthFetch()
-  const [, setAppState] = React.useContext(AppContext)
-
-  React.useEffect(() => {
-    //Get user favorite products
-    getFavoriteVariantsHandler({setAppState, authFetchHandler})
-  }, [])
 
   return (
     <div>

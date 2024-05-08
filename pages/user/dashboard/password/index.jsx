@@ -19,6 +19,7 @@ import {useAuthFetch} from 'components/customHooks'
 import {Container} from 'components/user/dashboard'
 import {CustomButton, CustomOutlinedInput} from 'components/shared'
 import {passwordDetails, routes} from 'constants/user'
+import {FAVORITE_VARIANTS, USER_DATA} from 'constants/general'
 /* -------------------------------------------------------------------------- */
 
 const NEW_PASSWORD = 'new_password'
@@ -62,6 +63,8 @@ export default function Password() {
       await postSetPassword({data: fieldData, token})
       destroyCookie(null, 'calacc', {path: '/'})
       destroyCookie(null, 'calref', {path: '/'})
+      localStorage.removeItem(FAVORITE_VARIANTS)
+      localStorage.removeItem(USER_DATA)
       setAppState(perv => ({...perv, isAuthenticate: false}))
       router.push('/user/sign-in/?password_changed=true')
     }

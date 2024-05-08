@@ -1,10 +1,7 @@
-import {useContext, useEffect} from 'react'
-
 import 'react-tabs/style/react-tabs.css'
 import Head from 'next/head'
-import {AppContext, ProductRange} from 'components'
+import {ProductRange} from 'components'
 
-import {useRouter} from 'next/router'
 import {Box, Typography} from '@mui/material'
 
 import {
@@ -12,32 +9,8 @@ import {
   getListOfProductsType,
   getProductsByCategory,
 } from 'services'
-import {useAuthFetch} from 'components/customHooks'
-import {getFavoriteVariantsHandler} from 'utils'
 
 function Category(props) {
-  const [appState, setAppState] = useContext(AppContext)
-  const authFetchHandler = useAuthFetch()
-  const router = useRouter()
-
-  const queryChangeHandler = async () => {
-    try {
-      await getFavoriteVariantsHandler({setAppState, authFetchHandler})
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  useEffect(() => {
-    if (!appState.favoriteProducts) {
-      getFavoriteVariantsHandler({setAppState, authFetchHandler})
-    }
-  }, [])
-
-  useEffect(() => {
-    queryChangeHandler()
-  }, [router.query.category])
-
   return (
     <div>
       <Head>

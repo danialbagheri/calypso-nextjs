@@ -14,8 +14,9 @@ import {Box, CircularProgress} from '@mui/material'
 
 /* ---------------------------- Local Components ---------------------------- */
 import {useAuthFetch} from 'components/customHooks'
-import {getUserInfo, getUserOrders} from 'services'
+import {getFavoriteVariants, getUserInfo, getUserOrders} from 'services'
 import {Body, Header} from 'components/user/dashboard'
+import {FAVORITE_VARIANTS, USER_DATA} from 'constants/general'
 /* -------------------------------------------------------------------------- */
 
 export const FIRST_NAME = 'first_name'
@@ -52,6 +53,13 @@ export default function Dashboard() {
     const onAuthenticatedAction = async token => {
       const data = await getUserInfo(token)
       const orders = await getUserOrders(token)
+      const favoriteProducts = await getFavoriteVariants(token)
+
+      localStorage.setItem(
+        FAVORITE_VARIANTS,
+        JSON.stringify(favoriteProducts.results),
+      )
+      localStorage.setItem(USER_DATA, JSON.stringify(data))
 
       setUserData(prevState => ({...prevState, info: {...data}, orders}))
     }
