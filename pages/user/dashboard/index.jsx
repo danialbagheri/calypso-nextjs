@@ -17,6 +17,7 @@ import {useAuthFetch} from 'components/customHooks'
 import {getFavoriteVariants, getUserInfo, getUserOrders} from 'services'
 import {Body, Header} from 'components/user/dashboard'
 import {FAVORITE_VARIANTS, USER_DATA} from 'constants/general'
+import {AppContext} from 'components'
 /* -------------------------------------------------------------------------- */
 
 export const FIRST_NAME = 'first_name'
@@ -38,6 +39,7 @@ export default function Dashboard() {
     orders: [],
   })
   const authFunctions = useAuthFetch()
+  const [, setAppState] = React.useContext(AppContext)
 
   /* -------------------------------------------------------------------------- */
   const router = useRouter()
@@ -64,9 +66,22 @@ export default function Dashboard() {
       setUserData(prevState => ({
         ...prevState,
         orders,
-        favoriteProducts: favoriteProducts.results,
-        userData: {...data},
+        info: {...data},
       }))
+
+      setAppState(prevState => ({
+        ...prevState,
+        isAuthenticate: true,
+        favoriteVariants: favoriteProducts.results,
+        userData: data,
+      }))
+      const isComingFromProductPage = Object.keys(router.query).includes(
+        'favourite',
+      )
+      if (isComingFromProductPage) {
+        const path = router.query.favourite.split('_').join('/')
+        router.push(path)
+      }
     }
 
     /**
