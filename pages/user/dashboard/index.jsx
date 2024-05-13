@@ -15,7 +15,7 @@ import {Box, CircularProgress} from '@mui/material'
 /* ---------------------------- Local Components ---------------------------- */
 import {useAuthFetch} from 'components/customHooks'
 import {getFavoriteVariants, getUserInfo, getUserOrders} from 'services'
-import {Body, Header} from 'components/user/dashboard'
+import {Container, DashboardBody} from 'components/user/dashboard'
 import {FAVORITE_VARIANTS, USER_DATA} from 'constants/general'
 import {AppContext} from 'components'
 /* -------------------------------------------------------------------------- */
@@ -107,7 +107,7 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <Box sx={{width: '100%', maxWidth: 1178, margin: '0 auto', px: 10}}>
+    <Container>
       {loading ? (
         <Box
           className="centralize"
@@ -118,11 +118,11 @@ export default function Dashboard() {
           <CircularProgress />
         </Box>
       ) : (
-        <>
-          <Header name={userData.info.first_name} />
-          <Body orders={userData.orders} />
-        </>
+        <DashboardBody
+          name={userData.info.first_name}
+          orders={userData.orders}
+        />
       )}
-    </Box>
+    </Container>
   )
 }
