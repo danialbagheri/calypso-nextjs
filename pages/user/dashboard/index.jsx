@@ -107,7 +107,7 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <Container>
+    <>
       {loading ? (
         <Box
           className="centralize"
@@ -119,11 +119,13 @@ export default function Dashboard() {
           <CircularProgress />
         </Box>
       ) : (
-        <DashboardBody
-          name={userData.info.first_name}
-          orders={userData.orders}
-        />
+        <Container>
+          <DashboardBody
+            name={userData.info.first_name}
+            orders={userData.orders}
+          />
+        </Container>
       )}
-    </Container>
+    </>
   )
 }
