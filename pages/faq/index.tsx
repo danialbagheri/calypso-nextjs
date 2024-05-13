@@ -39,6 +39,7 @@ export default function Faq(props: PropsType) {
         <Image
           alt="Frequently Asked Questions"
           fill
+          sizes="90vw"
           src="/faq/faqs.jpg"
           style={{objectFit: 'cover', objectPosition: '80% 100%'}}
         />

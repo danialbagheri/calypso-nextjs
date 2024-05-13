@@ -53,6 +53,7 @@ function Article({blog}) {
                   className="blog-post-image"
                   fill={true}
                   itemProp="url contentUrl"
+                  sizes="100vw"
                   src={blog.image || '/advice/placeholder.png'}
                   style={{objectFit: 'cover'}}
                   // height={blog.image_height}

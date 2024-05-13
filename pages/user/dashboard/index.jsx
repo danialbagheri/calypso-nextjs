@@ -113,6 +113,7 @@ export default function Dashboard() {
           className="centralize"
           sx={{
             height: 200,
+            width: '100%',
           }}
         >
           <CircularProgress />

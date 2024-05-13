@@ -40,6 +40,7 @@ export default function Advice({posts}) {
                 <Image
                   alt={blog.image_alt_text}
                   fill
+                  sizes="100vw"
                   src={blog.resized || '/advice/placeholder.png'}
                   style={{objectFit: 'cover'}}
                 />
