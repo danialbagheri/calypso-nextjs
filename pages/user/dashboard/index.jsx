@@ -14,8 +14,12 @@ import {Box, CircularProgress} from '@mui/material'
 
 /* ---------------------------- Local Components ---------------------------- */
 import {useAuthFetch} from 'components/customHooks'
-import {getFavoriteVariants, getUserInfo, getUserOrders} from 'services'
-import {Container, DashboardBody} from 'components/user/dashboard'
+import {getFavoriteVariants, getUserInfo} from 'services'
+import {
+  Container,
+  DashboardBody,
+  DashboardHeader,
+} from 'components/user/dashboard'
 import {FAVORITE_VARIANTS, USER_DATA} from 'constants/general'
 import {AppContext} from 'components'
 /* -------------------------------------------------------------------------- */
@@ -36,7 +40,6 @@ export default function Dashboard() {
       id: '',
       [MOBILE_NUMBER]: '',
     },
-    orders: [],
   })
   const authFunctions = useAuthFetch()
   const [, setAppState] = React.useContext(AppContext)
@@ -54,7 +57,6 @@ export default function Dashboard() {
      */
     const onAuthenticatedAction = async token => {
       const data = await getUserInfo(token)
-      const orders = await getUserOrders(token)
       const favoriteProducts = await getFavoriteVariants(token)
 
       localStorage.setItem(
@@ -65,7 +67,6 @@ export default function Dashboard() {
 
       setUserData(prevState => ({
         ...prevState,
-        orders,
         info: {...data},
       }))
 
@@ -119,12 +120,33 @@ export default function Dashboard() {
           <CircularProgress />
         </Box>
       ) : (
-        <Container>
-          <DashboardBody
-            name={userData.info.first_name}
-            orders={userData.orders}
-          />
-        </Container>
+        <Box>
+          <Container
+            mobileFooter={
+              <DashboardBody
+                orders={userData.orders}
+                sx={{
+                  display: {
+                    xs: 'flex !important',
+                    md: 'none !important',
+                  },
+                  mt: {xs: '10px', md: 0},
+                }}
+              />
+            }
+            route="dashboard"
+          >
+            <Box
+              className="centralize"
+              sx={{flexDirection: 'column', gap: '17px'}}
+            >
+              <DashboardHeader name={userData.info.first_name} />
+              <DashboardBody
+                sx={{display: {xs: 'none !important', md: 'flex !important'}}}
+              />
+            </Box>
+          </Container>
+        </Box>
       )}
     </>
   )

@@ -34,6 +34,11 @@ const initialState = {
 }
 /* -------------------------------------------------------------------------- */
 
+const breadcrumbs = [
+  {label: 'Dashboard', href: '/user/dashboard'},
+  {label: 'Password', href: ''},
+]
+
 export default function Password() {
   /* ---------------------------------- Hooks --------------------------------- */
   const [fieldData, setFieldData] = React.useState({
@@ -86,7 +91,7 @@ export default function Password() {
   }
 
   return (
-    <Container route={routes.PASSWORD}>
+    <Container breadcrumbs={breadcrumbs} route={routes.PASSWORD}>
       <Box width={{xs: '100%', md: 318}}>
         <Typography sx={{fontSize: 24, fontWeight: 700}} textAlign="center">
           Password

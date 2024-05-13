@@ -46,4 +46,5 @@ export const routes = {
   DASHBOARD: 'dashboard',
   ACCOUNT_DETAILS: 'account-details',
   FAVORITE_VARIANTS: 'favorite-variants',
+  ORDERS: 'orders',
 }

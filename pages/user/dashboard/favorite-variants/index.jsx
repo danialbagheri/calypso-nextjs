@@ -9,13 +9,18 @@ import {Container, FavoriteVariantsList} from 'components/user/dashboard'
 import {Heart} from 'components/icons'
 /* -------------------------------------------------------------------------- */
 
+const breadcrumbs = [
+  {label: 'Dashboard', href: '/user/dashboard'},
+  {label: 'My Wishlist', href: ''},
+]
+
 export default function FavoriteVariants() {
   /* ---------------------------------- Hooks --------------------------------- */
   const theme = useTheme()
   /* -------------------------------------------------------------------------- */
 
   return (
-    <Container sx={{gap: {md: '20px', lg: '70px'}}}>
+    <Container breadcrumbs={breadcrumbs} sx={{gap: {xs: '38px', lg: '70px'}}}>
       <Box
         className="centralize"
         sx={{

@@ -17,6 +17,11 @@ import {CustomButton} from 'components/shared'
 
 /* -------------------------------------------------------------------------- */
 
+const breadcrumbs = [
+  {label: 'Dashboard', href: '/user/dashboard'},
+  {label: 'Account details', href: ''},
+]
+
 export default function AccountDetails() {
   /* ---------------------------------- Hooks --------------------------------- */
   const [fieldData, setFieldData] = React.useState({
@@ -152,7 +157,7 @@ export default function AccountDetails() {
   }, [])
 
   return (
-    <Container route="account-details">
+    <Container breadcrumbs={breadcrumbs} route="account-details">
       <Box width={{xs: '100%', md: 318}}>
         <Typography sx={{fontSize: 24, fontWeight: 700}} textAlign="center">
           Account details
