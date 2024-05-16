@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {Fragment, useEffect, useState} from 'react'
 
 import {useRouter} from 'next/router'
 
@@ -158,10 +158,10 @@ export default function Orders() {
                   }}
                 >
                   {order.items.map((item, i) => (
-                    <>
+                    <Fragment key={item.sku}>
                       <OrderItem item={item} key={i} />
                       <Divider sx={{borderColor: '#F2F2F2', my: '12px'}} />
-                    </>
+                    </Fragment>
                   ))}
                 </Box>
               </Box>
