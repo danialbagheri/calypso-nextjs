@@ -89,14 +89,14 @@ function Product(props) {
             display: 'flex',
             flexDirection: {
               xs: 'column',
-              sm: 'row',
+              md: 'row',
             },
             alignItems: 'flex-start',
             justifyContent: 'center',
-            gap: {xs: 6, sm: 8},
+            gap: {xs: 6, md: 8},
             '&>div': {
-              width: {xs: '100%', sm: '50%'},
-              maxWidth: {xs: 'unset', sm: 460},
+              width: {xs: '100%', md: '50%'},
+              maxWidth: {xs: 'unset', md: 460},
             },
           }}
         >
