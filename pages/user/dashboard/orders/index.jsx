@@ -1,38 +1,73 @@
-import {useEffect, useState} from 'react'
+import {Fragment, useEffect, useState} from 'react'
 
-import Image from 'next/image'
 import {useRouter} from 'next/router'
 
 import {Box, CircularProgress, Divider, Typography} from '@mui/material'
-import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 
-import {monthArr, priceHandler} from 'utils'
 import {useAuthFetch} from 'components/customHooks'
 import {getUserOrders} from 'services'
-import {Container} from 'components/user/dashboard'
+import {
+  Container,
+  OrderDetails,
+  OrderItem,
+  OrdersEmptyState,
+} from 'components/user/dashboard'
 import {CartEmpty} from 'components/icons'
+import {monthArr} from 'utils'
 import {useTheme} from '@emotion/react'
 
-const breadcrumbs = [
+const breadcrumbsInitState = [
   {label: 'Dashboard', href: '/user/dashboard'},
-  {label: 'My orders', href: ''},
+  {
+    label: 'My orders',
+    href: '',
+  },
 ]
+
+export const formatDate = date => {
+  const d = new Date(date)
+  const year = d.getFullYear()
+  const month = monthArr[d.getMonth()]
+  const day = d.getDate()
+  return `${day} ${month} ${year}`
+}
 
 export default function Orders() {
   const fetchHandlers = useAuthFetch()
   const router = useRouter()
   const theme = useTheme()
   const [orders, setOrders] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [orderDetail, setOrderDetail] = useState(null)
+  const [breadcrumbs, setBreadcrumbs] = useState(breadcrumbsInitState)
 
-  const formatDate = date => {
-    const d = new Date(date)
-    const year = d.getFullYear()
-    const month = monthArr[d.getMonth()]
-    const day = d.getDate()
-    return `${day} ${month} ${year}`
+  const displayOrderDetail = Boolean(orderDetail)
+
+  const backHandler = () => {
+    setOrderDetail(null)
+    setBreadcrumbs(breadcrumbsInitState)
   }
+
+  const orderItemClickHandler = order => {
+    window.scrollTo({top: 0, behavior: 'smooth'})
+    setOrderDetail(order)
+    setBreadcrumbs([
+      {label: 'Dashboard', href: '/user/dashboard'},
+      {
+        label: 'My orders',
+        href: '',
+        onClick: backHandler,
+      },
+      {label: 'Order details', href: ''},
+    ])
+  }
+
+  const renderProperTitle = () => {
+    return displayOrderDetail ? 'Order details' : 'My orders'
+  }
+
+  const title = renderProperTitle()
 
   useEffect(() => {
     const onAuthenticatedAction = async token => {
@@ -55,11 +90,29 @@ export default function Orders() {
     <Container breadcrumbs={breadcrumbs}>
       <Box
         className="centralize"
-        sx={{width: '100%', mb: {xs: 8, md: 6}, gap: '12px'}}
+        sx={{
+          width: '100%',
+          mb: {xs: 8, md: 6},
+          gap: '12px',
+          position: 'relative',
+        }}
       >
+        <Box
+          onClick={backHandler}
+          sx={{
+            position: 'absolute',
+            left: 0,
+            top: '50%',
+            transform: 'translateY(-35%)',
+            cursor: 'pointer',
+            display: displayOrderDetail ? 'block' : 'none',
+          }}
+        >
+          <KeyboardBackspaceIcon color="primary" />
+        </Box>
         <CartEmpty sx={{fill: theme.palette.primary.main}} />
         <Typography sx={{fontSize: '24px', fontWeight: 700}}>
-          My orders
+          {title}
         </Typography>
       </Box>
       {loading ? (
@@ -75,15 +128,19 @@ export default function Orders() {
       ) : (
         <Box
           sx={{
-            display: 'flex',
+            display: displayOrderDetail ? 'none' : 'flex',
             flexDirection: 'column',
             gap: 6,
             width: '100%',
           }}
         >
           {orders.length ? (
-            orders.map(order => (
-              <Box key={order.created_at} sx={{width: '100%'}}>
+            orders.map((order, i) => (
+              <Box
+                key={order.created_at + i}
+                onClick={() => orderItemClickHandler(order)}
+                sx={{width: '100%', cursor: 'pointer'}}
+              >
                 <Typography
                   color="primary.main"
                   sx={{fontSize: 14, fontWeight: 700}}
@@ -101,82 +158,23 @@ export default function Orders() {
                   }}
                 >
                   {order.items.map((item, i) => (
-                    <>
-                      <Box
-                        className="centralize"
-                        key={item.sku + i}
-                        sx={{gap: '14px'}}
-                      >
-                        <Box
-                          sx={{width: 94, height: 110, position: 'relative'}}
-                        >
-                          <Image
-                            alt={item.name || 'Product image'}
-                            fill
-                            sizes="100vw"
-                            src={item.image_original_source || ''}
-                            styles={{objectFit: 'cover'}}
-                          />
-                        </Box>
-                        <Box
-                          sx={{
-                            width: '100%',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '6px',
-                            justifyContent: 'space-between',
-                            alignItems: 'flex-start',
-                          }}
-                        >
-                          <Typography
-                            sx={{
-                              fontSize: '26px',
-                              fontWeight: 700,
-                              color: '#226F61',
-                            }}
-                          >
-                            {priceHandler({
-                              price: item.total_price.amount,
-                              currency: item.total_price.currency,
-                            })}
-                          </Typography>
-                          <Typography>{item.name}</Typography>
-                          <Typography sx={{fontSize: '16px', fontWeight: 700}}>
-                            x{item.quantity}
-                          </Typography>
-                        </Box>
-                        <ArrowForwardIosIcon />
-                      </Box>
+                    <Fragment key={item.sku}>
+                      <OrderItem item={item} key={i} />
                       <Divider sx={{borderColor: '#F2F2F2', my: '12px'}} />
-                    </>
+                    </Fragment>
                   ))}
                 </Box>
               </Box>
             ))
           ) : (
-            <Box
-              className="centralize"
-              sx={{
-                width: '100%',
-                border: '2px solid #F2F2F2',
-                borderRadius: '10px',
-                flexDirection: 'column',
-                p: 7,
-                gap: 3,
-              }}
-            >
-              <LocalGroceryStoreIcon
-                sx={{fontSize: '100px', fill: '#D6D6D6'}}
-              />
-              <Typography
-                sx={{fontSize: 21, fontWeight: 700, color: '#D6D6D6'}}
-              >
-                No orders yet
-              </Typography>
-            </Box>
+            <OrdersEmptyState />
           )}
         </Box>
       )}
+      <OrderDetails
+        order={orderDetail}
+        sx={{display: displayOrderDetail ? 'flex' : 'none'}}
+      />
     </Container>
   )
 }
