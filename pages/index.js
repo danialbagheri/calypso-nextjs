@@ -16,7 +16,7 @@ import {
 import {getCollectionBanner, getTrendingUrls} from 'services'
 
 function Home(props) {
-  const {trendingItems, homepageBanner, productFinderBanner} = props
+  const {trending, homepageBanner, productFinderBanner} = props
 
   return (
     <div>
@@ -51,7 +51,7 @@ function Home(props) {
       <main>
         <section className="top-0">
           <HomeSlider banner={homepageBanner[0].slides} />
-          <Trending items={trendingItems} />
+          <Trending items={trending?.items} name={trending?.name} />
           <HomeSlider />
           <BestSellerSlider />
           <SpotlightHomePageBanner />
@@ -75,8 +75,7 @@ export async function getStaticProps() {
   ]
   const results = await Promise.allSettled(promises)
   const initialProps = {
-    trendingItems:
-      results[0]?.status === 'fulfilled' ? results[0].value.items : [],
+    trending: results[0]?.status === 'fulfilled' ? results[0].value : {},
     homepageBanner:
       results[1]?.status === 'fulfilled' ? results[1].value.results : [],
     productFinderBanner:

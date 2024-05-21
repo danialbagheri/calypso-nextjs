@@ -3,7 +3,7 @@ import * as React from 'react'
 import {Box, Typography, useTheme} from '@mui/material'
 
 export default function ShowPrice(props) {
-  const {selectedVariant} = props
+  const {selectedVariant, sx = {}} = props
   const [currency, setCurrency] = React.useState('GBP')
   const theme = useTheme()
   const hasDiscount = Boolean(selectedVariant.compare_at_price)
@@ -47,6 +47,7 @@ export default function ShowPrice(props) {
         justifyContent: 'flex-start',
         alignItems: 'center',
         gap: '18px',
+        ...sx,
       }}
     >
       <Box
