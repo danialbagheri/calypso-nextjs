@@ -8,6 +8,7 @@ import Head from 'next/head'
 import Box from '@mui/material/Box'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
+import Container from '@mui/material/Container'
 /* -------------------------------------------------------------------------- */
 
 import data from '../../../data.json'
@@ -84,29 +85,31 @@ function Product(props) {
         }}
       >
         <ProductBreadCrumb product={productData} style={{marginBottom: 20}} />
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: {
-              xs: 'column',
-              md: 'row',
-            },
-            alignItems: 'flex-start',
-            justifyContent: 'center',
-            gap: {xs: 6, md: 8},
-            '&>div': {
-              width: {xs: '100%', md: '50%'},
-              maxWidth: {xs: 'unset', md: 460},
-            },
-          }}
-        >
-          <ProductImageSlider selectedVariant={selectedVariant} />
-          <ProductDescription
-            product={productData}
-            selectedVariant={selectedVariant}
-            setSelectedVariant={setSelectedVariant}
-          />
-        </Box>
+        <Container>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: {
+                xs: 'column',
+                md: 'row',
+              },
+              alignItems: 'flex-start',
+              justifyContent: 'center',
+              gap: {xs: 6, md: 8},
+              '&>div': {
+                width: {xs: '100%', md: '50%'},
+                // maxWidth: {xs: 'unset', md: 560},
+              },
+            }}
+          >
+            <ProductImageSlider selectedVariant={selectedVariant} />
+            <ProductDescription
+              product={productData}
+              selectedVariant={selectedVariant}
+              setSelectedVariant={setSelectedVariant}
+            />
+          </Box>
+        </Container>
       </Box>
 
       <Faq {...productData.faq_list} />
