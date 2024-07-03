@@ -10,7 +10,6 @@ import {
   Instagram,
   ProductFinderBanner,
   SpotlightHomePageBanner,
-  TeenageCancer,
   Trending,
 } from 'components'
 import {getCollectionBanner, getTrendingUrls} from 'services'
@@ -57,7 +56,6 @@ function Home(props) {
           <SpotlightHomePageBanner />
           <BlogSlider />
           <ProductFinderBanner banner={productFinderBanner?.[0]} />
-          <TeenageCancer />
           <Instagram />
         </section>
       </main>
